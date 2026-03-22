@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="The artists who receive the fund. The music you will not find anywhere else.">
+<title>ARTISTS — KPT-UNDERGROUND</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#050505;--ink2:#090909;--ink3:#0e0e0e;
+  --green:#8ACE00;--orange:#FF8C00;--rust:#A0522D;--slate:#708090;
+  --paper:#E8E4DC;--muted:#606258;--dim:#333330;
+  --ease:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.34,1.56,0.64,1);
+  --mid:200ms;--sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{background:var(--ink);color:var(--paper);font-family:'Space Mono',monospace;font-size:13px;line-height:1.7;overflow-x:hidden;cursor:none;}
+body::before{content:'';position:fixed;inset:0;z-index:8000;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(138,206,0,0.012) 3px,rgba(138,206,0,0.012) 4px);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(138,206,0,0.026) 1px,transparent 1px),linear-gradient(90deg,rgba(138,206,0,0.026) 1px,transparent 1px);background-size:52px 52px;}
+
+/* CURSOR */
+#cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);will-change:transform;}
+.cc{position:relative;width:18px;height:18px;transition:width var(--mid) var(--ease),height var(--mid) var(--ease);}
+.cc::before,.cc::after{content:'';position:absolute;background:var(--green);}
+.cc::before{width:1px;height:100%;left:50%;transform:translateX(-50%);}
+.cc::after{width:100%;height:1px;top:50%;transform:translateY(-50%);}
+.cg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;background:var(--ink);z-index:1;}
+.cr{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border:1px solid rgba(138,206,0,0);border-radius:50%;transition:width 280ms var(--ease),height 280ms var(--ease),border-color 280ms;}
+.cl{position:absolute;left:22px;top:50%;transform:translateY(-50%);font-size:7px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity var(--mid);}
+body.ch .cc{width:30px;height:30px}body.ch .cg{width:7px;height:7px}body.ch .cr{width:42px;height:42px;border-color:rgba(138,206,0,0.3)}body.ch .cl{opacity:1}
+@keyframes rp{from{width:18px;height:18px;opacity:0.7;border-color:var(--green)}to{width:60px;height:60px;opacity:0;border-color:var(--green)}}
+@keyframes blink{0%,100%{opacity:0.5}50%{opacity:0}}
+@keyframes fi{to{opacity:1}}
+@keyframes su{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity 0.8s ease,visibility 0.8s ease;}
+#loader.gone{opacity:0;visibility:hidden;pointer-events:none;}
+.lp{width:min(180px,50vw);height:min(180px,50vw);margin-bottom:22px;animation:ldp 0.45s ease infinite alternate;}
+@keyframes ldp{from{opacity:0.82}to{opacity:1}}
+.ll{font-size:8px;letter-spacing:0.45em;color:var(--green);text-transform:uppercase;opacity:0;animation:fi 0.3s ease forwards;}
+.ll:nth-child(2){animation-delay:0.3s}.ll:nth-child(3){animation-delay:0.65s}
+.lb{width:min(160px,46vw);height:1px;background:rgba(138,206,0,0.1);margin-top:14px;overflow:hidden;opacity:0;animation:fi 0.3s ease 1.3s forwards;}
+.lf{height:100%;background:var(--green);width:0;animation:lff 0.8s ease 1.4s forwards;}
+@keyframes lff{to{width:100%}}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;padding:0 40px;display:flex;align-items:center;gap:20px;background:rgba(5,5,5,0.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(138,206,0,0.07);opacity:0;transition:opacity 0.5s ease;}
+#nav.show{opacity:1;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.2em;color:var(--green);text-decoration:none;margin-right:auto;}
+.nav-lnk{font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:0 14px;height:56px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:color var(--mid),border-color var(--mid);}
+.nav-lnk:hover{color:var(--paper);}
+.nav-lnk.act{color:var(--green);border-color:var(--green);}
+.nav-dot{font-size:7px;letter-spacing:0.3em;color:var(--green);opacity:0.45;}
+.nav-dot::before{content:'● ';animation:blink 1.6s step-end infinite;}
+
+/* TICKER */
+.tw{position:relative;z-index:1;overflow:hidden;border-top:1px solid rgba(138,206,0,0.07);border-bottom:1px solid rgba(138,206,0,0.07);background:rgba(138,206,0,0.018);padding:10px 0;white-space:nowrap;}
+.tw::before,.tw::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;}
+.tw::before{left:0;background:linear-gradient(90deg,var(--ink),transparent);}
+.tw::after{right:0;background:linear-gradient(-90deg,var(--ink),transparent);}
+.ttr{display:inline-flex;animation:tsc 32s linear infinite;}
+@keyframes tsc{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);padding:0 22px;transition:color var(--mid);}
+.ti:hover{color:var(--green)}.ti.ac{color:rgba(138,206,0,0.32);}
+
+/* REVEAL */
+.r{opacity:0;transform:translateY(18px);transition:opacity 0.85s var(--ease),transform 0.85s var(--ease);}
+.r.in{opacity:1;transform:none;}
+.d1{transition-delay:0.08s}.d2{transition-delay:0.18s}.d3{transition-delay:0.3s}.d4{transition-delay:0.44s}
+
+/* LAYOUT */
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px;}
+section{position:relative;z-index:1;}
+.eyebrow{font-size:8px;letter-spacing:0.5em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:20px;}
+.stmt{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,120px);line-height:0.86;letter-spacing:0.01em;color:var(--paper);}
+.stmt .g{color:var(--green);}
+.cta-lnk{display:inline-flex;align-items:center;gap:10px;font-size:9px;letter-spacing:0.45em;text-transform:uppercase;color:var(--green);text-decoration:none;border-bottom:1px solid rgba(138,206,0,0.22);padding-bottom:3px;transition:color var(--mid),border-color var(--mid);}
+.cta-lnk:hover{color:var(--paper);border-color:rgba(232,228,220,0.25);}
+.cta-lnk .arr{transition:transform var(--mid) var(--ease);}
+.cta-lnk:hover .arr{transform:translateX(4px);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-track{background:var(--ink);}::-webkit-scrollbar-thumb{background:var(--green);}
+
+/* ══ PAGE HEADER ══ */
+#pageHdr{
+  padding:calc(56px + 64px) 0 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  position:relative;z-index:1;
+  overflow:hidden;
+}
+
+.ph-bg{position:absolute;right:-60px;top:50%;transform:translateY(-50%);opacity:0.03;pointer-events:none;}
+
+.ph-eyebrow{font-size:8px;letter-spacing:0.5em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:20px;opacity:0;animation:fi 0.5s ease 0.3s forwards;}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,10vw,140px);line-height:0.86;letter-spacing:0.01em;color:var(--paper);opacity:0;animation:su 0.8s var(--ease) 0.4s both;}
+.ph-title .g{color:var(--green);}
+.ph-title .dim{color:rgba(232,228,220,0.14);}
+
+.ph-meta-row{
+  display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+  padding:20px 0 28px;margin-top:16px;
+  border-top:1px solid rgba(138,206,0,0.07);
+}
+.ph-quarter{font-size:9px;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;}
+.ph-quarter strong{color:var(--paper);}
+.ph-total{margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--green);letter-spacing:0.02em;}
+.ph-total-label{font-size:8px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;display:block;margin-top:-4px;}
+
+/* ══ MANIFESTO PULL QUOTE ══ */
+#pullQuote{padding:64px 0;text-align:center;overflow:hidden;border-bottom:1px solid rgba(138,206,0,0.07);}
+.pq-bg{position:absolute;inset:0;pointer-events:none;opacity:0.03;display:flex;align-items:center;justify-content:center;}
+.pq{font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5.5vw,76px);line-height:1.02;letter-spacing:0.02em;color:var(--paper);position:relative;z-index:1;}
+.pq span{color:var(--green);}
+
+/* ══ FUND OVERVIEW ══ */
+#fundOverview{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  background:var(--ink2);
+}
+
+.fo-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;}
+
+.fo-left{}
+.fo-total-display{margin-bottom:32px;}
+.fo-quarter-label{font-size:8px;letter-spacing:0.35em;color:rgba(138,206,0,0.5);text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px;}
+.fo-qdot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.4s step-end infinite;}
+.fo-amount{font-family:'Bebas Neue',sans-serif;font-size:clamp(64px,11vw,130px);line-height:0.85;color:var(--green);letter-spacing:-0.03em;}
+.fo-currency{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,52px);color:rgba(138,206,0,0.5);vertical-align:top;}
+.fo-period{font-size:9px;letter-spacing:0.3em;color:var(--slate);text-transform:uppercase;margin-top:12px;line-height:1.9;border-top:1px solid rgba(138,206,0,0.1);padding-top:10px;display:block;}
+
+/* Criteria block */
+.fo-criteria{background:var(--ink);padding:24px;}
+.fo-crit-label{font-size:8px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:16px;}
+.fo-crit-item{
+  padding:10px 0;border-bottom:1px solid rgba(112,128,144,0.07);
+  font-size:11px;line-height:1.7;color:var(--muted);
+  display:flex;align-items:flex-start;gap:12px;
+}
+.fo-crit-item:last-child{border-bottom:none;}
+.fo-crit-item::before{content:'—';color:var(--green);flex-shrink:0;}
+.fo-crit-item strong{color:var(--paper);}
+
+.fo-right{}
+.fo-how-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,60px);line-height:1;color:var(--paper);margin-bottom:20px;}
+.fo-how-title span{color:var(--green);}
+.fo-how-body{font-size:clamp(13px,1.5vw,15px);line-height:1.9;color:var(--muted);margin-bottom:20px;}
+.fo-how-body strong{color:var(--paper);}
+.fo-quarterly-history{margin-top:28px;}
+.fo-qh-label{font-size:8px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:12px;}
+.fo-qh-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid rgba(112,128,144,0.07);
+}
+.fo-qh-row:last-child{border-bottom:none;}
+.fo-qh-quarter{font-size:10px;color:var(--muted);letter-spacing:0.1em;}
+.fo-qh-bar-wrap{flex:1;margin:0 16px;height:2px;background:rgba(138,206,0,0.08);}
+.fo-qh-bar{height:100%;background:var(--green);transition:width 1s var(--ease);}
+.fo-qh-amount{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--green);}
+
+/* ══ ARTIST GRID ══ */
+#artistGrid{padding:80px 0;border-bottom:1px solid rgba(138,206,0,0.07);}
+
+.ag-controls{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:40px;
+}
+.ag-filter{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(112,128,144,0.15);color:var(--muted);background:none;cursor:none;transition:all var(--mid);}
+.ag-filter:hover{border-color:rgba(138,206,0,0.3);color:var(--paper);}
+.ag-filter.active{border-color:var(--green);color:var(--green);background:rgba(138,206,0,0.04);}
+.ag-count{font-size:9px;letter-spacing:0.25em;color:var(--muted);margin-left:auto;}
+.ag-count strong{color:var(--paper);}
+
+/* Artist cards in a dense grid */
+.artist-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:2px;
+}
+
+.artist-card{
+  background:var(--ink2);
+  position:relative;overflow:hidden;cursor:none;
+  display:flex;flex-direction:column;
+}
+
+/* Abstract waveform visual */
+.ac-visual{
+  aspect-ratio:16/9;background:var(--ink);
+  position:relative;overflow:hidden;
+}
+.ac-waveform{
+  position:absolute;inset:0;
+  display:flex;align-items:center;
+  padding:0 20px;gap:2px;
+}
+.ac-wave-bar{
+  flex:1;background:var(--green);border-radius:1px;
+  transition:height 0.4s ease,opacity 0.4s ease;
+  opacity:0.3;
+}
+.artist-card:hover .ac-wave-bar{opacity:0.55;}
+
+/* Scene color accent */
+.ac-stripe{position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform 0.4s var(--ease);}
+.artist-card:hover .ac-stripe{transform:scaleX(1);}
+
+/* Fund amount overlay */
+.ac-amount-overlay{
+  position:absolute;bottom:12px;right:14px;
+  font-family:'Bebas Neue',sans-serif;font-size:22px;
+  color:rgba(138,206,0,0.6);letter-spacing:0.02em;
+  transition:color 0.3s;
+}
+.artist-card:hover .ac-amount-overlay{color:var(--green);}
+
+/* Info */
+.ac-info{padding:18px 20px 22px;flex:1;}
+.ac-scene-tag{
+  font-size:7px;letter-spacing:0.35em;text-transform:uppercase;
+  padding:3px 8px;border:1px solid;display:inline-block;margin-bottom:10px;
+}
+.ac-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,2.8vw,32px);letter-spacing:0.04em;color:var(--paper);line-height:1;margin-bottom:8px;}
+.ac-bio{font-size:11px;line-height:1.75;color:var(--muted);margin-bottom:14px;}
+.ac-bio strong{color:var(--paper);}
+.ac-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.ac-tag{font-size:7px;letter-spacing:0.2em;text-transform:uppercase;padding:3px 8px;border:1px solid rgba(112,128,144,0.15);color:var(--muted);}
+
+/* Featured artist — full width */
+.artist-card.featured{grid-column:1 / -1;}
+.artist-card.featured .ac-visual{aspect-ratio:21/6;}
+.artist-card.featured .ac-name{font-size:clamp(32px,5vw,60px);}
+
+/* ══ FEATURED STORY ══ */
+#featuredStory{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  background:var(--ink2);
+}
+
+.fs-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+
+/* Pull interview style */
+.fs-left{}
+.fs-label{font-size:8px;letter-spacing:0.45em;color:var(--orange);text-transform:uppercase;display:block;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.fs-label::before{content:'';width:24px;height:1px;background:rgba(255,140,0,0.3);}
+.fs-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5.5vw,72px);line-height:0.9;color:var(--paper);margin-bottom:28px;}
+.fs-title span{color:var(--green);}
+
+/* Q&A format */
+.fs-qa{display:flex;flex-direction:column;gap:0;}
+.fs-q{
+  padding:16px 0;border-top:1px solid rgba(138,206,0,0.08);
+}
+.fs-q:last-child{border-bottom:1px solid rgba(138,206,0,0.08);}
+.fs-q-label{font-size:8px;letter-spacing:0.3em;color:var(--green);text-transform:uppercase;margin-bottom:6px;display:block;}
+.fs-q-text{font-size:13px;line-height:1.85;color:var(--paper);font-style:italic;margin-bottom:8px;}
+.fs-a-text{font-size:12px;line-height:1.85;color:var(--muted);}
+.fs-a-text strong{color:var(--paper);}
+
+/* Waveform visual right */
+.fs-right{}
+.fs-visual{
+  background:var(--ink);aspect-ratio:3/4;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  padding:24px;
+}
+/* Animated frequency lines */
+.freq-display{
+  display:flex;align-items:flex-end;gap:3px;
+  height:120px;width:100%;
+}
+.fd-bar{
+  flex:1;border-radius:1px;
+  animation:fdwave 0s ease-in-out infinite alternate;
+}
+.fs-meta{
+  position:absolute;bottom:20px;left:24px;right:24px;
+  font-size:8px;letter-spacing:0.25em;color:var(--muted);
+  text-transform:uppercase;line-height:1.9;
+}
+.fs-signal-note{
+  position:absolute;top:16px;right:16px;
+  font-size:7px;letter-spacing:0.3em;color:var(--orange);text-transform:uppercase;
+  border:1px solid rgba(255,140,0,0.2);padding:4px 8px;
+  background:rgba(255,140,0,0.04);
+}
+
+/* ══ SCENES MAP ══ */
+#scenesMap{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+}
+
+.sm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:40px;}
+.sm-cell{
+  background:var(--ink2);padding:28px 22px;
+  border-top:2px solid rgba(138,206,0,0.1);
+  transition:border-color var(--mid);cursor:none;
+}
+.sm-cell:hover{border-color:var(--green);}
+.sm-scene{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,2vw,26px);letter-spacing:0.05em;color:var(--paper);margin-bottom:6px;display:block;}
+.sm-count{font-size:8px;letter-spacing:0.25em;color:var(--green);text-transform:uppercase;margin-bottom:10px;display:block;}
+.sm-examples{font-size:10px;color:var(--muted);line-height:1.7;}
+
+/* ══ HOW TO SUPPORT ══ */
+#howSupport{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  background:var(--ink2);
+}
+
+.hs-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;}
+.hs-left{}
+.hs-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,88px);line-height:0.88;color:var(--paper);margin-bottom:24px;}
+.hs-title span{color:var(--green);}
+.hs-body{font-size:clamp(13px,1.6vw,16px);line-height:1.9;color:var(--muted);margin-bottom:32px;}
+.hs-body strong{color:var(--paper);}
+.hs-cta{display:inline-flex;align-items:center;gap:14px;padding:16px 32px;background:var(--green);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.12em;border:none;text-decoration:none;cursor:none;transition:background var(--mid),color var(--mid);}
+.hs-cta:hover{background:var(--paper);}
+
+.hs-right{}
+.hs-steps{display:flex;flex-direction:column;gap:2px;}
+.hs-step{
+  display:grid;grid-template-columns:32px 1fr;gap:16px;
+  background:rgba(5,5,5,0.85);padding:20px 20px;
+  border-left:2px solid rgba(138,206,0,0.15);
+  transition:border-color var(--mid);cursor:none;
+}
+.hs-step:hover{border-color:var(--green);}
+.hs-step-n{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(138,206,0,0.2);line-height:1;}
+.hs-step-t{font-size:9px;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:4px;}
+.hs-step-d{font-size:11px;color:var(--muted);line-height:1.7;}
+.hs-step-d strong{color:var(--paper);}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid rgba(138,206,0,0.07);padding:28px 40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:var(--ink2);}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.2em;color:var(--green);}
+.ft-meta{font-size:8px;letter-spacing:0.2em;color:var(--slate);text-transform:uppercase;opacity:0.38;}
+.ft-r{margin-left:auto;font-size:8px;letter-spacing:0.2em;color:rgba(112,128,144,0.28);text-align:right;line-height:1.9;}
+
+@media(max-width:1024px){
+  .artist-grid{grid-template-columns:1fr 1fr;}
+  .fo-layout,.fs-layout,.hs-layout{grid-template-columns:1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  .artist-card.featured .ac-visual{aspect-ratio:16/7;}
+}
+@media(max-width:768px){
+  body{cursor:auto;}#cursor{display:none!important;}
+  .wrap{padding:0 20px;}#nav{padding:0 20px;}
+  .artist-grid{grid-template-columns:1fr;}
+  .sm-grid{grid-template-columns:1fr 1fr;}
+  footer{flex-direction:column;align-items:flex-start;}.ft-r{margin-left:0;text-align:left;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"><div class="cc"><div class="cg"></div></div><div class="cr"></div><div class="cl" id="cl">ENTER</div></div>
+
+<div id="loader">
+  <svg class="lp" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+    <rect width="180" height="180" fill="#080808"/>
+    <g opacity="0.6">
+      <rect x="10"  y="100" width="6"  height="40" fill="#8ACE00"/>
+      <rect x="22"  y="70"  width="6"  height="70" fill="#8ACE00"/>
+      <rect x="34"  y="55"  width="6"  height="85" fill="#8ACE00"/>
+      <rect x="46"  y="80"  width="6"  height="60" fill="#8ACE00"/>
+      <rect x="58"  y="45"  width="6"  height="95" fill="#8ACE00"/>
+      <rect x="70"  y="90"  width="6"  height="50" fill="#8ACE00"/>
+      <rect x="82"  y="60"  width="6"  height="80" fill="#8ACE00"/>
+      <rect x="94"  y="40"  width="6"  height="100" fill="#8ACE00"/>
+      <rect x="106" y="75"  width="6"  height="65" fill="#8ACE00"/>
+      <rect x="118" y="55"  width="6"  height="85" fill="#8ACE00"/>
+      <rect x="130" y="85"  width="6"  height="55" fill="#8ACE00"/>
+      <rect x="142" y="65"  width="6"  height="75" fill="#8ACE00"/>
+      <rect x="154" y="95"  width="6"  height="45" fill="#8ACE00"/>
+      <rect x="166" y="78"  width="6"  height="62" fill="#8ACE00"/>
+    </g>
+    <text x="24" y="160" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.5" letter-spacing="1.5">ARTISTS</text>
+  </svg>
+  <div class="ll">Loading artist profiles</div>
+  <div class="ll">KPT-UG ARTIST FUND</div>
+  <div class="lb"><div class="lf"></div></div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">KPT-UNDERGROUND</a>
+  <a class="nav-lnk" href="index.html">HOME</a>
+  <a class="nav-lnk" href="story.html">STORY</a>
+  <a class="nav-lnk" href="shop.html">COLLECTION</a>
+  <a class="nav-lnk act" href="#">ARTISTS</a>
+  <span class="nav-dot" style="margin-left:auto">SIGNAL ACTIVE</span>
+</nav>
+
+<!-- PAGE HEADER -->
+<div id="pageHdr">
+  <svg class="ph-bg" viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg" width="600">
+    <circle cx="350" cy="300" r="260" fill="none" stroke="#8ACE00" stroke-width="0.6" stroke-dasharray="6 5"/>
+    <circle cx="350" cy="300" r="200" fill="none" stroke="#8ACE00" stroke-width="0.4"/>
+    <circle cx="350" cy="300" r="140" fill="none" stroke="#8ACE00" stroke-width="0.6"/>
+    <circle cx="350" cy="300" r="80"  fill="none" stroke="#8ACE00" stroke-width="0.4" stroke-dasharray="3 4"/>
+    <circle cx="350" cy="300" r="30"  fill="#8ACE00" opacity="0.05"/>
+    <circle cx="350" cy="300" r="8"   fill="#8ACE00" opacity="0.1"/>
+  </svg>
+  <div class="wrap">
+    <span class="ph-eyebrow">ARTIST FUND // Q1 2025 // KEEP IT UNDERGROUND</span>
+    <h1 class="ph-title">THE MUSIC<br>YOU WILL NEVER<br><span class="g">FIND</span> <span class="dim">ELSEWHERE.</span></h1>
+    <div class="ph-meta-row r in">
+      <span class="ph-quarter">Showing <strong>Q1 2025</strong> recipients // 10 artists // Active fund</span>
+      <div>
+        <span class="ph-total">€3,240</span>
+        <span class="ph-total-label">DISTRIBUTED THIS QUARTER</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tw"><div class="ttr" id="tt1"></div></div>
+
+<!-- PULL QUOTE -->
+<section id="pullQuote" style="position:relative">
+  <div class="pq-bg">
+    <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg" width="100%">
+      <text x="50%" y="55%" font-family="'Bebas Neue',sans-serif" font-size="180" fill="#8ACE00" text-anchor="middle" opacity="1">ARTISTS</text>
+    </svg>
+  </div>
+  <div class="wrap" style="text-align:center">
+    <p class="pq r">
+      "Not because they lack ability.<br>
+      Because they made a <span>deliberate choice</span><br>
+      to stay in the frequencies<br>
+      that do not negotiate."
+    </p>
+  </div>
+</section>
+
+<!-- FUND OVERVIEW -->
+<section id="fundOverview">
+  <div class="wrap">
+    <div class="fo-layout">
+      <div class="fo-left r">
+        <div class="fo-total-display">
+          <div class="fo-quarter-label"><div class="fo-qdot"></div>Q1 2025 // LIVE COUNTER</div>
+          <div><span class="fo-currency">€</span><span class="fo-amount" id="foAmount">0</span></div>
+          <span class="fo-period">
+            DISTRIBUTED THIS QUARTER<br>
+            TOTAL SINCE LAUNCH: €8,640<br>
+            ARTISTS SUPPORTED: 34
+          </span>
+        </div>
+        <div class="fo-criteria r d2">
+          <span class="fo-crit-label">HOW RECIPIENTS ARE CHOSEN</span>
+          <div class="fo-crit-item"><strong>No application process.</strong> Artists do not apply.</div>
+          <div class="fo-crit-item"><strong>No committee.</strong> The scene identifies who the work belongs to.</div>
+          <div class="fo-crit-item"><strong>No metrics.</strong> Not determined by stream counts or social following.</div>
+          <div class="fo-crit-item"><strong>Full transparency.</strong> Every recipient and amount published quarterly.</div>
+          <div class="fo-crit-item"><strong>Direct transfer.</strong> No intermediary. No overhead deducted.</div>
+        </div>
+      </div>
+      <div class="fo-right r d1">
+        <h2 class="fo-how-title">How the<br>fund <span>works.</span></h2>
+        <p class="fo-how-body">Ten percent of every KPT-UNDERGROUND transaction is held in a quarterly fund. At the close of each quarter, the fund is distributed to underground artists across the scenes the brand operates within — hardcore, gabber, hardtek, speedcore, techno, drum and bass, ambient — selected by people with genuine scene knowledge.</p>
+        <p class="fo-how-body">There is <strong>no threshold to meet, no genre requirement, no minimum follower count.</strong> The only criterion is making music that the scene recognises as honest — music that exists because it had to, not because a booking agency requested it.</p>
+        <div class="fo-quarterly-history r d2">
+          <span class="fo-qh-label">QUARTERLY HISTORY</span>
+          <div class="fo-qh-row">
+            <span class="fo-qh-quarter">Q2 2024</span>
+            <div class="fo-qh-bar-wrap"><div class="fo-qh-bar" style="width:0" data-w="55%"></div></div>
+            <span class="fo-qh-amount">€1,980</span>
+          </div>
+          <div class="fo-qh-row">
+            <span class="fo-qh-quarter">Q3 2024</span>
+            <div class="fo-qh-bar-wrap"><div class="fo-qh-bar" style="width:0" data-w="72%"></div></div>
+            <span class="fo-qh-amount">€2,520</span>
+          </div>
+          <div class="fo-qh-row">
+            <span class="fo-qh-quarter">Q4 2024</span>
+            <div class="fo-qh-bar-wrap"><div class="fo-qh-bar" style="width:0" data-w="85%"></div></div>
+            <span class="fo-qh-amount">€2,900</span>
+          </div>
+          <div class="fo-qh-row">
+            <span class="fo-qh-quarter">Q1 2025</span>
+            <div class="fo-qh-bar-wrap"><div class="fo-qh-bar" style="width:0" data-w="100%"></div></div>
+            <span class="fo-qh-amount" style="color:var(--green)">€3,240</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tw"><div class="ttr" id="tt2" style="animation-direction:reverse;animation-duration:38s"></div></div>
+
+<!-- ARTIST GRID -->
+<section id="artistGrid">
+  <div class="wrap">
+    <span class="eyebrow r">Q1 2025 RECIPIENTS</span>
+    <div class="ag-controls r d1">
+      <button class="ag-filter active" data-scene="all">ALL SCENES</button>
+      <button class="ag-filter" data-scene="uk">UK</button>
+      <button class="ag-filter" data-scene="eu">EU</button>
+      <button class="ag-filter" data-scene="us">US</button>
+      <button class="ag-filter" data-scene="ee">EE / BALTIC</button>
+      <span class="ag-count"><strong id="agCount">10</strong> artists</span>
+    </div>
+    <div class="artist-grid" id="artistGridContainer">
+      <!-- Injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED STORY -->
+<section id="featuredStory">
+  <div class="wrap">
+    <div class="fs-layout">
+      <div class="fs-left r">
+        <span class="fs-label">FEATURED // Q1 2025</span>
+        <h2 class="fs-title">BURIAL<br><span>STATIC</span><br>IN THEIR OWN WORDS.</h2>
+
+        <div class="fs-qa">
+          <div class="fs-q">
+            <span class="fs-q-label">On making music outside the circuit</span>
+            <p class="fs-q-text">"What does it mean to you to operate completely outside the booking agency system?"</p>
+            <p class="fs-a-text">It means the music doesn't have to be anything other than what it is. <strong>No one is asking me to make it more accessible, more bookable, more radio-friendly.</strong> The only accountability is to the people in the room when it plays. That's an enormous freedom and an enormous responsibility simultaneously. The freedom means every decision is mine. The responsibility means there's no infrastructure to blame when it's wrong.</p>
+          </div>
+          <div class="fs-q">
+            <span class="fs-q-label">On the relationship between the music and the scene</span>
+            <p class="fs-q-text">"Do you think the underground has a responsibility to stay underground?"</p>
+            <p class="fs-a-text">I think it has a responsibility to stay honest. <strong>Underground is a means, not an end.</strong> If the music is honest and the environment it plays in is honest, the rest takes care of itself. What I'm suspicious of is the aesthetic of underground without the substance of it — the visual language of resistance deployed in service of the same commercial mechanisms it's supposed to be resisting.</p>
+          </div>
+          <div class="fs-q">
+            <span class="fs-q-label">On the fund</span>
+            <p class="fs-q-text">"What does direct artist support from a clothing brand mean in practice?"</p>
+            <p class="fs-a-text"><strong>It means I could afford the studio time for a release I'd been deferring for two years.</strong> That's it. That's the entire practical impact. No strings. No branding requirement. No expectation of acknowledgment. It arrived and it removed a material obstacle. That matters more than any artist partnership programme I've ever been approached about.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fs-right r d2">
+        <div class="fs-visual">
+          <span class="fs-signal-note">SIGNAL ONLY</span>
+          <div class="freq-display" id="freqDisplay">
+            <!-- Injected by JS -->
+          </div>
+          <div class="fs-meta">
+            BURIAL STATIC // DARK STEP // UK<br>
+            FUND RECEIVED: Q1 2025 // €324<br>
+            RELEASES: UNRELEASED // SIGNAL BROADCAST ONLY<br>
+            SCENE: UK DARK STEP / INDUSTRIAL BASS
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SCENES MAP -->
+<section id="scenesMap">
+  <div class="wrap">
+    <span class="eyebrow r">SCENES REPRESENTED</span>
+    <div class="stmt r d1" style="font-size:clamp(38px,5vw,72px);margin-bottom:0">WHERE THE<br><span class="g">MUSIC LIVES.</span></div>
+    <div class="sm-grid r d2" id="smGrid"><!-- Injected --></div>
+  </div>
+</section>
+
+<!-- HOW TO SUPPORT -->
+<section id="howSupport">
+  <div class="wrap">
+    <div class="hs-layout">
+      <div class="hs-left r">
+        <h2 class="hs-title">Support the<br>artists by<br><span>buying the gear.</span></h2>
+        <p class="hs-body">Every purchase moves money directly to the underground artists on this page. No application, no committee, no grant language. <strong>Buy the clothing. Ten percent moves immediately.</strong> The mechanism is that simple because it should be.</p>
+        <a class="hs-cta" href="shop.html">SHOP THE COLLECTION <span>→</span></a>
+      </div>
+      <div class="hs-right r d1">
+        <div class="hs-steps">
+          <div class="hs-step"><span class="hs-step-n">01</span><div><span class="hs-step-t">You buy a garment</span><p class="hs-step-d">Any piece. Any line. Any value. <strong>Ten percent of the transaction is held.</strong></p></div></div>
+          <div class="hs-step"><span class="hs-step-n">02</span><div><span class="hs-step-t">Fund accumulates quarterly</span><p class="hs-step-d">Every order adds to the quarterly pool. <strong>No overhead deducted.</strong> The full ten percent moves.</p></div></div>
+          <div class="hs-step"><span class="hs-step-n">03</span><div><span class="hs-step-t">Recipients identified</span><p class="hs-step-d"><strong>The scene identifies who the money belongs to.</strong> People with genuine scene knowledge, not a committee.</p></div></div>
+          <div class="hs-step"><span class="hs-step-n">04</span><div><span class="hs-step-t">Direct transfer</span><p class="hs-step-d">Money moves directly to the artist. <strong>No strings. No branding requirement. No acknowledgment expected.</strong></p></div></div>
+          <div class="hs-step"><span class="hs-step-n">05</span><div><span class="hs-step-t">Quarterly report</span><p class="hs-step-d">Signal Network members receive a full breakdown: <strong>every artist, every amount, every quarter.</strong> Radical transparency.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tw"><div class="ttr" id="tt3" style="animation-duration:28s"></div></div>
+
+<footer>
+  <span class="ft-logo">KPT-UNDERGROUND</span>
+  <span class="ft-meta">Artist Fund // Q1 2025 // Soundsystem Workwear</span>
+  <div class="ft-r">KPT-UG-001 // ARTIST FUND<br>CERT: KPT-AF-Q1-2025</div>
+</footer>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════
+   AUDIO
+═══════════════════════════════════ */
+let actx=null,aon=false;
+const gc=()=>{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();return actx;};
+const pSub=(f=40,d=0.35,v=0.15)=>{if(!aon)return;try{const c=gc(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,c.currentTime);g.gain.linearRampToValueAtTime(v,c.currentTime+0.02);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d+0.05);}catch(e){}};
+const pClk=(v=0.08)=>{if(!aon)return;try{const c=gc(),buf=c.createBuffer(1,c.sampleRate*0.05,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(c.sampleRate*0.006));const s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=3000;f.Q.value=0.8;s.buffer=buf;s.connect(f);f.connect(g);g.connect(c.destination);g.gain.value=v;s.start();}catch(e){}};
+
+/* ═══════════════════════════════════
+   CURSOR
+═══════════════════════════════════ */
+const cursor=document.getElementById('cursor'),cl=document.getElementById('cl');
+let mx=-300,my=-300;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cursor.style.transform=`translate(calc(${mx}px - 50%),calc(${my}px - 50%))`;requestAnimationFrame(t);})();
+const sc=(s,l='')=>{document.body.className=s?`c${s}`:'';cl.textContent=l;};
+const rp=()=>{const r=cursor.querySelector('.cr');r.style.animation='none';r.offsetHeight;r.style.animation='rp 0.5s ease forwards';};
+
+/* ═══════════════════════════════════
+   ARTISTS DATA
+═══════════════════════════════════ */
+const SCENES={
+  'UK DARK STEP':{color:'var(--green)',tag:'uk',css:'#8ACE00'},
+  'EU HARDTEK':  {color:'var(--rust)', tag:'eu',css:'#A0522D'},
+  'EE TECHNO':   {color:'var(--green)',tag:'ee',css:'#8ACE00'},
+  'US NOISE TECHNO':{color:'var(--slate)',tag:'us',css:'#708090'},
+  'DE HARDFLOOR':{color:'var(--orange)',tag:'eu',css:'#FF8C00'},
+  'FR TEKNIVAL': {color:'var(--rust)', tag:'eu',css:'#A0522D'},
+  'PL UNDERGROUND':{color:'var(--slate)',tag:'eu',css:'#708090'},
+  'CZ DARK TEKNO':{color:'var(--green)',tag:'eu',css:'#8ACE00'},
+  'HU SYSTEM DUB':{color:'var(--orange)',tag:'eu',css:'#FF8C00'},
+  'BE INDUSTRIAL':{color:'var(--slate)',tag:'eu',css:'#708090'},
+};
+
+const ARTISTS=[
+  {name:'BURIAL STATIC',scene:'UK DARK STEP',received:'€324',bio:'Making dark step and industrial bass outside any circuit. <strong>Has released on zero labels.</strong> Distributes through a private Bandcamp shared only within the scene.',tags:['dark step','industrial','sub bass'],featured:true},
+  {name:'HEX PROTOCOL',scene:'EU HARDTEK',received:'€324',bio:'Hardtek and tekno DJ/producer from the European free party circuit. <strong>Has been running a soundsystem</strong> for eleven years without a permanent venue.',tags:['hardtek','tekno','free party']},
+  {name:'SUBTERRAIN',scene:'EE TECHNO',received:'€324',bio:'Tallinn-based techno producer. Underground event organiser. <strong>Has never submitted to a booking agency.</strong> Plays only events he considers honest.',tags:['techno','underground','EE']},
+  {name:'WAVEFORM ERROR',scene:'US NOISE TECHNO',received:'€162',bio:'Chicago-based noise techno. <strong>Music exists exclusively on CD-R</strong> distributed at events. No Bandcamp. No Spotify.',tags:['noise','techno','physical only']},
+  {name:'VOID OPERATOR',scene:'DE HARDFLOOR',received:'€162',bio:'Berlin hardfloor and industrial techno. <strong>Refused three major festival bookings</strong> in 2024 to maintain underground integrity.',tags:['hardfloor','industrial','Berlin']},
+  {name:'TERRAFORMER',scene:'FR TEKNIVAL',received:'€324',bio:'French teknival artist and sound engineer. Has been building and running soundsystems at forest gatherings for fifteen years. <strong>Distributes music only at teknivals.</strong>',tags:['teknival','forest','sound eng.']},
+  {name:'SIGNAL GHOST',scene:'PL UNDERGROUND',received:'€216',bio:'Warsaw-based artist working across gabber, speedcore, and experimental club music. <strong>Known only within Eastern European underground networks.</strong>',tags:['gabber','speedcore','Warsaw']},
+  {name:'FRACTURE UNIT',scene:'CZ DARK TEKNO',received:'€162',bio:'Czech dark tekno producer. Has been running an illegal party series in industrial spaces for seven years. <strong>No social media presence whatsoever.</strong>',tags:['dark tekno','industrial','Prague']},
+  {name:'IRON CURTAIN DUB',scene:'HU SYSTEM DUB',received:'€216',bio:'Budapest-based soundsystem dub and roots artist. <strong>Maintains a permanent outdoor soundsystem</strong> that has never been used for a commercial event.',tags:['dub','roots','soundsystem']},
+  {name:'NULL POINT',scene:'BE INDUSTRIAL',received:'€108',bio:'Belgian industrial and noise artist. <strong>Releases are numbered editions of 50.</strong> When they are gone, they are gone.',tags:['industrial','noise','limited']},
+];
+
+/* ═══════════════════════════════════
+   TICKERS
+═══════════════════════════════════ */
+const TA=[{t:'BURIAL STATIC',a:false},{t:'//',a:true},{t:'HEX PROTOCOL',a:false},{t:'//',a:true},{t:'SUBTERRAIN',a:false},{t:'//',a:true},{t:'WAVEFORM ERROR',a:false},{t:'//',a:true},{t:'VOID OPERATOR',a:false},{t:'//',a:true},{t:'TERRAFORMER',a:false},{t:'//',a:true},{t:'SIGNAL GHOST',a:false},{t:'//',a:true},{t:'FRACTURE UNIT',a:false},{t:'//',a:true},{t:'IRON CURTAIN DUB',a:false},{t:'//',a:true},{t:'NULL POINT',a:true},{t:'//',a:false}];
+const TB=[{t:'10% TO ARTISTS',a:true},{t:'//',a:true},{t:'Q1 2025 // €3,240 DISTRIBUTED',a:false},{t:'//',a:true},{t:'NO APPLICATION PROCESS',a:false},{t:'//',a:true},{t:'NO COMMITTEE',a:false},{t:'//',a:true},{t:'DIRECT TRANSFER',a:false},{t:'//',a:true},{t:'RADICAL TRANSPARENCY',a:true},{t:'//',a:true},{t:'KEEP IT UNDERGROUND',a:false},{t:'//',a:true}];
+const bt=(id,items)=>{const t=document.getElementById(id);if(!t)return;[...items,...items].forEach(i=>{const s=document.createElement('span');s.className='ti'+(i.a?' ac':'');s.textContent=i.t;t.appendChild(s);});};
+bt('tt1',TA);bt('tt2',TB);bt('tt3',TA);
+
+/* ═══════════════════════════════════
+   WAVEFORM BARS (random aesthetic)
+═══════════════════════════════════ */
+const makeWaveform=(count=24,colorCss='#8ACE00')=>{
+  let html='';
+  for(let i=0;i<count;i++){
+    const h=Math.floor(Math.random()*80)+20;
+    const delay=(i*0.04).toFixed(2);
+    const dur=(0.4+Math.random()*0.6).toFixed(2);
+    html+=`<div class="ac-wave-bar" style="height:${h}%;animation:fdwave ${dur}s ease-in-out ${delay}s infinite alternate;background:${colorCss}"></div>`;
+  }
+  return html;
+};
+
+/* ═══════════════════════════════════
+   RENDER ARTIST GRID
+═══════════════════════════════════ */
+let currentFilter='all';
+const renderArtists=(filter='all')=>{
+  currentFilter=filter;
+  const grid=document.getElementById('artistGridContainer');
+  const filtered=filter==='all'?ARTISTS:ARTISTS.filter(a=>SCENES[a.scene]?.tag===filter);
+  document.getElementById('agCount').textContent=filtered.length;
+  grid.innerHTML='';
+  filtered.forEach((artist,i)=>{
+    const sc=SCENES[artist.scene]||{color:'var(--green)',css:'#8ACE00'};
+    const isFeatured=artist.featured&&filter==='all';
+    const card=document.createElement('div');
+    card.className=`artist-card r${isFeatured?' featured':''} d${(i%4)+1}`;
+    card.setAttribute('data-scene',SCENES[artist.scene]?.tag||'');
+    card.innerHTML=`
+      <div class="ac-visual">
+        <div class="ac-stripe" style="background:${sc.css}"></div>
+        <div class="ac-waveform">${makeWaveform(isFeatured?36:20,sc.css)}</div>
+        <div class="ac-amount-overlay">${artist.received}</div>
+      </div>
+      <div class="ac-info">
+        <span class="ac-scene-tag" style="color:${sc.css};border-color:${sc.css}40;background:${sc.css}08">${artist.scene}</span>
+        <div class="ac-name">${artist.name}</div>
+        <p class="ac-bio">${artist.bio}</p>
+        <div class="ac-tags">${artist.tags.map(t=>`<span class="ac-tag">${t}</span>`).join('')}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+    setTimeout(()=>card.classList.add('in'),i*80);
+    card.addEventListener('mouseenter',()=>{sc2('h',artist.name);rp2();pClk(0.05);});
+    card.addEventListener('mouseleave',()=>sc2(''));
+  });
+};
+const sc2=sc,rp2=rp;
+
+/* ═══════════════════════════════════
+   FILTER TABS
+═══════════════════════════════════ */
+document.querySelectorAll('.ag-filter').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.ag-filter').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    renderArtists(btn.dataset.scene);
+    pClk(0.07);
+  });
+  btn.addEventListener('mouseenter',()=>{sc('h','FILTER');rp();});
+  btn.addEventListener('mouseleave',()=>sc(''));
+});
+
+/* ═══════════════════════════════════
+   FREQUENCY DISPLAY
+═══════════════════════════════════ */
+const buildFreqDisplay=()=>{
+  const el=document.getElementById('freqDisplay');
+  if(!el)return;
+  const bars=36;
+  let html='';
+  for(let i=0;i<bars;i++){
+    const h=Math.floor(Math.random()*90)+10;
+    const delay=(i*0.035).toFixed(2);
+    const dur=(0.3+Math.random()*0.8).toFixed(2);
+    html+=`<div class="fd-bar" style="height:${h}%;background:var(--green);opacity:${0.3+Math.random()*0.5};animation:fdwave ${dur}s ease-in-out ${delay}s infinite alternate;"></div>`;
+  }
+  el.innerHTML=html;
+};
+
+/* ═══════════════════════════════════
+   SCENES GRID
+═══════════════════════════════════ */
+const SCENE_DATA=[
+  {scene:'UK UNDERGROUND',count:3,examples:'Dark Step, Industrial Bass, Jungle'},
+  {scene:'EU HARDTEK',count:4,examples:'Hardtek, Forest Tekno, Teknival'},
+  {scene:'EE / BALTIC',count:1,examples:'Techno, Underground Club'},
+  {scene:'US UNDERGROUND',count:1,examples:'Noise Techno, Industrial'},
+  {scene:'DE / AT',count:1,examples:'Hardfloor, Industrial Techno'},
+  {scene:'HU / CZ / PL',count:3,examples:'Gabber, Speedcore, Dark Tekno'},
+  {scene:'BE / NL',count:1,examples:'Industrial, Noise'},
+  {scene:'FR',count:1,examples:'Teknival, Free Party'},
+];
+const buildScenes=()=>{
+  const g=document.getElementById('smGrid');
+  if(!g)return;
+  g.innerHTML=SCENE_DATA.map(s=>`
+    <div class="sm-cell r">
+      <span class="sm-scene">${s.scene}</span>
+      <span class="sm-count">${s.count} ARTIST${s.count!==1?'S':''}</span>
+      <div class="sm-examples">${s.examples}</div>
+    </div>
+  `).join('');
+};
+
+/* ═══════════════════════════════════
+   FUND AMOUNT COUNTER
+═══════════════════════════════════ */
+let foStarted=false;
+const animateFundAmount=()=>{
+  if(foStarted)return;foStarted=true;
+  const el=document.getElementById('foAmount');
+  const target=3240;let v=0;
+  const steps=40,dur=1600;
+  const iv=setInterval(()=>{
+    v=Math.min(v+Math.ceil(target/steps),target);
+    el.textContent=v.toLocaleString();
+    pClk(0.025);
+    if(v>=target){clearInterval(iv);el.textContent=target.toLocaleString();}
+  },dur/steps);
+  // Animate bar chart
+  document.querySelectorAll('.fo-qh-bar').forEach(bar=>{
+    const w=bar.dataset.w;
+    setTimeout(()=>bar.style.width=w,300);
+  });
+};
+
+/* ═══════════════════════════════════
+   REVEAL + OBSERVERS
+═══════════════════════════════════ */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    if(e.target.id==='fundOverview'||e.target.closest('#fundOverview'))animateFundAmount();
+    obs.unobserve(e.target);
+  });
+},{threshold:0.08,rootMargin:'0px 0px -24px 0px'});
+const foObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){animateFundAmount();foObs.disconnect();}});},{threshold:0.2});
+
+const wireReveal=()=>document.querySelectorAll('.r:not(.in)').forEach(el=>obs.observe(el));
+
+/* ═══════════════════════════════════
+   BOOT
+═══════════════════════════════════ */
+window.addEventListener('load',()=>{
+  renderArtists();buildFreqDisplay();buildScenes();
+
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('gone');
+    document.getElementById('nav').classList.add('show');
+
+    // Hero reveals
+    setTimeout(()=>{
+      document.querySelectorAll('#pageHdr .r').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*120));
+    },200);
+
+    wireReveal();
+    foObs.observe(document.getElementById('fundOverview'));
+
+    document.querySelectorAll('a,button,.artist-card,.sm-cell,.hs-step,.sc-benefit').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{sc('h','ENTER');rp();});
+      el.addEventListener('mouseleave',()=>sc(''));
+    });
+
+    pSub(40,0.2,0.08);
+  },2200);
+});
+
+/* CSS for wave animation (injected dynamically) */
+const style=document.createElement('style');
+style.textContent=`@keyframes fdwave{from{transform:scaleY(0.3)}to{transform:scaleY(1)}}`;
+document.head.appendChild(style);
+</script>
+</body>
+</html>

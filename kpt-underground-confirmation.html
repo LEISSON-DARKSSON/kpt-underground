@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>ORDER CONFIRMED — KPT-UNDERGROUND</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#050505;--ink2:#090909;--ink3:#0e0e0e;
+  --green:#8ACE00;--orange:#FF8C00;--slate:#708090;--paper:#E8E4DC;--muted:#606258;--dim:#333330;
+  --ease:cubic-bezier(0.16,1,0.3,1);--snap:cubic-bezier(0.34,1.56,0.64,1);
+  --sat:env(safe-area-inset-top,0px);--sab:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{-webkit-text-size-adjust:100%;}
+body{background:var(--ink);color:var(--paper);font-family:'Space Mono',monospace;font-size:13px;line-height:1.7;overflow-x:hidden;cursor:none;}
+body::before{content:'';position:fixed;inset:0;z-index:8000;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(138,206,0,0.012) 3px,rgba(138,206,0,0.012) 4px);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(138,206,0,0.026) 1px,transparent 1px),linear-gradient(90deg,rgba(138,206,0,0.026) 1px,transparent 1px);background-size:52px 52px;}
+
+/* CURSOR */
+#cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);will-change:transform;}
+.cc{position:relative;width:18px;height:18px;transition:width 200ms var(--ease),height 200ms var(--ease);}
+.cc::before,.cc::after{content:'';position:absolute;background:var(--green);}
+.cc::before{width:1px;height:100%;left:50%;transform:translateX(-50%);}
+.cc::after{width:100%;height:1px;top:50%;transform:translateY(-50%);}
+.cg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;background:var(--ink);z-index:1;transition:width 200ms var(--ease),height 200ms var(--ease);}
+.cr{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border:1px solid rgba(138,206,0,0);border-radius:50%;transition:width 280ms var(--ease),height 280ms var(--ease),border-color 280ms;}
+.cl{position:absolute;left:22px;top:50%;transform:translateY(-50%);font-size:7px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity 200ms;}
+body.ch .cc{width:30px;height:30px}body.ch .cg{width:7px;height:7px}body.ch .cr{width:42px;height:42px;border-color:rgba(138,206,0,0.3)}body.ch .cl{opacity:1}
+@keyframes rp{from{width:18px;height:18px;opacity:0.7;border-color:var(--green)}to{width:60px;height:60px;opacity:0;border-color:var(--green)}}
+@keyframes blink{0%,100%{opacity:0.5}50%{opacity:0}}
+@keyframes fi{to{opacity:1}}
+@keyframes caretblink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity 0.8s ease,visibility 0.8s ease;}
+#loader.gone{opacity:0;visibility:hidden;pointer-events:none;}
+.lp{width:min(200px,52vw);height:min(200px,52vw);margin-bottom:22px;animation:ldp 0.45s ease infinite alternate;}
+@keyframes ldp{from{opacity:0.82}to{opacity:1}}
+.ll{font-size:8px;letter-spacing:0.45em;color:var(--green);text-transform:uppercase;opacity:0;animation:fi 0.3s ease forwards;}
+.ll:nth-child(2){animation-delay:0.25s}.ll:nth-child(3){animation-delay:0.5s}
+.lb{width:min(160px,48vw);height:1px;background:rgba(138,206,0,0.1);margin-top:14px;overflow:hidden;opacity:0;animation:fi 0.3s ease 1.1s forwards;}
+.lf{height:100%;background:var(--green);width:0;animation:lff 0.8s ease 1.2s forwards;}
+@keyframes lff{to{width:100%}}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;padding:0 40px;display:flex;align-items:center;gap:20px;background:rgba(5,5,5,0.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(138,206,0,0.07);opacity:0;transition:opacity 0.5s ease;}
+#nav.show{opacity:1;}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.2em;color:var(--green);text-decoration:none;}
+.nav-dot{font-size:7px;letter-spacing:0.35em;color:var(--green);opacity:0.45;}
+.nav-dot::before{content:'● ';animation:blink 1.6s step-end infinite;}
+
+/* LAYOUT */
+.wrap{max-width:960px;margin:0 auto;padding:0 40px;}
+.eyebrow{font-size:8px;letter-spacing:0.5em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:20px;}
+.r{opacity:0;transform:translateY(18px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease);}
+.r.in{opacity:1;transform:none;}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.32s}.d4{transition-delay:0.46s}
+
+/* ══ CONFIRMATION HERO ══ */
+#confHero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:calc(56px + 60px) 0 80px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+}
+
+/* Expanding pulse ring — signal received */
+.signal-pulse{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;z-index:0;
+}
+.sp-ring{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:var(--s);height:var(--s);
+  border:1px solid rgba(138,206,0,var(--o));
+  border-radius:50%;
+  animation:spexpand var(--d) ease-out var(--delay) forwards;
+}
+@keyframes spexpand{
+  from{width:60px;height:60px;opacity:0.8;}
+  to{width:var(--s);height:var(--s);opacity:0;}
+}
+
+/* Cert stamp */
+.cert-stamp-wrap{
+  display:flex;justify-content:center;margin-bottom:40px;
+  opacity:0;animation:fi 0.6s ease 0.3s forwards;
+}
+.cert-stamp-big{
+  width:120px;height:120px;
+  border:2px solid var(--green);border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  position:relative;z-index:1;
+  animation:stampin 0.6s var(--snap) 0.4s both;
+}
+@keyframes stampin{from{transform:scale(0.4) rotate(-20deg);opacity:0}to{transform:scale(1) rotate(-8deg);opacity:1}}
+.csb-top{font-size:7px;letter-spacing:0.3em;color:var(--green);text-transform:uppercase;}
+.csb-mid{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--green);line-height:1;}
+.csb-bot{font-size:6px;letter-spacing:0.25em;color:rgba(138,206,0,0.6);text-transform:uppercase;}
+.csb-check{
+  position:absolute;top:-8px;right:-8px;
+  width:28px;height:28px;background:var(--green);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:var(--ink);
+}
+
+/* Order ref */
+.order-ref{
+  font-size:9px;letter-spacing:0.4em;color:var(--muted);text-transform:uppercase;
+  text-align:center;margin-bottom:12px;display:block;
+}
+.order-ref strong{color:var(--paper);}
+
+/* Main confirmation headline */
+.conf-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,9vw,120px);
+  line-height:0.86;letter-spacing:0.01em;
+  color:var(--paper);text-align:center;
+  position:relative;z-index:1;
+}
+.conf-title .g{color:var(--green);}
+.conf-title .dim{color:rgba(232,228,220,0.18);}
+
+.conf-sub{
+  font-size:clamp(14px,1.8vw,17px);line-height:1.85;
+  color:var(--muted);text-align:center;
+  max-width:600px;margin:28px auto 0;
+  position:relative;z-index:1;
+}
+.conf-sub strong{color:var(--paper);}
+
+/* ══ SIGNAL ACTIVATION SEQUENCE ══ */
+#signalActivation{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  background:var(--ink2);
+  position:relative;overflow:hidden;
+}
+
+.sa-noise{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;opacity:0.022;}
+
+.sa-header{display:flex;align-items:center;gap:14px;margin-bottom:40px;}
+.sa-badge{font-size:8px;letter-spacing:0.45em;text-transform:uppercase;padding:5px 12px;border:1px solid rgba(138,206,0,0.25);color:var(--green);background:rgba(138,206,0,0.05);}
+.sa-rule{flex:1;height:1px;background:rgba(138,206,0,0.1);}
+
+/* Terminal activation sequence */
+.terminal-activation{
+  background:#030a03;border:1px solid rgba(138,206,0,0.2);
+  padding:28px;position:relative;overflow:hidden;border-radius:3px;
+  max-width:720px;margin:0 auto;
+}
+.terminal-activation::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(138,206,0,0.05) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.terminal-activation::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);animation:crtf 0.08s step-end infinite;}
+@keyframes crtf{0%{opacity:0.7}50%{opacity:1}100%{opacity:0.8}}
+.ta-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(138,206,0,0.1);position:relative;z-index:1;}
+.ta-title{font-size:8px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;}
+.ta-status{font-size:8px;letter-spacing:0.3em;color:rgba(138,206,0,0.5);}
+.ta-status.active{color:var(--green);}
+.ta-status.active::before{content:'● ';animation:blink 1.4s step-end infinite;color:var(--green);}
+.ta-body{font-family:'Space Mono',monospace;font-size:11px;line-height:2;color:rgba(138,206,0,0.8);position:relative;z-index:1;min-height:240px;}
+.ta-line{display:block;overflow:hidden;}
+.ta-line.success{color:var(--green);}
+.ta-line.info{color:rgba(232,228,220,0.7);}
+.ta-line.dim{color:rgba(112,128,144,0.5);}
+.ta-cursor{display:inline-block;width:8px;height:13px;background:var(--green);vertical-align:middle;animation:caretblink 1.2s step-end infinite;margin-left:2px;}
+
+/* Progress bar under terminal */
+.sa-progress-wrap{max-width:720px;margin:16px auto 0;display:flex;align-items:center;gap:16px;}
+.sa-progress-bar{flex:1;height:2px;background:rgba(138,206,0,0.08);overflow:hidden;}
+.sa-progress-fill{height:100%;background:var(--green);width:0;transition:width 0.3s ease;}
+.sa-progress-label{font-size:8px;letter-spacing:0.25em;color:var(--muted);text-transform:uppercase;white-space:nowrap;}
+
+/* ══ ORDER SUMMARY ══ */
+#orderSummary{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+}
+
+.os-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+
+/* Order items */
+.os-items{}
+.os-item{
+  display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:center;
+  padding:16px 0;border-bottom:1px solid rgba(112,128,144,0.07);
+}
+.os-item:last-child{border-bottom:none;}
+.os-swatch{width:52px;height:52px;background:var(--ink3);border:1px solid rgba(138,206,0,0.1);display:flex;align-items:center;justify-content:center;}
+.os-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.06em;color:var(--paper);display:block;margin-bottom:2px;}
+.os-sub{font-size:8px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.os-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--green);}
+
+.os-total-row{
+  display:flex;justify-content:space-between;align-items:baseline;
+  padding:16px 0;margin-top:4px;
+  border-top:1px solid rgba(138,206,0,0.12);
+}
+.os-total-label{font-size:9px;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;}
+.os-total-value{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--green);}
+
+.os-artist-contribution{
+  margin-top:16px;padding:14px 16px;
+  background:rgba(138,206,0,0.04);border:1px solid rgba(138,206,0,0.12);
+  display:flex;align-items:center;gap:14px;
+}
+.oa-icon{font-size:18px;}
+.oa-text{font-size:10px;color:var(--muted);line-height:1.7;}
+.oa-text strong{color:var(--paper);}
+.oa-amount{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--green);margin-left:auto;white-space:nowrap;}
+
+/* Delivery details */
+.os-delivery{background:var(--ink3);padding:24px;}
+.od-label{font-size:8px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:16px;}
+.od-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(112,128,144,0.07);font-size:11px;}
+.od-row:last-child{border-bottom:none;}
+.od-key{color:var(--muted);}
+.od-val{color:var(--paper);font-weight:700;text-align:right;}
+.od-cert{
+  margin-top:16px;padding:12px 16px;
+  border:1px solid rgba(138,206,0,0.1);
+  font-size:8px;letter-spacing:0.2em;color:var(--muted);
+  text-transform:uppercase;line-height:2;
+  position:relative;
+}
+.od-cert::before{content:'// PACKAGING SPEC';position:absolute;top:-8px;left:12px;background:var(--ink3);padding:0 8px;font-size:7px;letter-spacing:0.3em;color:var(--green);}
+
+/* ══ WHAT HAPPENS NEXT ══ */
+#nextSteps{
+  padding:80px 0;
+  background:var(--ink2);
+  border-bottom:1px solid rgba(138,206,0,0.07);
+}
+
+.steps-list{display:flex;flex-direction:column;gap:2px;margin-top:40px;}
+.step-item{
+  display:grid;grid-template-columns:80px 1fr;
+  align-items:start;
+  background:rgba(5,5,5,0.9);
+  position:relative;overflow:hidden;
+}
+.step-item::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:rgba(138,206,0,0.15);
+  transition:background 0.3s;
+}
+.step-item:hover::before{background:var(--green);}
+.step-item.active-step::before{background:var(--green);}
+
+.step-num-col{
+  padding:28px 20px;
+  display:flex;align-items:flex-start;justify-content:center;
+}
+.step-num{
+  font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:0.8;
+  color:rgba(138,206,0,0.15);
+  transition:color 0.3s;
+}
+.step-item.active-step .step-num,.step-item:hover .step-num{color:rgba(138,206,0,0.35);}
+
+.step-content{padding:28px 28px 28px 0;}
+.step-status{
+  font-size:7px;letter-spacing:0.4em;color:var(--muted);text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:6px;margin-bottom:8px;
+}
+.step-status.done{color:var(--green);}
+.step-status.done::before{content:'✓ ';}
+.step-status.pending{color:var(--orange);}
+.step-status.pending::before{content:'◉ ';animation:blink 1.4s step-end infinite;}
+.step-status.upcoming{color:var(--muted);}
+.step-status.upcoming::before{content:'○ ';}
+.step-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.06em;color:var(--paper);margin-bottom:8px;}
+.step-desc{font-size:11px;line-height:1.8;color:var(--muted);}
+.step-desc strong{color:var(--paper);}
+.step-eta{
+  display:inline-block;margin-top:10px;
+  font-size:8px;letter-spacing:0.25em;color:var(--green);text-transform:uppercase;
+  padding:3px 10px;border:1px solid rgba(138,206,0,0.2);background:rgba(138,206,0,0.04);
+}
+
+/* ══ SIGNAL NETWORK CONFIRMED ══ */
+#signalConfirmed{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  position:relative;overflow:hidden;
+}
+
+.sc-bg{position:absolute;inset:0;pointer-events:none;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.sc-bg span{font-family:'Bebas Neue',sans-serif;font-size:clamp(100px,24vw,320px);color:rgba(138,206,0,0.02);letter-spacing:-0.04em;user-select:none;white-space:nowrap;animation:bgd 55s linear infinite alternate;}
+@keyframes bgd{from{transform:scale(1.03) rotate(-2deg)}to{transform:scale(1.03) rotate(2deg)}}
+
+.sc-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;position:relative;z-index:1;}
+
+.sc-left{}
+.sc-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,88px);line-height:0.88;color:var(--paper);margin-bottom:24px;}
+.sc-title span{color:var(--green);}
+.sc-body{font-size:clamp(13px,1.5vw,16px);line-height:1.9;color:var(--muted);margin-bottom:24px;}
+.sc-body strong{color:var(--paper);}
+
+/* Access card */
+.sc-access-card{
+  background:var(--ink3);border:1px solid rgba(138,206,0,0.15);
+  padding:24px;position:relative;margin-top:8px;
+}
+.sc-access-card::before{content:'// SIGNAL NETWORK ACCESS';position:absolute;top:-8px;left:16px;background:var(--ink2);padding:0 10px;font-size:8px;letter-spacing:0.3em;color:var(--green);}
+.sca-field{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(112,128,144,0.07);}
+.sca-field:last-child{border-bottom:none;}
+.sca-key{font-size:8px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.sca-val{font-size:12px;color:var(--paper);font-weight:700;letter-spacing:0.05em;}
+.sca-val.green{color:var(--green);}
+.sca-val.active{color:var(--green);display:flex;align-items:center;gap:6px;}
+.sca-val.active::before{content:'●';font-size:8px;animation:blink 1.4s step-end infinite;}
+
+.sc-right{}
+.sc-benefits{display:flex;flex-direction:column;gap:2px;}
+.sc-benefit{
+  display:grid;grid-template-columns:28px 1fr;gap:14px;align-items:start;
+  background:rgba(5,5,5,0.85);padding:16px 18px;
+  border-left:2px solid rgba(138,206,0,0.15);
+  transition:border-color 0.2s;
+}
+.sc-benefit:hover{border-color:var(--green);}
+.sc-bn{font-family:'Bebas Neue',sans-serif;font-size:22px;color:rgba(138,206,0,0.2);line-height:1;}
+.sc-bt{font-size:8px;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:3px;}
+.sc-bd{font-size:11px;color:var(--muted);line-height:1.7;}
+.sc-bd strong{color:var(--paper);}
+
+/* ══ ARTIST CONTRIBUTION CONFIRMED ══ */
+#artistConfirmed{
+  padding:80px 0;
+  background:var(--ink2);
+  border-bottom:1px solid rgba(138,206,0,0.07);
+}
+
+.ac-layout{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+.ac-left{}
+.ac-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,14vw,160px);line-height:0.8;color:var(--green);letter-spacing:-0.03em;display:block;}
+.ac-pct{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);color:rgba(138,206,0,0.5);letter-spacing:-0.02em;}
+.ac-rule{height:1px;background:rgba(138,206,0,0.12);margin:12px 0;}
+.ac-label{font-size:9px;letter-spacing:0.3em;color:var(--slate);text-transform:uppercase;line-height:1.9;}
+.ac-amount-moved{
+  display:inline-block;margin-top:16px;
+  font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,4vw,48px);
+  color:var(--green);letter-spacing:-0.01em;
+}
+
+.ac-right{}
+.ac-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4.5vw,52px);line-height:1;color:var(--paper);margin-bottom:20px;}
+.ac-title span{color:var(--green);}
+.ac-body{font-size:clamp(13px,1.5vw,15px);line-height:1.9;color:var(--muted);margin-bottom:24px;}
+.ac-body strong{color:var(--paper);}
+.ac-link{display:inline-flex;align-items:center;gap:10px;font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--green);text-decoration:none;border-bottom:1px solid rgba(138,206,0,0.22);padding-bottom:3px;transition:color 0.2s,border-color 0.2s;}
+.ac-link:hover{color:var(--paper);border-color:rgba(232,228,220,0.25);}
+.ac-link .arr{transition:transform 0.2s var(--ease);}
+.ac-link:hover .arr{transform:translateX(4px);}
+
+/* ══ CONTINUE SHOPPING ══ */
+#continueShop{
+  padding:80px 0;
+  border-bottom:1px solid rgba(138,206,0,0.07);
+}
+.cs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:40px;}
+.cs-card{
+  background:var(--ink2);position:relative;overflow:hidden;cursor:none;
+  transition:background 0.25s;
+}
+.cs-card:hover{background:var(--ink3);}
+.cs-vis{aspect-ratio:1/1;background:var(--ink);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.cs-bp{opacity:0.25;transition:opacity 0.4s ease,transform 0.5s var(--ease));}
+.cs-card:hover .cs-bp{opacity:0.45;transform:scale(1.04);}
+.cs-accent{position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform 0.35s var(--ease);}
+.cs-card:hover .cs-accent{transform:scaleX(1);}
+.cs-overlay{position:absolute;inset:0;background:rgba(5,5,5,0.75);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;}
+.cs-card:hover .cs-overlay{opacity:1;}
+.cs-ol-btn{font-size:9px;letter-spacing:0.3em;color:var(--green);border:1px solid rgba(138,206,0,0.35);padding:8px 18px;text-decoration:none;background:rgba(5,5,5,0.8);transition:background 0.2s,color 0.2s;}
+.cs-ol-btn:hover{background:var(--green);color:var(--ink);}
+.cs-info{padding:14px 16px 18px;}
+.cs-lnm{font-size:7px;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;}
+.cs-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.05em;color:var(--paper);display:block;margin-bottom:4px;}
+.cs-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--green);}
+
+/* ══ FOOTER ══ */
+footer{position:relative;z-index:1;border-top:1px solid rgba(138,206,0,0.07);padding:28px 40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;background:var(--ink2);}
+.ft-logo{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.2em;color:var(--green);}
+.ft-meta{font-size:8px;letter-spacing:0.2em;color:var(--slate);text-transform:uppercase;opacity:0.38;}
+.ft-r{margin-left:auto;font-size:8px;letter-spacing:0.2em;color:rgba(112,128,144,0.28);text-align:right;line-height:1.9;}
+
+/* Ticker */
+.tw{position:relative;z-index:1;overflow:hidden;border-top:1px solid rgba(138,206,0,0.06);border-bottom:1px solid rgba(138,206,0,0.06);background:rgba(138,206,0,0.018);padding:10px 0;white-space:nowrap;}
+.tw::before,.tw::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;}
+.tw::before{left:0;background:linear-gradient(90deg,var(--ink),transparent);}
+.tw::after{right:0;background:linear-gradient(-90deg,var(--ink),transparent);}
+.ttr{display:inline-flex;animation:tsc 32s linear infinite;}
+@keyframes tsc{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);padding:0 22px;}
+.ti.ac{color:rgba(138,206,0,0.32);}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:2px;}::-webkit-scrollbar-track{background:var(--ink);}::-webkit-scrollbar-thumb{background:var(--green);}
+
+@media(max-width:900px){
+  .os-grid,.sc-layout,.ac-layout{grid-template-columns:1fr;}
+  .cs-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:768px){
+  body{cursor:auto;}#cursor{display:none!important;}
+  .wrap{padding:0 20px;}
+  #nav{padding:0 20px;}
+  footer{flex-direction:column;align-items:flex-start;}.ft-r{margin-left:0;text-align:left;}
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"><div class="cc"><div class="cg"></div></div><div class="cr"></div><div class="cl" id="cl">ENTER</div></div>
+
+<div id="loader">
+  <svg class="lp" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+    <rect width="200" height="200" fill="#080808"/>
+    <!-- Signal received indicator — concentric circles expanding -->
+    <circle cx="100" cy="100" r="80" fill="none" stroke="#8ACE00" stroke-width="1" opacity="0.6"/>
+    <circle cx="100" cy="100" r="60" fill="none" stroke="#8ACE00" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="100" cy="100" r="40" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.7"/>
+    <circle cx="100" cy="100" r="22" fill="none" stroke="#8ACE00" stroke-width="1" opacity="0.8"/>
+    <circle cx="100" cy="100" r="8"  fill="#8ACE00" opacity="0.9"/>
+    <text x="30" y="185" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.5" letter-spacing="2">SIGNAL RECEIVED</text>
+  </svg>
+  <div class="ll">Processing order</div>
+  <div class="ll">Activating Signal Network</div>
+  <div class="lb"><div class="lf"></div></div>
+</div>
+
+<nav id="nav">
+  <a class="nav-logo" href="index.html">KPT-UNDERGROUND</a>
+  <span class="nav-dot" style="margin-left:auto">SIGNAL ACTIVE</span>
+</nav>
+
+<!-- HERO -->
+<section id="confHero">
+  <!-- Expanding pulse rings -->
+  <div class="signal-pulse" aria-hidden="true" id="pulsRings"></div>
+
+  <div class="wrap" style="position:relative;z-index:1;text-align:center;">
+    <div class="cert-stamp-wrap">
+      <div class="cert-stamp-big">
+        <span class="csb-top">CERT</span>
+        <span class="csb-mid">KPT<br>U/G</span>
+        <span class="csb-bot">UNDERGROUND</span>
+        <div class="csb-check">✓</div>
+      </div>
+    </div>
+
+    <span class="order-ref r" style="animation:fi 0.5s ease 0.8s both">
+      ORDER REF: <strong id="orderRefNum">KPT-2025-0247</strong>
+    </span>
+
+    <div class="conf-title r" style="transition-delay:0.1s">
+      ORDER<br>
+      <span class="g">CONFIRMED.</span><br>
+      <span class="dim">SIGNAL</span> <span class="g">ACTIVE.</span>
+    </div>
+
+    <p class="conf-sub r" style="transition-delay:0.3s">
+      Your order is in. Your Signal Network access has been activated.
+      <strong>A confirmation and your access credentials will arrive by email shortly.</strong>
+      Check below for what happens next.
+    </p>
+  </div>
+</section>
+
+<!-- SIGNAL ACTIVATION -->
+<section id="signalActivation">
+  <div class="sa-noise"></div>
+  <div class="wrap">
+    <div class="sa-header r">
+      <span class="sa-badge">SIGNAL NETWORK</span>
+      <div class="sa-rule"></div>
+      <span class="sa-badge">ACCESS GRANTED</span>
+    </div>
+
+    <div class="terminal-activation r d1">
+      <div class="ta-header">
+        <span class="ta-title">KPT-UG // SIGNAL NETWORK // NODE-01</span>
+        <span class="ta-status active" id="taStatus">AUTHENTICATING</span>
+      </div>
+      <div class="ta-body" id="taBody"></div>
+    </div>
+
+    <div class="sa-progress-wrap r d2">
+      <div class="sa-progress-bar"><div class="sa-progress-fill" id="saFill"></div></div>
+      <span class="sa-progress-label" id="saLabel">INITIALISING</span>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="tw"><div class="ttr" id="tt1"></div></div>
+
+<!-- ORDER SUMMARY -->
+<section id="orderSummary">
+  <div class="wrap">
+    <div class="os-grid">
+      <div>
+        <span class="eyebrow r">YOUR ORDER</span>
+        <div class="os-items r d1" id="osItems"><!-- Injected --></div>
+        <div class="os-total-row r d2">
+          <span class="os-total-label">Order Total</span>
+          <span class="os-total-value" id="osTotal">€0</span>
+        </div>
+        <div class="os-artist-contribution r d3">
+          <span class="oa-icon">⬛</span>
+          <div class="oa-text"><strong>Artist Fund Contribution</strong><br>10% of your order goes directly to underground artists. No committee. No intermediaries.</div>
+          <span class="oa-amount" id="oaAmount">€0</span>
+        </div>
+      </div>
+
+      <div>
+        <span class="eyebrow r">DELIVERY DETAILS</span>
+        <div class="os-delivery r d1">
+          <span class="od-label">SHIPMENT SPECIFICATION</span>
+          <div class="od-row"><span class="od-key">Method</span><span class="od-val">Tracked // Vacuum-sealed black poly-mailer</span></div>
+          <div class="od-row"><span class="od-key">Packaging</span><span class="od-val">Industrial black polybag + Resistance Pack insert</span></div>
+          <div class="od-row"><span class="od-key">Hangtag</span><span class="od-val">OSHA rigging inspection format — PVC</span></div>
+          <div class="od-row"><span class="od-key">Estimated dispatch</span><span class="od-val">3–5 working days</span></div>
+          <div class="od-row"><span class="od-key">Estimated delivery</span><span class="od-val">5–10 working days</span></div>
+          <div class="od-row"><span class="od-key">Tracking</span><span class="od-val">Via email confirmation</span></div>
+          <div class="od-cert r d2">
+            PACKAGING: VACUUM-SEALED BLACK POLY-MAILER<br>
+            INSERT: RESISTANCE PACK // QR → PIRATE RADIO STREAM<br>
+            CERT TAG: KPT-QC-001 // UNDERGROUND UTILITY
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT HAPPENS NEXT -->
+<section id="nextSteps">
+  <div class="wrap">
+    <span class="eyebrow r">WHAT HAPPENS NEXT</span>
+    <div class="steps-list r d1">
+      <div class="step-item active-step">
+        <div class="step-num-col"><span class="step-num">01</span></div>
+        <div class="step-content">
+          <span class="step-status done">COMPLETE</span>
+          <div class="step-title">ORDER CONFIRMED</div>
+          <p class="step-desc">Your order has been received and payment processed. Order reference <strong id="orderRef2">KPT-2025-0247</strong> is logged. A confirmation email is on its way.</p>
+          <span class="step-eta">NOW</span>
+        </div>
+      </div>
+      <div class="step-item active-step">
+        <div class="step-num-col"><span class="step-num">02</span></div>
+        <div class="step-content">
+          <span class="step-status done">COMPLETE</span>
+          <div class="step-title">SIGNAL NETWORK ACTIVATED</div>
+          <p class="step-desc">Your Signal Network credentials have been generated. <strong>Check your email for the access confirmation.</strong> Your first broadcast will arrive within 48 hours of order dispatch.</p>
+          <span class="step-eta">ACTIVE NOW</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num-col"><span class="step-num">03</span></div>
+        <div class="step-content">
+          <span class="step-status pending">IN PROGRESS</span>
+          <div class="step-title">PRODUCTION & QUALITY CHECK</div>
+          <p class="step-desc">Your garment enters the production pipeline. <strong>AQL 2.5 quality inspection</strong> — random sampling, print cracking test, shrinkage check. Maximum 3 defects per batch permitted before rejection.</p>
+          <span class="step-eta">3–5 WORKING DAYS</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num-col"><span class="step-num">04</span></div>
+        <div class="step-content">
+          <span class="step-status upcoming">UPCOMING</span>
+          <div class="step-title">PACKAGED & DISPATCHED</div>
+          <p class="step-desc">Vacuum-sealed black poly-mailer. Resistance Pack insert included — a physical QR code leading to a hidden SoundCloud stream, active for 48 hours. <strong>OSHA-style rigging inspection hangtag</strong> attached.</p>
+          <span class="step-eta">5–7 WORKING DAYS</span>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num-col"><span class="step-num">05</span></div>
+        <div class="step-content">
+          <span class="step-status upcoming">UPCOMING</span>
+          <div class="step-title">DELIVERED</div>
+          <p class="step-desc">Tracked delivery. No external branding on the outer packaging. <strong>Signal Network: active. Artist fund: updated.</strong> You are in.</p>
+          <span class="step-eta">5–10 WORKING DAYS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIGNAL NETWORK CONFIRMED -->
+<section id="signalConfirmed">
+  <div class="sc-bg"><span>SIGNAL</span></div>
+  <div class="wrap">
+    <div class="sc-layout">
+      <div class="sc-left r">
+        <span class="eyebrow">SIGNAL NETWORK // CONFIRMED</span>
+        <h2 class="sc-title">You are <span>in.</span></h2>
+        <p class="sc-body">The Signal Network is now active on your account. It is not a newsletter. It is a <strong>closed channel</strong> through which information about events that do not publicly exist is distributed. Your first message will arrive within 48 hours of dispatch.</p>
+        <p class="sc-body">The access code for future secret drops will be embedded in your first broadcast. <strong>Pay attention to the frequency data.</strong></p>
+        <div class="sc-access-card r d2">
+          <div class="sca-field"><span class="sca-key">Access Level</span><span class="sca-val green">UNDERGROUND</span></div>
+          <div class="sca-field"><span class="sca-key">Network Status</span><span class="sca-val active">ACTIVE</span></div>
+          <div class="sca-field"><span class="sca-key">First Broadcast</span><span class="sca-val">Within 48h of dispatch</span></div>
+          <div class="sca-field"><span class="sca-key">Drop Access</span><span class="sca-val green">ENABLED — 48H EARLY</span></div>
+          <div class="sca-field"><span class="sca-key">Artist Reports</span><span class="sca-val">Quarterly</span></div>
+          <div class="sca-field"><span class="sca-key">Cert Code</span><span class="sca-val" id="scaCert">KPT-SN-0247</span></div>
+        </div>
+      </div>
+      <div class="sc-right r d2">
+        <span class="eyebrow">WHAT YOU NOW HAVE ACCESS TO</span>
+        <div class="sc-benefits">
+          <div class="sc-benefit"><span class="sc-bn">01</span><div><span class="sc-bt">Inside Event Intel</span><p class="sc-bd">Location codes and frequency callouts for events not announced publicly. <strong>Not on social media. Not on Resident Advisor.</strong></p></div></div>
+          <div class="sc-benefit"><span class="sc-bn">02</span><div><span class="sc-bt">48H Early Drop Access</span><p class="sc-bd">Drop information before any public announcement. <strong>Secret drops are Signal-only.</strong> Future frequency codes arrive through this channel.</p></div></div>
+          <div class="sc-benefit"><span class="sc-bn">03</span><div><span class="sc-bt">Artist Broadcasts</span><p class="sc-bd">Unreleased mixes and sessions from fund recipients. <strong>Never archived. Never publicly listed.</strong></p></div></div>
+          <div class="sc-benefit"><span class="sc-bn">04</span><div><span class="sc-bt">Quarterly Fund Reports</span><p class="sc-bd">Exact amounts distributed, to which artists, from which orders. <strong>Full transparency. No committee language.</strong></p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ARTIST CONTRIBUTION -->
+<section id="artistConfirmed">
+  <div class="wrap">
+    <div class="ac-layout">
+      <div class="ac-left r">
+        <span class="ac-num" id="acNum">0</span><span class="ac-pct">%</span>
+        <div class="ac-rule"></div>
+        <div class="ac-label">OF THIS ORDER GOES<br>DIRECTLY TO UNDERGROUND ARTISTS</div>
+        <span class="ac-amount-moved">€<span id="acMoved">0</span> MOVING NOW</span>
+      </div>
+      <div class="ac-right r d1">
+        <h2 class="ac-title">Your purchase<br>funds the <span>music.</span></h2>
+        <p class="ac-body">Ten percent of your order value is being directed to the underground artist support fund right now. No application process. No committee. <strong>The scene identifies who the money belongs to. We move it there.</strong></p>
+        <p class="ac-body">This quarter's recipients include artists from the UK dark step, EU hardtek, EE techno, and US noise techno circuits — people making music because they have to, not because a booking agency told them to.</p>
+        <a class="ac-link" href="editorial.html">See who receives the fund <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTINUE SHOPPING -->
+<section id="continueShop">
+  <div class="wrap">
+    <span class="eyebrow r">YOU MIGHT ALSO NEED</span>
+    <div class="cs-grid">
+      <div class="cs-card r">
+        <div class="cs-vis">
+          <div class="cs-accent" style="background:var(--green)"></div>
+          <div class="cs-bp">
+            <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg" width="120" height="134">
+              <path d="M60 42 L30 66 L48 78 L48 150 L132 150 L132 78 L150 66 L120 42Z" fill="none" stroke="#8ACE00" stroke-width="0.8"/>
+              <line x1="90" y1="42" x2="90" y2="150" stroke="#8ACE00" stroke-width="0.4" stroke-dasharray="3 4" opacity="0.4"/>
+              <text x="28" y="168" font-family="monospace" font-size="5" fill="#8ACE00" opacity="0.4">250GSM // UV-REACTIVE</text>
+            </svg>
+          </div>
+          <div class="cs-overlay"><a class="cs-ol-btn" href="shop.html">VIEW →</a></div>
+        </div>
+        <div class="cs-info"><span class="cs-lnm">RAVEWEAR</span><span class="cs-name">CROSSOVER LONGSLEEVE</span><span class="cs-price">€95</span></div>
+      </div>
+      <div class="cs-card r d1">
+        <div class="cs-vis">
+          <div class="cs-accent" style="background:var(--orange)"></div>
+          <div class="cs-bp">
+            <svg viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" width="120" height="80">
+              <circle cx="54" cy="60" r="32" fill="none" stroke="#FF8C00" stroke-width="0.9"/>
+              <circle cx="126" cy="60" r="32" fill="none" stroke="#FF8C00" stroke-width="0.9"/>
+              <line x1="10" y1="54" x2="22" y2="60" stroke="#FF8C00" stroke-width="0.7"/>
+              <line x1="158" y1="60" x2="170" y2="54" stroke="#FF8C00" stroke-width="0.7"/>
+              <line x1="86" y1="60" x2="94" y2="60" stroke="#FF8C00" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="cs-overlay"><a class="cs-ol-btn" href="shop.html">VIEW →</a></div>
+        </div>
+        <div class="cs-info"><span class="cs-lnm">ACCESSORIES</span><span class="cs-name">KPT SHADES MK1</span><span class="cs-price">€120</span></div>
+      </div>
+      <div class="cs-card r d2">
+        <div class="cs-vis">
+          <div class="cs-accent" style="background:var(--rust)"></div>
+          <div class="cs-bp">
+            <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg" width="120" height="134">
+              <path d="M54 36 L24 66 L24 150 L84 150 L84 96 L96 96 L96 150 L156 150 L156 66 L126 36 L105 54 L90 48 L75 54Z" fill="none" stroke="#A0522D" stroke-width="0.8"/>
+              <line x1="84" y1="48" x2="84" y2="150" stroke="#A0522D" stroke-width="0.5" stroke-dasharray="4 4"/>
+            </svg>
+          </div>
+          <div class="cs-overlay"><a class="cs-ol-btn" href="shop.html">VIEW →</a></div>
+        </div>
+        <div class="cs-info"><span class="cs-lnm">FESTIVALWEAR</span><span class="cs-name">TEKNIVAL FIELD JACKET</span><span class="cs-price">€320</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="tw"><div class="ttr" id="tt2" style="animation-direction:reverse;animation-duration:36s"></div></div>
+
+<footer>
+  <span class="ft-logo">KPT-UNDERGROUND</span>
+  <span class="ft-meta">Order Confirmed // Signal Network Active // Thank you</span>
+  <div class="ft-r">KPT-UG // ORDER CONFIRMED<br>SIGNAL: ACTIVE // CERT: KPT-QC-001</div>
+</footer>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════
+   AUDIO
+═══════════════════════════════════ */
+let actx=null,aon=true; // auto-enable on confirmation page
+const gc=()=>{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();return actx;};
+const pSub=(f=40,d=0.35,v=0.18)=>{try{const c=gc(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,c.currentTime);g.gain.linearRampToValueAtTime(v,c.currentTime+0.02);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d+0.05);}catch(e){}};
+const pClk=(v=0.1)=>{try{const c=gc(),buf=c.createBuffer(1,c.sampleRate*0.06,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(c.sampleRate*0.008));const s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=3000;f.Q.value=0.8;s.buffer=buf;s.connect(f);f.connect(g);g.connect(c.destination);g.gain.value=v;s.start();}catch(e){}};
+const pStat=(d=0.2,v=0.08)=>{try{const c=gc(),buf=c.createBuffer(1,c.sampleRate*d,c.sampleRate),da=buf.getChannelData(0);for(let i=0;i<da.length;i++)da[i]=Math.random()*2-1;const s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=0.5;s.buffer=buf;s.connect(f);f.connect(g);g.connect(c.destination);g.gain.setValueAtTime(0,c.currentTime);g.gain.linearRampToValueAtTime(v,c.currentTime+0.03);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);s.start();}catch(e){}};
+
+/* Rising confirmation tones */
+const playConfirmChime=()=>{[40,55,80,110,165].forEach((f,i)=>setTimeout(()=>pSub(f,0.3,0.14-i*0.018),i*180));};
+
+/* ═══════════════════════════════════
+   CURSOR
+═══════════════════════════════════ */
+const cursor=document.getElementById('cursor'),cl=document.getElementById('cl');
+let mx=-300,my=-300;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cursor.style.transform=`translate(calc(${mx}px - 50%),calc(${my}px - 50%))`;requestAnimationFrame(t);})();
+const sc=(s,l='')=>{document.body.className=s?`c${s}`:'';cl.textContent=l;};
+const rp=()=>{const r=cursor.querySelector('.cr');r.style.animation='none';r.offsetHeight;r.style.animation='rp 0.5s ease forwards';};
+
+/* ═══════════════════════════════════
+   ORDER DATA (demo)
+═══════════════════════════════════ */
+const ORDER = {
+  ref: 'KPT-2025-0247',
+  items: [
+    {name:'RIGGER BOXY HOODIE',ref:'KPT-RW-001',size:'L',gsm:'440GSM',price:180,shape:'hoodie'},
+  ],
+  total: 180,
+  artistContrib: 18,
+};
+
+// Generate order ref with some variance for demo
+const genRef=()=>`KPT-2025-${(Math.floor(Math.random()*500)+200).toString().padStart(4,'0')}`;
+const orderRef = genRef();
+ORDER.ref = orderRef;
+document.getElementById('orderRefNum').textContent = orderRef;
+document.getElementById('orderRef2').textContent = orderRef;
+document.getElementById('scaCert').textContent = `KPT-SN-${orderRef.split('-')[2]}`;
+
+/* ═══════════════════════════════════
+   PULSE RINGS
+═══════════════════════════════════ */
+const buildPulseRings=()=>{
+  const wrap=document.getElementById('pulsRings');
+  const rings=[
+    {s:'90vw',o:'0.04',d:'3s',delay:'0s'},
+    {s:'70vw',o:'0.06',d:'3s',delay:'0.5s'},
+    {s:'50vw',o:'0.08',d:'3s',delay:'1s'},
+    {s:'30vw',o:'0.1', d:'3s',delay:'1.5s'},
+  ];
+  rings.forEach(r=>{
+    const el=document.createElement('div');
+    el.className='sp-ring';
+    el.style.setProperty('--s',r.s);
+    el.style.setProperty('--o',r.o);
+    el.style.setProperty('--d',r.d);
+    el.style.setProperty('--delay',r.delay);
+    wrap.appendChild(el);
+  });
+};
+
+/* ═══════════════════════════════════
+   ORDER SUMMARY RENDER
+═══════════════════════════════════ */
+const makeSVG=(shape)=>{
+  const svgs={
+    hoodie:`<svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" width="52" height="52"><rect width="52" height="52" fill="#0e0e0e"/><path d="M17 12 L10 20 L7 33 L15 33 L15 43 L37 43 L37 33 L45 33 L42 20 L35 12 C33 16 28 18 26 18 C24 18 19 16 17 12Z" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.5"/><circle cx="26" cy="14" r="5" fill="none" stroke="#8ACE00" stroke-width="0.5" opacity="0.4"/></svg>`,
+  };
+  return svgs[shape]||svgs.hoodie;
+};
+
+const renderOrder=()=>{
+  const c=document.getElementById('osItems');
+  c.innerHTML=ORDER.items.map(item=>`
+    <div class="os-item">
+      <div class="os-swatch">${makeSVG(item.shape)}</div>
+      <div><span class="os-name">${item.name}</span><span class="os-sub">${item.ref} // ${item.size} // ${item.gsm}</span></div>
+      <span class="os-price">€${item.price}</span>
+    </div>
+  `).join('');
+  document.getElementById('osTotal').textContent=`€${ORDER.total}`;
+  document.getElementById('oaAmount').textContent=`€${ORDER.artistContrib}`;
+};
+
+/* ═══════════════════════════════════
+   TERMINAL ACTIVATION SEQUENCE
+═══════════════════════════════════ */
+const ACT_LINES=[
+  {text:`> ORDER REF: ${orderRef}`,cls:'info',delay:0},
+  {text:'> PAYMENT: VERIFIED',cls:'success',delay:280},
+  {text:`> SIGNAL NETWORK: SEARCHING MEMBER POOL...`,cls:'',delay:560},
+  {text:`> NODE-01 ASSIGNED`,cls:'success',delay:840},
+  {text:`> GENERATING ACCESS CREDENTIALS...`,cls:'',delay:1120},
+  {text:`> CERT CODE: KPT-SN-${orderRef.split('-')[2]}`,cls:'success',delay:1400},
+  {text:'> ENCRYPTION: AES-256 ████████ OK',cls:'success',delay:1680},
+  {text:'> BROADCAST QUEUE: NEXT DISPATCH + 48H',cls:'success',delay:1960},
+  {text:`> ARTIST FUND: €${ORDER.artistContrib} QUEUED FOR DISTRIBUTION`,cls:'success',delay:2240},
+  {text:'> STATUS: AUTHENTICATED',cls:'success',delay:2520,final:true},
+];
+
+const PROGRESS_STEPS=[
+  {pct:10,label:'VERIFYING PAYMENT'},
+  {pct:25,label:'ASSIGNING NODE'},
+  {pct:40,label:'GENERATING CREDENTIALS'},
+  {pct:60,label:'ENCRYPTING CHANNEL'},
+  {pct:75,label:'QUEUING BROADCAST'},
+  {pct:88,label:'UPDATING FUND'},
+  {pct:100,label:'AUTHENTICATED'},
+];
+
+let termBooted=false;
+const bootActivation=()=>{
+  if(termBooted)return; termBooted=true;
+  pStat(0.2,0.08);
+  const body=document.getElementById('taBody');
+  const fill=document.getElementById('saFill');
+  const label=document.getElementById('saLabel');
+  const status=document.getElementById('taStatus');
+  body.innerHTML='';
+
+  ACT_LINES.forEach((line,i)=>{
+    setTimeout(()=>{
+      const el=document.createElement('span');
+      el.className=`ta-line${line.cls?' '+line.cls:''}`;
+      el.textContent=line.text;
+      body.appendChild(el);
+      pClk(0.05);
+      // progress
+      if(PROGRESS_STEPS[i]){
+        fill.style.width=PROGRESS_STEPS[i].pct+'%';
+        label.textContent=PROGRESS_STEPS[i].label;
+      }
+      if(line.final){
+        status.textContent='AUTHENTICATED';
+        const cur=document.createElement('span');
+        cur.className='ta-cursor';
+        body.appendChild(cur);
+        playConfirmChime();
+        // Animate artist counter
+        setTimeout(animateArtistContrib,500);
+      }
+    },line.delay);
+  });
+};
+
+/* ═══════════════════════════════════
+   ARTIST CONTRIBUTION COUNTER
+═══════════════════════════════════ */
+let acStarted=false;
+const animateArtistContrib=()=>{
+  if(acStarted)return;acStarted=true;
+  const numEl=document.getElementById('acNum');
+  const movedEl=document.getElementById('acMoved');
+  let v=0;
+  const iv=setInterval(()=>{
+    v++;numEl.textContent=v;pClk(0.04);
+    movedEl.textContent=(ORDER.artistContrib*v/10).toFixed(0);
+    if(v>=10){clearInterval(iv);numEl.textContent=10;movedEl.textContent=ORDER.artistContrib;}
+  },80);
+};
+
+/* ═══════════════════════════════════
+   TICKER
+═══════════════════════════════════ */
+const TI=[{t:'ORDER CONFIRMED',a:false},{t:'//',a:true},{t:'SIGNAL NETWORK ACTIVE',a:true},{t:'//',a:true},{t:'ARTIST FUND UPDATED',a:false},{t:'//',a:true},{t:'RESISTANCE PACK INCLUDED',a:false},{t:'//',a:true},{t:'AQL 2.5 // QUALITY ASSURED',a:false},{t:'//',a:true},{t:'VACUUM-SEALED BLACK MAILER',a:false},{t:'//',a:true},{t:'3–5 DAY DISPATCH',a:false},{t:'//',a:true},{t:'KEEP IT UNDERGROUND',a:true},{t:'//',a:true}];
+const TB=[{t:'YOU ARE IN',a:true},{t:'//',a:true},{t:'SIGNAL: AUTHENTICATED',a:false},{t:'//',a:true},{t:'FREQ: 20-200HZ',a:false},{t:'//',a:true},{t:'10% TO ARTISTS',a:true},{t:'//',a:true},{t:'CLANDESTINE BY DEFAULT',a:false},{t:'//',a:true},{t:'FIRST BROADCAST: 48H',a:false},{t:'//',a:true}];
+const bt=(id,items)=>{const t=document.getElementById(id);if(!t)return;[...items,...items].forEach(i=>{const s=document.createElement('span');s.className='ti'+(i.a?' ac':'');s.textContent=i.t;t.appendChild(s);});};
+bt('tt1',TI);bt('tt2',TB);
+
+/* ═══════════════════════════════════
+   REVEAL
+═══════════════════════════════════ */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    if(e.target.id==='signalActivation'||e.target.closest('#signalActivation'))bootActivation();
+    if(e.target.id==='artistConfirmed'||e.target.closest('#artistConfirmed'))animateArtistContrib();
+    obs.unobserve(e.target);
+  });
+},{threshold:0.08,rootMargin:'0px 0px -24px 0px'});
+
+const wireReveal=()=>document.querySelectorAll('.r:not(.in)').forEach(el=>obs.observe(el));
+
+/* ═══════════════════════════════════
+   BOOT
+═══════════════════════════════════ */
+window.addEventListener('load',()=>{
+  buildPulseRings();
+  renderOrder();
+
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('gone');
+    document.getElementById('nav').classList.add('show');
+
+    // Hero reveals
+    setTimeout(()=>{
+      document.querySelectorAll('#confHero .r').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),i*120));
+    },200);
+
+    // Boot activation terminal immediately (below fold — triggered by observer)
+    wireReveal();
+
+    // Wire interactives
+    document.querySelectorAll('a,button,.cs-card,.sc-benefit,.step-item').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{sc('h','ENTER');rp();});
+      el.addEventListener('mouseleave',()=>sc(''));
+    });
+
+    // Trigger signal activation if already in view
+    const sa=document.getElementById('signalActivation');
+    if(sa){const obs2=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){bootActivation();obs2.disconnect();}});},{threshold:0.2});obs2.observe(sa);}
+
+  },2000);
+});
+</script>
+</body>
+</html>

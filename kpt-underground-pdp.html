@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<title>RIGGER BOXY HOODIE — KPT-UNDERGROUND</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════
+   TOKENS
+══════════════════════════════════ */
+:root {
+  --ink:    #050505;
+  --ink2:   #090909;
+  --ink3:   #0e0e0e;
+  --green:  #8ACE00;
+  --orange: #FF8C00;
+  --rust:   #A0522D;
+  --slate:  #708090;
+  --paper:  #E8E4DC;
+  --muted:  #606258;
+  --dim:    #333330;
+  --ease:   cubic-bezier(0.16,1,0.3,1);
+  --snap:   cubic-bezier(0.34,1.56,0.64,1);
+  --mid:    200ms;
+  --slow:   700ms;
+  --sat:    env(safe-area-inset-top,0px);
+  --sab:    env(safe-area-inset-bottom,0px);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+
+body{
+  background:var(--ink);color:var(--paper);
+  font-family:'Space Mono',monospace;font-size:13px;line-height:1.7;
+  overflow-x:hidden;cursor:none;
+}
+body::before{content:'';position:fixed;inset:0;z-index:8000;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(138,206,0,0.012) 3px,rgba(138,206,0,0.012) 4px);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(138,206,0,0.028) 1px,transparent 1px),linear-gradient(90deg,rgba(138,206,0,0.028) 1px,transparent 1px);background-size:52px 52px;}
+
+/* ══════════════════════════════════
+   CURSOR
+══════════════════════════════════ */
+#cursor{position:fixed;top:0;left:0;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);will-change:transform;}
+.cc{position:relative;width:18px;height:18px;transition:width var(--mid) var(--ease),height var(--mid) var(--ease);}
+.cc::before,.cc::after{content:'';position:absolute;background:var(--green);}
+.cc::before{width:1px;height:100%;left:50%;transform:translateX(-50%);}
+.cc::after{width:100%;height:1px;top:50%;transform:translateY(-50%);}
+.cg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;background:var(--ink);z-index:1;transition:width var(--mid) var(--ease),height var(--mid) var(--ease);}
+.cr{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border:1px solid rgba(138,206,0,0);border-radius:50%;transition:width 280ms var(--ease),height 280ms var(--ease),border-color 280ms;}
+.cl{position:absolute;left:22px;top:50%;transform:translateY(-50%);font-size:7px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity var(--mid);}
+
+@keyframes rp{from{width:18px;height:18px;opacity:0.7;border-color:var(--green)}to{width:58px;height:58px;opacity:0;border-color:var(--green)}}
+@keyframes blink{0%,100%{opacity:0.5}50%{opacity:0}}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
+@keyframes fi{to{opacity:1}}
+@keyframes su{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+body.ch .cc{width:30px;height:30px} body.ch .cg{width:7px;height:7px}
+body.ch .cr{width:42px;height:42px;border-color:rgba(138,206,0,0.3)} body.ch .cl{opacity:1}
+body.cadd .cc::before,body.cadd .cc::after{background:var(--green)}
+body.cadd .cr{width:52px;height:52px;border-color:rgba(138,206,0,0.5)}
+body.cadd .cl{opacity:1;font-size:12px;font-family:'Bebas Neue',sans-serif;letter-spacing:0.05em;}
+body.czoom .cc{width:26px;height:26px;} body.czoom .cr{width:44px;height:44px;border-color:rgba(138,206,0,0.25);}
+
+/* ══════════════════════════════════
+   LOADER
+══════════════════════════════════ */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity 0.7s ease,visibility 0.7s ease;}
+#loader.gone{opacity:0;visibility:hidden;pointer-events:none;}
+.lp{width:min(180px,48vw);height:min(180px,48vw);margin-bottom:22px;animation:ldp 0.45s ease infinite alternate;}
+@keyframes ldp{from{opacity:0.8}to{opacity:1}}
+.ll{font-size:8px;letter-spacing:0.45em;color:var(--green);text-transform:uppercase;opacity:0;animation:fi 0.3s ease forwards;}
+.ll:nth-child(2){animation-delay:0.28s}.ll:nth-child(3){animation-delay:0.6s}
+.lb{width:min(160px,46vw);height:1px;background:rgba(138,206,0,0.1);margin-top:16px;overflow:hidden;opacity:0;animation:fi 0.3s ease 1.3s forwards;}
+.lf{height:100%;background:var(--green);width:0;animation:lff 0.8s ease 1.4s forwards;}
+@keyframes lff{to{width:100%}}
+
+/* ══════════════════════════════════
+   NAV
+══════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  background:rgba(5,5,5,0.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  height:56px;padding:0 40px;
+  display:flex;align-items:center;gap:20px;
+  opacity:0;transition:opacity 0.5s ease;
+}
+#nav.show{opacity:1}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.2em;color:var(--green);text-decoration:none;}
+.nav-back{font-size:8px;letter-spacing:0.35em;color:var(--muted);text-decoration:none;text-transform:uppercase;display:flex;align-items:center;gap:8px;transition:color var(--mid);}
+.nav-back:hover{color:var(--paper)}
+.nav-back::before{content:'←';font-size:12px;}
+.nav-line-tag{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(138,206,0,0.2);color:var(--green);}
+.nav-dot{font-size:7px;letter-spacing:0.35em;color:var(--green);opacity:0.45;}
+.nav-dot::before{content:'● ';animation:blink 1.6s step-end infinite;}
+#navCart{display:flex;align-items:center;gap:8px;margin-left:auto;background:none;border:1px solid rgba(138,206,0,0.18);padding:6px 14px;cursor:none;transition:border-color var(--mid),background var(--mid);}
+#navCart:hover{border-color:var(--green);background:rgba(138,206,0,0.04)}
+.nc-label{font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--green);}
+.nc-count{font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--green);}
+
+/* ══════════════════════════════════
+   AUDIO
+══════════════════════════════════ */
+#aBtn{position:fixed;bottom:28px;right:28px;z-index:600;display:flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(5,5,5,0.9);border:1px solid rgba(138,206,0,0.12);backdrop-filter:blur(10px);cursor:none;opacity:0;transition:opacity 0.4s ease,border-color var(--mid);}
+#aBtn.show{opacity:1}
+#aBtn:hover{border-color:rgba(138,206,0,0.35)}
+.abrs{display:flex;align-items:flex-end;gap:2px;height:11px}
+.abr{width:2px;background:var(--green);border-radius:1px;transition:height 0.15s}
+.abr:nth-child(1){height:3px}.abr:nth-child(2){height:7px}.abr:nth-child(3){height:5px}.abr:nth-child(4){height:10px}.abr:nth-child(5){height:6px}
+#aBtn.on .abr:nth-child(1){animation:b1 0.8s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(2){animation:b2 0.6s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(3){animation:b3 0.9s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(4){animation:b4 0.7s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(5){animation:b5 0.5s ease-in-out infinite alternate}
+@keyframes b1{from{height:3px}to{height:9px}}@keyframes b2{from{height:7px}to{height:3px}}
+@keyframes b3{from{height:5px}to{height:11px}}@keyframes b4{from{height:10px}to{height:4px}}
+@keyframes b5{from{height:6px}to{height:8px}}
+#aBtn.off .abr{height:2px;opacity:0.3}
+.alb{font-size:7px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;}
+
+/* ══════════════════════════════════
+   TOAST
+══════════════════════════════════ */
+#toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);z-index:700;background:rgba(8,8,8,0.96);border:1px solid rgba(138,206,0,0.28);padding:12px 22px;display:flex;align-items:center;gap:12px;opacity:0;pointer-events:none;transition:opacity 0.3s ease,transform 0.3s var(--ease);backdrop-filter:blur(12px);}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.td{width:6px;height:6px;border-radius:50%;background:var(--green);animation:tdp 1s ease-in-out infinite alternate;}
+@keyframes tdp{from{opacity:0.5}to{opacity:1}}
+.tt{font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:var(--paper);}
+
+/* ══════════════════════════════════
+   CART DRAWER
+══════════════════════════════════ */
+#cartDraw{position:fixed;top:0;right:0;bottom:0;width:min(380px,100vw);z-index:800;background:rgba(6,6,6,0.98);backdrop-filter:blur(20px);border-left:1px solid rgba(138,206,0,0.1);transform:translateX(100%);transition:transform 0.45s var(--ease);display:flex;flex-direction:column;padding-top:calc(56px + var(--sat));}
+#cartDraw.open{transform:translateX(0)}
+#cartOver{position:fixed;inset:0;z-index:799;background:rgba(0,0,0,0);pointer-events:none;transition:background 0.45s ease;}
+#cartOver.open{background:rgba(0,0,0,0.5);pointer-events:auto;}
+.cdh{padding:18px 24px;border-bottom:1px solid rgba(138,206,0,0.08);display:flex;align-items:center;gap:12px;}
+.cdt{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.1em;color:var(--paper);}
+.cdc{font-size:8px;letter-spacing:0.3em;color:var(--green);text-transform:uppercase;}
+.cdx{margin-left:auto;background:none;border:none;color:var(--muted);font-size:18px;cursor:none;padding:4px 6px;transition:color var(--mid);}
+.cdx:hover{color:var(--paper)}
+.cdi{flex:1;overflow-y:auto;padding:0;}
+.cdi::-webkit-scrollbar{width:2px}.cdi::-webkit-scrollbar-thumb{background:var(--green)}
+.ci{display:grid;grid-template-columns:52px 1fr auto;gap:14px;align-items:start;padding:16px 24px;border-bottom:1px solid rgba(112,128,144,0.07);}
+.cisw{width:52px;height:52px;background:var(--ink3);border:1px solid rgba(138,206,0,0.1);}
+.cin{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.06em;color:var(--paper);display:block;margin-bottom:2px;}
+.cis{font-size:7px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.cip{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--green);}
+.cir{font-size:9px;color:var(--dim);background:none;border:none;cursor:none;transition:color var(--mid);}
+.cir:hover{color:var(--orange)}
+.ce{display:flex;flex-direction:column;align-items:center;justify-content:center;height:160px;gap:8px;}
+.cet{font-size:9px;letter-spacing:0.3em;color:var(--dim);text-transform:uppercase;}
+.cdf{padding:18px 24px;border-top:1px solid rgba(138,206,0,0.08);}
+.ctr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;}
+.ctl{font-size:9px;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;}
+.ctv{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--green);}
+.cck{display:block;width:100%;padding:15px;background:var(--green);color:var(--ink);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:0.15em;text-align:center;border:none;cursor:none;transition:background var(--mid);}
+.cck:hover{background:var(--paper)}
+.csn{font-size:7px;letter-spacing:0.15em;color:var(--muted);text-align:center;margin-top:9px;line-height:1.7;}
+.csn strong{color:var(--green);}
+
+/* ══════════════════════════════════
+   HERO — BLUEPRINT ASSEMBLY
+══════════════════════════════════ */
+#pdpHero{
+  padding-top:56px;
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  position:relative;z-index:1;
+}
+
+/* Left: blueprint canvas */
+.hero-left{
+  position:sticky;
+  top:56px;
+  height:calc(100vh - 56px);
+  display:flex;align-items:center;justify-content:center;
+  background:var(--ink2);
+  overflow:hidden;
+}
+
+.hero-left::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 50%,rgba(138,206,0,0.04) 0%,transparent 65%);
+  pointer-events:none;
+}
+
+/* Blueprint assembly layers — each drawn in via scroll */
+.bp-wrap{
+  position:relative;
+  width:min(420px,90%);
+  aspect-ratio:1/1;
+}
+
+.bp-layer{
+  position:absolute;inset:0;
+  opacity:0;
+  transition:opacity 0.8s var(--ease);
+}
+.bp-layer.drawn{opacity:1;}
+
+/* Dimension markers */
+.bp-dims{
+  position:absolute;inset:0;
+  pointer-events:none;
+  opacity:0;transition:opacity 0.6s ease;
+}
+.bp-dims.drawn{opacity:0.5;}
+
+/* Blueprint meta label */
+.bp-meta{
+  position:absolute;bottom:16px;left:0;right:0;
+  text-align:center;
+  font-size:7px;letter-spacing:0.3em;color:var(--muted);
+  text-transform:uppercase;
+  opacity:0;transition:opacity 0.5s ease;
+}
+.bp-meta.drawn{opacity:1;}
+
+/* View cycle buttons */
+.bp-views{
+  position:absolute;bottom:16px;right:16px;
+  display:flex;gap:4px;
+}
+.bpv-btn{
+  font-size:7px;letter-spacing:0.2em;text-transform:uppercase;
+  padding:4px 8px;border:1px solid rgba(138,206,0,0.15);
+  color:var(--muted);background:none;cursor:none;
+  transition:all var(--mid);
+}
+.bpv-btn.active{border-color:var(--green);color:var(--green);background:rgba(138,206,0,0.05);}
+.bpv-btn:hover{border-color:rgba(138,206,0,0.35);color:var(--paper);}
+
+/* Assembly progress indicator */
+.bp-progress{
+  position:absolute;left:16px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:6px;
+}
+.bpp-dot{
+  width:4px;height:4px;border-radius:50%;
+  background:var(--dim);transition:background 0.3s ease,transform 0.3s var(--snap);
+}
+.bpp-dot.active{background:var(--green);transform:scale(1.5);}
+
+/* Zoom cursor on blueprint */
+.hero-left:hover .bp-wrap{cursor:none;}
+
+/* Right: product info */
+.hero-right{
+  padding:80px 48px 80px;
+  display:flex;flex-direction:column;
+  border-left:1px solid rgba(138,206,0,0.07);
+}
+
+/* Breadcrumb */
+.pdp-bread{
+  font-size:7px;letter-spacing:0.35em;color:var(--muted);
+  text-transform:uppercase;margin-bottom:24px;
+  display:flex;align-items:center;gap:8px;
+}
+.pdp-bread span{color:var(--green);}
+
+/* Product title */
+.pdp-ref{font-size:8px;letter-spacing:0.4em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:8px;}
+.pdp-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,4.5vw,64px);line-height:0.88;letter-spacing:0.02em;color:var(--paper);margin-bottom:20px;}
+
+/* Rating/status strip */
+.pdp-strip{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+  margin-bottom:28px;padding-bottom:28px;
+  border-bottom:1px solid rgba(138,206,0,0.08);
+}
+.pdp-badge{font-size:7px;letter-spacing:0.35em;text-transform:uppercase;padding:4px 10px;border:1px solid rgba(138,206,0,0.25);color:var(--green);background:rgba(138,206,0,0.05);}
+.pdp-badge.lim{color:var(--orange);border-color:rgba(255,140,0,0.25);background:rgba(255,140,0,0.05);}
+.pdp-stock{font-size:8px;letter-spacing:0.2em;color:var(--muted);margin-left:auto;}
+.pdp-stock strong{color:var(--paper);}
+
+/* Price */
+.pdp-price-row{display:flex;align-items:baseline;gap:10px;margin-bottom:24px;}
+.pdp-price{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--green);line-height:1;letter-spacing:-0.01em;}
+.pdp-currency{font-size:18px;color:rgba(138,206,0,0.5);}
+.pdp-gsm{font-size:9px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;align-self:center;}
+
+/* Short spec */
+.pdp-spec-short{font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:28px;}
+.pdp-spec-short strong{color:var(--paper);}
+
+/* Size selector */
+.size-label{font-size:8px;letter-spacing:0.4em;color:var(--muted);text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.size-guide-link{color:var(--green);cursor:none;text-decoration:none;font-size:7px;letter-spacing:0.3em;transition:color var(--mid);}
+.size-guide-link:hover{color:var(--paper);}
+
+.sizes-grid{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:28px;}
+.size-btn{
+  font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+  min-width:52px;padding:10px 14px;text-align:center;
+  border:1px solid rgba(138,206,0,0.15);color:var(--muted);
+  background:none;cursor:none;
+  transition:all var(--mid);position:relative;
+}
+.size-btn:hover{border-color:rgba(138,206,0,0.4);color:var(--paper);}
+.size-btn.sel{border-color:var(--green);color:var(--green);background:rgba(138,206,0,0.06);}
+.size-btn.low::after{
+  content:'LOW';position:absolute;top:-8px;right:-2px;
+  font-size:5px;letter-spacing:0.2em;color:var(--orange);
+  background:rgba(255,140,0,0.1);border:1px solid rgba(255,140,0,0.3);
+  padding:1px 4px;
+}
+.size-btn.out{border-color:rgba(112,128,144,0.1);color:var(--dim);text-decoration:line-through;pointer-events:none;}
+
+/* CTA area */
+.pdp-cta{display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.btn-atc{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:18px 28px;
+  background:var(--green);color:var(--ink);
+  font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.12em;
+  border:none;cursor:none;
+  transition:background var(--mid),color var(--mid),transform 0.1s;
+  position:relative;overflow:hidden;
+}
+.btn-atc::before{
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,0.08);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.3s var(--ease);
+}
+.btn-atc:hover::before{transform:scaleX(1);}
+.btn-atc:hover{background:var(--paper);}
+.btn-atc:active{transform:scale(0.98);}
+.btn-atc.added{background:var(--ink2);color:var(--green);border:1px solid rgba(138,206,0,0.3);}
+
+.btn-signal{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:13px 28px;
+  background:none;color:var(--muted);
+  font-size:9px;letter-spacing:0.35em;text-transform:uppercase;
+  border:1px solid rgba(138,206,0,0.12);cursor:none;
+  transition:all var(--mid);
+}
+.btn-signal:hover{border-color:rgba(138,206,0,0.3);color:var(--green);}
+.btn-signal::before{content:'⬛';font-size:8px;}
+
+/* Trust signals */
+.trust-row{display:flex;gap:0;border:1px solid rgba(112,128,144,0.1);margin-bottom:0;}
+.trust-item{flex:1;padding:12px 14px;text-align:center;border-right:1px solid rgba(112,128,144,0.08);}
+.trust-item:last-child{border-right:none;}
+.trust-icon{font-size:14px;display:block;margin-bottom:4px;}
+.trust-text{font-size:7px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;display:block;}
+
+/* ══════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════ */
+.r{opacity:0;transform:translateY(18px);transition:opacity 0.8s var(--ease),transform 0.8s var(--ease);}
+.r.in{opacity:1;transform:none;}
+.d1{transition-delay:0.08s}.d2{transition-delay:0.18s}.d3{transition-delay:0.28s}.d4{transition-delay:0.42s}
+
+/* ══════════════════════════════════
+   TABS SYSTEM (below fold)
+══════════════════════════════════ */
+#pdpTabs{
+  position:relative;z-index:1;
+  border-top:1px solid rgba(138,206,0,0.07);
+  border-bottom:1px solid rgba(138,206,0,0.07);
+  background:var(--ink2);
+}
+
+.tabs-nav{
+  display:flex;
+  max-width:1200px;margin:0 auto;
+  padding:0 40px;
+  overflow-x:auto;
+}
+.tabs-nav::-webkit-scrollbar{display:none;}
+
+.tab-btn{
+  font-size:8px;letter-spacing:0.35em;text-transform:uppercase;
+  color:var(--muted);padding:18px 20px;
+  border:none;border-bottom:2px solid transparent;
+  background:none;cursor:none;white-space:nowrap;
+  transition:color var(--mid),border-color var(--mid);
+}
+.tab-btn:hover{color:var(--paper);}
+.tab-btn.active{color:var(--green);border-color:var(--green);}
+
+/* ══════════════════════════════════
+   TAB PANELS
+══════════════════════════════════ */
+.tab-panel{display:none;max-width:1200px;margin:0 auto;padding:56px 40px 80px;}
+.tab-panel.active{display:block;}
+
+/* TAB 1: TECH DOCUMENTATION */
+.tech-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:56px;}
+.tech-cell{background:var(--ink3);padding:28px 24px;}
+.tech-cell-label{font-size:8px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:14px;}
+
+.spec-table{width:100%;border-collapse:collapse;}
+.spec-table tr{border-bottom:1px solid rgba(112,128,144,0.07);}
+.spec-table tr:last-child{border-bottom:none;}
+.spec-table td{padding:8px 0;font-size:11px;vertical-align:top;}
+.spec-table td:first-child{color:var(--muted);width:45%;letter-spacing:0.05em;}
+.spec-table td:last-child{color:var(--paper);font-weight:700;}
+
+/* BOM table */
+.bom-table{width:100%;border-collapse:collapse;}
+.bom-table th{font-size:8px;letter-spacing:0.3em;color:var(--green);text-align:left;padding:8px 12px;border-bottom:1px solid rgba(138,206,0,0.12);background:rgba(138,206,0,0.03);text-transform:uppercase;}
+.bom-table td{padding:9px 12px;border-bottom:1px solid rgba(112,128,144,0.06);font-size:11px;color:var(--muted);line-height:1.5;}
+.bom-table td:first-child{color:var(--paper);font-weight:700;}
+.bom-table tr:hover td{background:rgba(138,206,0,0.015);}
+
+/* Cert block */
+.cert-block{
+  border:1px solid rgba(138,206,0,0.12);padding:28px 24px;
+  position:relative;margin-top:2px;
+}
+.cert-block::before{
+  content:'// QUALITY CERTIFICATION';
+  position:absolute;top:-8px;left:20px;
+  background:var(--ink2);padding:0 10px;
+  font-size:8px;letter-spacing:0.35em;color:var(--green);
+}
+.cert-fields{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+.cert-field-label{font-size:7px;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;}
+.cert-field-value{font-size:14px;font-weight:700;color:var(--paper);letter-spacing:0.05em;display:block;}
+
+/* TAB 2: CONSTRUCTION CALLOUTS */
+.construction-layout{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+
+.callout-diagram{position:relative;background:var(--ink3);aspect-ratio:3/4;max-height:520px;}
+.callout-diagram svg{width:100%;height:100%;}
+
+/* Animated callout lines */
+.callout-line{
+  stroke-dasharray:100;stroke-dashoffset:100;
+  transition:stroke-dashoffset 0.6s var(--ease);
+}
+.callout-line.drawn{stroke-dashoffset:0;}
+
+.callout-dot{
+  transform:scale(0);transform-origin:center;
+  transition:transform 0.4s var(--snap);
+}
+.callout-dot.drawn{transform:scale(1);}
+
+.callout-list{display:flex;flex-direction:column;gap:0;}
+.callout-item{
+  padding:18px 0;
+  border-bottom:1px solid rgba(112,128,144,0.08);
+  cursor:none;
+  transition:background var(--mid);
+}
+.callout-item:last-child{border-bottom:none;}
+.callout-item:hover{background:rgba(138,206,0,0.02);}
+
+.ci-num{font-size:8px;letter-spacing:0.3em;color:rgba(138,206,0,0.4);text-transform:uppercase;display:block;margin-bottom:6px;}
+.ci-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.06em;color:var(--paper);margin-bottom:6px;}
+.ci-desc{font-size:11px;line-height:1.75;color:var(--muted);}
+.ci-desc strong{color:var(--paper);}
+
+/* TAB 3: SIZE GUIDE */
+.sg-intro{font-size:13px;line-height:1.8;color:var(--muted);margin-bottom:32px;max-width:680px;}
+.sg-intro strong{color:var(--paper);}
+
+.sg-table-wrap{overflow-x:auto;margin-bottom:32px;}
+.sg-table{width:100%;border-collapse:collapse;min-width:500px;}
+.sg-table th{font-size:8px;letter-spacing:0.3em;color:var(--green);text-align:left;padding:12px 14px;border-bottom:1px solid rgba(138,206,0,0.15);background:rgba(138,206,0,0.03);text-transform:uppercase;}
+.sg-table td{padding:11px 14px;border-bottom:1px solid rgba(112,128,144,0.07);font-size:11px;color:var(--muted);transition:background var(--mid),color var(--mid);}
+.sg-table td:first-child{color:var(--paper);font-weight:700;}
+.sg-table tr:hover td{background:rgba(138,206,0,0.02);color:var(--paper);}
+
+.sg-note{font-size:10px;line-height:1.8;color:var(--muted);border-left:2px solid rgba(138,206,0,0.2);padding-left:16px;}
+.sg-note strong{color:var(--green);}
+
+/* TAB 4: SIGNAL NETWORK */
+.signal-panel{max-width:720px;}
+.sp-header{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,6vw,72px);line-height:0.88;color:var(--paper);margin-bottom:32px;}
+.sp-header span{color:var(--green);}
+.sp-body{font-size:14px;line-height:1.9;color:var(--muted);margin-bottom:28px;}
+.sp-body strong{color:var(--paper);}
+
+.sp-benefits{display:flex;flex-direction:column;gap:2px;margin:32px 0;}
+.sp-benefit{
+  display:grid;grid-template-columns:32px 1fr;gap:16px;align-items:start;
+  background:var(--ink3);padding:18px 20px;
+  border-left:2px solid rgba(138,206,0,0.2);
+  transition:border-color var(--mid);
+}
+.sp-benefit:hover{border-color:var(--green);}
+.sp-bn{font-family:'Bebas Neue',sans-serif;font-size:24px;color:rgba(138,206,0,0.3);line-height:1;}
+.sp-bt{font-size:10px;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:4px;}
+.sp-bd{font-size:11px;color:var(--muted);line-height:1.7;}
+.sp-bd strong{color:var(--paper);}
+
+/* TAB 5: RELATED PRODUCTS */
+.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.related-card{background:var(--ink3);position:relative;overflow:hidden;cursor:none;}
+.rc-visual{aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:var(--ink);position:relative;overflow:hidden;}
+.rc-blueprint{opacity:0.3;transition:opacity 0.4s ease,transform 0.4s var(--ease));}
+.related-card:hover .rc-blueprint{opacity:0.5;transform:scale(1.04);}
+.rc-accent{position:absolute;top:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform 0.35s var(--ease);}
+.related-card:hover .rc-accent{transform:scaleX(1);}
+.rc-info{padding:14px 16px 18px;}
+.rc-ref{font-size:7px;letter-spacing:0.3em;color:var(--dim);text-transform:uppercase;display:block;margin-bottom:4px;}
+.rc-name{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:0.05em;color:var(--paper);display:block;margin-bottom:8px;}
+.rc-price{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--green);}
+.rc-quick{position:absolute;bottom:0;left:0;right:0;background:rgba(5,5,5,0.92);padding:10px;text-align:center;font-size:8px;letter-spacing:0.3em;color:var(--green);text-transform:uppercase;transform:translateY(100%);transition:transform 0.25s var(--ease);}
+.related-card:hover .rc-quick{transform:translateY(0);}
+
+/* ══════════════════════════════════
+   SIZE GUIDE MODAL
+══════════════════════════════════ */
+#sgModal{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);opacity:0;pointer-events:none;transition:opacity 0.3s ease;backdrop-filter:blur(8px);}
+#sgModal.open{opacity:1;pointer-events:auto;}
+.sgm-inner{background:var(--ink2);border:1px solid rgba(138,206,0,0.12);padding:40px;max-width:680px;width:90%;max-height:80vh;overflow-y:auto;position:relative;}
+.sgm-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--muted);font-size:18px;cursor:none;transition:color var(--mid);}
+.sgm-close:hover{color:var(--paper)}
+.sgm-title{font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:0.08em;color:var(--paper);margin-bottom:24px;}
+
+/* ══════════════════════════════════
+   TICKER
+══════════════════════════════════ */
+.tw{position:relative;z-index:1;overflow:hidden;border-top:1px solid rgba(138,206,0,0.06);border-bottom:1px solid rgba(138,206,0,0.06);background:rgba(138,206,0,0.018);padding:10px 0;white-space:nowrap;}
+.tw::before,.tw::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;}
+.tw::before{left:0;background:linear-gradient(90deg,var(--ink2),transparent);}
+.tw::after{right:0;background:linear-gradient(-90deg,var(--ink2),transparent);}
+.ttr{display:inline-flex;animation:tsc 34s linear infinite;}
+.ttr:hover{animation-play-state:paused}
+@keyframes tsc{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);padding:0 22px;transition:color var(--mid);}
+.ti:hover{color:var(--green)}.ti.ac{color:rgba(138,206,0,0.32);}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+@media(max-width:1024px){
+  #pdpHero{grid-template-columns:1fr;}
+  .hero-left{position:relative;top:0;height:60vw;min-height:300px;max-height:480px;}
+  .hero-right{border-left:none;border-top:1px solid rgba(138,206,0,0.07);padding:40px 32px;}
+  .construction-layout{grid-template-columns:1fr;}
+  .related-grid{grid-template-columns:1fr 1fr;}
+  .cert-fields{grid-template-columns:1fr 1fr;}
+}
+
+@media(max-width:768px){
+  body{cursor:auto;}
+  #cursor,#aBtn{display:none!important;}
+  #nav{padding:0 20px;}
+  .tabs-nav{padding:0 20px;}
+  .tab-panel{padding:40px 20px 60px;}
+  .hero-right{padding:28px 20px 40px;}
+  .tech-grid{grid-template-columns:1fr;}
+  .related-grid{grid-template-columns:1fr 1fr;}
+  .cert-fields{grid-template-columns:1fr 1fr;}
+  .sgm-inner{padding:28px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor"><div class="cc"><div class="cg"></div></div><div class="cr"></div><div class="cl" id="cl">ENTER</div></div>
+
+<!-- AUDIO -->
+<div id="aBtn"><div class="abrs"><div class="abr"></div><div class="abr"></div><div class="abr"></div><div class="abr"></div><div class="abr"></div></div><span class="alb" id="albl">SOUND OFF</span></div>
+
+<!-- TOAST -->
+<div id="toast"><div class="td"></div><span class="tt" id="toastTxt">Added to cart</span></div>
+
+<!-- CART -->
+<div id="cartOver"></div>
+<div id="cartDraw">
+  <div class="cdh"><span class="cdt">CART</span><span class="cdc" id="cartCL">0 ITEMS</span><button class="cdx" id="cartX">✕</button></div>
+  <div class="cdi" id="cartI"><div class="ce"><span class="cet">Your cart is empty</span></div></div>
+  <div class="cdf">
+    <div class="ctr"><span class="ctl">Total</span><span class="ctv" id="cartT">€0</span></div>
+    <button class="cck">PROCEED TO CHECKOUT</button>
+    <p class="csn"><strong>Signal Network access</strong> activates with every order. Check email after purchase.</p>
+  </div>
+</div>
+
+<!-- SIZE GUIDE MODAL -->
+<div id="sgModal">
+  <div class="sgm-inner">
+    <button class="sgm-close" id="sgClose">✕</button>
+    <div class="sgm-title">SIZE GUIDE</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.7">The Rigger Boxy Fit is designed with <strong style="color:var(--paper)">+3cm dropped shoulder</strong> and <strong style="color:var(--paper)">+4cm chest ease</strong> over standard. If between sizes, size down. Measure chest at widest point.</p>
+    <div class="sg-table-wrap" style="margin-bottom:16px">
+      <table class="sg-table">
+        <thead><tr><th>SIZE</th><th>CHEST (CM)</th><th>LENGTH (CM)</th><th>SHOULDER (CM)</th><th>SLEEVE (CM)</th></tr></thead>
+        <tbody>
+          <tr><td>S</td><td>110–118</td><td>68</td><td>58</td><td>62</td></tr>
+          <tr><td>M</td><td>118–126</td><td>71</td><td>62</td><td>64</td></tr>
+          <tr><td>L</td><td>126–134</td><td>74</td><td>66</td><td>66</td></tr>
+          <tr><td>XL</td><td>134–142</td><td>77</td><td>70</td><td>68</td></tr>
+          <tr><td>XXL</td><td>142–152</td><td>80</td><td>74</td><td>70</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sg-note"><strong>Production tolerance: ±1cm</strong> all measurements. This is a boxy fit — it will appear oversized against standard sizing charts. That is intentional.</p>
+  </div>
+</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <svg class="lp" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+    <!-- Hoodie blueprint as loader -->
+    <rect width="180" height="180" fill="#080808"/>
+    <path d="M60 42 L36 66 L24 114 L54 114 L54 150 L126 150 L126 114 L156 114 L144 66 L120 42 C114 54 96 60 90 60 C84 60 66 54 60 42Z" fill="none" stroke="#8ACE00" stroke-width="0.8" opacity="0.6"/>
+    <circle cx="90" cy="48" r="12" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.5"/>
+    <line x1="54" y1="90" x2="24" y2="90" stroke="#8ACE00" stroke-width="0.5" opacity="0.4" stroke-dasharray="3 3"/>
+    <line x1="126" y1="90" x2="156" y2="90" stroke="#8ACE00" stroke-width="0.5" opacity="0.4" stroke-dasharray="3 3"/>
+    <text x="4" y="175" font-family="monospace" font-size="5" fill="#8ACE00" opacity="0.4" letter-spacing="1.5">KPT-RW-001 // RIGGER BOXY // 440GSM</text>
+  </svg>
+  <div class="ll">Loading product</div>
+  <div class="ll">KPT-RW-001 // RIGGER BOXY HOODIE</div>
+  <div class="lb"><div class="lf"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="shop.html">KPT-UNDERGROUND</a>
+  <a class="nav-back" href="shop.html">COLLECTION</a>
+  <span class="nav-line-tag">RAVEWEAR</span>
+  <span class="nav-dot">SIGNAL ACTIVE</span>
+  <button id="navCart"><span class="nc-label">CART</span><span class="nc-count" id="navCartCount">0</span></button>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<div id="pdpHero">
+
+  <!-- LEFT: STICKY BLUEPRINT -->
+  <div class="hero-left" id="heroLeft">
+    <div class="bp-wrap" id="bpWrap">
+
+      <!-- Layer 1: Outline -->
+      <div class="bp-layer drawn" id="bpL1">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M140 98 L84 154 L56 266 L126 266 L126 350 L294 350 L294 266 L364 266 L336 154 L280 98 C266 126 224 140 210 140 C196 140 154 126 140 98Z" fill="none" stroke="#8ACE00" stroke-width="1"/>
+          <circle cx="210" cy="112" r="28" fill="none" stroke="#8ACE00" stroke-width="0.8"/>
+        </svg>
+      </div>
+
+      <!-- Layer 2: Internal seams -->
+      <div class="bp-layer" id="bpL2">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <path d="M140 98 L84 154 L56 266 L126 266 L126 350 L294 350 L294 266 L364 266 L336 154 L280 98 C266 126 224 140 210 140 C196 140 154 126 140 98Z" fill="none" stroke="#8ACE00" stroke-width="1" opacity="0.4"/>
+          <!-- Side seam -->
+          <line x1="126" y1="210" x2="126" y2="350" stroke="#8ACE00" stroke-width="0.6" stroke-dasharray="5 4"/>
+          <line x1="294" y1="210" x2="294" y2="350" stroke="#8ACE00" stroke-width="0.6" stroke-dasharray="5 4"/>
+          <!-- Pocket outline -->
+          <rect x="138" y="252" width="60" height="50" rx="2" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.7"/>
+          <rect x="222" y="252" width="60" height="50" rx="2" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.7"/>
+          <!-- Hem -->
+          <line x1="126" y1="340" x2="294" y2="340" stroke="#8ACE00" stroke-width="0.6" stroke-dasharray="4 3" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <!-- Layer 3: Callout lines + dimensions -->
+      <div class="bp-layer" id="bpL3">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- Width dimension -->
+          <line x1="56" y1="390" x2="364" y2="390" stroke="#8ACE00" stroke-width="0.6" opacity="0.5"/>
+          <line x1="56" y1="385" x2="56" y2="395" stroke="#8ACE00" stroke-width="0.6" opacity="0.5"/>
+          <line x1="364" y1="385" x2="364" y2="395" stroke="#8ACE00" stroke-width="0.6" opacity="0.5"/>
+          <text x="180" y="404" font-family="monospace" font-size="8" fill="#8ACE00" opacity="0.6" letter-spacing="1">126-134 CM</text>
+          <!-- Length dimension -->
+          <line x1="22" y1="98" x2="22" y2="350" stroke="#8ACE00" stroke-width="0.6" opacity="0.5"/>
+          <line x1="17" y1="98" x2="27" y2="98" stroke="#8ACE00" stroke-width="0.6" opacity="0.5"/>
+          <line x1="17" y1="350" x2="27" y2="350" stroke="#8ACE00" stroke-width="0.6" opacity="0.5"/>
+          <text x="6" y="230" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.6" transform="rotate(-90 6 230)" letter-spacing="1">74 CM</text>
+          <!-- Callout: Bar-tack -->
+          <circle cx="126" cy="252" r="4" fill="#8ACE00" opacity="0.6"/>
+          <line x1="126" y1="252" x2="70" y2="220" stroke="#8ACE00" stroke-width="0.5" opacity="0.5"/>
+          <text x="8" y="216" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.7" letter-spacing="1">BAR-TACK</text>
+          <!-- Callout: Dropped shoulder -->
+          <circle cx="280" cy="154" r="4" fill="#8ACE00" opacity="0.6"/>
+          <line x1="280" y1="154" x2="340" y2="130" stroke="#8ACE00" stroke-width="0.5" opacity="0.5"/>
+          <text x="342" y="127" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.7" letter-spacing="1">+3CM DROP</text>
+          <!-- SWL -->
+          <text x="148" y="302" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.4" letter-spacing="0.5">SWL: 24H</text>
+          <text x="232" y="302" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.4" letter-spacing="0.5">SWL: 24H</text>
+          <!-- Bottom metadata -->
+          <text x="56" y="416" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.4" letter-spacing="1">KPT-RW-001 // DRW-003 // REV B // 32LPI</text>
+        </svg>
+      </div>
+
+      <!-- Layer 4: Halftone back print preview -->
+      <div class="bp-layer" id="bpL4">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+          <!-- 32 LPI halftone subwoofer schematic overlaid on back -->
+          <g opacity="0.18">
+            <circle cx="210" cy="224" r="80" fill="none" stroke="#8ACE00" stroke-width="0.8" stroke-dasharray="6 5"/>
+            <circle cx="210" cy="224" r="62" fill="none" stroke="#8ACE00" stroke-width="0.5"/>
+            <circle cx="210" cy="224" r="44" fill="none" stroke="#8ACE00" stroke-width="0.7"/>
+            <circle cx="210" cy="224" r="22" fill="none" stroke="#8ACE00" stroke-width="0.6" stroke-dasharray="3 4"/>
+            <circle cx="210" cy="224" r="8" fill="none" stroke="#8ACE00" stroke-width="0.8"/>
+            <circle cx="210" cy="224" r="3" fill="#8ACE00"/>
+            <!-- Halftone dots grid -->
+            <g opacity="0.6">
+              <circle cx="180" cy="180" r="2" fill="#8ACE00"/>
+              <circle cx="198" cy="174" r="2.5" fill="#8ACE00"/>
+              <circle cx="216" cy="172" r="2" fill="#8ACE00"/>
+              <circle cx="234" cy="176" r="3" fill="#8ACE00"/>
+              <circle cx="248" cy="186" r="2" fill="#8ACE00"/>
+              <circle cx="172" cy="198" r="3" fill="#8ACE00"/>
+              <circle cx="248" cy="210" r="2.5" fill="#8ACE00"/>
+              <circle cx="166" cy="224" r="2" fill="#8ACE00"/>
+              <circle cx="254" cy="224" r="2" fill="#8ACE00"/>
+              <circle cx="170" cy="240" r="2.5" fill="#8ACE00"/>
+              <circle cx="250" cy="238" r="3" fill="#8ACE00"/>
+              <circle cx="178" cy="256" r="2" fill="#8ACE00"/>
+              <circle cx="244" cy="258" r="2" fill="#8ACE00"/>
+              <circle cx="194" cy="266" r="2.5" fill="#8ACE00"/>
+              <circle cx="224" cy="268" r="2" fill="#8ACE00"/>
+            </g>
+          </g>
+          <!-- Label -->
+          <text x="140" y="340" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.4" letter-spacing="1">BACK PRINT: 18" IPAL SCHEMATIC @ 32LPI</text>
+        </svg>
+      </div>
+
+      <!-- Dimension markers -->
+      <div class="bp-dims" id="bpDims"></div>
+
+      <!-- Blueprint meta -->
+      <div class="bp-meta" id="bpMeta">KPT-RW-001 // RIGGER BOXY HOODIE // REV B</div>
+
+      <!-- View controls -->
+      <div class="bp-views">
+        <button class="bpv-btn active" data-view="front">FRONT</button>
+        <button class="bpv-btn" data-view="back">BACK</button>
+        <button class="bpv-btn" data-view="detail">DETAIL</button>
+      </div>
+
+      <!-- Assembly progress -->
+      <div class="bp-progress" id="bpProg">
+        <div class="bpp-dot active"></div>
+        <div class="bpp-dot"></div>
+        <div class="bpp-dot"></div>
+        <div class="bpp-dot"></div>
+      </div>
+
+    </div><!-- /bp-wrap -->
+  </div><!-- /hero-left -->
+
+  <!-- RIGHT: PRODUCT INFO -->
+  <div class="hero-right" id="heroRight">
+    <div class="pdp-bread r">COLLECTION <span>//</span> RAVEWEAR <span>//</span> KPT-RW-001</div>
+
+    <span class="pdp-ref r d1">KPT-RW-001</span>
+    <h1 class="pdp-title r d1">RIGGER<br>BOXY<br>HOODIE</h1>
+
+    <div class="pdp-strip r d2">
+      <span class="pdp-badge">NEW SS-2025</span>
+      <span class="pdp-badge lim">LIMITED QTY</span>
+      <span class="pdp-stock"><strong>14</strong> of 40 remaining</span>
+    </div>
+
+    <div class="pdp-price-row r d2">
+      <span class="pdp-currency">€</span>
+      <span class="pdp-price">180</span>
+      <span class="pdp-gsm">440GSM FRENCH TERRY</span>
+    </div>
+
+    <p class="pdp-spec-short r d3">
+      The primary garment. Dropped shoulder construction prevents fabric from snagging on rigging belts. <strong>Acid-green reflective chest glyph</strong> activates under UV and flash. <strong>18" Ipal subwoofer schematic back print at 32 LPI</strong> — technical documentation as statement. Bar-tacked at every stress point.
+    </p>
+
+    <!-- SIZES -->
+    <div class="r d3">
+      <div class="size-label">
+        SELECT SIZE
+        <a href="#" class="size-guide-link" id="sgLink">SIZE GUIDE →</a>
+      </div>
+      <div class="sizes-grid" id="sizesGrid">
+        <button class="size-btn" data-size="S">S</button>
+        <button class="size-btn sel" data-size="M">M</button>
+        <button class="size-btn low" data-size="L">L</button>
+        <button class="size-btn" data-size="XL">XL</button>
+        <button class="size-btn out" data-size="XXL">XXL</button>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="pdp-cta r d4">
+      <button class="btn-atc" id="atcBtn" data-size="M">
+        <span id="atcTxt">ADD TO CART — €180</span>
+      </button>
+      <button class="btn-signal" id="signalBtn">SIGNAL NETWORK INCLUDED WITH ORDER</button>
+    </div>
+
+    <!-- Trust -->
+    <div class="trust-row r d4">
+      <div class="trust-item">
+        <span class="trust-icon">🔒</span>
+        <span class="trust-text">Signal Access<br>with order</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">⬛</span>
+        <span class="trust-text">10% to<br>underground artists</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">📦</span>
+        <span class="trust-text">Vacuum-sealed<br>black poly mailer</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-icon">🔧</span>
+        <span class="trust-text">AQL 2.5<br>QC standard</span>
+      </div>
+    </div>
+
+  </div><!-- /hero-right -->
+</div><!-- /pdpHero -->
+
+<!-- TICKER -->
+<div class="tw"><div class="ttr" id="ttr1"></div></div>
+
+<!-- ════════════════════════════════
+     TABS
+════════════════════════════════ -->
+<div id="pdpTabs">
+  <nav class="tabs-nav" id="tabsNav">
+    <button class="tab-btn active" data-tab="tech">TECH SPECS</button>
+    <button class="tab-btn" data-tab="construction">CONSTRUCTION</button>
+    <button class="tab-btn" data-tab="sizes">SIZE GUIDE</button>
+    <button class="tab-btn" data-tab="signal">SIGNAL NETWORK</button>
+    <button class="tab-btn" data-tab="related">MORE FROM RAVEWEAR</button>
+  </nav>
+</div>
+
+<!-- TAB 1: TECH SPECS -->
+<div class="tab-panel active" id="tab-tech">
+  <div class="tech-grid r">
+    <div class="tech-cell">
+      <span class="tech-cell-label">Primary Specifications</span>
+      <table class="spec-table">
+        <tr><td>Reference</td><td>KPT-RW-001</td></tr>
+        <tr><td>Line</td><td>RAVEWEAR SS-2025</td></tr>
+        <tr><td>Fabric Weight</td><td>440GSM</td></tr>
+        <tr><td>Fabric Type</td><td>French Terry Loop-Back</td></tr>
+        <tr><td>Fiber Content</td><td>100% Organic Cotton</td></tr>
+        <tr><td>Construction</td><td>Rigger Boxy Fit</td></tr>
+        <tr><td>Dropped Shoulder</td><td>+3cm over standard</td></tr>
+        <tr><td>Chest Ease</td><td>+4cm over standard</td></tr>
+        <tr><td>Hem Length</td><td>Slightly cropped — belt-clearance</td></tr>
+        <tr><td>SWL Rating</td><td>24h Dancefloor Endurance</td></tr>
+      </table>
+    </div>
+    <div class="tech-cell">
+      <span class="tech-cell-label">Graphics & Branding</span>
+      <table class="spec-table">
+        <tr><td>Front Graphic</td><td>Acid-green reflective crossover glyph</td></tr>
+        <tr><td>Back Graphic</td><td>18" Ipal subwoofer schematic @ 32 LPI</td></tr>
+        <tr><td>Print Method</td><td>DTG + Screen hybrid</td></tr>
+        <tr><td>Reflective Type</td><td>3M Scotchlite — UV & flash activation</td></tr>
+        <tr><td>Neck Label</td><td>KPT-UG woven label — replaces manufacturer</td></tr>
+        <tr><td>Hem Label</td><td>Tonal URL woven label</td></tr>
+        <tr><td>Nape Label</td><td>OCR-B 6pt metadata — SWL, GSM, cert code</td></tr>
+        <tr><td>Hangtag</td><td>PVC rigging inspection tag — OSHA format</td></tr>
+        <tr><td>Colorway</td><td>Ultra-Black (#050505)</td></tr>
+        <tr><td>Accent</td><td>Acid Green (#8ACE00)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="tech-cell r d1" style="margin-bottom:2px">
+    <span class="tech-cell-label">Bill of Materials (BOM) — Abridged</span>
+    <table class="bom-table">
+      <thead><tr><th>Component</th><th>Specification</th><th>Quantity</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Shell Fabric</td><td>440GSM French Terry, 100% OC, Ultra-Black</td><td>Per garment</td><td>Primary body construction</td></tr>
+        <tr><td>Rib Knit</td><td>2×2 ribbing, 220GSM, matched colorway</td><td>Cuffs, hood trim</td><td>Finished edges</td></tr>
+        <tr><td>Main Thread</td><td>Coats Astra, 80/2 Tex, Black</td><td>Standard coverage</td><td>Construction seams</td></tr>
+        <tr><td>Bar-Tack Thread</td><td>Coats Epic 80, Black</td><td>Pocket corners ×8</td><td>High-stress reinforcement</td></tr>
+        <tr><td>Reflective Transfer</td><td>3M Scotchlite 8910, Acid Green</td><td>1× chest, 4cm dia.</td><td>UV/flash activation graphic</td></tr>
+        <tr><td>Woven Label (neck)</td><td>High-def weave, 2cm × 5cm</td><td>1× per garment</td><td>Brand ID — replaces manufacturer tag</td></tr>
+        <tr><td>Woven Label (hem)</td><td>Tonal weave, URL, 1cm × 4cm</td><td>1× per garment</td><td>Exterior URL reference</td></tr>
+        <tr><td>Nape Print</td><td>OCR-B 6pt — SWL data</td><td>1× per garment</td><td>Technical metadata</td></tr>
+        <tr><td>Drawcord</td><td>6mm flat braid, Acid Green</td><td>1× per garment</td><td>Hood closure</td></tr>
+        <tr><td>Drawcord Tips</td><td>Metal barrel, Black oxide</td><td>2× per garment</td><td>Cord finish</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cert-block r d2">
+    <div class="cert-fields">
+      <div><span class="cert-field-label">Production Standard</span><span class="cert-field-value">AQL 2.5</span></div>
+      <div><span class="cert-field-label">Sample Size</span><span class="cert-field-value">50/500</span></div>
+      <div><span class="cert-field-label">Max Defects</span><span class="cert-field-value">3 Major</span></div>
+      <div><span class="cert-field-label">Shrink Tolerance</span><span class="cert-field-value">Max 5%</span></div>
+      <div><span class="cert-field-label">Print Test</span><span class="cert-field-value">130% Stretch</span></div>
+      <div><span class="cert-field-label">Colour Fastness</span><span class="cert-field-value">ISO Grade 4</span></div>
+      <div><span class="cert-field-label">Cert Code</span><span class="cert-field-value">KPT-QC-001</span></div>
+      <div><span class="cert-field-label">Classification</span><span class="cert-field-value">UNDERGROUND UTILITY</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 2: CONSTRUCTION -->
+<div class="tab-panel" id="tab-construction">
+  <div class="construction-layout r">
+    <div class="callout-diagram" id="calloutDiagram">
+      <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+        <rect width="320" height="420" fill="#080808"/>
+        <!-- Base hoodie outline -->
+        <path d="M106 74 L63 116 L42 200 L95 200 L95 263 L225 263 L225 200 L278 200 L257 116 L214 74 C200 95 168 105 160 105 C152 105 120 95 106 74Z" fill="none" stroke="#8ACE00" stroke-width="0.8" opacity="0.4"/>
+        <!-- Callout 1: Bar-tack — pocket corner -->
+        <circle cx="95" cy="190" r="5" fill="none" stroke="#8ACE00" stroke-width="1" id="cd1"/>
+        <line x1="95" y1="190" x2="40" y2="160" stroke="#8ACE00" stroke-width="0.5" class="callout-line" id="cl1"/>
+        <text x="10" y="157" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.8" letter-spacing="0.5">01</text>
+        <!-- Callout 2: Dropped shoulder -->
+        <circle cx="214" cy="116" r="5" fill="none" stroke="#8ACE00" stroke-width="1" id="cd2"/>
+        <line x1="214" y1="116" x2="270" y2="90" stroke="#8ACE00" stroke-width="0.5" class="callout-line" id="cl2"/>
+        <text x="273" y="87" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.8" letter-spacing="0.5">02</text>
+        <!-- Callout 3: Hood seam -->
+        <circle cx="160" cy="78" r="5" fill="none" stroke="#8ACE00" stroke-width="1" id="cd3"/>
+        <line x1="160" y1="78" x2="160" y2="40" stroke="#8ACE00" stroke-width="0.5" class="callout-line" id="cl3"/>
+        <text x="153" y="35" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.8" letter-spacing="0.5">03</text>
+        <!-- Callout 4: Hem -->
+        <circle cx="160" cy="258" r="5" fill="none" stroke="#8ACE00" stroke-width="1" id="cd4"/>
+        <line x1="160" y1="258" x2="210" y2="300" stroke="#8ACE00" stroke-width="0.5" class="callout-line" id="cl4"/>
+        <text x="213" y="303" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.8" letter-spacing="0.5">04</text>
+        <!-- Callout 5: Side seam triple-needle -->
+        <circle cx="95" cy="220" r="5" fill="none" stroke="#8ACE00" stroke-width="1" id="cd5"/>
+        <line x1="95" y1="220" x2="40" y2="240" stroke="#8ACE00" stroke-width="0.5" class="callout-line" id="cl5"/>
+        <text x="10" y="243" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.8" letter-spacing="0.5">05</text>
+        <!-- Callout 6: Nape label position -->
+        <circle cx="160" cy="118" r="5" fill="none" stroke="#8ACE00" stroke-width="1" id="cd6"/>
+        <line x1="160" y1="118" x2="270" y2="140" stroke="#8ACE00" stroke-width="0.5" class="callout-line" id="cl6"/>
+        <text x="273" y="143" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.8" letter-spacing="0.5">06</text>
+        <!-- Bottom ref -->
+        <text x="20" y="405" font-family="monospace" font-size="6" fill="#8ACE00" opacity="0.3" letter-spacing="1">KPT-RW-001 CONSTRUCTION DRW // REV B</text>
+      </svg>
+    </div>
+
+    <div class="callout-list">
+      <div class="callout-item r">
+        <span class="ci-num">CALLOUT 01 //</span>
+        <div class="ci-title">BAR-TACK REINFORCEMENT</div>
+        <p class="ci-desc">All eight pocket corners reinforced with 42-stitch bar-tack using Coats Epic 80 thread. <strong>Rated for cable-haul stress loads.</strong> Standard on all Rigger line garments. Applied before pocket attachment to ensure seam integrity under lateral load.</p>
+      </div>
+      <div class="callout-item r d1">
+        <span class="ci-num">CALLOUT 02 //</span>
+        <div class="ci-title">DROPPED SHOULDER BLOCK</div>
+        <p class="ci-desc">Shoulder seam positioned +3cm beyond the natural shoulder point. <strong>Prevents fabric restriction during overhead cable work and speaker panel lifting.</strong> Chest ease +4cm over standard sizing block.</p>
+      </div>
+      <div class="callout-item r d2">
+        <span class="ci-num">CALLOUT 03 //</span>
+        <div class="ci-title">TRIPLE-NEEDLE HOOD SEAM</div>
+        <p class="ci-desc">Hood join seam uses 3-needle chainstitch at 4mm pitch. <strong>Rated to 180N tensile load.</strong> Drawcord channel double-topstitched at 2mm and 6mm from edge. Metal barrel cord tips prevent fraying in wet field conditions.</p>
+      </div>
+      <div class="callout-item r d3">
+        <span class="ci-num">CALLOUT 04 //</span>
+        <div class="ci-title">BELT-CLEARANCE HEM</div>
+        <p class="ci-desc">Hem length calibrated to sit above standard rigger belt attachment point, preventing fabric from being caught in buckle systems during load-out. <strong>Accounts for 440GSM drape weight.</strong> Hem tape: 3M reflective strip, Acid Green.</p>
+      </div>
+      <div class="callout-item r d4">
+        <span class="ci-num">CALLOUT 05 //</span>
+        <div class="ci-title">TRIPLE-NEEDLE SIDE SEAM</div>
+        <p class="ci-desc">All main body seams triple-needle stitched for load-bearing integrity. <strong>Side seam rated for heavy cable haul.</strong> Flatlock finish on all interior seams — no exposed raw edges against skin during extended wear.</p>
+      </div>
+      <div class="callout-item r">
+        <span class="ci-num">CALLOUT 06 //</span>
+        <div class="ci-title">NAPE METADATA LABEL</div>
+        <p class="ci-desc">OCR-B 6pt monospace text block printed on interior nape panel. Content: SWL rating, fabric weight, certification code, production batch. <strong>Visible only on close inspection — the brand's quietest credential.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 3: SIZE GUIDE -->
+<div class="tab-panel" id="tab-sizes">
+  <p class="sg-intro r">The Rigger Boxy Fit is <strong>intentionally oversized</strong> by design. Dropped shoulder and extra chest ease are part of the pattern, not a fit error. Compare against your actual chest measurement — not a standard size chart. <strong>Runs true to the KPT fit system.</strong> If between sizes, size down.</p>
+  <div class="sg-table-wrap r d1">
+    <table class="sg-table">
+      <thead><tr><th>SIZE</th><th>CHEST (CM)</th><th>LENGTH (CM)</th><th>SHOULDER (CM)</th><th>SLEEVE (CM)</th><th>HEM CIRCUMFERENCE</th></tr></thead>
+      <tbody>
+        <tr><td>S</td><td>110–118</td><td>68</td><td>58</td><td>62</td><td>88cm</td></tr>
+        <tr><td>M</td><td>118–126</td><td>71</td><td>62</td><td>64</td><td>94cm</td></tr>
+        <tr><td>L</td><td>126–134</td><td>74</td><td>66</td><td>66</td><td>100cm</td></tr>
+        <tr><td>XL</td><td>134–142</td><td>77</td><td>70</td><td>68</td><td>106cm</td></tr>
+        <tr><td>XXL</td><td>142–152</td><td>80</td><td>74</td><td>70</td><td>112cm</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="sg-note r d2"><strong>Tolerance: ±1cm</strong> all measurements. All measurements taken flat, doubled for circumference. <strong>Wash note:</strong> First wash may result in up to 2% length reduction — within spec. Wash cold. Line dry. Do not tumble dry. Do not iron graphics.</p>
+</div>
+
+<!-- TAB 4: SIGNAL NETWORK -->
+<div class="tab-panel" id="tab-signal">
+  <div class="signal-panel">
+    <h2 class="sp-header r"><span>Signal Network</span><br>access with<br>every order.</h2>
+    <p class="sp-body r d1">This is not a loyalty programme. It is not a newsletter. It is a <strong>closed information channel</strong> through which location codes, frequency callouts, and access instructions for events that have no public existence are distributed. Every KPT-UNDERGROUND order — regardless of value — activates your access automatically.</p>
+    <p class="sp-body r d2">The information is real because <strong>the relationships are real.</strong> We are embedded in these scenes. We were there before the brand existed. The Signal Network is the brand's deepest value — it exists because we can sustain it, not because we built a database and called it community.</p>
+    <div class="sp-benefits r d3">
+      <div class="sp-benefit">
+        <span class="sp-bn">01</span>
+        <div>
+          <span class="sp-bt">Inside Event Intel</span>
+          <p class="sp-bd">Access to location codes and frequency callouts for events that are not announced publicly. Distributed via the channel — <strong>not via social media.</strong></p>
+        </div>
+      </div>
+      <div class="sp-benefit">
+        <span class="sp-bn">02</span>
+        <div>
+          <span class="sp-bt">Early Drop Access</span>
+          <p class="sp-bd">Signal Network members receive drop information 48h before any public announcement. <strong>Secret drops are Network-only.</strong> The frequency code for future drops arrives through this channel.</p>
+        </div>
+      </div>
+      <div class="sp-benefit">
+        <span class="sp-bn">03</span>
+        <div>
+          <span class="sp-bt">Artist Broadcasts</span>
+          <p class="sp-bd">Unreleased mixes, production sessions, and sets from artists in the support pool. <strong>Distributed through the channel only</strong> — never archived, never publicly listed.</p>
+        </div>
+      </div>
+      <div class="sp-benefit">
+        <span class="sp-bn">04</span>
+        <div>
+          <span class="sp-bt">Direct Artist Fund Report</span>
+          <p class="sp-bd">Quarterly distribution reports: which artists received funds, how much moved. <strong>Radical transparency.</strong> No committee language, no impact metrics.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TAB 5: RELATED -->
+<div class="tab-panel" id="tab-related">
+  <div class="related-grid" id="relatedGrid">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════
+   AUDIO
+═══════════════════════════════════ */
+let actx=null, aon=false;
+const gc=()=>{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();return actx;};
+const pSub=(f=40,d=0.35,v=0.18)=>{if(!aon)return;try{const c=gc(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,c.currentTime);g.gain.linearRampToValueAtTime(v,c.currentTime+0.02);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d+0.05);}catch(e){}};
+const pClk=(v=0.1)=>{if(!aon)return;try{const c=gc(),buf=c.createBuffer(1,c.sampleRate*0.06,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(c.sampleRate*0.008));const s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=3000;f.Q.value=0.8;s.buffer=buf;s.connect(f);f.connect(g);g.connect(c.destination);g.gain.value=v;s.start();}catch(e){}};
+const setA=(on)=>{aon=on;if(on)gc();const b=document.getElementById('aBtn');b.classList.toggle('on',on);b.classList.toggle('off',!on);document.getElementById('albl').textContent=on?'SOUND ON':'SOUND OFF';};
+document.getElementById('aBtn').addEventListener('click',()=>setA(!aon));
+
+/* ═══════════════════════════════════
+   CURSOR
+═══════════════════════════════════ */
+const cur=document.getElementById('cursor'),cl=document.getElementById('cl');
+let mx=-300,my=-300;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.transform=`translate(calc(${mx}px - 50%),calc(${my}px - 50%))`;requestAnimationFrame(t);})();
+const sc=(s,l='')=>{document.body.className=s?`c${s}`:'';cl.textContent=l;};
+const rp=()=>{const r=cur.querySelector('.cr');r.style.animation='none';r.offsetHeight;r.style.animation='rp 0.5s ease forwards';};
+
+/* ═══════════════════════════════════
+   CART
+═══════════════════════════════════ */
+let cart=[];
+const upCart=()=>{
+  const n=cart.length,tot=cart.reduce((s,i)=>s+i.price,0);
+  document.getElementById('navCartCount').textContent=n;
+  document.getElementById('cartCL').textContent=`${n} ITEM${n!==1?'S':''}`;
+  document.getElementById('cartT').textContent=`€${tot}`;
+  const ci=document.getElementById('cartI');
+  if(!n){ci.innerHTML='<div class="ce"><span class="cet">Your cart is empty</span></div>';return;}
+  ci.innerHTML=cart.map((item,i)=>`<div class="ci"><div class="cisw"><svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg" width="52" height="52"><rect width="52" height="52" fill="#0e0e0e"/><path d="M17 12 L10 20 L7 33 L15 33 L15 43 L37 43 L37 33 L45 33 L42 20 L35 12 C33 16 28 18 26 18 C24 18 19 16 17 12Z" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.5"/></svg></div><div><span class="cin">${item.name}</span><span class="cis">${item.ref} // ${item.size} // ${item.gsm}</span></div><div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span class="cip">€${item.price}</span><button class="cir" data-i="${i}">REMOVE</button></div></div>`).join('');
+  ci.querySelectorAll('.cir').forEach(b=>b.addEventListener('click',()=>{cart.splice(+b.dataset.i,1);upCart();pClk(0.08);}));
+};
+const openCart=()=>{document.getElementById('cartDraw').classList.add('open');document.getElementById('cartOver').classList.add('open');};
+const closeCart=()=>{document.getElementById('cartDraw').classList.remove('open');document.getElementById('cartOver').classList.remove('open');};
+document.getElementById('navCart').addEventListener('click',openCart);
+document.getElementById('cartX').addEventListener('click',closeCart);
+document.getElementById('cartOver').addEventListener('click',closeCart);
+
+/* ═══════════════════════════════════
+   TOAST
+═══════════════════════════════════ */
+let tt;
+const showToast=(msg)=>{document.getElementById('toastTxt').textContent=msg;document.getElementById('toast').classList.add('show');clearTimeout(tt);tt=setTimeout(()=>document.getElementById('toast').classList.remove('show'),2600);};
+
+/* ═══════════════════════════════════
+   SIZE SELECTION
+═══════════════════════════════════ */
+let selSize='M';
+document.querySelectorAll('.size-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(btn.classList.contains('out'))return;
+    document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('sel'));
+    btn.classList.add('sel');
+    selSize=btn.dataset.size;
+    document.getElementById('atcBtn').dataset.size=selSize;
+    pClk(0.06);
+    sc('h','SIZE');rp();
+  });
+  btn.addEventListener('mouseenter',()=>{sc('h',btn.classList.contains('out')?'SOLD OUT':'SELECT');rp();});
+  btn.addEventListener('mouseleave',()=>sc(''));
+});
+
+/* ═══════════════════════════════════
+   ADD TO CART
+═══════════════════════════════════ */
+const product={id:'rw001',name:'RIGGER BOXY HOODIE',ref:'KPT-RW-001',price:180,gsm:'440GSM',shape:'hoodie'};
+document.getElementById('atcBtn').addEventListener('click',()=>{
+  cart.push({...product,size:selSize});
+  upCart();
+  showToast(`RIGGER BOXY HOODIE — ${selSize} added`);
+  pSub(60,0.25,0.14);
+  const btn=document.getElementById('atcBtn');
+  const txt=document.getElementById('atcTxt');
+  txt.textContent='ADDED TO CART ✓';
+  btn.classList.add('added');
+  setTimeout(()=>{txt.textContent='ADD TO CART — €180';btn.classList.remove('added');},1200);
+});
+document.getElementById('atcBtn').addEventListener('mouseenter',()=>{sc('add','€180');rp();});
+document.getElementById('atcBtn').addEventListener('mouseleave',()=>sc(''));
+document.getElementById('signalBtn').addEventListener('mouseenter',()=>{sc('h','SIGNAL');rp();});
+document.getElementById('signalBtn').addEventListener('mouseleave',()=>sc(''));
+
+/* ═══════════════════════════════════
+   SIZE GUIDE MODAL
+═══════════════════════════════════ */
+document.getElementById('sgLink').addEventListener('click',e=>{e.preventDefault();document.getElementById('sgModal').classList.add('open');pClk(0.07);});
+document.getElementById('sgClose').addEventListener('click',()=>document.getElementById('sgModal').classList.remove('open'));
+document.getElementById('sgModal').addEventListener('click',e=>{if(e.target===document.getElementById('sgModal'))document.getElementById('sgModal').classList.remove('open');});
+
+/* ═══════════════════════════════════
+   TICKER
+═══════════════════════════════════ */
+const TI=[{t:'RIGGER BOXY HOODIE',a:false},{t:'//',a:true},{t:'440GSM FRENCH TERRY',a:false},{t:'//',a:true},{t:'BAR-TACK REINFORCED',a:false},{t:'//',a:true},{t:'3M REFLECTIVE GLYPH',a:false},{t:'//',a:true},{t:'18" IPAL BACK PRINT @ 32LPI',a:false},{t:'//',a:true},{t:'AQL 2.5 STANDARD',a:false},{t:'//',a:true},{t:'SIGNAL NETWORK INCLUDED',a:false},{t:'//',a:true},{t:'10% TO ARTISTS',a:false},{t:'//',a:true},{t:'KPT-RW-001 // SS-2025',a:false},{t:'//',a:true}];
+const bt=(id,items)=>{const t=document.getElementById(id);if(!t)return;[...items,...items].forEach(i=>{const s=document.createElement('span');s.className='ti'+(i.a?' ac':'');s.textContent=i.t;t.appendChild(s);});};
+bt('ttr1',TI);
+
+/* ═══════════════════════════════════
+   TABS
+═══════════════════════════════════ */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    const panel=document.getElementById(`tab-${btn.dataset.tab}`);
+    if(panel){panel.classList.add('active');wireReveal();}
+    pClk(0.07);
+    if(btn.dataset.tab==='construction') setTimeout(animateCallouts,300);
+    if(btn.dataset.tab==='related') renderRelated();
+    window.scrollTo({top:document.getElementById('pdpTabs').offsetTop-60,behavior:'smooth'});
+  });
+  btn.addEventListener('mouseenter',()=>{sc('h','TAB');rp();});
+  btn.addEventListener('mouseleave',()=>sc(''));
+});
+
+/* ═══════════════════════════════════
+   BLUEPRINT SCROLL ASSEMBLY
+═══════════════════════════════════ */
+const BP_LAYERS=['bpL1','bpL2','bpL3','bpL4'];
+let bpCurrentView='front';
+let bpAssembled=false;
+
+const assembleBP=()=>{
+  if(bpAssembled)return;
+  BP_LAYERS.forEach((id,i)=>{
+    setTimeout(()=>{
+      document.getElementById(id).classList.add('drawn');
+      pClk(0.04);
+      // Update progress dots
+      const dots=document.querySelectorAll('.bpp-dot');
+      dots.forEach((d,di)=>d.classList.toggle('active',di<=i));
+    },i*280);
+  });
+  setTimeout(()=>{
+    document.getElementById('bpMeta').classList.add('drawn');
+    bpAssembled=true;
+  },BP_LAYERS.length*280+200);
+};
+
+// Blueprint view switching
+document.querySelectorAll('.bpv-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.bpv-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    bpCurrentView=btn.dataset.view;
+    // Toggle layer visibility based on view
+    const isBack=bpCurrentView==='back';
+    const isDetail=bpCurrentView==='detail';
+    document.getElementById('bpL4').style.opacity=isBack?'1':'0';
+    document.getElementById('bpL3').style.opacity=isDetail?'1':'0';
+    pClk(0.07);
+  });
+  btn.addEventListener('mouseenter',()=>{sc('h','VIEW');rp();});
+  btn.addEventListener('mouseleave',()=>sc(''));
+});
+
+document.getElementById('heroLeft').addEventListener('mouseenter',()=>{sc('zoom','ZOOM');});
+document.getElementById('heroLeft').addEventListener('mouseleave',()=>sc(''));
+
+/* ═══════════════════════════════════
+   CONSTRUCTION CALLOUT ANIMATION
+═══════════════════════════════════ */
+const animateCallouts=()=>{
+  document.querySelectorAll('.callout-line').forEach((line,i)=>{
+    setTimeout(()=>line.classList.add('drawn'),i*120);
+  });
+};
+
+/* ═══════════════════════════════════
+   RELATED PRODUCTS
+═══════════════════════════════════ */
+const RELATED=[
+  {name:'CROSSOVER LONGSLEEVE',ref:'KPT-RW-002',price:95,color:'#8ACE00',cls:'lv1'},
+  {name:'RAVE BALACLAVA',ref:'KPT-RW-003',price:55,color:'#8ACE00',cls:'lv1'},
+  {name:'TEKNIVAL FIELD JACKET',ref:'KPT-FW-001',price:320,color:'#A0522D',cls:'lv2'},
+];
+const makeSVG=(color)=>`<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="120" height="120"><path d="M70 49 L42 77 L28 133 L63 133 L63 175 L137 175 L137 133 L172 133 L158 77 L130 49 C122 63 112 70 100 70 C88 70 78 63 70 49Z" fill="none" stroke="${color}" stroke-width="0.9" opacity="0.5"/><circle cx="100" cy="56" r="14" fill="none" stroke="${color}" stroke-width="0.7" opacity="0.4"/></svg>`;
+const renderRelated=()=>{
+  const g=document.getElementById('relatedGrid');
+  if(g.children.length)return;
+  g.innerHTML=RELATED.map(p=>`<div class="related-card ${p.cls}"><div class="rc-visual"><div class="rc-accent" style="background:${p.color}"></div><div class="rc-blueprint">${makeSVG(p.color)}</div></div><div class="rc-info"><span class="rc-ref">${p.ref}</span><span class="rc-name">${p.name}</span><div style="display:flex;align-items:center;justify-content:space-between"><span class="rc-price">€${p.price}</span></div></div><div class="rc-quick">VIEW PRODUCT →</div></div>`).join('');
+  g.querySelectorAll('.related-card').forEach(c=>{c.addEventListener('mouseenter',()=>{sc('h','VIEW');rp();});c.addEventListener('mouseleave',()=>sc(''));});
+};
+
+/* ═══════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════ */
+const wireReveal=()=>{
+  const o=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');o.unobserve(e.target);}});},{threshold:0.08,rootMargin:'0px 0px -24px 0px'});
+  document.querySelectorAll('.r:not(.in)').forEach(el=>o.observe(el));
+};
+
+/* ═══════════════════════════════════
+   BOOT
+═══════════════════════════════════ */
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('gone');
+    document.getElementById('nav').classList.add('show');
+    document.getElementById('aBtn').classList.add('show','off');
+    pSub(40,0.25,0.1);
+
+    // Wire nav
+    document.querySelectorAll('#nav a,#nav button').forEach(el=>{el.addEventListener('mouseenter',()=>{sc('h','ENTER');rp();});el.addEventListener('mouseleave',()=>sc(''));});
+    document.getElementById('aBtn').addEventListener('mouseenter',()=>{sc('h','SOUND');rp();});
+    document.getElementById('aBtn').addEventListener('mouseleave',()=>sc(''));
+    document.getElementById('navCart').addEventListener('mouseenter',()=>{sc('h','CART');rp();});
+    document.getElementById('navCart').addEventListener('mouseleave',()=>sc(''));
+
+    // Observe hero elements
+    wireReveal();
+
+    // Blueprint assembly — trigger when blueprint comes into view
+    const bpObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){setTimeout(assembleBP,300);bpObs.disconnect();}});},{threshold:0.3});
+    const hl=document.getElementById('heroLeft');
+    if(hl)bpObs.observe(hl);
+
+    // Trust row cursor
+    document.querySelectorAll('.trust-item').forEach(t=>{t.addEventListener('mouseenter',()=>{sc('h','INFO');rp();});t.addEventListener('mouseleave',()=>sc(''));});
+
+    // Animate callouts on construction tab if already active (won't be on load, but just in case)
+    if(document.getElementById('tab-construction').classList.contains('active'))animateCallouts();
+
+  },2200);
+});
+</script>
+</body>
+</html>

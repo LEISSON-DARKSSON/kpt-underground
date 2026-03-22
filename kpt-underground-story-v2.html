@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEEP IT UNDERGROUND — Our Story</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════
+   TOKENS
+══════════════════════════════ */
+:root {
+  --ink:     #050505;
+  --ink2:    #0c0c0c;
+  --green:   #8ACE00;
+  --orange:  #FF8C00;
+  --rust:    #A0522D;
+  --slate:   #708090;
+  --paper:   #E8E4DC;
+  --muted:   #6a6a62;
+  --dim:     #3a3a36;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* scanline */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9000; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(138,206,0,0.015) 3px, rgba(138,206,0,0.015) 4px
+  );
+}
+/* grid */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(138,206,0,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138,206,0,0.035) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* ══════════════════════════════
+   LOADER
+══════════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--ink);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 10px;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+#loader.gone { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.ld-patch {
+  width: min(240px, 60vw);
+  height: min(240px, 60vw);
+  margin-bottom: 32px;
+  animation: pulse 0.5s ease infinite alternate;
+}
+@keyframes pulse { from { opacity: 0.8; } to { opacity: 1; } }
+
+.ld-line {
+  font-size: 8px; letter-spacing: 0.45em;
+  color: var(--green); text-transform: uppercase;
+  opacity: 0; animation: fi 0.3s ease forwards;
+}
+.ld-line:nth-child(2) { animation-delay: 0.4s; }
+.ld-line:nth-child(3) { animation-delay: 0.8s; }
+.ld-line:nth-child(4) { animation-delay: 1.2s; }
+
+.ld-bar { width: min(200px, 55vw); height: 1px; background: rgba(138,206,0,0.12); margin-top: 20px; overflow: hidden; opacity: 0; animation: fi 0.3s ease 1.6s forwards; }
+.ld-fill { height: 100%; background: var(--green); width: 0; animation: fill 1s ease 1.7s forwards; }
+
+@keyframes fi   { to { opacity: 1; } }
+@keyframes fill { to { width: 100%; } }
+
+/* ══════════════════════════════
+   NAV
+══════════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: rgba(5,5,5,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(138,206,0,0.08);
+  padding: 14px 40px;
+  display: flex; align-items: center;
+  opacity: 0; transition: opacity 0.5s ease 3s;
+}
+nav.show { opacity: 1; }
+
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: 0.2em; color: var(--green);
+  text-decoration: none;
+}
+.nav-dot {
+  margin-left: auto;
+  font-size: 8px; letter-spacing: 0.35em; color: var(--green); opacity: 0.5;
+}
+.nav-dot::before { content: '● '; animation: blink 1.6s step-end infinite; }
+@keyframes blink { 0%,100%{opacity:0.5;} 50%{opacity:0;} }
+
+/* ══════════════════════════════
+   REVEAL SYSTEM
+══════════════════════════════ */
+.r { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.r.in { opacity: 1; transform: none; }
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.22s; }
+.d3 { transition-delay: 0.36s; }
+.d4 { transition-delay: 0.52s; }
+
+/* ══════════════════════════════
+   LAYOUT
+══════════════════════════════ */
+.wrap  { max-width: 960px;  margin: 0 auto; padding: 0 40px; }
+.wwide { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+section {
+  position: relative; z-index: 1;
+  padding: 112px 0;
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+}
+
+/* ══════════════════════════════
+   SHARED TYPE ATOMS
+══════════════════════════════ */
+.eyebrow {
+  font-size: 8px; letter-spacing: 0.5em;
+  color: var(--green); text-transform: uppercase;
+  display: block; margin-bottom: 28px;
+}
+
+/* Giant display — the primary statement in every section */
+.stmt {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 9vw, 120px);
+  line-height: 0.88; letter-spacing: 0.01em;
+  color: var(--paper);
+}
+.stmt .g  { color: var(--green); }
+.stmt .o  { color: var(--orange); }
+.stmt .gh { color: rgba(232,228,220,0.15); }
+
+/* Support copy — one or two sentences max per block */
+.support {
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.85; color: var(--muted);
+  max-width: 580px; margin-top: 32px;
+}
+.support strong { color: var(--paper); font-weight: 700; }
+
+/* ══════════════════════════════
+   01  HERO
+══════════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 0 80px;
+  position: relative; overflow: hidden;
+}
+
+/* background waveform */
+#hero::before {
+  content: '';
+  position: absolute; right: -60px; top: 0; bottom: 0;
+  width: min(580px, 55vw);
+  background: radial-gradient(ellipse at 70% 50%, rgba(138,206,0,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-sub {
+  display: block;
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.8; color: var(--muted);
+  max-width: 540px; margin-top: 36px;
+}
+.hero-sub em { font-style: normal; color: var(--paper); }
+
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 14px;
+  margin-top: 48px;
+  font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+  color: var(--green);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(138,206,0,0.25);
+  padding-bottom: 4px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.hero-cta:hover { color: var(--paper); border-color: rgba(232,228,220,0.3); }
+.hero-cta::after { content: '↓'; font-size: 12px; }
+
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 40px;
+  font-size: 8px; letter-spacing: 0.4em; color: rgba(112,128,144,0.35);
+  text-transform: uppercase;
+  animation: nudge 2.4s ease-in-out infinite;
+}
+@keyframes nudge { 0%,100%{transform:translateY(0)} 50%{transform:translateY(5px)} }
+
+/* glitch on "UNDERGROUND" */
+.gw { position: relative; display: block; }
+.gw::before, .gw::after {
+  content: attr(data-t); position: absolute; left: 0; top: 0;
+  font-family: 'Bebas Neue', sans-serif; font-size: inherit; line-height: inherit;
+  width: 100%; color: var(--orange); opacity: 0;
+  animation: gl 7s infinite;
+}
+.gw::after { color: var(--green); animation: gl2 7s infinite; }
+@keyframes gl  { 0%,90%,100%{opacity:0;transform:none} 91%{opacity:0.6;transform:translateX(-4px)skewX(-6deg)} 93%{opacity:0;} }
+@keyframes gl2 { 0%,90%,100%{opacity:0;transform:none} 92%{opacity:0.4;transform:translateX(3px)} 94%{opacity:0;} }
+
+/* ══════════════════════════════
+   02  EQUIPMENT NOT FASHION
+══════════════════════════════ */
+#equipment { background: var(--ink2); }
+
+.eq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.eq-cell {
+  background: rgba(5,5,5,0.9);
+  padding: 36px 32px;
+  border-top: 2px solid rgba(138,206,0,0.12);
+  transition: border-color 0.3s;
+}
+.eq-cell:hover { border-color: var(--green); }
+
+.eq-label {
+  font-size: 8px; letter-spacing: 0.4em;
+  color: var(--green); text-transform: uppercase;
+  display: block; margin-bottom: 14px;
+}
+
+.eq-text {
+  font-size: clamp(13px, 1.5vw, 15px);
+  line-height: 1.85; color: var(--muted);
+}
+.eq-text strong { color: var(--paper); }
+
+.spec-strip {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 48px;
+}
+.spec-tag {
+  font-size: 8px; letter-spacing: 0.25em; text-transform: uppercase;
+  padding: 5px 12px;
+  border: 1px solid rgba(138,206,0,0.18);
+  color: var(--green);
+  background: rgba(138,206,0,0.04);
+}
+
+/* ══════════════════════════════
+   03  PULL QUOTE BREAK
+══════════════════════════════ */
+#quote {
+  padding: 80px 0;
+  background: var(--ink);
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.quote-sub-bg {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
+  display: flex; align-items: center; justify-content: center;
+}
+.quote-sub-bg svg { width: min(600px, 90vw); }
+
+.pq {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 6vw, 80px);
+  line-height: 1.0; letter-spacing: 0.02em;
+  color: var(--paper);
+  position: relative; z-index: 1;
+}
+.pq span { color: var(--green); }
+
+/* ══════════════════════════════
+   04  PRODUCT LINES
+══════════════════════════════ */
+#lines { background: var(--ink2); }
+
+.lines-stack { margin-top: 56px; display: flex; flex-direction: column; gap: 2px; }
+
+.line-row {
+  display: grid;
+  grid-template-columns: 56px 220px 1fr auto;
+  align-items: center;
+  gap: 0;
+  background: rgba(5,5,5,0.9);
+  padding: 0;
+  min-height: 88px;
+  overflow: hidden;
+  position: relative;
+  transition: background 0.25s;
+  cursor: default;
+}
+.line-row:hover { background: rgba(12,12,12,1); }
+
+.line-row::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+  transition: width 0.25s;
+}
+.line-row:hover::before { width: 5px; }
+.line-row.lv1::before { background: var(--green);  }
+.line-row.lv2::before { background: var(--rust);   }
+.line-row.lv3::before { background: var(--slate);  }
+.line-row.lv4::before { background: var(--orange); }
+
+.ln-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 32px; line-height: 1;
+  opacity: 0.12; padding-left: 20px;
+}
+.lv1 .ln-num { color: var(--green);  }
+.lv2 .ln-num { color: var(--rust);   }
+.lv3 .ln-num { color: var(--slate);  }
+.lv4 .ln-num { color: var(--orange); }
+
+.ln-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  letter-spacing: 0.05em; line-height: 1;
+  padding-left: 24px;
+}
+.lv1 .ln-name { color: var(--green);  }
+.lv2 .ln-name { color: #C0724D;       }
+.lv3 .ln-name { color: var(--paper);  }
+.lv4 .ln-name { color: var(--orange); }
+
+.ln-desc {
+  font-size: clamp(12px, 1.4vw, 13px);
+  color: var(--muted); line-height: 1.7;
+  padding: 24px 32px 24px 24px;
+}
+.ln-desc strong { color: var(--paper); }
+
+.ln-tag {
+  font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--muted); padding-right: 28px; white-space: nowrap;
+  opacity: 0; transition: opacity 0.25s;
+}
+.line-row:hover .ln-tag { opacity: 1; }
+
+/* ══════════════════════════════
+   05  ARTISTS
+══════════════════════════════ */
+#artists { position: relative; overflow: hidden; }
+
+.artists-bg-num {
+  position: absolute; right: -10px; top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 20vw, 260px);
+  color: rgba(138,206,0,0.03);
+  pointer-events: none; user-select: none;
+  white-space: nowrap; letter-spacing: -0.02em;
+}
+
+.artists-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  position: relative; z-index: 1;
+}
+
+.fund-display {
+  display: flex; flex-direction: column;
+  align-items: flex-start;
+}
+
+.fund-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 16vw, 200px);
+  line-height: 0.8; color: var(--green);
+  letter-spacing: -0.03em;
+}
+
+.fund-label {
+  font-size: 10px; letter-spacing: 0.3em;
+  color: var(--slate); text-transform: uppercase;
+  margin-top: 12px; line-height: 1.9;
+  border-top: 1px solid rgba(138,206,0,0.15);
+  padding-top: 14px; width: 100%;
+}
+
+.artists-copy {}
+
+.artists-h {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 4.5vw, 56px);
+  line-height: 1; letter-spacing: 0.02em;
+  color: var(--paper); margin-bottom: 24px;
+}
+.artists-h span { color: var(--green); }
+
+.artists-p {
+  font-size: clamp(13px, 1.5vw, 15px);
+  line-height: 1.9; color: var(--muted);
+  margin-bottom: 20px;
+}
+.artists-p strong { color: var(--paper); }
+
+/* ══════════════════════════════
+   06  SIGNAL NETWORK
+══════════════════════════════ */
+#signal {
+  background: var(--ink2);
+  position: relative; overflow: hidden;
+}
+
+.signal-noise {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 200px; opacity: 0.022;
+}
+
+.signal-bar {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 48px;
+}
+.s-badge {
+  font-size: 8px; letter-spacing: 0.45em; text-transform: uppercase;
+  padding: 5px 12px; border: 1px solid;
+}
+.s-badge.orange { color: var(--orange); border-color: rgba(255,140,0,0.25); background: rgba(255,140,0,0.04); }
+.s-badge.green  { color: var(--green);  border-color: rgba(138,206,0,0.2);  background: rgba(138,206,0,0.04); }
+.s-rule { flex: 1; height: 1px; background: rgba(138,206,0,0.1); }
+
+.signal-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+  position: relative; z-index: 1;
+}
+
+.signal-left .signal-stmt {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 100px);
+  line-height: 0.88; letter-spacing: 0.02em;
+  color: var(--paper);
+  margin-bottom: 32px;
+}
+.signal-left .signal-stmt .redact {
+  background: #181818; color: #181818;
+  cursor: default;
+  transition: background 0.3s, color 0.3s;
+  padding: 0 6px;
+}
+.signal-left .signal-stmt .redact:hover {
+  background: rgba(138,206,0,0.08); color: var(--green);
+}
+
+.signal-right {
+  padding-top: 8px;
+}
+
+.signal-item {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+}
+.signal-item:last-child { border-bottom: none; }
+
+.si-label {
+  font-size: 8px; letter-spacing: 0.4em;
+  color: var(--green); text-transform: uppercase;
+  display: block; margin-bottom: 8px;
+}
+
+.si-text {
+  font-size: clamp(12px, 1.4vw, 14px);
+  line-height: 1.8; color: var(--muted);
+}
+.si-text strong { color: var(--paper); }
+
+/* ══════════════════════════════
+   07  MANIFESTO
+══════════════════════════════ */
+#manifesto {
+  min-height: 70vh;
+  display: flex; align-items: center;
+  background: var(--ink);
+  position: relative; overflow: hidden;
+  border-bottom: none;
+}
+
+.mfst-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+}
+.mfst-bg span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 28vw, 380px);
+  color: rgba(138,206,0,0.022);
+  letter-spacing: -0.04em; user-select: none; white-space: nowrap;
+  animation: drift 50s linear infinite alternate;
+}
+@keyframes drift { from { transform: scale(1.02) rotate(-1.5deg); } to { transform: scale(1.02) rotate(1.5deg); } }
+
+.mfst-list {
+  list-style: none;
+  position: relative; z-index: 1;
+  margin-bottom: 48px;
+}
+.mfst-list li {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 5.5vw, 68px);
+  line-height: 1.06; letter-spacing: 0.02em;
+  color: var(--paper);
+  border-bottom: 1px solid rgba(138,206,0,0.06);
+  padding: 14px 0;
+  transition: color 0.15s, letter-spacing 0.15s;
+}
+.mfst-list li:hover { color: var(--green); letter-spacing: 0.04em; }
+.mfst-list li.pale   { color: rgba(232,228,220,0.18); }
+.mfst-list li.green  { color: var(--green); }
+.mfst-list li.orange { color: var(--orange); }
+.mfst-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+.mfst-foot {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: 28px;
+  flex-wrap: wrap;
+}
+
+.mfst-cert {
+  font-size: 8px; letter-spacing: 0.25em; color: var(--slate);
+  text-transform: uppercase; line-height: 2.1; opacity: 0.55;
+}
+
+.mfst-stamp {
+  width: 68px; height: 68px;
+  border: 1.5px solid rgba(138,206,0,0.28); border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transform: rotate(-14deg); opacity: 0.45; flex-shrink: 0;
+  margin-left: auto;
+}
+.mfst-stamp s1 { display: block; font-size: 6px; letter-spacing: 0.25em; color: var(--green); text-transform: uppercase; }
+.mfst-stamp s2 { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 19px; color: var(--green); line-height: 1.1; }
+
+/* ══════════════════════════════
+   FOOTER
+══════════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(138,206,0,0.08);
+  padding: 28px 40px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.ft-logo { font-family: 'Bebas Neue', sans-serif; font-size: 14px; letter-spacing: 0.2em; color: var(--green); }
+.ft-meta { font-size: 8px; letter-spacing: 0.2em; color: var(--slate); text-transform: uppercase; opacity: 0.4; }
+.ft-r    { margin-left: auto; font-size: 8px; letter-spacing: 0.2em; color: rgba(112,128,144,0.3); text-align: right; line-height: 1.9; }
+
+/* ══════════════════════════════
+   SCROLLBAR
+══════════════════════════════ */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--green); }
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 900px) {
+  section { padding: 80px 0; }
+  .wrap, .wwide { padding: 0 24px; }
+  .eq-grid { grid-template-columns: 1fr; }
+  .line-row { grid-template-columns: 48px 1fr; min-height: auto; }
+  .ln-num  { font-size: 24px; padding-left: 16px; }
+  .ln-name { padding-left: 16px; font-size: 24px; }
+  .ln-desc { padding: 16px 16px 20px 16px; grid-column: 1 / -1; }
+  .ln-tag  { display: none; }
+  .artists-layout { grid-template-columns: 1fr; gap: 40px; }
+  .signal-layout  { grid-template-columns: 1fr; gap: 32px; }
+  footer { flex-direction: column; align-items: flex-start; }
+  .ft-r  { margin-left: 0; text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <svg class="ld-patch" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+    <rect width="240" height="240" fill="#080808"/>
+    <rect x="0"  y="0"  width="40" height="55" fill="#8ACE00" opacity="0.9"/>
+    <rect x="40" y="0"  width="25" height="28" fill="#050505"/>
+    <rect x="65" y="0"  width="48" height="40" fill="#E8E4DC" opacity="0.85"/>
+    <rect x="113" y="0" width="35" height="64" fill="#050505"/>
+    <rect x="148" y="0" width="60" height="30" fill="#8ACE00" opacity="0.6"/>
+    <rect x="0"  y="55" width="22" height="40" fill="#050505"/>
+    <rect x="22" y="55" width="64" height="28" fill="#E8E4DC" opacity="0.7"/>
+    <rect x="86" y="28" width="27" height="48" fill="#8ACE00" opacity="0.4"/>
+    <rect x="148" y="30" width="92" height="55" fill="#050505"/>
+    <rect x="0"  y="95" width="100" height="40" fill="#050505"/>
+    <rect x="100" y="76" width="40" height="55" fill="#E8E4DC" opacity="0.78"/>
+    <rect x="140" y="85" width="100" height="35" fill="#8ACE00" opacity="0.28"/>
+    <rect x="0"  y="135" width="46" height="55" fill="#8ACE00" opacity="0.72"/>
+    <rect x="46" y="135" width="54" height="28" fill="#050505"/>
+    <rect x="100" y="131" width="40" height="59" fill="#050505"/>
+    <rect x="140" y="120" width="100" height="50" fill="#E8E4DC" opacity="0.55"/>
+    <rect x="0"  y="190" width="70" height="50" fill="#050505"/>
+    <rect x="70" y="160" width="50" height="80" fill="#8ACE00" opacity="0.5"/>
+    <rect x="120" y="185" width="40" height="55" fill="#050505"/>
+    <rect x="160" y="170" width="80" height="70" fill="#050505"/>
+    <ellipse cx="68"  cy="112" rx="25" ry="30" fill="none" stroke="#FF8C00" stroke-width="1" opacity="0.5"/>
+    <ellipse cx="168" cy="100" rx="20" ry="26" fill="none" stroke="#FF8C00" stroke-width="0.8" opacity="0.38"/>
+    <text x="4" y="237" font-family="monospace" font-size="5" fill="#8ACE00" opacity="0.35" letter-spacing="2">ADV_PATCH_v2.1 // YOLO_DISRUPT // KPT-UG</text>
+  </svg>
+  <div class="ld-line">Initialising signal</div>
+  <div class="ld-line">Confirming underground access</div>
+  <div class="ld-line">KPT-UG — CERT-001 — ACTIVE</div>
+  <div class="ld-bar"><div class="ld-fill"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">KPT-UNDERGROUND</a>
+  <span class="nav-dot">SIGNAL ACTIVE</span>
+</nav>
+
+<!-- ══════════════════════
+     01  HERO
+══════════════════════ -->
+<section id="hero">
+  <div class="wrap">
+    <span class="eyebrow r">BRAND STORY // KPT-UG-BS-001 // CLANDESTINE</span>
+
+    <div class="stmt r d1">
+      <span>YOU FELT IT</span>
+      <span class="g">BEFORE YOU</span>
+      <span class="gw gh" data-t="UNDERSTOOD IT." style="font-family:'Bebas Neue',sans-serif;font-size:inherit;line-height:inherit;letter-spacing:inherit;">UNDERSTOOD IT.</span>
+    </div>
+
+    <span class="hero-sub r d2">
+      The pressure before the first kick. The specific darkness at 3 AM when everyone present
+      <em>chose</em> to be there. That feeling is not a product.
+      But the people who build it needed something to wear.
+      <strong style="color:var(--paper);">We made it for them first.</strong>
+    </span>
+
+    <a class="hero-cta r d3" href="#equipment">Read the story</a>
+  </div>
+  <span class="hero-scroll">↓ Scroll</span>
+</section>
+
+<!-- ══════════════════════
+     02  EQUIPMENT
+══════════════════════ -->
+<section id="equipment">
+  <div class="wrap">
+    <span class="eyebrow r">02 // The Standard</span>
+
+    <div class="stmt r d1">
+      THIS IS NOT<br>
+      <span style="text-decoration:line-through;text-decoration-color:var(--orange);text-decoration-thickness:3px;opacity:0.45;">FASHION.</span><br>
+      <span class="g">EQUIPMENT.</span>
+    </div>
+
+    <div class="eq-grid r d2">
+      <div class="eq-cell">
+        <span class="eq-label">The brief</span>
+        <p class="eq-text">Fashion answers to a trend cycle. We answer to the environment — dark floors, open fields, 5 AM service corridors. <strong>Every specification exists because someone needed it to exist.</strong></p>
+      </div>
+      <div class="eq-cell">
+        <span class="eq-label">The origin</span>
+        <p class="eq-text">We started by showing up. Loading in at midnight. Running cable. Finding the frequency before anyone else was awake enough to hear it. <strong>The gear came first. Always.</strong></p>
+      </div>
+    </div>
+
+    <div class="spec-strip r d3">
+      <span class="spec-tag">440GSM French Terry</span>
+      <span class="spec-tag">AQL 2.5 Standard</span>
+      <span class="spec-tag">±1CM Tolerance</span>
+      <span class="spec-tag">Load-Rated Hardware</span>
+      <span class="spec-tag">Faraday Option</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     PULL QUOTE BREAK
+══════════════════════ -->
+<section id="quote" style="padding:80px 0;">
+  <div class="quote-sub-bg">
+    <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="250" cy="250" r="220" stroke="#8ACE00" stroke-width="0.7" fill="none" stroke-dasharray="5 5"/>
+      <circle cx="250" cy="250" r="165" stroke="#8ACE00" stroke-width="0.5" fill="none"/>
+      <circle cx="250" cy="250" r="108" stroke="#8ACE00" stroke-width="0.8" fill="none"/>
+      <circle cx="250" cy="250" r="54"  stroke="#8ACE00" stroke-width="0.6" fill="none" stroke-dasharray="3 4"/>
+      <circle cx="250" cy="250" r="20"  fill="#8ACE00" opacity="0.05"/>
+      <circle cx="250" cy="250" r="6"   fill="#8ACE00" opacity="0.15"/>
+    </svg>
+  </div>
+  <div class="wrap" style="text-align:center;">
+    <p class="pq r">
+      "We are the people<br>who build the systems<br>
+      that other people <span>dance inside.</span>"
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     04  LINES
+══════════════════════ -->
+<section id="lines">
+  <div class="wwide">
+    <div class="wrap" style="padding-bottom:0;">
+      <span class="eyebrow r">04 // The Four Lines</span>
+      <div class="stmt r d1" style="font-size:clamp(40px,6vw,80px);">BUILT FOR<br>EVERY <span class="g">STAGE.</span></div>
+    </div>
+
+    <div class="lines-stack" style="margin-top:48px;">
+
+      <div class="line-row lv1 r d1">
+        <div class="ln-num">01</div>
+        <div class="ln-name">RAVEWEAR</div>
+        <div class="ln-desc">Six hours. Full dark. <strong>Moisture-responsive, reinforced at every stress point.</strong> Reflective elements that activate under UV. Nothing decorative. Nothing that fails.</div>
+        <div class="ln-tag">Built for the floor</div>
+      </div>
+
+      <div class="line-row lv2 r d2">
+        <div class="ln-num">02</div>
+        <div class="ln-name">FESTIVALWEAR</div>
+        <div class="ln-desc">Three days, open sky. <strong>Water-resistant, layerable, carrying the heaviest graphic documentation</strong> — subwoofer schematics at 32 LPI. For the people who stay until the generator runs out.</div>
+        <div class="ln-tag">Built to last the field</div>
+      </div>
+
+      <div class="line-row lv3 r d3">
+        <div class="ln-num">03</div>
+        <div class="ln-name">EVERYDAY</div>
+        <div class="ln-desc">What you wear between events is not neutral. <strong>Restrained graphics, interior labels that reward the person who looks.</strong> The door to everything else.</div>
+        <div class="ln-tag">The quiet credential</div>
+      </div>
+
+      <div class="line-row lv4 r d4">
+        <div class="ln-num">04</div>
+        <div class="ln-name">ACCESSORIES</div>
+        <div class="ln-desc">Eyewear, hardware, modular carry. <strong>Polarised, matte, built for festival UV and warehouse dark equally.</strong> Every detail is a sentence in the same document.</div>
+        <div class="ln-tag">Details are the document</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     05  ARTISTS
+══════════════════════ -->
+<section id="artists">
+  <div class="artists-bg-num">ARTISTS</div>
+  <div class="wrap">
+    <div class="artists-layout">
+
+      <div class="fund-display r">
+        <div class="fund-num">10%</div>
+        <div class="fund-label">
+          OF EVERY TRANSACTION<br>
+          GOES DIRECTLY TO<br>
+          UNDERGROUND ARTISTS
+        </div>
+      </div>
+
+      <div class="artists-copy">
+        <h2 class="artists-h r d1">
+          The music you will never<br>find on <span>any chart.</span>
+        </h2>
+        <p class="artists-p r d2">
+          There are artists making electronic music right now who will never appear on a booking roster — not because they lack ability, but because they <strong>made a deliberate choice</strong> to stay in the frequencies that do not negotiate with commercial radio.
+        </p>
+        <p class="artists-p r d3">
+          No application. No committee. No grant language. <strong>The scene identifies who the money belongs to. We move it there.</strong> The clothing is the product. The culture is the purpose.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════
+     06  SIGNAL NETWORK
+══════════════════════ -->
+<section id="signal">
+  <div class="signal-noise"></div>
+  <div class="wrap" style="position:relative;z-index:1;">
+
+    <div class="signal-bar r">
+      <span class="s-badge orange">CLASSIFIED</span>
+      <div class="s-rule"></div>
+      <span class="s-badge green">MEMBERS ONLY</span>
+    </div>
+
+    <div class="signal-layout">
+      <div class="signal-left">
+        <div class="signal-stmt r d1">
+          THE<br>
+          SIGNAL<br>
+          <span class="redact" title="Hover to reveal">NETWORK</span>
+        </div>
+      </div>
+
+      <div class="signal-right r d2">
+        <div class="signal-item">
+          <span class="si-label">What it is</span>
+          <p class="si-text">A closed, non-algorithmic channel. Not a newsletter. Not a loyalty programme. <strong>A direct line to events that have no public existence.</strong></p>
+        </div>
+        <div class="signal-item">
+          <span class="si-label">What moves through it</span>
+          <p class="si-text">Location codes. Frequency callouts. Access instructions for parties not on any map. The only way in is <strong>already knowing.</strong></p>
+        </div>
+        <div class="signal-item">
+          <span class="si-label">How you enter</span>
+          <p class="si-text">You buy the clothing. You receive access. <strong>What follows cannot be described further here.</strong></p>
+        </div>
+        <div class="signal-item" style="border-bottom:none;">
+          <span class="si-label">Why it works</span>
+          <p class="si-text">Because the information is real. <strong>The relationships are real.</strong> We were there before the brand existed.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════
+     07  MANIFESTO
+══════════════════════ -->
+<section id="manifesto">
+  <div class="mfst-bg"><span>UNDERGROUND</span></div>
+  <div class="wrap">
+    <ul class="mfst-list">
+      <li class="r">WE DO NOT ADVERTISE.</li>
+      <li class="pale r d1">WE DO NOT TREND.</li>
+      <li class="pale r d2">WE DO NOT FOLLOW.</li>
+      <li class="r d1">WE BUILD THE SYSTEMS.</li>
+      <li class="green r d2">WE SUSTAIN THE ARTISTS.</li>
+      <li class="r d3">WE KEEP THE FREQUENCY.</li>
+      <li class="orange r d2">WE KEEP THE STANDARD.</li>
+      <li class="r d3" style="border-bottom:none;padding-bottom:0;">WE KEEP IT UNDERGROUND.</li>
+    </ul>
+
+    <div class="mfst-foot r d4">
+      <div class="mfst-cert">
+        SWL: UNLIMITED // SIGNAL: ACTIVE // CERT: KPT-UG-001<br>
+        FREQ: 20–200HZ // CLASS: UNDERGROUND UTILITY
+      </div>
+      <div class="mfst-stamp">
+        <s1>CERT</s1><s2>KPT</s2><s1>U/G</s1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="ft-logo">KPT-UNDERGROUND</span>
+  <span class="ft-meta">Soundsystem Workwear // Signal Network // Est. Underground</span>
+  <div class="ft-r">KPT-UG-BS-001 // V2<br>CLASSIFICATION: CLANDESTINE</div>
+</footer>
+
+<script>
+// LOADER
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('gone');
+    document.getElementById('nav').classList.add('show');
+    document.querySelectorAll('#hero .r').forEach((el, i) => {
+      setTimeout(() => el.classList.add('in'), 150 + i * 130);
+    });
+  }, 3100);
+});
+
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+
+document.querySelectorAll('.r:not(#hero .r)').forEach(el => obs.observe(el));
+
+// HERO PARALLAX
+const hd = document.querySelector('.stmt');
+if (hd) window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  hd.style.transform = `translateY(${y * 0.15}px)`;
+  hd.style.opacity = Math.max(0, 1 - y / 500);
+}, { passive: true });
+</script>
+</body>
+</html>

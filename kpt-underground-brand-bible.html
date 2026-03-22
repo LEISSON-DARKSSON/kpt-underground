@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPT-UnderGround // BRAND SYSTEM v1.0</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Anton&display=swap');
+
+:root {
+  --ultra-black: #050505;
+  --acid-green: #8ACE00;
+  --rigger-rust: #A0522D;
+  --slate-grey: #708090;
+  --warn-orange: #FF8C00;
+  --off-white: #E8E4DC;
+  --dim-white: #999;
+  --grid: rgba(138,206,0,0.06);
+  --scan: rgba(138,206,0,0.03);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ultra-black);
+  color: var(--off-white);
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* SCANLINE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--scan) 2px,
+    var(--scan) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+  animation: scanshift 8s linear infinite;
+}
+
+@keyframes scanshift {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100px; }
+}
+
+/* GRID BG */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* LAYOUT */
+.container {
+  position: relative;
+  z-index: 1;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ═══════════════════════════════════════════
+   HEADER / HERO
+═══════════════════════════════════════════ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid rgba(138,206,0,0.2);
+  overflow: hidden;
+  padding: 80px 24px;
+}
+
+.hero-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+.system-badge {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--acid-green);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeup 0.6s ease 0.2s forwards;
+}
+
+.system-badge::before {
+  content: '▶ ';
+}
+
+.hero-wordmark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(52px, 10vw, 140px);
+  line-height: 0.88;
+  letter-spacing: -0.02em;
+  color: var(--off-white);
+  position: relative;
+  opacity: 0;
+  animation: fadeup 0.8s ease 0.4s forwards;
+}
+
+.hero-wordmark .kiu {
+  color: var(--acid-green);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-wordmark .kiu::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  color: var(--warn-orange);
+  clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
+  opacity: 0.6;
+  animation: glitch1 4s infinite;
+}
+
+@keyframes glitch1 {
+  0%, 92%, 100% { transform: none; opacity: 0.6; }
+  93% { transform: skewX(-15deg) translateX(-4px); opacity: 0.8; }
+  95% { transform: skewX(8deg) translateX(2px); opacity: 0.4; }
+  97% { transform: skewX(-5deg) translateX(-1px); }
+}
+
+.hero-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(10px, 1.5vw, 13px);
+  letter-spacing: 0.25em;
+  color: var(--slate-grey);
+  margin-top: 24px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeup 0.6s ease 0.8s forwards;
+}
+
+.hero-meta {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(112,128,144,0.5);
+  text-align: right;
+  line-height: 1.8;
+}
+
+.hero-circuit {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.08;
+  width: min(500px, 50vw);
+}
+
+/* Circuit SVG animation */
+.circuit-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawcircuit 3s ease 1s forwards;
+}
+@keyframes drawcircuit {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeup {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ═══════════════════════════════════════════
+   SECTION LABELS
+═══════════════════════════════════════════ */
+.section {
+  padding: 80px 0;
+  border-bottom: 1px solid rgba(112,128,144,0.15);
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 56px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(138,206,0,0.15);
+}
+
+.section-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--acid-green);
+  letter-spacing: 0.3em;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4vw, 48px);
+  letter-spacing: 0.05em;
+  color: var(--off-white);
+  line-height: 1;
+}
+
+.section-desc {
+  font-size: 11px;
+  color: var(--slate-grey);
+  letter-spacing: 0.1em;
+  margin-left: auto;
+  text-align: right;
+  max-width: 220px;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   LOGO SYSTEM
+═══════════════════════════════════════════ */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.logo-cell {
+  background: #0a0a0a;
+  padding: 40px 32px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  transition: background 0.3s;
+}
+
+.logo-cell:hover { background: #111; }
+
+.logo-cell-label {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--slate-grey);
+  text-transform: uppercase;
+}
+
+.logo-cell-num {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  font-size: 9px;
+  color: rgba(112,128,144,0.4);
+  letter-spacing: 0.2em;
+}
+
+/* Primary wordmark SVG */
+.primary-logo svg {
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Dazzle version */
+.dazzle-logo {
+  position: relative;
+}
+.dazzle-logo svg {
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Circuit icon */
+.circuit-icon svg {
+  width: 120px;
+  height: 120px;
+}
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY SYSTEM
+═══════════════════════════════════════════ */
+.type-specimens {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.type-specimen {
+  background: #080808;
+  padding: 40px;
+  position: relative;
+}
+
+.type-spec-tag {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  color: var(--acid-green);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.specimen-rigger {
+  font-family: 'Space Mono', monospace;
+  font-size: clamp(20px, 3vw, 36px);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--off-white);
+  letter-spacing: -0.02em;
+}
+
+.specimen-warehouse {
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--off-white);
+}
+
+.specimen-metadata {
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: var(--slate-grey);
+  line-height: 2;
+  text-transform: uppercase;
+  margin-top: 20px;
+  border-top: 1px solid rgba(112,128,144,0.2);
+  padding-top: 16px;
+}
+
+.type-scale {
+  grid-column: 1 / -1;
+  background: #080808;
+  padding: 40px;
+}
+
+.scale-row {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(112,128,144,0.08);
+}
+
+.scale-label {
+  font-size: 9px;
+  color: var(--slate-grey);
+  letter-spacing: 0.2em;
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.scale-sample {
+  font-family: 'Space Mono', monospace;
+  color: var(--off-white);
+}
+
+/* ═══════════════════════════════════════════
+   COLOR SYSTEM
+═══════════════════════════════════════════ */
+.color-system {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2px;
+}
+
+.color-swatch {
+  position: relative;
+  overflow: hidden;
+}
+
+.swatch-body {
+  height: 180px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.swatch-body::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0,0,0,0.05) 10px,
+    rgba(0,0,0,0.05) 11px
+  );
+}
+
+.swatch-hex {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+}
+
+.swatch-info {
+  background: #0a0a0a;
+  padding: 16px;
+}
+
+.swatch-name {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--off-white);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.swatch-use {
+  font-size: 9px;
+  color: var(--slate-grey);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   GRAPHIC MOTIFS
+═══════════════════════════════════════════ */
+.motif-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+}
+
+.motif-cell {
+  background: #070707;
+  position: relative;
+  overflow: hidden;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.motif-visual {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.motif-caption {
+  padding: 16px 20px;
+  border-top: 1px solid rgba(112,128,144,0.15);
+}
+
+.motif-caption-title {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--acid-green);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.motif-caption-desc {
+  font-size: 9px;
+  color: var(--slate-grey);
+  line-height: 1.6;
+}
+
+/* Halftone */
+.halftone-demo {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adversarial patch */
+.adversarial-patch {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════════
+   HARDWARE / TRIM LIBRARY
+═══════════════════════════════════════════ */
+.hardware-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+}
+
+.hardware-item {
+  background: #080808;
+  padding: 28px 24px;
+  border-top: 2px solid var(--acid-green);
+}
+
+.hardware-icon {
+  margin-bottom: 16px;
+  opacity: 0.7;
+}
+
+.hardware-name {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--acid-green);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.hardware-spec {
+  font-size: 9px;
+  color: var(--dim-white);
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════════════════════
+   GARMENT TAGS / LABELS
+═══════════════════════════════════════════ */
+.tags-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+
+.tag-mockup {
+  background: #0a0a0a;
+  border: 1px solid rgba(112,128,144,0.2);
+  padding: 0;
+  position: relative;
+}
+
+.tag-hole {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--ultra-black);
+  border: 1px solid rgba(138,206,0,0.4);
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tag-body {
+  padding: 36px 20px 20px;
+}
+
+.tag-logo-line {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.1em;
+  color: var(--off-white);
+  display: block;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.tag-divider {
+  height: 1px;
+  background: rgba(138,206,0,0.2);
+  margin: 10px 0;
+}
+
+.tag-field {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  letter-spacing: 0.15em;
+  color: var(--slate-grey);
+  padding: 2px 0;
+  text-transform: uppercase;
+}
+
+.tag-field .value {
+  color: var(--off-white);
+  font-weight: 700;
+}
+
+.tag-barcode {
+  margin-top: 12px;
+  display: flex;
+  gap: 2px;
+  height: 32px;
+  align-items: stretch;
+}
+
+.tag-barcode-bar {
+  background: var(--off-white);
+  flex: 1;
+}
+
+.tag-barcode-bar:nth-child(2n) { flex: 2; opacity: 0.6; }
+.tag-barcode-bar:nth-child(3n) { flex: 0.5; }
+.tag-barcode-bar:nth-child(5n) { flex: 1.5; }
+
+/* ═══════════════════════════════════════════
+   POD SPECS TABLE
+═══════════════════════════════════════════ */
+.spec-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+.spec-table th {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--acid-green);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(138,206,0,0.2);
+  background: #0a0a0a;
+}
+
+.spec-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+  color: var(--dim-white);
+  vertical-align: top;
+  line-height: 1.6;
+}
+
+.spec-table tr:hover td {
+  background: rgba(138,206,0,0.02);
+  color: var(--off-white);
+}
+
+.spec-table td:first-child {
+  color: var(--off-white);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.spec-tag {
+  display: inline-block;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  margin: 2px 2px 2px 0;
+}
+
+.tag-green { background: rgba(138,206,0,0.1); color: var(--acid-green); border: 1px solid rgba(138,206,0,0.3); }
+.tag-orange { background: rgba(255,140,0,0.1); color: var(--warn-orange); border: 1px solid rgba(255,140,0,0.3); }
+.tag-rust { background: rgba(160,82,45,0.15); color: #C0724D; border: 1px solid rgba(160,82,45,0.3); }
+
+/* ═══════════════════════════════════════════
+   PHASE ROADMAP
+═══════════════════════════════════════════ */
+.phases {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.phase-card {
+  background: #080808;
+  padding: 36px 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.phase-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+.phase-card.phase-a::before { background: var(--slate-grey); }
+.phase-card.phase-b::before { background: var(--warn-orange); }
+.phase-card.phase-c::before { background: var(--acid-green); }
+
+.phase-letter {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 80px;
+  line-height: 0.8;
+  margin-bottom: 20px;
+  opacity: 0.08;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.phase-a .phase-letter { color: var(--slate-grey); }
+.phase-b .phase-letter { color: var(--warn-orange); }
+.phase-c .phase-letter { color: var(--acid-green); }
+
+.phase-label {
+  font-size: 9px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.phase-a .phase-label { color: var(--slate-grey); }
+.phase-b .phase-label { color: var(--warn-orange); }
+.phase-c .phase-label { color: var(--acid-green); }
+
+.phase-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.05em;
+  color: var(--off-white);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.phase-items {
+  list-style: none;
+}
+
+.phase-items li {
+  font-size: 10px;
+  color: var(--dim-white);
+  line-height: 1.7;
+  padding-left: 16px;
+  position: relative;
+  letter-spacing: 0.05em;
+}
+
+.phase-items li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--slate-grey);
+}
+
+/* ═══════════════════════════════════════════
+   TECH STACK
+═══════════════════════════════════════════ */
+.stack-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+}
+
+.stack-item {
+  background: #080808;
+  padding: 28px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.stack-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(138,206,0,0.06);
+  border: 1px solid rgba(138,206,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.stack-content {}
+
+.stack-name {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--off-white);
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.stack-desc {
+  font-size: 10px;
+  color: var(--slate-grey);
+  line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER / CERT BLOCK
+═══════════════════════════════════════════ */
+.cert-block {
+  border: 1px solid rgba(138,206,0,0.15);
+  padding: 40px;
+  margin-top: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.cert-block::before {
+  content: '// CERTIFIED FOR UNDERGROUND USE';
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  background: var(--ultra-black);
+  padding: 0 12px;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--acid-green);
+}
+
+.cert-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: center;
+}
+
+.cert-fields {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.cert-field {}
+
+.cert-field-label {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: var(--slate-grey);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.cert-field-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--off-white);
+  display: block;
+  letter-spacing: 0.05em;
+}
+
+.cert-stamp {
+  width: 80px;
+  height: 80px;
+  border: 2px solid var(--acid-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0;
+  text-align: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transform: rotate(-12deg);
+}
+
+.cert-stamp-line1 {
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  color: var(--acid-green);
+  text-transform: uppercase;
+}
+
+.cert-stamp-line2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  color: var(--acid-green);
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════════════
+   UTILITY
+═══════════════════════════════════════════ */
+.mono { font-family: 'Space Mono', monospace; }
+.acid { color: var(--acid-green); }
+.rust { color: var(--rigger-rust); }
+.orange { color: var(--warn-orange); }
+.grey { color: var(--slate-grey); }
+.dim { color: var(--dim-white); }
+
+.rule {
+  border: none;
+  border-top: 1px solid rgba(112,128,144,0.12);
+  margin: 0;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.inline-tag {
+  display: inline-block;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  padding: 2px 8px;
+  background: rgba(138,206,0,0.08);
+  border: 1px solid rgba(138,206,0,0.2);
+  color: var(--acid-green);
+  text-transform: uppercase;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: var(--acid-green); opacity: 0.5; }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(5,5,5,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(138,206,0,0.1);
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0.15em;
+  color: var(--acid-green);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  margin-left: auto;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--slate-grey);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--acid-green); }
+
+.nav-status {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--acid-green);
+  opacity: 0.6;
+}
+
+.nav-status::before {
+  content: '● ';
+  animation: blink 1.5s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0; }
+}
+
+/* ═══ REFLECTIVE EFFECT ═══ */
+.reflective {
+  background: linear-gradient(
+    105deg,
+    var(--ultra-black) 0%,
+    rgba(112,128,144,0.08) 40%,
+    rgba(138,206,0,0.04) 55%,
+    var(--ultra-black) 100%
+  );
+  transition: background 0.4s;
+}
+.reflective:hover {
+  background: linear-gradient(
+    105deg,
+    var(--ultra-black) 0%,
+    rgba(112,128,144,0.18) 40%,
+    rgba(138,206,0,0.1) 55%,
+    var(--ultra-black) 100%
+  );
+}
+
+/* ═══ GLITCH TEXT UTIL ═══ */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+.glitch-text::before, .glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+}
+.glitch-text::before {
+  color: var(--warn-orange);
+  clip-path: polygon(0 15%, 100% 15%, 100% 35%, 0 35%);
+  animation: glitch-before 5s infinite;
+  opacity: 0;
+}
+.glitch-text::after {
+  color: var(--acid-green);
+  clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+  animation: glitch-after 5s infinite;
+  opacity: 0;
+}
+@keyframes glitch-before {
+  0%, 89%, 100% { opacity: 0; transform: none; }
+  90% { opacity: 0.7; transform: translateX(-3px); }
+  92% { opacity: 0; transform: translateX(3px); }
+}
+@keyframes glitch-after {
+  0%, 89%, 100% { opacity: 0; transform: none; }
+  91% { opacity: 0.5; transform: translateX(3px); }
+  93% { opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .logo-grid, .type-specimens, .color-system, .motif-grid,
+  .hardware-grid, .phases, .stack-grid { grid-template-columns: 1fr 1fr; }
+  .tags-grid { grid-template-columns: 1fr; }
+  .cert-fields { grid-template-columns: 1fr 1fr; }
+  nav .nav-links { display: none; }
+}
+
+@media (max-width: 600px) {
+  .logo-grid, .type-specimens, .color-system, .motif-grid,
+  .hardware-grid, .phases, .stack-grid, .two-col { grid-template-columns: 1fr; }
+  .color-system { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">KPT-UG</a>
+  <ul class="nav-links">
+    <li><a href="#logo">Logo</a></li>
+    <li><a href="#type">Type</a></li>
+    <li><a href="#color">Color</a></li>
+    <li><a href="#motifs">Motifs</a></li>
+    <li><a href="#hardware">Hardware</a></li>
+    <li><a href="#tags">Tags</a></li>
+    <li><a href="#pod">POD</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#phases">Phases</a></li>
+  </ul>
+  <span class="nav-status">LIVE SYSTEM</span>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<section class="hero" style="padding-top: 120px;">
+  <div class="hero-noise"></div>
+
+  <!-- Background circuit art -->
+  <svg class="hero-circuit" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path class="circuit-path" d="M50 250 H 150 V 150 H 350 V 100 H 450" stroke="#8ACE00" stroke-width="1.5"/>
+    <path class="circuit-path" d="M50 300 H 100 V 400 H 300 V 450 H 450" stroke="#8ACE00" stroke-width="1.5" style="animation-delay:0.3s"/>
+    <path class="circuit-path" d="M200 50 V 150 H 250 V 350 H 200 V 450" stroke="#708090" stroke-width="1" style="animation-delay:0.6s"/>
+    <path class="circuit-path" d="M350 50 V 200 H 400 V 300 H 350 V 450" stroke="#708090" stroke-width="1" style="animation-delay:0.9s"/>
+    <circle cx="150" cy="150" r="6" fill="#8ACE00" opacity="0.8"/>
+    <circle cx="350" cy="100" r="4" fill="#8ACE00" opacity="0.6"/>
+    <circle cx="100" cy="400" r="6" fill="#8ACE00" opacity="0.8"/>
+    <circle cx="300" cy="450" r="4" fill="#8ACE00" opacity="0.6"/>
+    <circle cx="250" cy="150" r="5" fill="#708090" opacity="0.5"/>
+    <circle cx="250" cy="350" r="5" fill="#708090" opacity="0.5"/>
+    <circle cx="400" cy="200" r="4" fill="#708090" opacity="0.5"/>
+    <rect x="220" y="220" width="60" height="60" stroke="#8ACE00" stroke-width="1" fill="none" opacity="0.3"/>
+    <line x1="225" y1="235" x2="275" y2="235" stroke="#8ACE00" stroke-width="0.5" opacity="0.4"/>
+    <line x1="225" y1="250" x2="275" y2="250" stroke="#8ACE00" stroke-width="0.5" opacity="0.4"/>
+    <line x1="225" y1="265" x2="275" y2="265" stroke="#8ACE00" stroke-width="0.5" opacity="0.4"/>
+  </svg>
+
+  <div class="container">
+    <div class="system-badge">BRAND SYSTEM v1.0 // REV 2025.KPT // CERTIFIED FOR UNDERGROUND USE</div>
+
+    <h1 class="hero-wordmark">
+      <span class="kiu" data-text="KEEP IT">KEEP IT</span><br>
+      <span style="color: var(--off-white);">UNDER</span><span style="color: var(--acid-green);">GROUND</span>
+    </h1>
+
+    <p class="hero-sub">
+      Visual Identity System &nbsp;|&nbsp; Soundsystem Workwear &nbsp;|&nbsp; Anti-Surveillance Aesthetics<br>
+      SWL: 24H DANCEFLOOR ENDURANCE &nbsp;|&nbsp; FREQ: 20–200Hz &nbsp;|&nbsp; CLASS: UNDERGROUND UTILITY
+    </p>
+  </div>
+
+  <div class="hero-meta">
+    DOC_TYPE: BRAND_BIBLE<br>
+    REF: KPT-UG-BB-001<br>
+    ISSUE DATE: 2025<br>
+    CLASSIFICATION: CLANDESTINE
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     01 — LOGO SYSTEM
+════════════════════════════════ -->
+<section class="section" id="logo">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">01 //</span>
+      <h2 class="section-title">LOGO SYSTEM</h2>
+      <p class="section-desc">Three marks. One identity. Hostile to casual observation.</p>
+    </div>
+
+    <div class="logo-grid">
+
+      <!-- PRIMARY WORDMARK -->
+      <div class="logo-cell reflective">
+        <div class="logo-cell-num">01.A</div>
+        <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+          <text x="0" y="42" font-family="'Bebas Neue',sans-serif" font-size="40" fill="#E8E4DC" letter-spacing="3">KEEP IT</text>
+          <text x="0" y="90" font-family="'Bebas Neue',sans-serif" font-size="50" fill="#8ACE00" letter-spacing="2">UNDERGROUND</text>
+          <line x1="0" y1="52" x2="320" y2="52" stroke="#8ACE00" stroke-width="0.5" opacity="0.3"/>
+          <text x="0" y="100" font-family="'Space Mono',monospace" font-size="6" fill="#708090" letter-spacing="2">EST. UNDERGROUND // SWL: UNLIMITED // FREQ: SUB-BASS</text>
+        </svg>
+        <div class="logo-cell-label">PRIMARY WORDMARK</div>
+      </div>
+
+      <!-- CIRCUIT-BREAKER GLYPH -->
+      <div class="logo-cell" style="background:#060606;">
+        <div class="logo-cell-num">01.B</div>
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" width="120" height="120">
+          <!-- 4-way crossover icon -->
+          <circle cx="60" cy="60" r="50" stroke="#8ACE00" stroke-width="1" fill="none" opacity="0.3"/>
+          <circle cx="60" cy="60" r="36" stroke="#8ACE00" stroke-width="0.5" fill="none" opacity="0.2"/>
+          <!-- crossover lines -->
+          <line x1="10" y1="60" x2="110" y2="60" stroke="#8ACE00" stroke-width="1.5"/>
+          <line x1="60" y1="10" x2="60" y2="110" stroke="#8ACE00" stroke-width="1.5"/>
+          <!-- diagonal cuts -->
+          <line x1="25" y1="25" x2="95" y2="95" stroke="#E8E4DC" stroke-width="0.5" opacity="0.2"/>
+          <line x1="95" y1="25" x2="25" y2="95" stroke="#E8E4DC" stroke-width="0.5" opacity="0.2"/>
+          <!-- nodes -->
+          <circle cx="60" cy="10" r="4" fill="#8ACE00"/>
+          <circle cx="60" cy="110" r="4" fill="#8ACE00"/>
+          <circle cx="10" cy="60" r="4" fill="#8ACE00"/>
+          <circle cx="110" cy="60" r="4" fill="#8ACE00"/>
+          <!-- center node -->
+          <rect x="53" y="53" width="14" height="14" fill="none" stroke="#8ACE00" stroke-width="1.5"/>
+          <rect x="56" y="56" width="8" height="8" fill="#8ACE00" opacity="0.8"/>
+          <!-- freq labels -->
+          <text x="64" y="22" font-family="'Space Mono',monospace" font-size="5" fill="#708090">HF</text>
+          <text x="64" y="108" font-family="'Space Mono',monospace" font-size="5" fill="#708090">SUB</text>
+          <text x="14" y="58" font-family="'Space Mono',monospace" font-size="5" fill="#708090">MF</text>
+          <text x="92" y="58" font-family="'Space Mono',monospace" font-size="5" fill="#708090">LF</text>
+        </svg>
+        <div class="logo-cell-label">CIRCUIT-BREAKER GLYPH // 4-WAY CROSSOVER</div>
+      </div>
+
+      <!-- DAZZLE VERSION -->
+      <div class="logo-cell" style="background:#030303;">
+        <div class="logo-cell-num">01.C</div>
+        <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg" style="max-width:280px;width:100%">
+          <!-- Dazzle disruption blocks overlaying wordmark -->
+          <text x="0" y="42" font-family="'Bebas Neue',sans-serif" font-size="40" fill="#E8E4DC" letter-spacing="3" opacity="0.9">KEEP IT</text>
+          <text x="0" y="90" font-family="'Bebas Neue',sans-serif" font-size="50" fill="#8ACE00" letter-spacing="2" opacity="0.9">UNDERGROUND</text>
+          <!-- Dazzle stripe overlays -->
+          <rect x="0" y="5" width="45" height="12" fill="#050505" opacity="0.85"/>
+          <rect x="50" y="2" width="30" height="8" fill="#8ACE00" opacity="0.25"/>
+          <rect x="85" y="8" width="20" height="14" fill="#050505" opacity="0.9"/>
+          <rect x="110" y="0" width="15" height="18" fill="#FF8C00" opacity="0.2"/>
+          <rect x="8" y="55" width="60" height="16" fill="#050505" opacity="0.8"/>
+          <rect x="75" y="50" width="45" height="12" fill="#8ACE00" opacity="0.12"/>
+          <rect x="125" y="58" width="30" height="14" fill="#050505" opacity="0.85"/>
+          <rect x="160" y="52" width="50" height="10" fill="#FF8C00" opacity="0.15"/>
+          <rect x="215" y="56" width="40" height="16" fill="#050505" opacity="0.7"/>
+          <rect x="260" y="50" width="25" height="18" fill="#8ACE00" opacity="0.18"/>
+          <!-- diagonal dazzle stripes -->
+          <polygon points="0,30 20,15 30,30 10,45" fill="#8ACE00" opacity="0.1"/>
+          <polygon points="180,60 210,45 220,65 190,80" fill="#050505" opacity="0.8"/>
+          <polygon points="140,35 160,20 175,40 155,55" fill="#FF8C00" opacity="0.12"/>
+        </svg>
+        <div class="logo-cell-label">DAZZLE VARIANT // CV DAZZLE ANTI-RECOGNITION</div>
+      </div>
+
+    </div>
+
+    <!-- Lockup variations -->
+    <div class="two-col" style="margin-top:2px;">
+      <div class="logo-cell reflective" style="flex-direction:row;gap:24px;justify-content:flex-start;padding:28px 32px;min-height:auto;">
+        <svg viewBox="0 0 40 40" width="40" height="40" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0">
+          <circle cx="20" cy="20" r="18" stroke="#8ACE00" stroke-width="1" fill="none"/>
+          <line x1="2" y1="20" x2="38" y2="20" stroke="#8ACE00" stroke-width="1.5"/>
+          <line x1="20" y1="2" x2="20" y2="38" stroke="#8ACE00" stroke-width="1.5"/>
+          <rect x="14" y="14" width="12" height="12" fill="none" stroke="#8ACE00" stroke-width="1"/>
+          <rect x="17" y="17" width="6" height="6" fill="#8ACE00"/>
+        </svg>
+        <div>
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.1em;color:var(--off-white);">KPT-UNDERGROUND</span>
+          <span style="display:block;font-size:8px;letter-spacing:0.3em;color:var(--slate-grey);margin-top:3px;">HORIZONTAL LOCKUP // ICON + WORDMARK</span>
+        </div>
+        <div class="logo-cell-num" style="position:static;margin-left:auto">01.D</div>
+      </div>
+      <div class="logo-cell" style="min-height:auto;padding:28px 32px;background:#060606;">
+        <div class="logo-cell-num" style="position:static;margin-left:auto;margin-bottom:12px;">01.E</div>
+        <span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:0.3em;color:var(--acid-green);text-transform:uppercase;display:block;">KPT-UG</span>
+        <span style="font-size:8px;letter-spacing:0.2em;color:var(--slate-grey);margin-top:4px;display:block;">ABBREVIATED MARK // TECHNICAL CONTEXTS</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     02 — TYPOGRAPHY
+════════════════════════════════ -->
+<section class="section" id="type">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">02 //</span>
+      <h2 class="section-title">TYPOGRAPHY</h2>
+      <p class="section-desc">The Technician & The Resistance. Two layers, one voice.</p>
+    </div>
+
+    <div class="type-specimens">
+
+      <div class="type-specimen">
+        <span class="type-spec-tag">PRIMARY // THE RIGGER // SPACE MONO</span>
+        <div class="specimen-rigger glitch-text" data-text="TECHNICAL SPEC">TECHNICAL SPEC<br>DOCUMENTATION</div>
+        <div class="specimen-metadata">
+          FONT FAMILY: SPACE MONO // WEIGHT: 400 / 700<br>
+          USE: METADATA, LABELS, SYSTEM TEXT, SPECS<br>
+          TRACKING: +200–+350 SMALL / -20 DISPLAY<br>
+          MIN SIZE: 7PT // MAX SIZE: 36PT
+        </div>
+      </div>
+
+      <div class="type-specimen" style="background:#060606;">
+        <span class="type-spec-tag">SECONDARY // THE WAREHOUSE // BEBAS NEUE / ANTON</span>
+        <div class="specimen-warehouse">SOUND<br><span style="color:var(--acid-green);">SYSTEM</span><br>WRKS</div>
+        <div class="specimen-metadata">
+          FONT FAMILY: BEBAS NEUE / ANTON<br>
+          USE: HEADLINES, POSTERS, BACKPRINTS, HERO<br>
+          TRACKING: +50–+100 // LINE HEIGHT: 0.85–0.95<br>
+          ALL-CAPS ONLY // 90S ILLEGAL RAVE URGENCY
+        </div>
+      </div>
+
+      <div class="type-scale">
+        <span class="type-spec-tag">TYPE SCALE // SPACE MONO</span>
+        <div class="scale-row">
+          <span class="scale-label">6PT / MICRO</span>
+          <span class="scale-sample" style="font-size:6px;letter-spacing:0.3em;color:var(--slate-grey);">SWL: 24H DANCEFLOOR ENDURANCE // MATERIAL: 440GSM FRENCH TERRY // CERT: KPT-UG-001</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">9PT / CAPTION</span>
+          <span class="scale-sample" style="font-size:9px;letter-spacing:0.2em;color:var(--dim-white);">FREQ RESPONSE: 20–200Hz // CROSSOVER: 4-WAY</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">12PT / BODY</span>
+          <span class="scale-sample" style="font-size:12px;">Keep It Underground. Keep It Real.</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">18PT / SUBHEAD</span>
+          <span class="scale-sample" style="font-size:18px;font-weight:700;">RIGGER GRADE WORKWEAR</span>
+        </div>
+        <div class="scale-row">
+          <span class="scale-label">36PT / DISPLAY</span>
+          <span class="scale-sample" style="font-size:36px;font-weight:700;color:var(--acid-green);line-height:1;">140 BPM</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     03 — COLOR SYSTEM
+════════════════════════════════ -->
+<section class="section" id="color">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">03 //</span>
+      <h2 class="section-title">COLOR SYSTEM</h2>
+      <p class="section-desc">Anti-trend. Environment-specific utility. Hostile to fashion cycles.</p>
+    </div>
+
+    <div class="color-system">
+
+      <div class="color-swatch">
+        <div class="swatch-body" style="background:#050505;">
+          <span class="swatch-hex" style="color:#3a3a3a;">#050505</span>
+        </div>
+        <div class="swatch-info">
+          <span class="swatch-name">Ultra-Black</span>
+          <span class="swatch-use">Base. Primary background. Void. The absence of surveillance.</span>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-body" style="background:#8ACE00;">
+          <span class="swatch-hex" style="color:#050505;">#8ACE00</span>
+        </div>
+        <div class="swatch-info">
+          <span class="swatch-name">Anti-Trend Green</span>
+          <span class="swatch-use">Primary accent. Cuts through warehouse darkness. Acid. Hostile to mainstream palettes.</span>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-body" style="background:#A0522D;">
+          <span class="swatch-hex" style="color:#E8E4DC;">#A0522D</span>
+        </div>
+        <div class="swatch-info">
+          <span class="swatch-name">Rigger's Rust</span>
+          <span class="swatch-use">Oxidized steel. Teknival wear. Outdoor rig weathering. Secondary graphic tones.</span>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-body" style="background:#708090;">
+          <span class="swatch-hex" style="color:#E8E4DC;">#708090</span>
+        </div>
+        <div class="swatch-info">
+          <span class="swatch-name">Signal Interference Grey</span>
+          <span class="swatch-use">3M reflective. Activates on direct light. Metadata text. Stealth-state default.</span>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="swatch-body" style="background:#FF8C00;">
+          <span class="swatch-hex" style="color:#050505;">#FF8C00</span>
+        </div>
+        <div class="swatch-info">
+          <span class="swatch-name">Warning Label Orange</span>
+          <span class="swatch-use">OSHA industrial rigging tags. Heavy lift certification. Alert states. Danger callouts.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Color usage rules -->
+    <div style="margin-top:2px;background:#080808;padding:28px 32px;">
+      <span class="type-spec-tag">USAGE PROTOCOL</span>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:16px;">
+        <div>
+          <span style="font-size:9px;letter-spacing:0.2em;color:var(--slate-grey);display:block;margin-bottom:8px;text-transform:uppercase;">Do</span>
+          <ul style="list-style:none;">
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Acid green on ultra-black</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Rust as tertiary accent only</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Grey for all metadata text</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;">Orange for warnings & certs only</li>
+          </ul>
+        </div>
+        <div>
+          <span style="font-size:9px;letter-spacing:0.2em;color:var(--slate-grey);display:block;margin-bottom:8px;text-transform:uppercase;">Don't</span>
+          <ul style="list-style:none;">
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">White backgrounds. Ever.</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Gradients (except subtle overlays)</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Colour-correct photography</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;">Pastels or any "warm" palette trend</li>
+          </ul>
+        </div>
+        <div>
+          <span style="font-size:9px;letter-spacing:0.2em;color:var(--slate-grey);display:block;margin-bottom:8px;text-transform:uppercase;">Reflective Contexts</span>
+          <p style="font-size:10px;color:var(--dim-white);line-height:1.7;">Signal Interference Grey (#708090) is used exclusively for 3M reflective print elements. At ambient light: invisible. At direct flash or headlight: full activation. Deploy on nape labels, shoulder panels, and hem tape.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     04 — GRAPHIC MOTIFS
+════════════════════════════════ -->
+<section class="section" id="motifs">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">04 //</span>
+      <h2 class="section-title">GRAPHIC MOTIFS</h2>
+      <p class="section-desc">Not decoration. Technical documentation & defensive camouflage.</p>
+    </div>
+
+    <div class="motif-grid">
+
+      <!-- HALFTONE BLUEPRINT -->
+      <div class="motif-cell">
+        <div class="motif-visual" style="background:#040404;min-height:240px;">
+          <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;opacity:0.8;">
+            <!-- Subwoofer baffle schematic in halftone dot style -->
+            <!-- Outer ring -->
+            <circle cx="130" cy="100" r="88" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.4" stroke-dasharray="4 3"/>
+            <!-- Surround -->
+            <circle cx="130" cy="100" r="76" stroke="#8ACE00" stroke-width="0.5" fill="none" opacity="0.3"/>
+            <!-- Cone -->
+            <circle cx="130" cy="100" r="58" stroke="#8ACE00" stroke-width="1" fill="none" opacity="0.5"/>
+            <!-- Spider -->
+            <circle cx="130" cy="100" r="32" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.4" stroke-dasharray="2 2"/>
+            <!-- Dustcap -->
+            <circle cx="130" cy="100" r="16" stroke="#8ACE00" stroke-width="1.2" fill="none" opacity="0.7"/>
+            <circle cx="130" cy="100" r="8" fill="#8ACE00" opacity="0.2"/>
+            <!-- Center dot -->
+            <circle cx="130" cy="100" r="3" fill="#8ACE00" opacity="0.9"/>
+            <!-- Mounting holes -->
+            <circle cx="130" cy="12" r="4" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <circle cx="130" cy="188" r="4" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <circle cx="42" cy="100" r="4" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <circle cx="218" cy="100" r="4" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <circle cx="67" cy="27" r="3" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.4"/>
+            <circle cx="193" cy="27" r="3" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.4"/>
+            <circle cx="67" cy="173" r="3" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.4"/>
+            <circle cx="193" cy="173" r="3" stroke="#8ACE00" stroke-width="0.8" fill="none" opacity="0.4"/>
+            <!-- Cross section lines -->
+            <line x1="42" y1="100" x2="72" y2="100" stroke="#8ACE00" stroke-width="0.5" opacity="0.3"/>
+            <line x1="188" y1="100" x2="218" y2="100" stroke="#8ACE00" stroke-width="0.5" opacity="0.3"/>
+            <!-- Label lines -->
+            <line x1="130" y1="56" x2="170" y2="40" stroke="#8ACE00" stroke-width="0.4" opacity="0.4"/>
+            <text x="172" y="38" font-family="'Space Mono',monospace" font-size="5" fill="#8ACE00" opacity="0.7">18" IPAL CONE</text>
+            <line x1="158" y1="100" x2="195" y2="80" stroke="#8ACE00" stroke-width="0.4" opacity="0.4"/>
+            <text x="197" y="78" font-family="'Space Mono',monospace" font-size="5" fill="#8ACE00" opacity="0.7">SPIDER ASY.</text>
+            <text x="5" y="170" font-family="'Space Mono',monospace" font-size="5" fill="#708090" opacity="0.6">KPT-UG // DRW-SUB-018 // 32LPI</text>
+          </svg>
+        </div>
+        <div class="motif-caption">
+          <span class="motif-caption-title">HALFTONE BLUEPRINT</span>
+          <span class="motif-caption-desc">18" Ipal subwoofer baffle plan reproduced at 32 LPI. Replicates 90s photocopied flyer art while signaling technical rig knowledge.</span>
+        </div>
+      </div>
+
+      <!-- ADVERSARIAL PATCH -->
+      <div class="motif-cell" style="background:#030303;">
+        <div class="motif-visual" style="min-height:240px;">
+          <svg viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg" width="170" height="170">
+            <!-- Adversarial patch — chaotic high-contrast blocks for YOLO disruption -->
+            <rect width="180" height="180" fill="#080808"/>
+            <!-- Random high-contrast blocks -->
+            <rect x="0" y="0" width="30" height="45" fill="#8ACE00" opacity="0.85"/>
+            <rect x="30" y="0" width="20" height="20" fill="#050505"/>
+            <rect x="50" y="0" width="40" height="30" fill="#E8E4DC" opacity="0.9"/>
+            <rect x="90" y="0" width="25" height="50" fill="#050505"/>
+            <rect x="115" y="0" width="65" height="25" fill="#8ACE00" opacity="0.6"/>
+            <rect x="0" y="45" width="15" height="30" fill="#050505"/>
+            <rect x="15" y="45" width="50" height="20" fill="#E8E4DC" opacity="0.7"/>
+            <rect x="65" y="20" width="25" height="35" fill="#8ACE00" opacity="0.4"/>
+            <rect x="115" y="25" width="65" height="40" fill="#050505"/>
+            <rect x="0" y="75" width="80" height="30" fill="#050505"/>
+            <rect x="80" y="60" width="30" height="40" fill="#E8E4DC" opacity="0.8"/>
+            <rect x="110" y="65" width="70" height="25" fill="#8ACE00" opacity="0.3"/>
+            <rect x="0" y="105" width="35" height="40" fill="#8ACE00" opacity="0.7"/>
+            <rect x="35" y="105" width="45" height="20" fill="#050505"/>
+            <rect x="80" y="100" width="30" height="45" fill="#050505"/>
+            <rect x="110" y="90" width="70" height="35" fill="#E8E4DC" opacity="0.6"/>
+            <rect x="0" y="145" width="60" height="35" fill="#050505"/>
+            <rect x="60" y="125" width="40" height="55" fill="#8ACE00" opacity="0.5"/>
+            <rect x="100" y="145" width="30" height="35" fill="#050505"/>
+            <rect x="130" y="125" width="50" height="55" fill="#E8E4DC" opacity="0.5"/>
+            <!-- False facial cue shapes -->
+            <ellipse cx="55" cy="90" rx="20" ry="25" fill="none" stroke="#FF8C00" stroke-width="0.8" opacity="0.6"/>
+            <ellipse cx="125" cy="80" rx="15" ry="20" fill="none" stroke="#FF8C00" stroke-width="0.6" opacity="0.4"/>
+            <!-- Disruption text -->
+            <text x="5" y="175" font-family="'Space Mono',monospace" font-size="4" fill="#8ACE00" opacity="0.5">ADV_PATCH_v2.1 // CONF_SCORE: &lt;0.3 // YOLO_DISRUPT</text>
+          </svg>
+        </div>
+        <div class="motif-caption">
+          <span class="motif-caption-title">ADVERSARIAL PATCH</span>
+          <span class="motif-caption-desc">Digitally-crafted chaotic texture with false facial cues. Designed to lower AI confidence scores in YOLO object detection below 0.3 threshold.</span>
+        </div>
+      </div>
+
+      <!-- THERMAL MASKING -->
+      <div class="motif-cell">
+        <div class="motif-visual" style="background:#020202;min-height:240px;">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:180px;height:180px;">
+            <!-- Thermal masking — diamond/argyle pattern mimicking silver-plated anti-drone fabric -->
+            <defs>
+              <pattern id="diamond" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                <polygon points="10,0 20,10 10,20 0,10" fill="none" stroke="#708090" stroke-width="0.4" opacity="0.5"/>
+                <polygon points="10,3 17,10 10,17 3,10" fill="none" stroke="#708090" stroke-width="0.3" opacity="0.25"/>
+              </pattern>
+              <pattern id="thermal" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                <rect width="40" height="40" fill="url(#diamond)"/>
+                <polygon points="20,5 35,20 20,35 5,20" fill="rgba(112,128,144,0.04)"/>
+              </pattern>
+            </defs>
+            <rect width="200" height="200" fill="url(#thermal)"/>
+            <!-- crushed coating zones -->
+            <ellipse cx="80" cy="80" rx="40" ry="35" fill="rgba(112,128,144,0.08)" opacity="0.6"/>
+            <ellipse cx="140" cy="130" rx="35" ry="30" fill="rgba(112,128,144,0.06)" opacity="0.5"/>
+            <!-- Heat diffusion indicators -->
+            <circle cx="80" cy="80" r="50" fill="none" stroke="#708090" stroke-width="0.3" opacity="0.2" stroke-dasharray="3 6"/>
+            <circle cx="80" cy="80" r="35" fill="none" stroke="#708090" stroke-width="0.3" opacity="0.3" stroke-dasharray="2 4"/>
+            <text x="5" y="195" font-family="'Space Mono',monospace" font-size="4" fill="#708090" opacity="0.4">THERMAL_MASK // IR_DIFFUSE // STEALTH_WEAR_INSP.</text>
+          </svg>
+        </div>
+        <div class="motif-caption">
+          <span class="motif-caption-title">THERMAL MASKING TEXTURE</span>
+          <span class="motif-caption-desc">Diamond-pattern inspired by silver-plated anti-drone Stealth Wear fabric. Crushed coatings diffuse heat signature. Applied to inner panels & pocket linings.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     05 — HARDWARE LIBRARY
+════════════════════════════════ -->
+<section class="section" id="hardware">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">05 //</span>
+      <h2 class="section-title">HARDWARE & TRIM LIBRARY</h2>
+      <p class="section-desc">Signature hardware is the jewelry of utility streetwear.</p>
+    </div>
+
+    <div class="hardware-grid">
+
+      <div class="hardware-item">
+        <div class="hardware-icon">
+          <svg viewBox="0 0 48 24" width="60" height="30" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="20" height="22" rx="2" fill="none" stroke="#8ACE00" stroke-width="1.2"/>
+            <rect x="27" y="1" width="20" height="22" rx="2" fill="none" stroke="#8ACE00" stroke-width="1.2"/>
+            <path d="M21 12 L27 12" stroke="#8ACE00" stroke-width="2"/>
+            <circle cx="11" cy="12" r="5" fill="none" stroke="#8ACE00" stroke-width="1"/>
+            <circle cx="37" cy="12" r="5" fill="none" stroke="#8ACE00" stroke-width="1"/>
+          </svg>
+        </div>
+        <span class="hardware-name">FIDLOCK V-BUCKLE</span>
+        <div class="hardware-spec">
+          Magnetic quick-release system<br>
+          Pull force: 40N rated<br>
+          Material: Zn die-cast + PA6<br>
+          Deploy: Chest straps, cable mgmt loops<br>
+          Tactile confirm click on engagement
+        </div>
+      </div>
+
+      <div class="hardware-item">
+        <div class="hardware-icon">
+          <svg viewBox="0 0 56 24" width="68" height="30" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12 L8 4 L48 4 L54 12 L48 20 L8 20 Z" fill="none" stroke="#FF8C00" stroke-width="1.2"/>
+            <path d="M12 12 L20 12" stroke="#FF8C00" stroke-width="2"/>
+            <path d="M20 12 L20 6 L44 6 L44 18 L20 18 L20 12" fill="none" stroke="#FF8C00" stroke-width="1"/>
+            <circle cx="32" cy="12" r="3" fill="#FF8C00" opacity="0.5"/>
+          </svg>
+        </div>
+        <span class="hardware-name">COBRA BUCKLE</span>
+        <div class="hardware-spec">
+          Military-spec anodized alloy<br>
+          SWL: 500kg rated<br>
+          Finger-loop emergency release<br>
+          Deploy: Belt systems, harness points<br>
+          Color: Matte black / gunmetal
+        </div>
+      </div>
+
+      <div class="hardware-item">
+        <div class="hardware-icon">
+          <svg viewBox="0 0 48 20" width="60" height="25" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0" y="0" width="48" height="20" fill="none"/>
+            <line x1="0" y1="4" x2="48" y2="4" stroke="#A0522D" stroke-width="1.5"/>
+            <line x1="0" y1="8" x2="48" y2="8" stroke="#A0522D" stroke-width="0.8"/>
+            <line x1="0" y1="12" x2="48" y2="12" stroke="#A0522D" stroke-width="1.5"/>
+            <line x1="0" y1="16" x2="48" y2="16" stroke="#A0522D" stroke-width="0.8"/>
+          </svg>
+        </div>
+        <span class="hardware-name">HEAT-SEAL TAPE</span>
+        <div class="hardware-spec">
+          Seam sealing: 100% waterproof<br>
+          Width: 10mm, 20mm<br>
+          Color: Black / Acid Green<br>
+          Apply: All critical seams<br>
+          Luxury-industrial finish interior
+        </div>
+      </div>
+
+      <div class="hardware-item">
+        <div class="hardware-icon">
+          <svg viewBox="0 0 36 48" width="36" height="48" xmlns="http://www.w3.org/2000/svg">
+            <rect x="6" y="0" width="24" height="36" rx="2" fill="none" stroke="#8ACE00" stroke-width="1"/>
+            <circle cx="18" cy="4" r="3" fill="none" stroke="#8ACE00" stroke-width="1"/>
+            <rect x="10" y="10" width="16" height="1" fill="#8ACE00" opacity="0.4"/>
+            <rect x="10" y="14" width="16" height="1" fill="#8ACE00" opacity="0.4"/>
+            <rect x="10" y="18" width="16" height="1" fill="#8ACE00" opacity="0.4"/>
+            <rect x="10" y="22" width="10" height="1" fill="#8ACE00" opacity="0.4"/>
+            <rect x="9" y="28" width="18" height="6" rx="1" fill="rgba(138,206,0,0.1)" stroke="#8ACE00" stroke-width="0.6"/>
+            <line x1="18" y1="36" x2="18" y2="48" stroke="#8ACE00" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+        </div>
+        <span class="hardware-name">RIGGING INSPECT TAG</span>
+        <div class="hardware-spec">
+          Material: Heavyweight PVC / Tyvek<br>
+          Fields: MFG date, cert code, SWL<br>
+          "CERTIFIED FOR UNDERGROUND USE"<br>
+          Replace standard hangtags<br>
+          OSHA/ASME visual language
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Faraday detail -->
+    <div style="margin-top:2px;background:#060606;padding:28px 32px;border-left:2px solid var(--warn-orange);">
+      <span style="font-size:9px;letter-spacing:0.3em;color:var(--warn-orange);text-transform:uppercase;display:block;margin-bottom:8px;">FARADAY POCKET LINING // OPTIONAL UPGRADE</span>
+      <p style="font-size:11px;color:var(--dim-white);line-height:1.8;max-width:800px;">Select garments integrate RF-blocking fabric into internal pocket linings (MIL-STD-461 signal attenuation 80dB at 1GHz). Prevents RFID scanning and GPS packet transmission. Integrated directly into garment DNA — not branded, not discussed. Functional privacy as silent specification. Included in tech pack as optional BOM line: <span class="inline-tag">FARADAY_LINING_V1</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     06 — GARMENT TAGS
+════════════════════════════════ -->
+<section class="section" id="tags">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">06 //</span>
+      <h2 class="section-title">PHYSICAL BRANDING</h2>
+      <p class="section-desc">Hangtags, labels, inserts. The clandestine unboxing experience.</p>
+    </div>
+
+    <div class="tags-grid">
+
+      <!-- Primary hangtag -->
+      <div class="tag-mockup">
+        <div class="tag-hole"></div>
+        <div class="tag-body">
+          <svg viewBox="0 0 160 30" style="width:100%;margin-bottom:10px;" xmlns="http://www.w3.org/2000/svg">
+            <text x="0" y="24" font-family="'Bebas Neue',sans-serif" font-size="28" fill="#E8E4DC" letter-spacing="2">KPT-UNDERGROUND</text>
+          </svg>
+          <div class="tag-divider"></div>
+          <div class="tag-field"><span>CLASSIFICATION</span><span class="value">UNDERGROUND UTILITY</span></div>
+          <div class="tag-field"><span>SWL RATING</span><span class="value">24H DANCEFLOOR</span></div>
+          <div class="tag-field"><span>GRADE</span><span class="value">INDUSTRIAL</span></div>
+          <div class="tag-field"><span>MATERIAL</span><span class="value">440GSM FR.TERRY</span></div>
+          <div class="tag-divider" style="margin-top:10px;"></div>
+          <div class="tag-field"><span>MFG DATE</span><span class="value" style="color:var(--acid-green);">__/__/____</span></div>
+          <div class="tag-field"><span>CERT NO.</span><span class="value" style="color:var(--acid-green);">KPT-UG-____</span></div>
+          <div class="tag-barcode" style="margin-top:14px;">
+            <div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div>
+            <div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div>
+            <div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div>
+            <div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div><div class="tag-barcode-bar"></div>
+          </div>
+          <div style="font-size:7px;color:var(--slate-grey);letter-spacing:0.15em;margin-top:4px;text-align:center;">CERTIFIED FOR UNDERGROUND USE</div>
+        </div>
+      </div>
+
+      <!-- Neck label -->
+      <div class="tag-mockup" style="max-width:160px;margin:0 auto;">
+        <div class="tag-body" style="padding:24px 16px;">
+          <span style="font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.15em;color:var(--acid-green);display:block;text-align:center;margin-bottom:8px;">KPT</span>
+          <div class="tag-divider"></div>
+          <div class="tag-field" style="flex-direction:column;align-items:center;gap:2px;">
+            <span>S / M / L / XL / XXL</span>
+          </div>
+          <div class="tag-divider"></div>
+          <div style="font-size:7px;color:var(--slate-grey);letter-spacing:0.1em;text-align:center;line-height:1.8;">
+            440GSM FRENCH TERRY<br>
+            100% ORGANIC COTTON<br>
+            WASH COLD. LINE DRY.<br>
+            DO NOT COMMERCIALISE.
+          </div>
+          <div class="tag-divider"></div>
+          <div style="font-size:6px;color:var(--slate-grey);letter-spacing:0.15em;text-align:center;margin-top:4px;">LEISSON.EU // KPT-UG</div>
+        </div>
+      </div>
+
+      <!-- Resistance insert -->
+      <div class="tag-mockup" style="background:#030303;">
+        <div class="tag-body" style="padding:28px 20px;">
+          <span style="font-size:8px;letter-spacing:0.3em;color:var(--warn-orange);text-transform:uppercase;display:block;margin-bottom:12px;">// RESISTANCE PACK INSERT</span>
+          <div style="border:1px solid rgba(138,206,0,0.15);padding:16px;margin-bottom:12px;">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--acid-green);display:block;margin-bottom:8px;">YOU ARE IN.</span>
+            <p style="font-size:9px;color:var(--dim-white);line-height:1.8;letter-spacing:0.05em;">This garment is not fashion. It is field equipment for those who build the systems others dance inside. You found us the right way.</p>
+          </div>
+          <div style="border:1px solid rgba(138,206,0,0.1);padding:12px;text-align:center;">
+            <!-- QR placeholder -->
+            <svg viewBox="0 0 60 60" width="60" height="60" xmlns="http://www.w3.org/2000/svg" style="margin:0 auto;display:block;">
+              <rect x="2" y="2" width="20" height="20" fill="none" stroke="#8ACE00" stroke-width="1.5"/>
+              <rect x="7" y="7" width="10" height="10" fill="#8ACE00" opacity="0.7"/>
+              <rect x="38" y="2" width="20" height="20" fill="none" stroke="#8ACE00" stroke-width="1.5"/>
+              <rect x="43" y="7" width="10" height="10" fill="#8ACE00" opacity="0.7"/>
+              <rect x="2" y="38" width="20" height="20" fill="none" stroke="#8ACE00" stroke-width="1.5"/>
+              <rect x="7" y="43" width="10" height="10" fill="#8ACE00" opacity="0.7"/>
+              <rect x="25" y="5" width="5" height="5" fill="#8ACE00" opacity="0.4"/>
+              <rect x="32" y="5" width="5" height="5" fill="#8ACE00" opacity="0.4"/>
+              <rect x="25" y="12" width="5" height="5" fill="#8ACE00" opacity="0.6"/>
+              <rect x="32" y="12" width="5" height="5" fill="#8ACE00" opacity="0.2"/>
+              <rect x="5" y="25" width="5" height="5" fill="#8ACE00" opacity="0.4"/>
+              <rect x="5" y="32" width="5" height="5" fill="#8ACE00" opacity="0.6"/>
+              <rect x="25" y="25" width="30" height="30" fill="none" stroke="#8ACE00" stroke-width="0.5" opacity="0.3"/>
+              <rect x="30" y="30" width="20" height="20" fill="rgba(138,206,0,0.05)"/>
+              <rect x="35" y="35" width="10" height="10" fill="#8ACE00" opacity="0.3"/>
+            </svg>
+            <span style="font-size:7px;color:var(--slate-grey);letter-spacing:0.2em;display:block;margin-top:8px;">SCAN FOR PIRATE RADIO STREAM<br>LINK ACTIVE DURING DROPS ONLY</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     07 — POD PARTNERS
+════════════════════════════════ -->
+<section class="section" id="pod">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">07 //</span>
+      <h2 class="section-title">POD PARTNER SPECS</h2>
+      <p class="section-desc">Selected for heavyweight substrates & private label capability only.</p>
+    </div>
+
+    <table class="spec-table">
+      <thead>
+        <tr>
+          <th>PARTNER</th>
+          <th>SPECIALTY</th>
+          <th>MAX GSM</th>
+          <th>PRIVATE LABEL</th>
+          <th>REGION</th>
+          <th>USE CASE</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>APLIIQ</td>
+          <td>Woven labels, custom neck tags, embroidered patches per-order</td>
+          <td>Standard</td>
+          <td><span class="spec-tag tag-green">WOVEN LABELS</span><span class="spec-tag tag-green">NECK TAG</span></td>
+          <td>US</td>
+          <td>Branding layer. Replace all manufacturer tags with KPT-UG industrial identity.</td>
+        </tr>
+        <tr>
+          <td>PODPARTNER</td>
+          <td>Heavyweight French Terry + Jumbo DTG (24"×24")</td>
+          <td><span style="color:var(--acid-green);font-weight:700;">440GSM</span></td>
+          <td><span class="spec-tag tag-orange">LIMITED</span></td>
+          <td>EU/US</td>
+          <td>Hero hoodies, large-scale blueprint prints, speaker schematics front/back.</td>
+        </tr>
+        <tr>
+          <td>CREATE FASHION BRAND</td>
+          <td>Luxury blanks, no MOQ, custom cut options</td>
+          <td><span style="color:var(--acid-green);font-weight:700;">650GSM</span></td>
+          <td><span class="spec-tag tag-green">FULL</span></td>
+          <td>PT / EU</td>
+          <td>EU market. Teknival armor weight. Phase B+ transition partner.</td>
+        </tr>
+        <tr>
+          <td>PIETRA</td>
+          <td>Custom packaging, inserts, hangtags</td>
+          <td>N/A</td>
+          <td><span class="spec-tag tag-green">FULL</span></td>
+          <td>US/INTL</td>
+          <td>OSHA-style rigging hangtags. Resistance pack inserts. Unboxing experience.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Quality standards -->
+    <div style="margin-top:2px;display:grid;grid-template-columns:1fr 1fr;gap:2px;">
+      <div style="background:#080808;padding:28px;">
+        <span class="type-spec-tag">QC STANDARD // AQL 2.5</span>
+        <p style="font-size:11px;color:var(--dim-white);line-height:1.8;">Random sampling at 50/500 units. Batch rejected if more than 3 major defects detected. Print Cracking test: stretch to 130% — no cracking. Shrinkage test: max 5% length reduction post wash cycle 1. Color fastness: minimum Grade 4 (ISO 105-C06).</p>
+      </div>
+      <div style="background:#080808;padding:28px;">
+        <span class="type-spec-tag">MASTER FIT BLOCKS</span>
+        <p style="font-size:11px;color:var(--dim-white);line-height:1.8;margin-bottom:12px;"><span style="color:var(--acid-green);">Rigger Boxy Fit:</span> Dropped shoulder (+3cm), wider chest (+4cm ease), slightly cropped hem. Prevents fabric snagging on rigging belts.</p>
+        <p style="font-size:11px;color:var(--dim-white);line-height:1.8;"><span style="color:var(--acid-green);">Tech-Cargo Block:</span> Articulated knees, gusseted crotch (+8cm), reinforced knee panels. Full ROM for speaker stack climbing.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     08 — TECH STACK
+════════════════════════════════ -->
+<section class="section" id="stack">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">08 //</span>
+      <h2 class="section-title">E-SHOP TECH STACK</h2>
+      <p class="section-desc">Next.js 15 headless. Digital Brutalism. Secret drop gating.</p>
+    </div>
+
+    <div class="stack-grid">
+
+      <div class="stack-item">
+        <div class="stack-icon">⚡</div>
+        <div class="stack-content">
+          <span class="stack-name">Next.js 15 + App Router</span>
+          <span class="stack-desc">React Server Components for sub-100ms TTFB. View Transitions API for morphing product thumbnail → hero image. viewTransition flag in next.config.js.</span>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon">🗄</div>
+        <div class="stack-content">
+          <span class="stack-name">Neon (Serverless Postgres)</span>
+          <span class="stack-desc">Branching enables isolated UI testing without touching production. Inventory, drop schedules, access codes, Faraday pocket opt-in data.</span>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon">🛒</div>
+        <div class="stack-content">
+          <span class="stack-name">MedusaJS / Headless Shopify</span>
+          <span class="stack-desc">100% open-source commerce layer or Storefront API for headless Shopify. Full UI freedom. Cart, inventory, orders decoupled from frontend.</span>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon">💳</div>
+        <div class="stack-content">
+          <span class="stack-name">Stripe Checkout + Webhooks</span>
+          <span class="stack-desc">Never build custom checkout. Stripe webhook on payment_intent.succeeded triggers drop access reveal and fulfillment pipeline.</span>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon">〰</div>
+        <div class="stack-content">
+          <span class="stack-name">Lenis + GSAP ScrollTrigger</span>
+          <span class="stack-desc">Momentum scroll decoupled from browser default. Speaker blueprints assemble on scroll. Lenis RAF synced with GSAP ticker — zero resource conflict.</span>
+        </div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-icon">🔒</div>
+        <div class="stack-content">
+          <span class="stack-name">Next.js Middleware + Locksmith</span>
+          <span class="stack-desc">Secret drop URLs gated via frequency code (e.g. "140HZ" terminal input). Access codes embedded in SoundCloud track metadata or pirate radio broadcast.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Secret drop logic diagram -->
+    <div style="margin-top:2px;background:#060606;padding:32px;border-left:2px solid var(--acid-green);">
+      <span class="type-spec-tag">SECRET DROP FLOW // PIRATE RADIO MODEL</span>
+      <div style="display:flex;gap:0;margin-top:20px;overflow-x:auto;">
+        <div style="text-align:center;padding:0 20px;min-width:120px;">
+          <div style="width:40px;height:40px;border:1px solid var(--acid-green);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:16px;">📻</div>
+          <span style="font-size:8px;color:var(--dim-white);letter-spacing:0.1em;display:block;">PIRATE RADIO<br>BROADCAST</span>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--acid-green);font-size:18px;padding:0 4px;padding-bottom:28px;">→</div>
+        <div style="text-align:center;padding:0 20px;min-width:120px;">
+          <div style="width:40px;height:40px;border:1px solid var(--acid-green);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:16px;">🎵</div>
+          <span style="font-size:8px;color:var(--dim-white);letter-spacing:0.1em;display:block;">FREQ CODE<br>IN TRACK META</span>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--acid-green);font-size:18px;padding:0 4px;padding-bottom:28px;">→</div>
+        <div style="text-align:center;padding:0 20px;min-width:120px;">
+          <div style="width:40px;height:40px;border:1px solid var(--warn-orange);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:16px;">⌨</div>
+          <span style="font-size:8px;color:var(--dim-white);letter-spacing:0.1em;display:block;">TERMINAL INPUT<br>"140HZ"</span>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--acid-green);font-size:18px;padding:0 4px;padding-bottom:28px;">→</div>
+        <div style="text-align:center;padding:0 20px;min-width:120px;">
+          <div style="width:40px;height:40px;border:1px solid var(--acid-green);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:16px;">🔓</div>
+          <span style="font-size:8px;color:var(--dim-white);letter-spacing:0.1em;display:block;">MIDDLEWARE<br>UNLOCKS ROUTE</span>
+        </div>
+        <div style="display:flex;align-items:center;color:var(--acid-green);font-size:18px;padding:0 4px;padding-bottom:28px;">→</div>
+        <div style="text-align:center;padding:0 20px;min-width:120px;">
+          <div style="width:40px;height:40px;border:1px solid var(--acid-green);background:rgba(138,206,0,0.1);display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:16px;">🛍</div>
+          <span style="font-size:8px;color:var(--acid-green);letter-spacing:0.1em;display:block;">DROP PAGE<br>REVEALED</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     09 — PHASES ROADMAP
+════════════════════════════════ -->
+<section class="section" id="phases">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-num">09 //</span>
+      <h2 class="section-title">PRODUCTION ROADMAP</h2>
+      <p class="section-desc">POD → Hybrid → Cut-and-sew. Authentic at every stage.</p>
+    </div>
+
+    <div class="phases">
+
+      <div class="phase-card phase-a">
+        <span class="phase-letter">A</span>
+        <span class="phase-label">PHASE A // PURE POD</span>
+        <div class="phase-title">THE LEAN<br>LAUNCH</div>
+        <ul class="phase-items">
+          <li>5 core graphic pieces on 440GSM blanks</li>
+          <li>Apliiq woven labels — replace all manufacturer tags</li>
+          <li>OSHA hangtags via Pietra</li>
+          <li>Adversarial patch loading screen on e-shop</li>
+          <li>First run: NOT for sale — for the riggers & DJs</li>
+          <li>Secret drop URL embedded in first broadcast</li>
+          <li>Community seeding — no influencers</li>
+          <li>AQL 2.5 spot checks on all print runs</li>
+        </ul>
+      </div>
+
+      <div class="phase-card phase-b">
+        <span class="phase-letter">B</span>
+        <span class="phase-label">PHASE B // HYBRID DROP</span>
+        <div class="phase-title">SMALL BATCH<br>HARDWARE</div>
+        <ul class="phase-items">
+          <li>50–100 unit small batch runs</li>
+          <li>Custom adversarial patches hand-sewn by factory</li>
+          <li>Fidlock V-Buckle integration on chest straps</li>
+          <li>3M reflective hem tape in Signal Interference Grey</li>
+          <li>Resistance Pack inserts with QR stream codes</li>
+          <li>3D puff embroidery for bolt glyph logo</li>
+          <li>Faraday pocket lining as opt-in spec</li>
+          <li>EU fulfillment via Create Fashion Brand (PT)</li>
+        </ul>
+      </div>
+
+      <div class="phase-card phase-c">
+        <span class="phase-letter">C</span>
+        <span class="phase-label">PHASE C // TECHNICAL ARCHIVE</span>
+        <div class="phase-title">FULL CUT &<br>SEW</div>
+        <ul class="phase-items">
+          <li>Transition best-sellers to PT/CN cut-and-sew</li>
+          <li>Hidden stash pockets with Faraday lining standard</li>
+          <li>1000D Cordura paneling on knees and elbows</li>
+          <li>Gusseted crotch & articulated knee Tech-Cargo block</li>
+          <li>Cobra Buckle harness systems</li>
+          <li>Heat-sealed seam tape throughout</li>
+          <li>Full BOM documentation per SKU</li>
+          <li>+/-1cm tolerance spec enforced</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Seeding strategy -->
+    <div style="margin-top:2px;background:#070707;padding:32px;border-top:2px solid var(--acid-green);">
+      <span class="type-spec-tag">GRASSROOTS SEEDING // A&R MODEL</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-top:20px;">
+        <div>
+          <span style="font-size:9px;letter-spacing:0.2em;color:var(--acid-green);text-transform:uppercase;display:block;margin-bottom:8px;">Target Scenes</span>
+          <ul style="list-style:none;">
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">UK Dubstep / Dark Step</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">EU Hardtek / Forest Tekno</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">US Techno / Underground</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;">EE/Baltic Rave Scene</li>
+          </ul>
+        </div>
+        <div>
+          <span style="font-size:9px;letter-spacing:0.2em;color:var(--acid-green);text-transform:uppercase;display:block;margin-bottom:8px;">Seed Targets</span>
+          <ul style="list-style:none;">
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Active riggers at Teknival circuits</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Rising DJs pre-breakthrough</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">Soundsystem crew members</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;">Online: r/DeepDubstep, r/Tekno</li>
+          </ul>
+        </div>
+        <div>
+          <span style="font-size:9px;letter-spacing:0.2em;color:var(--acid-green);text-transform:uppercase;display:block;margin-bottom:8px;">Anti-Marketing Rules</span>
+          <ul style="list-style:none;">
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">No paid influencers. Ever.</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">No mainstream press outreach</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;border-bottom:1px solid rgba(112,128,144,0.08);">No fashion week positioning</li>
+            <li style="font-size:10px;color:var(--dim-white);padding:3px 0;">Legitimacy = 4AM load-in photo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     CERTIFICATION FOOTER
+════════════════════════════════ -->
+<div class="container">
+  <div class="cert-block">
+    <div class="cert-inner">
+      <div>
+        <div class="cert-fields">
+          <div class="cert-field">
+            <span class="cert-field-label">Document Ref</span>
+            <span class="cert-field-value">KPT-UG-BB-001</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">Version</span>
+            <span class="cert-field-value">1.0.0</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">Classification</span>
+            <span class="cert-field-value" style="color:var(--acid-green);">CLANDESTINE</span>
+          </div>
+          <div class="cert-field">
+            <span class="cert-field-label">Issued By</span>
+            <span class="cert-field-value">LEISSON.EU</span>
+          </div>
+        </div>
+        <div style="margin-top:20px;font-size:9px;color:var(--slate-grey);letter-spacing:0.15em;line-height:1.8;">
+          SWL: UNLIMITED // FREQ RESPONSE: 20–20,000Hz // CLASSIFICATION: UNDERGROUND UTILITY<br>
+          THIS DOCUMENT IS NOT FASHION. IT IS FIELD DOCUMENTATION FOR THOSE WHO BUILD THE SYSTEMS.
+        </div>
+      </div>
+      <div class="cert-stamp">
+        <span class="cert-stamp-line1">CERT</span>
+        <span class="cert-stamp-line2">KPT</span>
+        <span class="cert-stamp-line1">UNDERGROUND</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="height:60px;"></div>
+
+</body>
+</html>
