@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════
+   KPT UNDERGROUND — DESIGN TOKENS
+══════════════════════════════════ */
+
+@theme {
+  --color-ink: #050505;
+  --color-ink-2: #090909;
+  --color-ink-3: #0e0e0e;
+  --color-green: #8ACE00;
+  --color-orange: #FF8C00;
+  --color-rust: #A0522D;
+  --color-slate: #708090;
+  --color-paper: #E8E4DC;
+  --color-muted: #606258;
+  --color-dim: #333330;
+
+  --font-display: var(--font-bebas), sans-serif;
+  --font-mono: var(--font-space-mono), monospace;
+
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --z-grid: 0;
+  --z-content: 1;
+  --z-nav: 500;
+  --z-audio: 600;
+  --z-cart: 700;
+  --z-scanline: 8000;
+  --z-cursor: 9997;
+  --z-loader: 9999;
+}
+
+/* ══════════════════════════════════
+   CUSTOM PROPERTIES
+══════════════════════════════════ */
+
+:root {
+  --ink: #050505;
+  --ink2: #090909;
+  --ink3: #0e0e0e;
+  --green: #8ACE00;
+  --orange: #FF8C00;
+  --rust: #A0522D;
+  --slate: #708090;
+  --paper: #E8E4DC;
+  --muted: #606258;
+  --dim: #333330;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --mid: 200ms;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+}
+
+/* ══════════════════════════════════
+   BASE
+══════════════════════════════════ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ══════════════════════════════════
+   SCANLINE OVERLAY
+══════════════════════════════════ */
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-scanline);
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(138, 206, 0, 0.012) 3px,
+    rgba(138, 206, 0, 0.012) 4px
+  );
+}
+
+/* ══════════════════════════════════
+   52px GRID BACKGROUND
+══════════════════════════════════ */
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grid);
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(138, 206, 0, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138, 206, 0, 0.026) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+/* ══════════════════════════════════
+   CURSOR STATES
+══════════════════════════════════ */
+
+body.ch .cc { width: 30px; height: 30px; }
+body.ch .cg { width: 7px; height: 7px; }
+body.ch .cr { width: 42px; height: 42px; border-color: rgba(138, 206, 0, 0.3); }
+body.ch .cl { opacity: 1; }
+
+body.cshop .cc { width: 26px; height: 26px; }
+body.cshop .cl { opacity: 1; font-family: var(--font-display); font-size: 14px; letter-spacing: 0.06em; }
+body.cshop .cr { width: 50px; height: 50px; border-color: rgba(138, 206, 0, 0.4); }
+
+body.clock .cc::before, body.clock .cc::after { background: var(--orange); }
+body.clock .cl { color: var(--orange); opacity: 1; }
+body.clock .cr { width: 42px; height: 42px; border-color: rgba(255, 140, 0, 0.3); }
+
+/* ══════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════ */
+
+@keyframes fadeup {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0; }
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes bar1 { from { height: 3px; } to { height: 10px; } }
+@keyframes bar2 { from { height: 8px; } to { height: 3px; } }
+@keyframes bar3 { from { height: 5px; } to { height: 12px; } }
+@keyframes bar4 { from { height: 11px; } to { height: 4px; } }
+@keyframes bar5 { from { height: 6px; } to { height: 9px; } }
+
+@keyframes ring-pulse {
+  from { width: 18px; height: 18px; opacity: 0.7; border-color: var(--green); }
+  to { width: 60px; height: 60px; opacity: 0; border-color: var(--green); }
+}
+
+@keyframes loader-pulse {
+  from { opacity: 0.82; }
+  to { opacity: 1; }
+}
+
+@keyframes loader-fill {
+  to { width: 100%; }
+}
+
+@keyframes caret-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ══════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════ */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.85s var(--ease), transform 0.85s var(--ease);
+}
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+.reveal-d1 { transition-delay: 0.08s; }
+.reveal-d2 { transition-delay: 0.18s; }
+.reveal-d3 { transition-delay: 0.3s; }
+.reveal-d4 { transition-delay: 0.44s; }
+
+/* ══════════════════════════════════
+   LAYOUT UTILS
+══════════════════════════════════ */
+
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ══════════════════════════════════
+   TYPOGRAPHY
+══════════════════════════════════ */
+
+.eyebrow {
+  font-size: 8px;
+  letter-spacing: 0.5em;
+  color: var(--green);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 24px;
+}
+
+.stmt {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 9vw, 128px);
+  line-height: 0.86;
+  letter-spacing: 0.01em;
+  color: var(--paper);
+}
+
+/* ══════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  body::before {
+    animation: none;
+  }
+}
+
+/* ══════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .wrap {
+    padding: 0 24px;
+  }
+}
