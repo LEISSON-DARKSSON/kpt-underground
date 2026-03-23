@@ -124,6 +124,16 @@ export const ARTISTS: ArtistProfile[] = [
     frequency: "60–140 BPM",
     soundcloud: "leisson-darksson",
   },
+  {
+    id: "a012",
+    name: "SUPAPYX SOUNDSYSTEM",
+    scene: "TEKNO",
+    location: "Estonia",
+    fundAmount: 155000,
+    bio: "Underground Party Systems. 622 followers, 16 tracks, 1,809 deep in the network. Multicultural hyper column species pioneering darker edges of creativity. Not a producer — a system. Twisting elements according to situation. Affiliated with NEOONDREED. Everything is possible.",
+    frequency: "140–165 BPM",
+    soundcloud: "supapyx",
+  },
 ];
 
 export function getTotalFundDistributed(): number {
