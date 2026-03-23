@@ -3,7 +3,8 @@ import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
 import { ArtistGrid } from "@/components/artists/artist-grid";
-import { FundMechanics } from "@/components/artists/fund-mechanics";
+import { FundOverview } from "@/components/artists/fund-overview";
+import { FeaturedStory } from "@/components/artists/featured-story";
 import { ARTISTS, getTotalFundDistributed, formatFundAmount } from "@/lib/artists";
 import Link from "next/link";
 
@@ -70,11 +71,14 @@ export default function ArtistsPage() {
         duration={30}
       />
 
+      {/* ═══ FUND OVERVIEW ═══ */}
+      <FundOverview />
+
       {/* ═══ ARTIST GRID ═══ */}
       <ArtistGrid artists={ARTISTS} />
 
-      {/* ═══ FUND MECHANICS ═══ */}
-      <FundMechanics />
+      {/* ═══ FEATURED STORY ═══ */}
+      <FeaturedStory />
 
       {/* ═══ CTA ═══ */}
       <section className="py-32 border-t border-dim">
