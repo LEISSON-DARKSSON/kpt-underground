@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { ProductData } from "@/lib/products";
 import { formatEUR, getLineColor } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
+import { ProductBlueprint } from "@/components/shop/product-blueprint";
 
 interface ProductCardProps {
   product: ProductData;
@@ -67,23 +68,16 @@ export function ProductCard({ product }: ProductCardProps) {
 
       {/* ─── Visual Area ─── */}
       <div className="aspect-square bg-ink relative overflow-hidden">
-        {/* Blueprint schematic pattern */}
+        {/* SVG Blueprint drawing */}
         <div
           className="absolute inset-0 transition-all duration-[400ms]"
           style={{
-            backgroundImage: `linear-gradient(45deg, ${lineColor}22 1px, transparent 1px), linear-gradient(-45deg, ${lineColor}22 1px, transparent 1px)`,
-            backgroundSize: "20px 20px",
-            opacity: hovered ? 0.55 : 0.35,
+            opacity: hovered ? 0.85 : 0.6,
             transform: hovered ? "scale(1.03)" : "scale(1)",
             transitionTimingFunction: "var(--ease)",
           }}
-        />
-
-        {/* Center ref watermark */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-          <span className="font-display text-[clamp(1.5rem,4vw,2.5rem)] text-paper/5">
-            {product.ref}
-          </span>
+        >
+          <ProductBlueprint productId={product.id} lineColor={lineColor} />
         </div>
 
         {/* Badge */}

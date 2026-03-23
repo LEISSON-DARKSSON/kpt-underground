@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { ProductData } from "@/lib/products";
 import { formatEUR, getLineColor, PRODUCT_LINES_DATA } from "@/lib/products";
 import { useCart } from "@/lib/cart-context";
+import { ProductBlueprint } from "@/components/shop/product-blueprint";
 
 interface ProductDetailProps {
   product: ProductData;
@@ -41,34 +42,23 @@ export function ProductDetail({ product }: ProductDetailProps) {
           className="relative overflow-hidden lg:sticky lg:top-[56px]"
           style={{ height: "calc(100vh - 56px)", background: "var(--ink2)" }}
         >
-          {/* Radial gradient overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: `radial-gradient(ellipse at center, ${lineColor}08 0%, transparent 70%)` }}
-          />
-
-          {/* Diagonal grid pattern */}
-          <div
-            className="absolute inset-0 opacity-35"
-            style={{
-              backgroundImage: `linear-gradient(45deg, ${lineColor}22 1px, transparent 1px), linear-gradient(-45deg, ${lineColor}22 1px, transparent 1px)`,
-              backgroundSize: "24px 24px",
-            }}
-          />
-
-          {/* Crosshair center */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="relative">
-              <div className="w-[1px] h-24 absolute left-1/2 -translate-x-1/2 -top-12" style={{ backgroundColor: `${lineColor}40` }} />
-              <div className="h-[1px] w-24 absolute top-1/2 -translate-y-1/2 -left-12" style={{ backgroundColor: `${lineColor}40` }} />
-              <div className="w-3 h-3 rounded-full border" style={{ borderColor: `${lineColor}60` }} />
+          {/* SVG Blueprint drawing */}
+          <div className="absolute inset-0 flex items-center justify-center p-8 lg:p-16">
+            <div className="w-full max-w-[500px] aspect-square">
+              <ProductBlueprint productId={product.id} lineColor={lineColor} />
             </div>
           </div>
 
-          {/* Ref watermark */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <span className="font-display text-[clamp(2rem,6vw,4rem)] text-paper/5">{product.ref}</span>
-            <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-paper/10 mt-2">
+          {/* Radial gradient overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at center, ${lineColor}06 0%, transparent 70%)` }}
+          />
+
+          {/* Ref watermark overlay */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none">
+            <span className="font-display text-[clamp(1rem,2vw,1.5rem)] text-paper/8">{product.ref}</span>
+            <span className="font-mono text-[8px] tracking-[0.14em] uppercase text-paper/5 mt-1">
               BLUEPRINT // REV B
             </span>
           </div>
