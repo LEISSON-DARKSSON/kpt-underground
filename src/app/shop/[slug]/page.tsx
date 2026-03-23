@@ -1,9 +1,10 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
 import { ProductDetail } from "@/components/shop/product-detail";
 import { ProductCard } from "@/components/shop/product-card";
-import { PRODUCTS, getProductBySlug, getProductsByLine } from "@/lib/products";
+import { PRODUCTS, getProductBySlug, getProductsByLine, formatEUR } from "@/lib/products";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -11,6 +12,16 @@ interface PageProps {
 
 export function generateStaticParams() {
   return PRODUCTS.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
+  if (!product) return { title: "Not Found" };
+  return {
+    title: `${product.name} — ${product.line}`,
+    description: `${product.name}. ${product.shortSpec}. ${formatEUR(product.price)}. Soundsystem workwear engineered for the underground.`,
+  };
 }
 
 export default async function ProductPage({ params }: PageProps) {

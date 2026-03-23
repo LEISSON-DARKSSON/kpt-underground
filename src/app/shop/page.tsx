@@ -1,8 +1,14 @@
+import type { Metadata } from "next";
 import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
 import { ShopGrid } from "@/components/shop/shop-grid";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Equipment",
+  description: "The Collection — SS 2025. Equipment engineered for the underground. Ravewear, Festivalwear, Everyday, Accessories. Limited quantities.",
+};
 
 export default function ShopPage() {
   return (

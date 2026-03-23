@@ -4,6 +4,7 @@ const FOOTER_LINKS = [
   { href: "/story", label: "STORY" },
   { href: "/artists", label: "ARTISTS" },
   { href: "/shop", label: "EQUIPMENT" },
+  { href: "/signal", label: "SIGNAL" },
 ];
 
 export function Footer() {

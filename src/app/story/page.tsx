@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
@@ -6,6 +7,11 @@ import { StoryProductLines } from "@/components/story/story-product-lines";
 import { StorySignalNetwork } from "@/components/story/story-signal-network";
 import { StoryManifesto } from "@/components/story/story-manifesto";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "The Story",
+  description: "This is not fashion. This is equipment. Soundsystem workwear engineered for the underground — dark floors, open fields, 5 AM service corridors.",
+};
 
 export default function StoryPage() {
   return (

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
@@ -5,6 +6,11 @@ import { ArtistGrid } from "@/components/artists/artist-grid";
 import { FundMechanics } from "@/components/artists/fund-mechanics";
 import { ARTISTS, getTotalFundDistributed, formatFundAmount } from "@/lib/artists";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Artist Fund",
+  description: "10% of every transaction goes directly to underground artists. No application. No committee. The scene identifies who the money belongs to.",
+};
 
 export default function ArtistsPage() {
   const totalDistributed = getTotalFundDistributed();
