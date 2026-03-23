@@ -196,13 +196,15 @@ export function CartDrawer() {
             </div>
 
             {/* Checkout CTA */}
-            <button
-              className="w-full font-mono text-[12px] tracking-[0.14em] uppercase py-4 bg-green text-ink hover:bg-paper transition-colors duration-200"
+            <Link
+              href="/checkout"
+              onClick={closeCart}
+              className="block w-full text-center font-mono text-[12px] tracking-[0.14em] uppercase py-4 bg-green text-ink hover:bg-paper transition-colors duration-200 no-underline"
               data-cursor="shop"
               data-cursor-label="PAY"
             >
               CHECKOUT — {formatEUR(totalPrice)}
-            </button>
+            </Link>
 
             {/* Continue shopping */}
             <Link
