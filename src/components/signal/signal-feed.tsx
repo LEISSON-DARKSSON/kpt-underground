@@ -29,7 +29,7 @@ const SIGNALS: SignalEntry[] = [
     id: "sig-005",
     timestamp: "2025-03-18T01:30:00Z",
     type: "EVENT",
-    content: "KRVN live hardware set — 3 hours. Location broadcast 60 minutes before start. No recording.",
+    content: "NEOONDREED live techno set — 3 hours. Location broadcast 60 minutes before start. No recording.",
     status: "UPCOMING",
   },
   {
@@ -57,7 +57,7 @@ const SIGNALS: SignalEntry[] = [
     id: "sig-001",
     timestamp: "2025-03-01T02:00:00Z",
     type: "EVENT",
-    content: "PHASE_NULL + NØISE.DEPT — joint set. Industrial zone. Capacity: 200. No phones.",
+    content: "LEISSON + DARKSSON — joint set. Krematoorium. Capacity: 200. No phones.",
     status: "EXPIRED",
   },
 ];

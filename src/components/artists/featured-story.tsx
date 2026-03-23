@@ -13,7 +13,7 @@ export function FeaturedStory() {
           <div>
             <ScrollReveal delay={1}>
               <h2 className="font-display text-[clamp(36px,5.5vw,72px)] leading-[0.9] text-paper">
-                KRVN<br /><span className="text-green">ON THE</span><br />UNDERGROUND
+                NEOONDREED<br /><span className="text-green">ON THE</span><br />UNDERGROUND
               </h2>
             </ScrollReveal>
 
@@ -84,7 +84,7 @@ export function FeaturedStory() {
                 {/* Meta */}
                 <div className="absolute bottom-4 left-4">
                   <span className="font-mono text-[8px] tracking-[0.2em] text-muted uppercase block">
-                    KRVN // UK BASS // 140HZ
+                    NEOONDREED // TECHNO // 135-150HZ
                   </span>
                   <span className="font-mono text-[7px] tracking-[0.2em] text-muted/50 uppercase block mt-0.5">
                     RECORDING SESSION 047

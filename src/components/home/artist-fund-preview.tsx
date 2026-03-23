@@ -3,9 +3,9 @@
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 
 const ARTISTS = [
-  { name: "SYST3M_BLDR", scene: "UK BASS", amount: "2,400" },
-  { name: "FREQ.CTRL", scene: "EU TECHNO", amount: "1,800" },
-  { name: "SUBLOW_OPS", scene: "US UNDERGROUND", amount: "2,100" },
+  { name: "NEOONDREED", scene: "TECHNO", amount: "2,450" },
+  { name: "LEISSON", scene: "HARD TECHNO", amount: "2,800" },
+  { name: "PULK", scene: "TECHNO", amount: "2,100" },
 ];
 
 export function ArtistFundPreview() {
