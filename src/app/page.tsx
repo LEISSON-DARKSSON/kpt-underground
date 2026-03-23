@@ -196,7 +196,7 @@ export default function HomePage() {
           <ArtistFundPreview />
           <ScrollReveal delay={3}>
             <Link
-              href="/editorial"
+              href="/artists"
               data-cursor="hover"
               data-cursor-label="VIEW"
               style={{
@@ -262,7 +262,10 @@ export default function HomePage() {
             </p>
           </ScrollReveal>
           <ScrollReveal delay={3}>
-            <span
+            <Link
+              href="/signal"
+              data-cursor="h"
+              data-cursor-label="ENTER"
               style={{
                 display: "inline-block",
                 fontSize: 8,
@@ -271,10 +274,12 @@ export default function HomePage() {
                 textTransform: "uppercase",
                 border: "1px solid rgba(255, 140, 0, 0.22)",
                 padding: "10px 24px",
+                textDecoration: "none",
+                transition: "background 0.3s ease, color 0.3s ease",
               }}
             >
-              &#x25CF; CLASSIFIED
-            </span>
+              &#x25CF; ENTER SIGNAL NETWORK
+            </Link>
           </ScrollReveal>
         </div>
       </section>

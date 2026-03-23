@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Link from "next/link";
 import type { ProductData } from "@/lib/products";
 import { formatEUR, getLineColor, PRODUCT_LINES_DATA } from "@/lib/products";
+import { useCart } from "@/lib/cart-context";
 
 interface ProductDetailProps {
   product: ProductData;
@@ -14,15 +15,17 @@ export function ProductDetail({ product }: ProductDetailProps) {
     product.sizes.find((s) => s.stock === "available")?.label ?? null
   );
   const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
 
   const lineColor = getLineColor(product.line);
   const lineName = PRODUCT_LINES_DATA.find((l) => l.slug === product.line)?.name ?? product.line.toUpperCase();
 
-  function handleAddToCart() {
+  const handleAddToCart = useCallback(() => {
     if (!selectedSize) return;
+    addItem(product, selectedSize);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
-  }
+  }, [selectedSize, product, addItem]);
 
   return (
     <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">

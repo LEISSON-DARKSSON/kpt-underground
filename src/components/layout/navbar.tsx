@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCart } from "@/lib/cart-context";
 
 const NAV_LINKS = [
   { href: "/", label: "HOME" },
@@ -17,6 +18,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { totalItems, toggleCart } = useCart();
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60);
@@ -128,12 +130,10 @@ export function Navbar() {
           LIVE
         </span>
 
-        {/* Shop button — desktop only */}
-        <Link
-          href="/shop"
-          data-cursor="shop"
-          data-cursor-label=""
-          className="hidden md:block no-underline transition-colors"
+        {/* Cart button — desktop */}
+        <button
+          onClick={toggleCart}
+          className="hidden md:flex items-center gap-2 no-underline transition-colors"
           style={{
             fontSize: 9,
             letterSpacing: "0.4em",
@@ -141,6 +141,7 @@ export function Navbar() {
             color: "var(--green)",
             border: "1px solid rgba(138, 206, 0, 0.22)",
             padding: "7px 18px",
+            background: "transparent",
             transition: "background var(--mid), color var(--mid), border-color var(--mid)",
           }}
           onMouseEnter={(e) => {
@@ -155,9 +156,39 @@ export function Navbar() {
             el.style.color = "var(--green)";
             el.style.borderColor = "rgba(138, 206, 0, 0.22)";
           }}
+          data-cursor="shop"
+          data-cursor-label="CART"
+          aria-label={`Shopping cart with ${totalItems} items`}
         >
-          EQUIPMENT
-        </Link>
+          CART
+          {totalItems > 0 && (
+            <span
+              className="font-mono text-[9px] bg-green text-ink px-1.5 py-0.5 leading-none"
+              style={{ minWidth: 18, textAlign: "center", letterSpacing: 0 }}
+            >
+              {totalItems}
+            </span>
+          )}
+        </button>
+
+        {/* Cart button — mobile (before hamburger) */}
+        <button
+          onClick={toggleCart}
+          className="md:hidden flex items-center justify-center relative"
+          style={{ width: 44, height: 44, background: "none", border: "none" }}
+          data-cursor="h"
+          aria-label={`Shopping cart with ${totalItems} items`}
+        >
+          <span className="font-mono text-[9px] tracking-[0.2em] text-green">CART</span>
+          {totalItems > 0 && (
+            <span
+              className="absolute font-mono text-[8px] bg-green text-ink rounded-full leading-none"
+              style={{ top: 6, right: 2, width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center" }}
+            >
+              {totalItems}
+            </span>
+          )}
+        </button>
 
         {/* Hamburger — mobile only */}
         <button

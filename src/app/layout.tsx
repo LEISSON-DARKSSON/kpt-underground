@@ -7,6 +7,8 @@ import { AudioToggle } from "@/components/brand/audio-toggle";
 import { PageLoader } from "@/components/brand/page-loader";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { CartProvider } from "@/lib/cart-context";
+import { CartDrawer } from "@/components/shop/cart-drawer";
 
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
@@ -54,14 +56,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${spaceMono.variable} ${bebasNeue.variable}`}>
       <body>
-        <PageLoader />
-        <CursorEngine />
-        <Navbar />
-        <main className="relative" style={{ zIndex: 1 }}>
-          {children}
-        </main>
-        <Footer />
-        <AudioToggle />
+        <CartProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[10000] focus:bg-green focus:text-ink focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:tracking-widest focus:uppercase focus:no-underline"
+          >
+            Skip to content
+          </a>
+          <PageLoader />
+          <CursorEngine />
+          <Navbar />
+          <main id="main-content" className="relative" style={{ zIndex: 1 }}>
+            {children}
+          </main>
+          <Footer />
+          <AudioToggle />
+          <CartDrawer />
+        </CartProvider>
       </body>
     </html>
   );
