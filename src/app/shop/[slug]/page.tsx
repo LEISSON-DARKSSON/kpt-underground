@@ -1,0 +1,62 @@
+import { notFound } from "next/navigation";
+import { ScrollReveal } from "@/components/brand/scroll-reveal";
+import { Ticker } from "@/components/brand/ticker";
+import { ProductDetail } from "@/components/shop/product-detail";
+import { ProductCard } from "@/components/shop/product-card";
+import { PRODUCTS, getProductBySlug, getProductsByLine } from "@/lib/products";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export function generateStaticParams() {
+  return PRODUCTS.map((p) => ({ slug: p.slug }));
+}
+
+export default async function ProductPage({ params }: PageProps) {
+  const { slug } = await params;
+  const product = getProductBySlug(slug);
+
+  if (!product) {
+    notFound();
+  }
+
+  const related = getProductsByLine(product.line).filter((p) => p.id !== product.id);
+
+  return (
+    <>
+      {/* ═══ PRODUCT DETAIL ═══ */}
+      <section
+        className="relative"
+        style={{ paddingTop: "calc(80px + var(--sat) + 2rem)", paddingBottom: "3rem" }}
+      >
+        <div className="wrap">
+          <ProductDetail product={product} />
+        </div>
+      </section>
+
+      {/* ═══ TICKER ═══ */}
+      <Ticker
+        items={["EQUIPMENT NOT FASHION", "440GSM FRENCH TERRY", "AQL 2.5 STANDARD", "SOUNDSYSTEM WORKWEAR"]}
+        duration={35}
+      />
+
+      {/* ═══ RELATED ═══ */}
+      {related.length > 0 && (
+        <section className="py-24 border-t border-dim">
+          <div className="wrap">
+            <ScrollReveal>
+              <span className="eyebrow">RELATED EQUIPMENT</span>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+              {related.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+    </>
+  );
+}
