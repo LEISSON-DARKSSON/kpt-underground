@@ -7,10 +7,14 @@ import { formatFundAmount } from "@/lib/artists";
 
 /* Scene → color mapping */
 const SCENE_COLORS: Record<string, string> = {
+  "TEKNO": "#8ACE00",
   "TECHNO": "#8ACE00",
+  "RAPTEK": "#FF8C00",
   "HARD TECHNO": "#FF8C00",
-  "DnB": "#708090",
-  "DUBSTEP": "#A0522D",
+  "HOUSE": "#E8E4DC",
+  "INDUSTRIAL": "#A0522D",
+  "DnB / JUNGLE": "#708090",
+  "DEEP DUBSTEP": "#708090",
 };
 
 function getSceneColor(scene: string): string {
@@ -30,7 +34,7 @@ interface ArtistGridProps {
   artists: ArtistProfile[];
 }
 
-const FILTERS = ["ALL", "TECHNO", "HARD TECHNO", "DnB", "DUBSTEP"];
+const FILTERS = ["ALL", "TEKNO", "TECHNO", "RAPTEK", "HARD TECHNO", "HOUSE", "INDUSTRIAL", "DnB / JUNGLE", "DEEP DUBSTEP"];
 
 export function ArtistGrid({ artists }: ArtistGridProps) {
   const [filter, setFilter] = useState("ALL");

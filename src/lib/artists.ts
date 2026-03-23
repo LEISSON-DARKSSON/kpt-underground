@@ -1,7 +1,8 @@
 /**
  * Artist fund data — Tallinn Underground Radio roster.
  * All artists sourced from RAVEMAGEDDON, Techno Takeover @AtticBass,
- * Beats From The Vault @ Krematoorium, and affiliated events.
+ * Beats From The Vault @ Krematoorium, Dzungel, DSTRCT, and affiliated events.
+ * Profiles verified via SoundCloud.
  */
 
 export interface ArtistProfile {
@@ -12,26 +13,29 @@ export interface ArtistProfile {
   fundAmount: number; // EUR cents distributed to date
   bio: string;
   frequency: string;
+  soundcloud?: string;
 }
 
 export const ARTISTS: ArtistProfile[] = [
   {
     id: "a001",
     name: "NEOONDREED",
-    scene: "TECHNO",
+    scene: "TEKNO",
     location: "Tallinn, EE",
     fundAmount: 245000,
-    bio: "High-energy techno transmissions from Krematoorium to RAVEMAGEDDON. Stuts Live sessions at 145 BPM — no pause, no permission, no compromise. The system runs until the system runs out.",
-    frequency: "135–150 HZ",
+    bio: "Supapyx SoundsysteM operator. TRIBE TEKNO sets at Stuts, UNDERGROUND SIRENS transmissions, RAVEMAGEDDON-certified. 413 followers deep. Also runs NEO_N dnb. The system runs until the system runs out.",
+    frequency: "135–150 BPM",
+    soundcloud: "neoondreed",
   },
   {
     id: "a002",
     name: "LEISSON",
-    scene: "HARD TECHNO",
+    scene: "RAPTEK",
     location: "Tallinn, EE",
     fundAmount: 280000,
-    bio: "Hardcore techno and hybrid sets that treat the redline as a starting point. Resident force behind Techno Takeover @AtticBass. Sound check is the opening act. Every frequency is a weapon.",
-    frequency: "140–160 HZ",
+    bio: "Trailblazer behind RAPTEK — a hybrid sub-genre born in Estonia's underground. Fuses Hardtek, Hardcore, Frenchcore, Dubcore, Dubstep, and Jungle with Estonian-language vocals. 160-200 BPM. Resident force behind Techno Takeover @AtticBass. 27 tracks, 382 followers.",
+    frequency: "160–200 BPM",
+    soundcloud: "leisson-darksson",
   },
   {
     id: "a003",
@@ -40,70 +44,85 @@ export const ARTISTS: ArtistProfile[] = [
     location: "Tallinn, EE",
     fundAmount: 195000,
     bio: "Techno Takeover veteran since session 006. Methodical four-to-the-floor architecture with a Baltic coldness that cuts through concrete. RAVEMAGEDDON-certified signal operator.",
-    frequency: "130–142 HZ",
+    frequency: "130–142 BPM",
   },
   {
     id: "a004",
+    name: "ANNIKA",
+    scene: "HARD TECHNO",
+    location: "Tallinn, EE",
+    fundAmount: 120000,
+    bio: "We love techno and we like it hard. DSTRCT X warm-up sets and Hard Rave transmissions from Tallinn. Artist Pro with 32 followers and a frequency tolerance that starts where others peak.",
+    frequency: "140–155 BPM",
+    soundcloud: "user-380399946",
+  },
+  {
+    id: "a005",
+    name: "LOVIISE",
+    scene: "HOUSE",
+    location: "Tallinn, EE",
+    fundAmount: 135000,
+    bio: "Chaos Magic Through The Music. 74 followers, 12 tracks spanning house to techno. Mixes are one whole sound and vocal-trip through different nations, planets, and thick basslines. Heart of House of Heart. Curious Tales of Planet Loviise.",
+    frequency: "122–138 BPM",
+    soundcloud: "djloviise",
+  },
+  {
+    id: "a006",
+    name: "CLY/SUVA",
+    scene: "INDUSTRIAL",
+    location: "Tallinn, EE",
+    fundAmount: 210000,
+    bio: "DJ Cly/Suva [Remixta]. 591 followers. The Shadow Industry — Hard/Mental/Industrial Techno transmissions. Bandcamp, YouTube, Instagram. B2B sessions with NEOONDREED. Embrace the darkness.",
+    frequency: "140–160 BPM",
+    soundcloud: "clysuva",
+  },
+  {
+    id: "a007",
     name: "NUPR NAPR",
     scene: "HARD TECHNO",
     location: "Tallinn, EE",
     fundAmount: 165000,
     bio: "Unfiltered aggression channeled through the mixing desk. RAVEMAGEDDON alumni with a frequency tolerance that starts where others peak. The name is the warning.",
-    frequency: "145–158 HZ",
+    frequency: "145–158 BPM",
   },
   {
-    id: "a005",
+    id: "a008",
     name: "AZURAS",
     scene: "TECHNO",
     location: "Tallinn, EE",
     fundAmount: 175000,
     bio: "Dark-room techno that maps the negative space between kicks. RAVEMAGEDDON frequency carrier. Operates in the zone where hypnosis becomes infrastructure.",
-    frequency: "132–145 HZ",
+    frequency: "132–145 BPM",
   },
   {
-    id: "a006",
+    id: "a009",
     name: "PULK",
     scene: "TECHNO",
     location: "Tallinn, EE",
     fundAmount: 210000,
-    bio: "Beats From The Vault resident at Krematoorium. Digging through the archive of what the underground produced when nobody was documenting. Every mix is an excavation.",
-    frequency: "128–140 HZ",
-  },
-  {
-    id: "a007",
-    name: "REGLOK",
-    scene: "DnB",
-    location: "Tallinn, EE",
-    fundAmount: 155000,
-    bio: "Drum and bass signal from the Solstitium network. 174 BPM is not a speed limit — it is a frequency commitment. The Tallinn jungle connection that refuses to break.",
-    frequency: "170–180 HZ",
-  },
-  {
-    id: "a008",
-    name: "DARKSSON",
-    scene: "DUBSTEP",
-    location: "Tallinn, EE",
-    fundAmount: 185000,
-    bio: "Deep dubstep transmissions from below the surface. Sub-bass pressure that you measure in wall vibrations, not decibels. The dark half of the signal chain.",
-    frequency: "60–140 HZ",
-  },
-  {
-    id: "a009",
-    name: "CLY",
-    scene: "TECHNO",
-    location: "Tallinn, EE",
-    fundAmount: 140000,
-    bio: "Krematoorium Beats From The Vault operator. Four hours deep into a stream when most have disconnected — that is when the real transmission begins.",
-    frequency: "130–142 HZ",
+    bio: "Beats From The Vault resident at Krematoorium. 105 followers, 777 following — connected to everything. Acid techno lineage through Sterling Moss and Chris Liberator. Every mix is an excavation.",
+    frequency: "128–145 BPM",
+    soundcloud: "h2lbepulk",
   },
   {
     id: "a010",
-    name: "SUVA",
-    scene: "TECHNO",
+    name: "REGLOK",
+    scene: "DnB / JUNGLE",
+    location: "Estonia",
+    fundAmount: 190000,
+    bio: "Estonia Jungle Community founder. Dzungel event series. Harder & Louder. 576 followers, 13 tracks. REGCORE and Journey Through Junglism Spectre. Also runs Reglok Techno. The jungle connection that refuses to break.",
+    frequency: "170–180 BPM",
+    soundcloud: "reglok",
+  },
+  {
+    id: "a011",
+    name: "DARKSSON",
+    scene: "DEEP DUBSTEP",
     location: "Tallinn, EE",
-    fundAmount: 150000,
-    bio: "Back-to-back Krematoorium sessions with CLY — two signals merged into one unbroken transmission. Beats From The Vault Live contributor. The frequency holds.",
-    frequency: "128–138 HZ",
+    fundAmount: 185000,
+    bio: "Master of deep bass sounds. A mysterious figure who interweaves meditative sound journeys with powerful bass structures. ~140 BPM where bass is not just sound — it is a physical force. Nordic mystery fusing UK dubstep tradition with Estonian darkness.",
+    frequency: "60–140 BPM",
+    soundcloud: "leisson-darksson",
   },
 ];
 
