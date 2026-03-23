@@ -36,14 +36,9 @@ export default async function ProductPage({ params }: PageProps) {
 
   return (
     <>
-      {/* ═══ PRODUCT DETAIL ═══ */}
-      <section
-        className="relative"
-        style={{ paddingTop: "calc(80px + var(--sat) + 2rem)", paddingBottom: "3rem" }}
-      >
-        <div className="wrap">
-          <ProductDetail product={product} />
-        </div>
+      {/* ═══ PRODUCT DETAIL (full-bleed 2-col layout) ═══ */}
+      <section style={{ paddingTop: 56 }}>
+        <ProductDetail product={product} />
       </section>
 
       {/* ═══ TICKER ═══ */}
@@ -60,7 +55,10 @@ export default async function ProductPage({ params }: PageProps) {
               <span className="eyebrow">RELATED EQUIPMENT</span>
             </ScrollReveal>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-8">
+            <div
+              className="grid grid-cols-2 md:grid-cols-3 mt-8"
+              style={{ gap: 2 }}
+            >
               {related.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}

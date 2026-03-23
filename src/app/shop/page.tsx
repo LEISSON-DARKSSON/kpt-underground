@@ -3,6 +3,7 @@ import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
 import { ShopGrid } from "@/components/shop/shop-grid";
+import { SecretDrop } from "@/components/shop/secret-drop";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ export default function ShopPage() {
       {/* ═══ HEADER ═══ */}
       <section
         className="relative overflow-hidden flex items-end"
-        style={{ minHeight: "50vh", paddingTop: "calc(80px + var(--sat))", paddingBottom: "3rem" }}
+        style={{ paddingTop: "calc(56px + 60px)", paddingBottom: 0 }}
       >
         <div className="wrap">
           <ScrollReveal>
@@ -27,26 +28,27 @@ export default function ShopPage() {
             <CharReveal
               as="h1"
               text="THE COLLECTION."
-              className="font-display text-[clamp(3rem,10vw,7rem)] leading-[0.95] text-green mt-4"
+              className="font-display text-[clamp(56px,9vw,120px)] leading-[0.86] text-paper mt-4"
             />
-          </ScrollReveal>
-
-          <ScrollReveal delay={2}>
-            <p className="max-w-[500px] mt-6 text-paper/60 leading-relaxed">
-              Equipment engineered for the underground. Every specification exists because someone needed it to exist.
-            </p>
           </ScrollReveal>
         </div>
       </section>
+
+      {/* ═══ PRODUCT GRID (with meta row, filters, sort built in) ═══ */}
+      <ShopGrid />
+
+      {/* ═══ SECRET DROP GATE ═══ */}
+      <div className="wrap py-16">
+        <ScrollReveal>
+          <SecretDrop />
+        </ScrollReveal>
+      </div>
 
       {/* ═══ TICKER ═══ */}
       <Ticker
         items={["EQUIPMENT NOT FASHION", "440GSM FRENCH TERRY", "AQL 2.5 STANDARD", "10% ARTIST FUND", "SOUNDSYSTEM WORKWEAR"]}
         duration={35}
       />
-
-      {/* ═══ PRODUCT GRID ═══ */}
-      <ShopGrid />
 
       {/* ═══ SIGNAL CTA ═══ */}
       <section className="py-24 border-t border-dim">
@@ -58,11 +60,11 @@ export default function ShopPage() {
           </ScrollReveal>
           <ScrollReveal delay={1}>
             <Link
-              href="/story"
-              className="inline-block mt-8 font-mono text-[11px] tracking-[0.14em] uppercase text-green border border-green/30 px-6 py-3 hover:bg-green hover:text-ink transition-colors duration-200"
+              href="/signal"
+              className="inline-block mt-8 font-mono text-[11px] tracking-[0.14em] uppercase text-green border border-green/30 px-6 py-3 hover:bg-green hover:text-ink transition-colors duration-200 no-underline"
               data-cursor="h"
             >
-              LEARN MORE &rarr;
+              ENTER SIGNAL NETWORK &rarr;
             </Link>
           </ScrollReveal>
         </div>
