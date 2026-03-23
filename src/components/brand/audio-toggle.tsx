@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const TRACK_SRC = "/audio/z-neo-reese-you.mp3";
+const TRACK_TITLE = "Z-NEO — REESE YOU";
 
 const BAR_ANIMATIONS = [
   { name: "bar1", duration: "0.8s", defaultH: 3 },
@@ -13,15 +16,91 @@ const BAR_ANIMATIONS = [
 export function AudioToggle() {
   const [isOn, setIsOn] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  // Initialize audio element once
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 3500);
+    const audio = new Audio(TRACK_SRC);
+    audio.loop = true;
+    audio.volume = 0.6;
+    audio.preload = "auto";
+    audioRef.current = audio;
+
+    return () => {
+      audio.pause();
+      audio.src = "";
+    };
+  }, []);
+
+  // Attempt autoplay after page loader finishes (~3.5s)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(true);
+
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      audio.play().then(() => {
+        setIsOn(true);
+      }).catch(() => {
+        // Browser blocked autoplay — wait for user interaction
+        setAutoplayBlocked(true);
+      });
+    }, 3500);
+
     return () => clearTimeout(timer);
   }, []);
 
+  // If autoplay was blocked, start on first user interaction anywhere
+  useEffect(() => {
+    if (!autoplayBlocked) return;
+
+    const startOnInteraction = () => {
+      const audio = audioRef.current;
+      if (!audio) return;
+
+      audio.play().then(() => {
+        setIsOn(true);
+        setAutoplayBlocked(false);
+      }).catch(() => {
+        // Still blocked — user will use the toggle
+      });
+
+      document.removeEventListener("click", startOnInteraction);
+      document.removeEventListener("keydown", startOnInteraction);
+      document.removeEventListener("touchstart", startOnInteraction);
+    };
+
+    document.addEventListener("click", startOnInteraction, { once: true });
+    document.addEventListener("keydown", startOnInteraction, { once: true });
+    document.addEventListener("touchstart", startOnInteraction, { once: true });
+
+    return () => {
+      document.removeEventListener("click", startOnInteraction);
+      document.removeEventListener("keydown", startOnInteraction);
+      document.removeEventListener("touchstart", startOnInteraction);
+    };
+  }, [autoplayBlocked]);
+
+  const toggle = useCallback(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isOn) {
+      audio.pause();
+      setIsOn(false);
+    } else {
+      audio.play().then(() => {
+        setIsOn(true);
+        setAutoplayBlocked(false);
+      }).catch(() => {});
+    }
+  }, [isOn]);
+
   return (
     <button
-      onClick={() => setIsOn((prev) => !prev)}
+      onClick={toggle}
       data-cursor="hover"
       data-cursor-label={isOn ? "MUTE" : "SOUND"}
       className="fixed"
