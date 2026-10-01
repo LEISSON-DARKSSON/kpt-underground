@@ -58,10 +58,14 @@
    BASE
 ══════════════════════════════════ */
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* Reset lives in the base layer: unlayered, it overrode every Tailwind 4
+   margin/padding utility (utilities are layered, and unlayered CSS always wins). */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {
