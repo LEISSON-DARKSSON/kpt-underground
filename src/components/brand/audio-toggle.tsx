@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
+import { usePathname } from "next/navigation";
 
 const TRACK_SRC = "/audio/z-neo-reese-you.mp3";
 const TRACK_TITLE = "Z-NEO — REESE YOU";
@@ -18,6 +19,12 @@ export function AudioToggle() {
   const [visible, setVisible] = useState(false);
   const [autoplayBlocked, setAutoplayBlocked] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  /* No automatic sound in the commerce preview (cart / checkout); the toggle still works. */
+  const pathname = usePathname();
+  const noAutoplayRef = useRef(false);
+  useEffect(() => {
+    noAutoplayRef.current = pathname.startsWith("/commerce-preview");
+  }, [pathname]);
 
   // Initialize audio element once
   useEffect(() => {
@@ -39,7 +46,7 @@ export function AudioToggle() {
       setVisible(true);
 
       const audio = audioRef.current;
-      if (!audio) return;
+      if (!audio || noAutoplayRef.current) return;
 
       audio.play().then(() => {
         setIsOn(true);
@@ -58,7 +65,7 @@ export function AudioToggle() {
 
     const startOnInteraction = () => {
       const audio = audioRef.current;
-      if (!audio) return;
+      if (!audio || noAutoplayRef.current) return;
 
       audio.play().then(() => {
         setIsOn(true);

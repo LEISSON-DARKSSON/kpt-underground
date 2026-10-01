@@ -19,6 +19,8 @@ export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
   const { totalItems, toggleCart } = useCart();
+  /* The gated desk-mat preview has its own demo cart; hide the legacy (Stripe/EUR) cart trigger there. */
+  const inCommercePreview = pathname.startsWith("/commerce-preview");
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60);
@@ -133,6 +135,7 @@ export function Navbar() {
         {/* Cart button — desktop */}
         <button
           onClick={toggleCart}
+          hidden={inCommercePreview}
           className="hidden md:flex items-center gap-2 no-underline transition-colors"
           style={{
             fontSize: 9,
@@ -174,6 +177,7 @@ export function Navbar() {
         {/* Cart button — mobile (before hamburger) */}
         <button
           onClick={toggleCart}
+          hidden={inCommercePreview}
           className="md:hidden flex items-center justify-center relative"
           style={{ width: 44, height: 44, background: "none", border: "none" }}
           data-cursor="h"

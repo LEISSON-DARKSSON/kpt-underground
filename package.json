@@ -7,8 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test:commerce-preview": "node scripts/commerce-preview/build-preview-assets.mjs --check && node --test tests/commerce-preview/preview-guard.test.mjs tests/commerce-preview/react-preview.test.mjs"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.5",
