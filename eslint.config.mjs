@@ -15,6 +15,7 @@ const eslintConfig = defineConfig([
     "prototypes/**",
     // Generated design-preview bundle; not hand-written code.
     "src/lib/kiu-commerce-preview.mjs",
+    "src/lib/commerce/preview-assets.generated.mjs",
   ]),
 ]);
 
