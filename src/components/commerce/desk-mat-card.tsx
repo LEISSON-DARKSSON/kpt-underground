@@ -3,6 +3,7 @@ import Link from "next/link";
 import { assetUrl, formatUSD } from "@/lib/commerce/desk-mats";
 
 import type { DeskMat } from "@/lib/commerce/desk-mats";
+import s from "@/components/commerce/commerce.module.css";
 
 /** Catalog card. Artwork keeps its original colours and 1600×838 proportion. */
 export function DeskMatCard({ mat, priority = false }: { mat: DeskMat; priority?: boolean }) {
@@ -10,8 +11,8 @@ export function DeskMatCard({ mat, priority = false }: { mat: DeskMat; priority?
   const href = `/commerce-preview/shop/${mat.slug}`;
   return (
     <article className="kiu-product-card group flex flex-col border border-dim bg-ink-2 transition-colors duration-200 ease-expo hover:border-green/40" data-offer-id={mat.offerId}>
-      <Link href={href} data-cursor="shop" data-cursor-label="VIEW" className="block p-5 no-underline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-green sm:p-7">
-        <div className="mb-6 flex justify-between font-mono text-[10px] uppercase tracking-[0.22em]">
+      <Link href={href} data-cursor="shop" data-cursor-label="VIEW" className={`block no-underline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-green ${s.card}`}>
+        <div className={`flex justify-between font-mono text-[10px] uppercase tracking-[0.22em] ${s.mb6}`}>
           <span className="text-green">{mat.code}</span>
           <span className="text-slate">Desk mat</span>
         </div>
@@ -25,9 +26,9 @@ export function DeskMatCard({ mat, priority = false }: { mat: DeskMat; priority?
           fetchPriority={priority ? "high" : "auto"}
           className="block h-auto w-full rounded-[10px] motion-safe:transition-transform motion-safe:duration-500 motion-safe:ease-expo motion-safe:group-hover:scale-[1.01]"
         />
-        <p className="mt-6 font-mono text-[10px] uppercase tracking-[0.16em] text-slate">Artwork preview / production trim not simulated</p>
+        <p className={`font-mono text-[10px] uppercase tracking-[0.16em] text-slate ${s.mt6}`}>Artwork preview / production trim not simulated</p>
       </Link>
-      <div className="mt-auto border-t border-dim p-5 sm:p-7">
+      <div className={`border-t border-dim ${s.card} ${s.mtAuto}`}>
         <div className="flex items-start justify-between gap-4">
           <h2 className="font-display text-[clamp(30px,3vw,40px)] leading-none text-paper">
             <Link href={href} data-cursor="shop" data-cursor-label="VIEW" className="text-inherit no-underline hover:text-green focus-visible:outline-2 focus-visible:outline-green">
@@ -39,14 +40,14 @@ export function DeskMatCard({ mat, priority = false }: { mat: DeskMat; priority?
             <span className="font-mono text-[10px] text-slate">USD · planned price</span>
           </p>
         </div>
-        <p className="mt-4 font-mono text-xs leading-relaxed text-slate">
+        <p className={`font-mono text-xs leading-relaxed text-slate ${s.mt4}`}>
           {mat.summary}
           <br />
           {mat.size.label} · One size
         </p>
-        <div className="mt-6 flex items-center justify-between gap-4">
-          <span className="border border-orange/60 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-orange">Private sample</span>
-          <Link href={href} data-cursor="shop" data-cursor-label="VIEW" className="border-b border-green/40 pb-1 font-mono text-[11px] uppercase tracking-[0.2em] text-green no-underline hover:border-green focus-visible:outline-2 focus-visible:outline-green">
+        <div className={`flex items-center justify-between gap-4 ${s.mt6}`}>
+          <span className={`border border-orange/60 font-mono text-[10px] uppercase tracking-[0.16em] text-orange ${s.badge}`}>Private sample</span>
+          <Link href={href} data-cursor="shop" data-cursor-label="VIEW" className={`border-b border-green/40 font-mono text-[11px] uppercase tracking-[0.2em] text-green no-underline hover:border-green focus-visible:outline-2 focus-visible:outline-green ${s.underlineLink}`}>
             View design ↗
           </Link>
         </div>

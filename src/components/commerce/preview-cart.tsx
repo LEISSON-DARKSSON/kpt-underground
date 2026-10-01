@@ -4,6 +4,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useReducer,
 import Link from "next/link";
 
 import { DESK_MATS, MAX_QTY, assetUrl, formatUSD, getDeskMatByVariant } from "@/lib/commerce/desk-mats";
+import s from "@/components/commerce/commerce.module.css";
 
 /*
  * Design-preview cart for the two desk mats.
@@ -129,10 +130,10 @@ function PreviewCartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLEle
       onClick={(e) => {
         if (e.target === e.currentTarget) close(); // backdrop click
       }}
-      className="kiu-cart m-0 ml-auto h-dvh max-h-dvh w-[min(440px,100vw)] max-w-full bg-ink-2 p-0 text-paper border-l border-green/25 backdrop:bg-ink/75"
+      className={`kiu-cart h-dvh max-h-dvh w-[min(440px,100vw)] max-w-full bg-ink-2 text-paper border-l border-green/25 backdrop:bg-ink/75 ${s.drawer}`}
     >
       <div className="flex h-full flex-col">
-        <header className="flex items-start justify-between gap-4 border-b border-dim px-6 py-6">
+        <header className={`flex items-start justify-between gap-4 border-b border-dim ${s.drawerHead}`}>
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-orange">Interaction preview / no purchase</p>
             <h2 id="preview-cart-title" className="font-display text-[40px] leading-none text-paper">
@@ -150,9 +151,9 @@ function PreviewCartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLEle
           </button>
         </header>
 
-        <div className="flex-1 overflow-y-auto px-6">
+        <div className={`flex-1 overflow-y-auto ${s.drawerBody}`}>
           {lines.length === 0 ? (
-            <div className="kiu-empty-cart flex h-full flex-col items-start justify-center gap-5 py-12">
+            <div className={`kiu-empty-cart flex h-full flex-col items-start justify-center gap-5 ${s.emptyY}`}>
               <p className="font-display text-5xl leading-none text-paper/20">EMPTY</p>
               <p className="font-mono text-xs leading-relaxed text-slate">No desk mats selected in this preview.</p>
               <Link
@@ -160,7 +161,7 @@ function PreviewCartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLEle
                 onClick={close}
                 data-cursor="shop"
                 data-cursor-label="SHOP"
-                className="border border-green/40 px-5 py-3 font-mono text-[11px] uppercase tracking-[0.2em] text-green no-underline hover:bg-green hover:text-ink"
+                className={`border border-green/40 font-mono text-[11px] uppercase tracking-[0.2em] text-green no-underline hover:bg-green hover:text-ink ${s.cta}`}
               >
                 Browse desk mats
               </Link>
@@ -172,13 +173,13 @@ function PreviewCartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLEle
                 if (!mat) return null;
                 const art = mat.images[0];
                 return (
-                  <li key={line.variantId} className="kiu-cart-row grid grid-cols-[96px_1fr_auto] gap-4 py-6" data-variant={line.variantId}>
+                  <li key={line.variantId} className={`kiu-cart-row grid grid-cols-[96px_1fr_auto] gap-4 ${s.rowY}`} data-variant={line.variantId}>
                     {/* eslint-disable-next-line @next/next/no-img-element -- gated route asset; next/image optimizer cannot read SSO-protected previews */}
                     <img src={assetUrl(art.file)} alt="" width={art.width} height={art.height} className="h-auto w-24 rounded-[4px] border border-dim" />
                     <div className="min-w-0">
                       <p className="font-display text-2xl leading-none">{mat.name}</p>
-                      <p className="mt-2 font-mono text-[11px] text-slate">{mat.size.label}</p>
-                      <div className="mt-4 flex items-center gap-4">
+                      <p className={`font-mono text-[11px] text-slate ${s.mt2}`}>{mat.size.label}</p>
+                      <div className={`flex items-center gap-4 ${s.mt4}`}>
                         <div className="flex items-center border border-dim" role="group" aria-label={`Quantity for ${mat.name}`}>
                           <button type="button" data-cursor="h" aria-label={`Decrease ${mat.name}`} onClick={() => setQty(line.variantId, line.qty - 1)} className="flex h-9 w-9 items-center justify-center font-mono text-paper hover:text-green focus-visible:outline-2 focus-visible:outline-green">
                             −
@@ -204,12 +205,12 @@ function PreviewCartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLEle
         </div>
 
         {lines.length > 0 && (
-          <footer className="space-y-4 border-t border-dim px-6 py-6">
+          <footer className={`border-t border-dim ${s.drawerFoot}`}>
             <div className="flex justify-between font-mono text-xs">
               <span>Shipping, taxes and fees</span>
               <span>At real checkout</span>
             </div>
-            <div className="flex items-end justify-between border-t border-dim pt-4">
+            <div className={`flex items-end justify-between border-t border-dim ${s.ruleTop}`}>
               <span className="font-mono text-sm">Planned subtotal · {count} item{count === 1 ? "" : "s"}</span>
               <span className="font-display text-4xl leading-none" data-subtotal-cents={plannedSubtotalCents}>
                 {formatUSD(plannedSubtotalCents)}
@@ -246,7 +247,7 @@ export function PreviewCartButton({ className = "" }: { className?: string }) {
       aria-haspopup="dialog"
       aria-controls="preview-cart"
       aria-label={`Preview cart, ${count} item${count === 1 ? "" : "s"}`}
-      className={`border border-green/30 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.2em] text-green hover:bg-green hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${className}`}
+      className={`border border-green/30 font-mono text-[11px] uppercase tracking-[0.2em] text-green hover:bg-green hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green ${className} ${s.pill}`}
     >
       Cart / {String(count).padStart(2, "0")}
     </button>

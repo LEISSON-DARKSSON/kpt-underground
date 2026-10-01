@@ -34,7 +34,7 @@ ${entries.map((e) => `  ${JSON.stringify(e.name)}: Object.freeze({ width: ${e.wi
 `;
 
 if (process.argv.includes("--check")) {
-  const current = readFileSync(outFile, "utf8");
+  const current = readFileSync(outFile, "utf8").replace(/\r\n/g, "\n"); // tolerate Windows autocrlf checkouts
   if (current !== body) { console.error("preview-assets.generated.mjs is stale; run the generator"); process.exit(1); }
   console.log("preview assets up to date");
 } else {

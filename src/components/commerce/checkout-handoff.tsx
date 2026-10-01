@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { usePreviewCart } from "@/components/commerce/preview-cart";
+import s from "@/components/commerce/commerce.module.css";
 import { formatUSD, getDeskMatByVariant } from "@/lib/commerce/desk-mats";
 
 const STEPS = [
@@ -17,9 +18,9 @@ export function CheckoutHandoff() {
   const { lines, plannedSubtotalCents, count } = usePreviewCart();
   return (
     <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
-      <section aria-labelledby="handoff-flow" className="border border-dim bg-ink-2 p-6 sm:p-8">
+      <section aria-labelledby="handoff-flow" className={`border border-dim bg-ink-2 ${s.panel}`}>
         <h2 id="handoff-flow" className="eyebrow">Future real flow</h2>
-        <ol className="mt-6 space-y-5">
+        <ol className={`${s.mt6} ${s.stack5}`}>
           {STEPS.map(([n, text]) => (
             <li key={n} className="grid grid-cols-[40px_1fr] gap-3">
               <span className="font-display text-2xl leading-none text-green">{n}</span>
@@ -28,10 +29,10 @@ export function CheckoutHandoff() {
           ))}
         </ol>
       </section>
-      <section aria-labelledby="handoff-summary" className="border border-dim p-6 sm:p-8">
+      <section aria-labelledby="handoff-summary" className={`border border-dim ${s.panel}`}>
         <h2 id="handoff-summary" className="font-display text-3xl leading-none">Preview summary</h2>
         {lines.length === 0 ? (
-          <p className="mt-6 font-mono text-xs text-slate">
+          <p className={`font-mono text-xs text-slate ${s.mt6}`}>
             Preview cart is empty.{" "}
             <Link href="/commerce-preview/shop" data-cursor="h" className="text-green">
               Browse desk mats
@@ -39,11 +40,11 @@ export function CheckoutHandoff() {
             .
           </p>
         ) : (
-          <ul className="mt-6 divide-y divide-dim font-mono text-xs">
+          <ul className={`divide-y divide-dim font-mono text-xs ${s.mt6}`}>
             {lines.map((l) => {
               const mat = getDeskMatByVariant(l.variantId);
               return mat ? (
-                <li key={l.variantId} className="flex justify-between py-3">
+                <li key={l.variantId} className={`flex justify-between ${s.listY}`}>
                   <span>
                     {mat.name} × {l.qty}
                   </span>
@@ -53,17 +54,17 @@ export function CheckoutHandoff() {
             })}
           </ul>
         )}
-        <div className="mt-4 flex items-end justify-between border-t border-dim pt-4">
+        <div className={`flex items-end justify-between border-t border-dim ${s.mt4} ${s.ruleTop}`}>
           <span className="font-mono text-sm">Planned subtotal · {count}</span>
           <span className="font-display text-4xl leading-none" data-handoff-subtotal={plannedSubtotalCents}>
             {formatUSD(plannedSubtotalCents)}
           </span>
         </div>
-        <p className="mt-3 font-mono text-[11px] text-slate">Shipping, taxes and fees are calculated only at the real Fourthwall checkout.</p>
-        <button type="button" disabled aria-describedby="handoff-note" className="kiu-checkout-disabled mt-6 flex min-h-14 w-full items-center justify-center border border-dim font-display text-2xl tracking-[0.06em] text-muted">
+        <p className={`font-mono text-[11px] text-slate ${s.mt3}`}>Shipping, taxes and fees are calculated only at the real Fourthwall checkout.</p>
+        <button type="button" disabled aria-describedby="handoff-note" className={`kiu-checkout-disabled flex min-h-14 w-full items-center justify-center border border-dim font-display text-2xl tracking-[0.06em] text-muted ${s.mt6}`}>
           CHECKOUT NOT ACTIVE
         </button>
-        <p id="handoff-note" className="mt-3 font-mono text-[11px] leading-relaxed text-orange">
+        <p id="handoff-note" className={`font-mono text-[11px] leading-relaxed text-orange ${s.mt3}`}>
           Design preview. No checkout session, order or payment is created. The link activates only after the real Fourthwall purchase flow is approved.
         </p>
       </section>

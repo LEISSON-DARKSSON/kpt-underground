@@ -1,12 +1,13 @@
 import Link from "next/link";
 
 import { PreviewCartButton } from "@/components/commerce/preview-cart";
+import s from "@/components/commerce/commerce.module.css";
 
 /** Sticky preview strip under the site Navbar: honest labelling + the preview cart trigger. */
 export function PreviewToolbar() {
   return (
     <div className="sticky top-14 z-[400] border-y border-dim bg-ink/95 backdrop-blur-sm">
-      <div className="wrap flex min-h-12 flex-wrap items-center justify-between gap-x-6 gap-y-2 py-2">
+      <div className={`wrap flex min-h-12 flex-wrap items-center justify-between gap-x-6 gap-y-2 ${s.toolbarY}`}>
         <p className="font-mono text-[10px] uppercase tracking-[0.18em]">
           <span className="text-orange">Design preview</span>
           <span className="text-paper"> · Not for sale · No payment</span>

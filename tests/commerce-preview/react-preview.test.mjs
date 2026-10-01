@@ -79,6 +79,15 @@ test("commerce components never touch the legacy cart, Stripe or /api/checkout",
   }
 });
 
+test("no Tailwind margin/padding utilities in commerce UI (dead under globals.css unlayered reset)", async () => {
+  const files = ["src/components/commerce/checkout-handoff.tsx", "src/components/commerce/desk-mat-card.tsx", "src/components/commerce/desk-mat-gallery.tsx", "src/components/commerce/desk-mat-purchase.tsx", "src/components/commerce/preview-cart.tsx", "src/components/commerce/preview-toolbar.tsx", "src/app/commerce-preview/shop/page.tsx", "src/app/commerce-preview/shop/[slug]/page.tsx", "src/app/commerce-preview/shop/handoff/page.tsx"];
+  const dead = /(?:^|[\s"`])(?:(?:sm|md|lg|xl):)?-?(?:m[trblxy]?|p[trblxy]?|space-[xy])-(?:\d|auto|\[|px)/;
+  for (const p of files) {
+    const classes = [...(await readFile(new URL(p, root), "utf8")).matchAll(/className=(?:"([^"]*)"|\{`([^`]*)`\})/g)].map((m) => m[1] ?? m[2]);
+    for (const c of classes) assert.equal(dead.test(c), false, `${p}: "${c}" — use commerce.module.css spacing`);
+  }
+});
+
 test("every gated React route enforces the gate", async () => {
   const proxy = await readFile(new URL("src/proxy.ts", root), "utf8");
   assert.match(proxy, /commercePreviewEnabled\(\)/);

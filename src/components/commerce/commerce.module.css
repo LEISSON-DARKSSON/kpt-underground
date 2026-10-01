@@ -1,0 +1,57 @@
+/*
+ * Spacing for the commerce preview components.
+ * globals.css has an UNLAYERED `* { margin: 0; padding: 0 }` reset, which beats every
+ * Tailwind v4 margin/padding utility (utilities live in a cascade layer). These module
+ * classes are unlayered too and win on specificity, so spacing works without touching
+ * the public site's reset. Colours/typography still come from the shared Tailwind tokens.
+ */
+
+/* Page sections */
+.section { padding-top: 56px; padding-bottom: 96px; }
+.sectionTight { padding-top: 40px; padding-bottom: 96px; }
+
+/* Vertical rhythm */
+.mt1 { margin-top: 4px; }
+.mt2 { margin-top: 8px; }
+.mt3 { margin-top: 12px; }
+.mt4 { margin-top: 16px; }
+.mt5 { margin-top: 20px; }
+.mt6 { margin-top: 24px; }
+.mt8 { margin-top: 32px; }
+.mt10 { margin-top: 40px; }
+.mt12 { margin-top: 48px; }
+.mb6 { margin-bottom: 24px; }
+.mtAuto { margin-top: auto; }
+.stack3 > * + * { margin-top: 12px; }
+.stack4 > * + * { margin-top: 16px; }
+.stack5 > * + * { margin-top: 20px; }
+
+/* Boxes */
+.card { padding: 20px; }
+.panel { padding: 24px; }
+.cell { padding: 16px; }
+.thumb { padding: 8px; }
+@media (min-width: 640px) {
+  .card { padding: 28px; }
+  .panel { padding: 32px; }
+}
+
+/* Small controls */
+.badge { padding: 4px 8px; }
+.pill { padding: 8px 16px; }
+.cta { padding: 12px 20px; }
+.underlineLink { padding-bottom: 4px; }
+.barY { padding-block: 16px; }
+.barY5 { padding-block: 20px; }
+.rowY { padding-block: 24px; }
+.listY { padding-block: 12px; }
+.ruleTop { padding-top: 16px; }
+.toolbarY { padding-block: 8px; }
+.emptyY { padding-block: 48px; }
+
+/* Native <dialog> drawer: right aligned, full height */
+.drawer { margin: 0 0 0 auto; padding: 0; }
+.drawerHead { padding: 24px; }
+.drawerBody { padding: 0 24px; }
+.drawerFoot { padding: 24px; }
+.drawerFoot > * + * { margin-top: 16px; }
