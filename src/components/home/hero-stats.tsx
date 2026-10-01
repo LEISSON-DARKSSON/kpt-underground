@@ -3,9 +3,9 @@
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 
 const STATS = [
-  { value: "4", label: "EQUIPMENT LINES" },
-  { value: "10%", label: "ARTIST FUND" },
-  { value: "140", label: "HZ FREQUENCY" },
+  { value: "ORIGINAL", label: "DESIGNS" },
+  { value: "ON DEMAND", label: "MADE TO ORDER" },
+  { value: "USD", label: "SECURE CHECKOUT" },
 ];
 
 export function HeroStats() {

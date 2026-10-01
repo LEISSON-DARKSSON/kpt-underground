@@ -37,8 +37,8 @@ export function CharReveal({
     ).matches;
 
     if (prefersReducedMotion) {
-      setRevealed(true);
-      return;
+      const frame = requestAnimationFrame(() => setRevealed(true));
+      return () => cancelAnimationFrame(frame);
     }
 
     const observer = new IntersectionObserver(

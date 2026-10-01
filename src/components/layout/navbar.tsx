@@ -3,33 +3,35 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCart } from "@/lib/cart-context";
+import { useCart } from "@/lib/store/cart";
 
 const NAV_LINKS = [
   { href: "/", label: "HOME" },
-  { href: "/story", label: "STORY" },
-  { href: "/artists", label: "ARTISTS" },
   { href: "/shop", label: "SHOP" },
+  { href: "/story", label: "STORY" },
   { href: "/signal", label: "SIGNAL" },
 ];
 
 export function Navbar() {
   const [show, setShow] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  /* Menu remembers the path it was opened on, so any route change closes it without an effect. */
+  const [menuPath, setMenuPath] = useState<string | null>(null);
   const pathname = usePathname();
-  const { totalItems, toggleCart } = useCart();
-  /* The gated desk-mat preview has its own demo cart; hide the legacy (Stripe/EUR) cart trigger there. */
+  const { count: totalItems, open: openCart } = useCart();
+  const toggleCart = (e: React.MouseEvent<HTMLElement>) => openCart(e.currentTarget);
+  /* The gated design preview has its own demo cart; hide the live cart trigger there. */
   const inCommercePreview = pathname.startsWith("/commerce-preview");
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 60);
   }, []);
 
-  /* Close mobile menu on route change */
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
+  const menuOpen = menuPath === pathname;
+  const setMenuOpen = (next: boolean | ((open: boolean) => boolean)) => {
+    const value = typeof next === "function" ? next(menuOpen) : next;
+    setMenuPath(value ? pathname : null);
+  };
 
   /* Lock body scroll when menu is open */
   useEffect(() => {
@@ -298,7 +300,7 @@ export function Navbar() {
           }}
           onClick={() => setMenuOpen(false)}
         >
-          VIEW EQUIPMENT
+          VIEW THE SHOP
         </Link>
 
         {/* Live indicator mobile */}

@@ -13,6 +13,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    // Retired routes from the earlier concept site (artist fund, Stripe demo checkout).
+    return [
+      { source: "/artists", destination: "/shop", permanent: false },
+      { source: "/checkout", destination: "/shop", permanent: false },
+      { source: "/confirmation", destination: "/shop", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;

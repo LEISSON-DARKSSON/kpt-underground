@@ -79,12 +79,12 @@ export function FrequencyGate({ onUnlock }: FrequencyGateProps) {
 
       {error && (
         <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-orange mt-3">
-          // FREQUENCY NOT RECOGNISED
+          {"// FREQUENCY NOT RECOGNISED"}
         </p>
       )}
 
       <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-dim mt-3">
-        // CORRECT CODE UNLOCKS ACCESS
+        {"// CORRECT CODE UNLOCKS ACCESS"}
       </p>
     </div>
   );

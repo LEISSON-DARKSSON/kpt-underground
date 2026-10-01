@@ -37,7 +37,7 @@ export function HeroCTAs() {
             (e.currentTarget as HTMLElement).style.background = "var(--green)";
           }}
         >
-          VIEW EQUIPMENT <span>&#x2192;</span>
+          VIEW THE SHOP <span>&#x2192;</span>
         </Link>
 
         <Link

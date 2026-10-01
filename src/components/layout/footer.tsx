@@ -1,9 +1,8 @@
 import Link from "next/link";
 
 const FOOTER_LINKS = [
+  { href: "/shop", label: "SHOP" },
   { href: "/story", label: "STORY" },
-  { href: "/artists", label: "ARTISTS" },
-  { href: "/shop", label: "EQUIPMENT" },
   { href: "/signal", label: "SIGNAL" },
 ];
 
@@ -87,7 +86,7 @@ export function Footer() {
               textTransform: "uppercase",
             }}
           >
-            10% OF EVERY TRANSACTION FUNDS UNDERGROUND ARTISTS
+            MADE ON DEMAND // CHECKOUT BY FOURTHWALL
           </span>
         </div>
       </div>

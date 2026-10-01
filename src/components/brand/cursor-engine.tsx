@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 
 export function CursorEngine() {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -8,14 +8,13 @@ export function CursorEngine() {
   const rafRef = useRef<number>(0);
   const labelRef = useRef<HTMLSpanElement>(null);
 
-  const updatePosition = useCallback(() => {
-    if (cursorRef.current) {
-      cursorRef.current.style.transform = `translate(${posRef.current.x}px, ${posRef.current.y}px) translate(-50%, -50%)`;
-    }
-    rafRef.current = requestAnimationFrame(updatePosition);
-  }, []);
-
   useEffect(() => {
+    const updatePosition = () => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${posRef.current.x}px, ${posRef.current.y}px) translate(-50%, -50%)`;
+      }
+      rafRef.current = requestAnimationFrame(updatePosition);
+    };
     rafRef.current = requestAnimationFrame(updatePosition);
 
     const onMove = (e: MouseEvent) => {
@@ -71,7 +70,7 @@ export function CursorEngine() {
       document.removeEventListener("mouseover", onEnter);
       document.removeEventListener("mouseout", onLeave);
     };
-  }, [updatePosition]);
+  }, []);
 
   return (
     <div
