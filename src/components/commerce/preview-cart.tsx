@@ -173,9 +173,9 @@ function PreviewCartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLEle
                 if (!mat) return null;
                 const art = mat.images[0];
                 return (
-                  <li key={line.variantId} className={`kiu-cart-row grid grid-cols-[96px_1fr_auto] gap-4 ${s.rowY}`} data-variant={line.variantId}>
+                  <li key={line.variantId} className={`kiu-cart-row grid grid-cols-[64px_minmax(0,1fr)] gap-x-4 gap-y-3 min-[400px]:grid-cols-[96px_minmax(0,1fr)_auto] ${s.rowY}`} data-variant={line.variantId}>
                     {/* eslint-disable-next-line @next/next/no-img-element -- gated route asset; next/image optimizer cannot read SSO-protected previews */}
-                    <img src={assetUrl(art.file)} alt="" width={art.width} height={art.height} className="h-auto w-24 rounded-[4px] border border-dim" />
+                    <img src={assetUrl(art.file)} alt="" width={art.width} height={art.height} className="h-auto w-16 rounded-[4px] border border-dim min-[400px]:w-24" />
                     <div className="min-w-0">
                       <p className="font-display text-2xl leading-none">{mat.name}</p>
                       <p className={`font-mono text-[11px] text-slate ${s.mt2}`}>{mat.size.label}</p>
@@ -196,7 +196,7 @@ function PreviewCartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLEle
                         </button>
                       </div>
                     </div>
-                    <p className="font-display text-2xl leading-none">{formatUSD(mat.plannedPrice.amountCents * line.qty)}</p>
+                    <p className="col-start-2 font-display text-2xl leading-none min-[400px]:col-start-auto min-[400px]:text-right">{formatUSD(mat.plannedPrice.amountCents * line.qty)}</p>
                   </li>
                 );
               })}
