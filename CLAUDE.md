@@ -1,7 +1,7 @@
 # KEEP IT UNDERGROUND — Agent Instructions
 
 > Read this file first. It overrides defaults for every Claude/Codex instance and subagent working in this repo.
-> Last verified against `main` @ e15e229 (2026-10-02).
+> Last verified against `main` @ febac3d + branch `feat/shop-buyability-20261002` (2026-10-02).
 
 ## Project identity
 
@@ -31,25 +31,34 @@ Out of scope until the owner says otherwise: artist-fund pages/topics, backgroun
 ```
 src/
 ├── app/
-│   ├── layout.tsx, globals.css, page.tsx      # shell, ALL design tokens, home
-│   ├── shop/page.tsx                          # live catalog grid (ISR, revalidate = 60)
-│   ├── shop/[slug]/page.tsx                   # product detail
+│   ├── layout.tsx, globals.css, page.tsx      # shell, ALL design tokens, home (Studio picks)
+│   ├── shop/page.tsx                          # live catalog (ISR 60 s); client filters via ?category/q/sort
+│   ├── shop/[slug]/page.tsx + error.tsx       # product detail; 404 only for non-public, 5xx + retry for upstream faults
+│   ├── help/page.tsx                          # shipping/returns/contact summary → links to Fourthwall policy pages
+│   ├── sitemap.ts, robots.ts                  # public canonical URLs only
 │   ├── story/page.tsx, signal/page.tsx        # brand pages
-│   ├── api/cart/checkout/route.ts             # POST → validates lines → Fourthwall cart → checkout URL
+│   ├── api/cart/checkout/route.ts             # POST → validates lines → Fourthwall cart → checkout URL (409 PRICE_CHANGED)
 │   ├── api/fourthwall/status/route.ts         # opt-in diagnostic (FOURTHWALL_READONLY_ENABLED)
 │   └── commerce-preview/…                     # legacy desk-mat preview (gated, reference only)
 ├── components/
-│   ├── brand/      char-reveal, cursor-engine, page-loader, scroll-reveal, ticker
-│   ├── store/      product-card, product-grid, product-gallery, add-to-cart
-│   ├── layout/     navbar (HOME / SHOP / STORY / SIGNAL), footer
+│   ├── brand/      char-reveal, cursor-engine, page-loader (home only, CSS-timed), scroll-reveal, ticker
+│   ├── store/      shop-catalog, product-card, product-grid, product-purchase, product-gallery, add-to-cart
+│   ├── layout/     navbar (HOME / SHOP / STORY / SIGNAL), footer (+ help + Fourthwall policy links)
 │   ├── home/ story/ signal/ commerce/
 ├── lib/
-│   ├── store/core.ts        # pure: normalizeProduct, sortProducts, validateCheckoutLines, validateAgainstCatalog, checkoutUrl
-│   ├── store/fourthwall.ts  # Storefront fetch; getProducts({ fresh? }) — 60 s data cache, `fresh` = no-store
-│   ├── store/cart.tsx       # client cart state
+│   ├── store/core.ts          # pure: normalize, parseCatalogPage, choiceKind, galleryFor, fitStatus, checkout validation
+│   ├── store/cart-model.ts    # pure cart rules (storage parsing, 20-line / 10-qty limits, price reconcile)
+│   ├── store/merchandising.ts # offer-id → category/type, Studio picks, search/sort (presentation only)
+│   ├── store/seo.ts, store/policies.ts
+│   ├── store/fourthwall.ts    # Storefront fetch; getProducts({ fresh? }); StoreUnavailableError vs null (=404)
+│   ├── store/cart.tsx         # client cart state + drawer
+│   ├── analytics.ts           # dataLayer adapter only (no vendor script, no purchase event)
 │   └── fourthwall-storefront.ts, utils.ts
 tests/
-├── store/store-core.test.mjs          # catalog sorting, checkout validation, fresh-catalog fallback, no-audio regression
+├── store/store-core.test.mjs, store-contract.test.mjs   # unit + contract tests; fixture = real public catalog snapshot
+├── store/fixtures/public-catalog-2026-10-02.json
+├── e2e/http-contract.mjs      # npm run test:http — builds + starts against a mock Fourthwall, checks real HTTP statuses
+├── e2e/browser-qa.mjs         # Playwright buy journey at 320/390/768/1440 (needs PLAYWRIGHT_MODULE, CHROMIUM_PATH)
 ├── fourthwall/storefront.test.mjs     # read-only client (mocked)
 └── commerce-preview/…
 ```
@@ -60,6 +69,9 @@ tests/
 2. Checkout posts lines to `/api/cart/checkout`. `validateAgainstCatalog` checks them against the cached catalog and, **once**, against a fresh (`no-store`) read if the error is `UNKNOWN_VARIANT` / `VARIANT_UNAVAILABLE` (a product published seconds ago). Other errors are not retried.
 3. The route creates a Fourthwall cart and returns the hosted checkout URL. Prices always come from Fourthwall, never from the client.
 4. `sortProducts` ranks only `*-desk-mat` slugs first (regex `/-desk-mat$/`).
+5. Size/model products start with **no** variant selected; the chosen variant drives gallery, price and cart line. Fit text comes from Fourthwall `additionalInformation` (SIZE_AND_FIT) — never generate measurements.
+6. Product pages must be able to answer 404/5xx: keep `htmlLimitedBots: /.*/` in `next.config.ts` and **no** `loading.tsx` above `/shop/[slug]` (a loading boundary streams a 200 first — soft 404 seen live 2026-10-02).
+7. A checkout redirect is not a purchase. Never emit `purchase` from the browser; never empty the cart on redirect.
 
 ### Environment
 
@@ -68,6 +80,7 @@ tests/
 | `FOURTHWALL_STOREFRONT_TOKEN` | Vercel (Production + Preview) | Storefront API token — secret, never logged |
 | `FOURTHWALL_EXPECTED_SHOP_ID` | Vercel | Guards against a token for the wrong shop |
 | `FOURTHWALL_READONLY_ENABLED` | Vercel | Enables `/api/fourthwall/status` diagnostic only |
+| `FOURTHWALL_STOREFRONT_API_BASE` | tests only | Loopback mock base (`http://127.0.0.1:<port>/`); any other value is ignored |
 
 ## Conventions
 
@@ -100,11 +113,12 @@ Product artwork palette (print files): background `#0B0C0C`, paper `#EBE7DF`, or
 1. Branch from `origin/main` (`feat/…`, `fix/…`, `docs/…`). `main` is checked out in the `C:\PROJECTS\kpt-underground` worktree; work in `C:\PROJECTS\kpt-underground-live` or another worktree.
 2. Gates before every push:
    ```
-   npm run test:store      # node --test tests/store/store-core.test.mjs
+   npm run test:store      # unit + contract tests (real-catalog fixture)
    npm run test:docs       # CLAUDE.md + docs/*.md: no BOM/mojibake, no stale instructions
    npm run typecheck
    npm run lint
    npm run build
+   npm run test:http       # store/route changes: real HTTP statuses against a mock Fourthwall (~2 min)
    ```
 3. Open a PR (`gh pr create`). Merging to `main` deploys production on Vercel — merge only when the owner asked for it.
 4. After merge, verify live: `/shop` card count, product pages 200, checkout API 200 (see `docs/store-operations.md`).
