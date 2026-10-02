@@ -153,8 +153,12 @@ test("KPT-08: a phone model shows its own images; apparel sizes share the produc
 
 test("KPT-02: fit info comes from Fourthwall; missing apparel measurements are reported, not generated", () => {
   const missing = catalog.filter((p) => fitStatus(p).missing).map((p) => p.slug).sort();
-  // Snapshot 2026-10-02: Fourthwall has no SIZE_AND_FIT section / sizeGuide for these three.
-  assert.deepEqual(missing, ["kpt-crewneck", "kpt-heavyweight-tee", "kpt-premium-hoodie"]);
+  // Snapshot 2026-10-02: Fourthwall has no SIZE_AND_FIT section / sizeGuide for these three. The tee is now
+  // covered by a source-backed chart (H04, src/lib/store/fit-sources.ts); hoodie and crewneck stay honestly missing.
+  assert.deepEqual(missing, ["kpt-crewneck", "kpt-premium-hoodie"]);
+  const tee = fitStatus(bySlug("kpt-heavyweight-tee"));
+  assert.equal(tee.fit, null, "Fourthwall itself publishes no tee chart");
+  assert.ok(tee.source && tee.missing === false, "tee uses the sourced chart, not a generated one");
   for (const s of ["kpt-crew-socks", "kpt-beanie", "offline-embroidered-beanie", "transit-signal-laptop-sleeve", "transit-subsurface-laptop-sleeve"]) {
     const f = fitStatus(bySlug(s));
     assert.equal(f.needsFit, true, s);
