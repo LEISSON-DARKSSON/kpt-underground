@@ -1,4 +1,8 @@
-# Fourthwall Storefront connection — read-only stage
+# Fourthwall Storefront connection
+
+> **Status 2026-10-02: live.** keepitunderground.com reads the catalog and creates hosted-checkout carts through the Storefront API (`src/lib/store/*`, `/api/cart/checkout`). Operations runbook: `docs/store-operations.md`. The section below is the original read-only stage record (2026-09-23), kept for history; its Stripe and "not live" statements no longer apply.
+
+## Original read-only stage (2026-09-23)
 
 Prepared 2026-09-23. **Not a completed live integration.**
 
