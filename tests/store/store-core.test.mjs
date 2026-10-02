@@ -83,6 +83,14 @@ test("legacy concept-site code is gone (Stripe, artist fund, fake catalog)", asy
   }
 });
 
+test("no background music: no audio element, toggle or audio assets ship", async () => {
+  const layout = await readFile(new URL("src/app/layout.tsx", root), "utf8");
+  assert.equal(/AudioToggle|<audio|new Audio\(/.test(layout), false);
+  const { existsSync } = await import("node:fs");
+  assert.equal(existsSync(new URL("src/components/brand/audio-toggle.tsx", root)), false);
+  assert.equal(existsSync(new URL("public/audio/", root)), false);
+});
+
 test("checkout route validates against the live catalog before creating a cart", async () => {
   const src = await readFile(new URL("src/app/api/cart/checkout/route.ts", root), "utf8");
   assert.ok(src.indexOf("getProducts()") < src.indexOf("validateCheckoutLines(") && src.indexOf("validateCheckoutLines(") < src.indexOf("createHostedCheckout("));
