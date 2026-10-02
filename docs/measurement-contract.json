@@ -2,7 +2,7 @@
   "status": "TRANSPORT_WIRED_NOT_ACTIVATED",
   "ticket": "H05",
   "asOf": "2026-10-02",
-  "note": "Code ready, not activated. The one GA4 transport (direct gtag, Basic consent, manual page views) is wired but inert: with NEXT_PUBLIC_GA4_MEASUREMENT_ID or NEXT_PUBLIC_GA4_OWNER_ACTIVATION unset it loads nothing and sends nothing. No GA4 property or web stream for keepitunderground.com was found in the Google accounts visible on 2026-10-02, so no Measurement ID exists. The adapter enforces a per-event allowlist (code, static reading + unit tests). Every collector/consent/cross-domain/purchase verification field below is NOT_RUN.",
+  "note": "Code ready, not activated. The one GA4 transport (direct gtag, Basic consent, manual page views) is wired but inert: with NEXT_PUBLIC_GA4_MEASUREMENT_ID or NEXT_PUBLIC_GA4_OWNER_ACTIVATION unset it loads nothing and sends nothing. No GA4 property or web stream for keepitunderground.com was found in the Google accounts visible on 2026-10-02, so none existed then; after the owner's approval on 2026-10-02 one property and one web stream were created (Enhanced Measurement off). The Measurement ID lives only in the two env vars, never in the repository, and nothing is activated. The adapter enforces a per-event allowlist (code, static reading + unit tests). Every collector/consent/cross-domain/purchase verification field below is NOT_RUN.",
   "collector": {
     "recommended": "GA4 (single setup), owner decision pending",
     "configured": false,
