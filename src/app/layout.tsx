@@ -23,11 +23,11 @@ const bebasNeue = Bebas_Neue({
 
 export const metadata: Metadata = {
   title: {
-    default: "KEEP IT UNDERGROUND — Original graphic objects",
+    default: "KEEP IT UNDERGROUND — Desk mats, prints & wear for people who build",
     template: "%s — KEEP IT UNDERGROUND",
   },
   description:
-    "Original graphic objects for the spaces where you build, work and create. Desk mats, notebooks, prints, stickers and totes, made on demand.",
+    "For the people who build, work and create: original graphic desk mats, notebooks, mugs, wall prints, tees, hoodies and totes. Made to order, secure checkout by Fourthwall.",
   metadataBase: new URL("https://keepitunderground.com"),
   openGraph: {
     title: "KEEP IT UNDERGROUND",

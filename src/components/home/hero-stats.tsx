@@ -1,64 +1,33 @@
-"use client";
+import { formatPrice } from "@/lib/store/core";
+import { getProducts } from "@/lib/store/fourthwall";
 
-import { ScrollReveal } from "@/components/brand/scroll-reveal";
-
-const STATS = [
-  { value: "ORIGINAL", label: "DESIGNS" },
-  { value: "ON DEMAND", label: "MADE TO ORDER" },
-  { value: "USD", label: "SECURE CHECKOUT" },
-];
-
-export function HeroStats() {
+/**
+ * Proof directly under the hero CTA (UX audit 2026-10-02: "move proof closer to the CTA").
+ * Only verifiable facts: the live public catalog (count + lowest buyable price), the shop's
+ * published quality guarantee, and the hosted checkout provider. Server-rendered, no reveal.
+ * If Fourthwall is unreachable the catalog fact is left out rather than guessed.
+ */
+export async function HeroStats() {
+  let catalog: { count: number; fromCents: number } | null = null;
+  try {
+    const products = (await getProducts()).filter((p) => p.available);
+    if (products.length > 0) catalog = { count: products.length, fromCents: Math.min(...products.map((p) => p.priceFromCents)) };
+  } catch {
+    catalog = null;
+  }
+  const facts = [
+    ...(catalog ? [{ value: `${catalog.count} OBJECTS`, label: `FROM ${formatPrice(catalog.fromCents)} · MADE TO ORDER` }] : []),
+    { value: "QUALITY GUARANTEE", label: "MISPRINTS REPLACED OR REFUNDED" },
+    { value: "SECURE CHECKOUT", label: "HOSTED BY FOURTHWALL" },
+  ];
   return (
-    <ScrollReveal delay={4}>
-      <div
-        className="flex"
-        style={{
-          gap: 0,
-          marginTop: 52,
-          border: "1px solid rgba(138, 206, 0, 0.1)",
-          maxWidth: 560,
-        }}
-      >
-        {STATS.map((stat, i) => (
-          <div
-            key={stat.label}
-            style={{
-              flex: 1,
-              padding: "14px 16px",
-              borderRight:
-                i < STATS.length - 1
-                  ? "1px solid rgba(138, 206, 0, 0.07)"
-                  : "none",
-            }}
-          >
-            <span
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: 28,
-                color: "var(--green)",
-                lineHeight: 1,
-                display: "block",
-                letterSpacing: "-0.01em",
-              }}
-            >
-              {stat.value}
-            </span>
-            <span
-              style={{
-                fontSize: 7,
-                letterSpacing: "0.3em",
-                color: "var(--muted)",
-                textTransform: "uppercase",
-                display: "block",
-                marginTop: 3,
-              }}
-            >
-              {stat.label}
-            </span>
-          </div>
-        ))}
-      </div>
-    </ScrollReveal>
+    <ul className="mt-10 grid max-w-[640px] grid-cols-1 border border-green/10 sm:grid-cols-3" aria-label="Shop facts" data-hero-proof>
+      {facts.map((f) => (
+        <li key={f.value} className="border-b border-green/10 px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
+          <span className="block font-display text-[22px] leading-none text-green">{f.value}</span>
+          <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-slate">{f.label}</span>
+        </li>
+      ))}
+    </ul>
   );
 }
