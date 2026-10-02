@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test:commerce-preview": "node scripts/commerce-preview/build-preview-assets.mjs --check && node --test tests/commerce-preview/preview-guard.test.mjs tests/commerce-preview/react-preview.test.mjs",
-    "test:store": "node --test tests/store/store-core.test.mjs"
+    "test:store": "node --test tests/store/store-core.test.mjs",
+    "test:docs": "node --test tests/docs/docs-hygiene.test.mjs"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.5",
