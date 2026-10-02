@@ -257,18 +257,17 @@ test("case 8: a failing or slow script, blocked storage or a throwing loader nev
   assert.equal(slow.events("add_to_cart").length, MAX_QUEUED_WHILE_LOADING, "after the load there is no cap");
 });
 
-/* ---- case 10: Fourthwall sends begin_checkout natively, so the app does not (no double count) */
+/* ---- case 10: the whole funnel goes out, begin_checkout included (no hosted-side sender while the Fourthwall pixel is empty) */
 
-test("case 10: begin_checkout stays local (Fourthwall sends it natively); checkout_redirect and the other funnel events still go out", () => {
+test("case 10: begin_checkout is forwarded like the other funnel events (the Fourthwall Tracking pixel is empty, so nothing else sends it)", () => {
   const f = makeEnv();
   const ga = createGa4Transport(ACTIVE, f.env);
-  withShop(ga, (win) => {
+  withShop(ga, () => {
     ga.grant();
     track("add_to_cart", cartParams);
     track("begin_checkout", cartParams);
     track("checkout_redirect", { currency: "USD", value: 5, items: [{ item_id: "kpt-beanie", item_variant: "v1", quantity: 1 }] });
-    assert.deepEqual(f.events().map((c) => c[1]), ["page_view", "add_to_cart", "checkout_redirect"]);
-    assert.ok(win.dataLayer.some((e) => e.event === "begin_checkout"), "the local dataLayer still records it");
+    assert.deepEqual(f.events().map((c) => c[1]), ["page_view", "add_to_cart", "begin_checkout", "checkout_redirect"]);
   });
 });
 

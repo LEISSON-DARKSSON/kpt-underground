@@ -368,9 +368,7 @@ try {
       await addMat(page, B);
       const snap = await checkout(c, page, B);
       await sleep(500);
-      assert.equal(events(c).includes("begin_checkout"), false, "Fourthwall sends begin_checkout natively; the app must not double it");
-      assert.equal(JSON.stringify(snap.processed).includes("begin_checkout"), false);
-      assert.ok(snap.dataLayer.includes("begin_checkout"), "still recorded in the local dataLayer");
+      assert.ok(events(c).includes("begin_checkout"));
       assert.ok(events(c).includes("checkout_redirect"));
       assert.equal(events(c).some((e) => /purchase|refund/.test(e)), false);
       assert.equal(JSON.stringify(snap.processed).includes("purchase"), false);
