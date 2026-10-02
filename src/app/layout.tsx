@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Space_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { CursorEngine } from "@/components/brand/cursor-engine";
-import { AudioToggle } from "@/components/brand/audio-toggle";
 import { PageLoader } from "@/components/brand/page-loader";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
@@ -68,7 +67,6 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
-          <AudioToggle />
         </CartProvider>
       </body>
     </html>
