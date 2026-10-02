@@ -285,8 +285,8 @@
       "name": "begin_checkout",
       "meaning": "Checkout initiation from the cart drawer. Not payment.",
       "source": "keepitunderground.com",
-      "forwardedToCollector": false,
-      "forwardedToCollectorWhy": "Fourthwall's hosted checkout sends begin_checkout natively into the same stream; forwarding ours would count it twice",
+      "forwardedToCollector": true,
+      "forwardedToCollectorWhy": "The Fourthwall Tracking pixel field is empty (cleared 2026-10-02), so nothing else sends begin_checkout. If the field is filled again the hosted checkout sends its own and forwarding ours would count it twice",
       "emittedToday": true,
       "requiredParams": [
         "items[].item_id",
