@@ -156,7 +156,9 @@ function FitInfo({ product, family, selectedSize }: { product: StoreProduct; fam
         </summary>
         <div className="mt-3 overflow-x-auto">
           <table className="w-full min-w-[300px] border-collapse text-left" data-size-chart>
-            <caption className="sr-only">Size chart in inches for {source.baseModel}: garment measurements laid flat, and body chest</caption>
+            <caption className="sr-only">
+              Size chart in inches for {source.baseModel}: {body > 0 ? "garment measurements laid flat, and body measurements" : "garment measurements laid flat"}
+            </caption>
             <thead>
               <tr className="text-slate">
                 <td className="pb-1" />

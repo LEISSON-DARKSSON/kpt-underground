@@ -2,20 +2,34 @@
   "status": "DESIGN_ONLY_NOT_CONFIGURED",
   "ticket": "H05",
   "asOf": "2026-10-02",
-  "note": "Preparation only. No collector is active; events go to window.dataLayer and nowhere else. Every verification field below is NOT_RUN unless it says static code reading.",
+  "note": "Preparation only. No collector is active; events go to window.dataLayer and nowhere else. The adapter enforces a per-event allowlist (code, static reading + unit tests). Every collector/consent/cross-domain/purchase verification field below is NOT_RUN.",
   "collector": {
     "recommended": "GA4 (single setup), owner decision pending",
     "configured": false,
     "surfaces": [
       "keepitunderground.com",
       "keepitunderground-shop.fourthwall.com"
-    ]
+    ],
+    "variant": {
+      "plan": "GA4, one web stream, Basic consent mode (no script before consent)",
+      "module": "src/lib/analytics-collector.ts",
+      "status": "DISABLED",
+      "importedBy": [],
+      "measurementIdInRepo": false,
+      "enabledOnlyWhen": [
+        "ownerActivation === true",
+        "valid non-placeholder G-XXXXXXXXXX id",
+        "consent === granted"
+      ],
+      "crossDomainProcedure": "docs/cross-domain-check.md (every step NOT_RUN)"
+    }
   },
   "adapter": "src/lib/analytics.ts",
   "units": {
     "price": "major currency units (USD dollars), computed once as cents / 100",
-    "currency": "USD literal at each call site that sends value",
-    "value": "major units; set currency whenever value is sent"
+    "currency": "USD literal at each call site that sends price or value; the adapter also fills USD if money survives without a currency",
+    "value": "major units; set currency whenever value is sent",
+    "missing": "unknown or missing values are omitted by the adapter, never sent as 0 (price 0 is only sent if the caller really passes 0)"
   },
   "forbiddenParams": {
     "keysScrubbedByAdapter": [
@@ -24,13 +38,25 @@
       "address",
       "phone",
       "name_full",
+      "full_name",
       "first_name",
       "last_name",
+      "customer*",
       "token",
       "cookie",
       "card",
       "iban",
-      "password"
+      "password",
+      "street",
+      "city",
+      "postcode",
+      "zip",
+      "ip",
+      "user_id",
+      "session*",
+      "cart_id",
+      "checkout*",
+      "*url*"
     ],
     "keysRequiredForbiddenByContract": [
       "email",
@@ -42,28 +68,19 @@
     ],
     "valuesRedacted": [
       "any string containing @",
-      "any string containing ptkn_"
+      "any string containing ptkn_",
+      "any string containing ://"
     ],
-    "knownScrubGaps": [
-      "full_name",
-      "customer_name",
-      "street",
-      "city",
-      "postcode",
-      "zip",
-      "ip",
-      "user_id",
-      "customer_id",
-      "order_email"
-    ],
-    "allowlistRequiredBeforeActivation": true
+    "knownScrubGaps": [],
+    "allowlistRequiredBeforeActivation": true,
+    "allowlistImplemented": true
   },
   "events": [
     {
       "name": "hero_shop_click",
-      "meaning": "Primary hero CTA (SHOP THE OBJECTS) actually activated on the home page.",
+      "meaning": "Primary hero CTA (SHOP THE OBJECTS) activated on the home page (click or keyboard activation of the one link). Does not prevent or delay navigation.",
       "source": "keepitunderground.com",
-      "emittedToday": false,
+      "emittedToday": true,
       "requiredParams": [
         "cta_id",
         "destination"
@@ -75,8 +92,14 @@
       ],
       "itemsSentToday": false,
       "itemIdRequired": false,
-      "callSites": [],
-      "blockedBy": "needs a small client-side handler; HeroCTAs is a server component with only a data-hero-cta attribute"
+      "callSites": [
+        "src/components/home/hero-cta-tracker.tsx:16"
+      ],
+      "allowedParams": [
+        "cta_id",
+        "destination"
+      ],
+      "handler": "src/components/home/hero-cta-tracker.tsx (client wrapper around the server-rendered link; DOM unchanged)"
     },
     {
       "name": "view_item_list",
@@ -89,7 +112,9 @@
       ],
       "recommendedParams": [
         "items[].index",
-        "items[].price"
+        "items[].price",
+        "currency",
+        "items[].item_name"
       ],
       "forbiddenParams": [
         "transaction_id"
@@ -97,10 +122,20 @@
       "itemsSentToday": true,
       "itemIdRequired": true,
       "callSites": [
-        "src/components/store/shop-catalog.tsx:48"
+        "src/components/store/shop-catalog.tsx:50"
       ],
       "gaps": [
-        "no currency alongside item prices"
+        "item_list_id never contains the visitor's search text (':search' suffix only)"
+      ],
+      "allowedParams": [
+        "item_list_id",
+        "currency"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_name",
+        "index",
+        "price"
       ]
     },
     {
@@ -123,8 +158,15 @@
       "callSites": [
         "src/components/store/product-card.tsx:22"
       ],
-      "gaps": [
-        "no currency alongside item price"
+      "gaps": [],
+      "allowedParams": [
+        "item_list_id",
+        "currency"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_name",
+        "price"
       ]
     },
     {
@@ -139,7 +181,8 @@
       ],
       "recommendedParams": [
         "items[].item_name",
-        "items[].price"
+        "items[].price",
+        "items[].item_variant"
       ],
       "forbiddenParams": [
         "transaction_id"
@@ -147,12 +190,22 @@
       "itemsSentToday": true,
       "itemIdRequired": true,
       "callSites": [
-        "src/components/store/product-purchase.tsx:32"
+        "src/components/store/product-purchase.tsx:36"
       ],
       "gaps": [
-        "price/value is the from-price (priceFromCents), not a chosen variant",
-        "no item_variant",
-        "fires once per product id per full page load (trackOnce set is module-level)"
+        "item_variant only for single-variant products; size/model products start with no variant chosen, so it is omitted (unknown, not 0)",
+        "price/value is the from-price for multi-variant products, not a chosen variant",
+        "fires once per product id per full page load (module-level trackOnce set); a client-side revisit is not counted again (undercount, never a repeat)"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_name",
+        "item_variant",
+        "price"
       ]
     },
     {
@@ -175,11 +228,21 @@
       "itemsSentToday": true,
       "itemIdRequired": true,
       "callSites": [
-        "src/lib/store/cart.tsx:105"
+        "src/lib/store/cart.tsx:106"
       ],
       "gaps": [
-        "no currency/value",
-        "fires on every drawer open, so one add_to_cart is followed by one view_cart"
+        "fires on every drawer open, so one add_to_cart is followed by one view_cart",
+        "value omitted when the cart is empty (unknown, not 0)"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "price",
+        "quantity"
       ]
     },
     {
@@ -203,7 +266,17 @@
       "itemsSentToday": true,
       "itemIdRequired": true,
       "callSites": [
-        "src/lib/store/cart.tsx:113"
+        "src/lib/store/cart.tsx:114"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "price",
+        "quantity"
       ]
     },
     {
@@ -227,10 +300,20 @@
       "itemsSentToday": true,
       "itemIdRequired": true,
       "callSites": [
-        "src/lib/store/cart.tsx:196"
+        "src/lib/store/cart.tsx:197"
       ],
       "gaps": [
         "fires before server validation, so it also counts attempts that end in checkout_error"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "price",
+        "quantity"
       ]
     },
     {
@@ -240,21 +323,37 @@
       "emittedToday": true,
       "requiredParams": [
         "currency",
-        "value"
+        "value",
+        "items[].item_id",
+        "items[].quantity"
       ],
       "recommendedParams": [
-        "items[].item_id"
+        "items[].item_variant"
       ],
       "forbiddenParams": [
-        "transaction_id"
+        "transaction_id",
+        "url",
+        "checkout_url",
+        "cart_id",
+        "session",
+        "any URL or query string"
       ],
-      "itemsSentToday": false,
-      "itemIdRequired": false,
+      "itemsSentToday": true,
+      "itemIdRequired": true,
       "callSites": [
-        "src/lib/store/cart.tsx:218"
+        "src/lib/store/cart.tsx:219"
       ],
       "gaps": [
-        "no items array, so no item_id (reported gap)"
+        "no per-item price (value is the cart subtotal from cents / 100)"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "quantity"
       ]
     },
     {
@@ -273,12 +372,15 @@
       "itemsSentToday": false,
       "itemIdRequired": false,
       "callSites": [
-        "src/lib/store/cart.tsx:208",
-        "src/lib/store/cart.tsx:214",
-        "src/lib/store/cart.tsx:223"
+        "src/lib/store/cart.tsx:209",
+        "src/lib/store/cart.tsx:215",
+        "src/lib/store/cart.tsx:229"
       ],
       "gaps": [
         "no items array (by design: technical event)"
+      ],
+      "allowedParams": [
+        "reason"
       ]
     },
     {
@@ -501,11 +603,29 @@
     ]
   },
   "verification": {
-    "dataLayerOnly": "PASS (static code reading)",
+    "dataLayerOnly": "PASS (static code reading + unit tests)",
     "collectorReceives": "NOT_RUN",
     "crossDomain": "NOT_RUN",
     "consent": "NOT_RUN",
     "purchase": "NOT_RUN",
-    "idReconciliation": "NOT_RUN"
+    "idReconciliation": "NOT_RUN",
+    "allowlistEnforced": "PASS (unit tests: tests/store/analytics-allowlist.test.mjs)"
+  },
+  "allowlist": {
+    "enforced": true,
+    "schemaSource": "src/lib/analytics.ts EVENT_SCHEMA (a test compares it with allowedParams/allowedItemParams below)",
+    "rule": "unknown top-level and per-item params are dropped; each allowed value is validated by kind; scrub() stays as a second guard",
+    "valueKinds": {
+      "id": "^[A-Za-z0-9._:-]{1,100}$",
+      "label": "1-120 chars, no URL scheme",
+      "money": "finite number >= 0, 2 decimals",
+      "quantity": "integer 1-1000",
+      "index": "integer 0-10000",
+      "currency": "^[A-Z]{3}$",
+      "listId": "^[a-z0-9_:.-]{1,60}$ (never free-text search)",
+      "reason": "^[A-Za-z0-9_]{1,40}$",
+      "ctaId": "^[a-z0-9_-]{1,40}$",
+      "path": "site path only, no scheme/host/query/fragment"
+    }
   }
 }

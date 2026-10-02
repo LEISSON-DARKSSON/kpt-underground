@@ -101,6 +101,8 @@ function unionMembers() {
 test("contract: status is design-only and nothing claims a verified collector", () => {
   assert.equal(contract.status, "DESIGN_ONLY_NOT_CONFIGURED");
   assert.equal(contract.collector.configured, false);
+  assert.equal(contract.collector.variant.status, "DISABLED");
+  assert.equal(contract.collector.variant.measurementIdInRepo, false);
   for (const k of ["collectorReceives", "crossDomain", "consent", "purchase", "idReconciliation"]) {
     assert.equal(contract.verification[k], "NOT_RUN", k);
   }
@@ -111,8 +113,9 @@ test("contract: events emitted today equal the ShopEvent union exactly", () => {
   assert.equal(new Set(union).size, union.length, "duplicate union members");
   const emitted = contract.events.filter((e) => e.emittedToday === true).map((e) => e.name);
   assert.deepEqual([...emitted].sort(), [...union].sort());
-  assert.equal(emitted.length, 8);
-  for (const name of ["hero_shop_click", "purchase"]) {
+  assert.equal(emitted.length, 9);
+  assert.ok(emitted.includes("hero_shop_click"), "hero_shop_click must be emitted");
+  for (const name of ["purchase"]) {
     const e = contract.events.find((x) => x.name === name);
     assert.ok(e, `${name} missing from contract`);
     assert.equal(e.emittedToday, false, `${name} must not be emitted today`);
@@ -148,9 +151,9 @@ test("call sites: every site that sends items sends item_id; exempt events are e
       assert.match(s.text, /\bitem_id\s*:/, `${s.file}:${s.line} ${s.event} sends items without item_id`);
     }
   }
-  // Reported gap, not a pass: these emitted events carry no item_id today.
+  // Only technical events without a product context may omit items (checkout_redirect now carries them).
   const exempt = contract.events.filter((e) => e.emittedToday && !e.itemsSentToday).map((e) => e.name).sort();
-  assert.deepEqual(exempt, ["checkout_error", "checkout_redirect"]);
+  assert.deepEqual(exempt, ["checkout_error", "hero_shop_click"]);
 });
 
 test("call sites: item_id comes from the product/line slug", () => {
@@ -166,7 +169,7 @@ test("units: money is divided by 100 exactly once and value always travels with 
     for (const m of s.text.matchAll(/\b(price|value)\s*:\s*([^,}\]]+)/g)) {
       assert.match(m[2], /\/\s*100\b/, `${s.file}:${s.line} ${m[1]} is not cents / 100 (${m[2].trim()})`);
     }
-    if (/\bvalue\s*:/.test(s.text)) assert.match(s.text, /currency\s*:\s*"USD"/, `${s.file}:${s.line} value without currency USD`);
+    if (/\b(value|price)\s*:/.test(s.text)) assert.match(s.text, /currency\s*:\s*"USD"/, `${s.file}:${s.line} value/price without currency USD`);
   }
   for (const file of srcFiles) {
     const code = stripComments(read(file));

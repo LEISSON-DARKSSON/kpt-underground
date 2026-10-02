@@ -1,12 +1,14 @@
 import Link from "next/link";
 
+import { HeroCtaTracker } from "@/components/home/hero-cta-tracker";
+
 /**
  * One dominant next step in the hero (UX audit 2026-10-02: "make one CTA the obvious primary
  * action"). Story stays reachable from the navigation; it no longer competes here.
  */
 export function HeroCTAs() {
   return (
-    <div className="mt-10">
+    <HeroCtaTracker className="mt-10">
       <Link
         href="/shop"
         data-cursor="shop"
@@ -16,6 +18,6 @@ export function HeroCTAs() {
       >
         SHOP THE OBJECTS <span aria-hidden="true">&#x2192;</span>
       </Link>
-    </div>
+    </HeroCtaTracker>
   );
 }

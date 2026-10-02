@@ -1,41 +1,44 @@
 # Measurement plan (ticket H05)
 
-Status: PREPARATION ONLY, written 2026-10-02 on branch `feat/home-nonblocking-fit-20261002`. No collector is active, no third-party script is loaded, no account was created, no data was sent anywhere, nothing under `src/` was changed. Everything that was not run is marked NOT_RUN.
+Status: PREPARATION, updated 2026-10-02 on branch `feat/home-nonblocking-fit-20261002`. The adapter now enforces a per-event allowlist and emits `hero_shop_click`; a GA4 one-stream, Basic-consent collector plan exists but is DISABLED and imported by nothing. No collector is active, no third-party script is loaded, no account or Measurement ID exists, no data was sent anywhere. Everything that was not run is marked NOT_RUN.
 
-Machine-readable twin: `docs/measurement-contract.json`. Guard test: `tests/store/measurement-contract.test.mjs`.
+Machine-readable twin: `docs/measurement-contract.json`. Guard tests: `tests/store/measurement-contract.test.mjs`, `tests/store/analytics-allowlist.test.mjs`. Cross-domain procedure: `docs/cross-domain-check.md` (every step NOT_RUN).
 
 ## 1. Current state
 
 - `src/lib/analytics.ts` pushes events to `window.dataLayer` and nowhere else. No vendor script (`gtag`, GTM, Pixel, PostHog and so on) exists in `src/`. Nothing is collected. A non-empty `dataLayer` is a browser buffer, not a report.
-- `scrub()` is a key blocklist plus redaction of string values containing `@` or `ptkn_`. It is not a privacy audit. Known holes: `full_name`, `customer_name`, street/city/postcode/zip, IP, `user_id`. An allowlist is required before activation.
-- `track()` swallows every error, so a blocked or broken `dataLayer` cannot break shopping (covered by the guard test).
+- Privacy: every event has an explicit ALLOWLIST (`EVENT_SCHEMA`, top level and per item). Unknown params are dropped, every allowed value is shape-checked (ids, list ids, reasons, CTA ids, site paths; no free text, no URLs), and the old `scrub()` key blocklist plus redaction of values containing `@`, `ptkn_` or `://` remains as a second guard. The blocklist now also covers name, street, city, postcode, zip, ip, user/customer ids, session, cart id, checkout and url keys. The schema equals `docs/measurement-contract.json` (tested).
+- Unknown or missing values are omitted, never sent as 0. Currency USD accompanies any price or value that is sent.
+- `track()` swallows every error, so a blocked or broken `dataLayer` cannot break shopping (covered by the guard test). Events outside the schema are never pushed.
 - `purchase` does not exist in `src/` and must never be added there (CLAUDE.md commerce rule 7).
-- `hero_shop_click` is not emitted. The hero CTA (`src/components/home/hero-ctas.tsx`) is a server component with only a `data-hero-cta` attribute.
+- `hero_shop_click` is emitted by `src/components/home/hero-cta-tracker.tsx`, a client wrapper that renders the same `div` around the unchanged server-rendered hero link and never blocks navigation. Params: `cta_id`, `destination` (site path) only.
+- `src/lib/analytics-collector.ts` (`collectorPlan`) is the prepared, DISABLED GA4 variant: one web stream, Basic consent (the script is not loaded before consent). It returns `enabled:false` unless the owner activation flag is exactly true, the Measurement ID is a valid non-placeholder `G-XXXXXXXXXX` and consent is exactly `granted`. It is pure, has no imports and no side effects, and is imported by nothing (tested).
 
 ## 2. Events emitted today (static code reading, 2026-10-02)
 
-Money is `cents / 100` exactly once (USD dollars). `item_id` is always the product slug. `item_variant`, when present, is the Fourthwall variant id.
+Money is `cents / 100` exactly once (USD dollars). `item_id` is always the product slug. `item_variant`, when present, is the Fourthwall variant id. The params column lists what the call site sends; the adapter then keeps only the event's allowlist.
 
-| Event | File:line | Params sent | item_id source | Price units | Currency |
-|---|---|---|---|---|---|
-| view_item_list | `src/components/store/shop-catalog.tsx:48` | item_list_id, items[item_id, index, price] | `p.slug` | `priceFromCents / 100` | none |
-| select_item | `src/components/store/product-card.tsx:22` | item_list_id, items[item_id, price] | `product.slug` | `priceFromCents / 100` | none |
-| view_item | `src/components/store/product-purchase.tsx:32` | currency, value, items[item_id, item_name, price] | `product.slug` | `priceFromCents / 100` (from-price, not the chosen variant) | `"USD"` literal |
-| view_cart | `src/lib/store/cart.tsx:105` | items[item_variant, item_id, price, quantity] | `l.slug` | `unitCents / 100` | none |
-| add_to_cart | `src/lib/store/cart.tsx:113` | currency, value, items[item_id, item_variant, price, quantity] | `line.slug` | `unitCents * qty / 100`, `unitCents / 100` | `"USD"` literal |
-| begin_checkout | `src/lib/store/cart.tsx:196` | currency, value, items[item_id, item_variant, price, quantity] | `l.slug` | `subtotalCents / 100`, `unitCents / 100` | `"USD"` literal |
-| checkout_redirect | `src/lib/store/cart.tsx:218` | currency, value | none (no items) | `subtotalCents / 100` | `"USD"` literal |
-| checkout_error | `src/lib/store/cart.tsx:208`, `:214`, `:223` | reason (PRICE_CHANGED, HTTP_n, NETWORK) | none | none | none |
+| Event | File | Params sent | item_id source | Currency |
+|---|---|---|---|---|
+| hero_shop_click | `src/components/home/hero-cta-tracker.tsx` | cta_id, destination | none | none (no money) |
+| view_item_list | `src/components/store/shop-catalog.tsx` | item_list_id (no search text), currency, items[item_id, item_name, index, price] | `p.slug` | `"USD"` |
+| select_item | `src/components/store/product-card.tsx` | item_list_id, currency, items[item_id, item_name, price] | `product.slug` | `"USD"` |
+| view_item | `src/components/store/product-purchase.tsx` | currency, value, items[item_id, item_name, item_variant (single-variant products only), price] | `product.slug` | `"USD"` |
+| view_cart | `src/lib/store/cart.tsx` | currency, value (omitted when empty), items[item_id, item_variant, price, quantity] | `l.slug` | `"USD"` |
+| add_to_cart | `src/lib/store/cart.tsx` | currency, value, items[item_id, item_variant, price, quantity] | `line.slug` | `"USD"` |
+| begin_checkout | `src/lib/store/cart.tsx` | currency, value, items[item_id, item_variant, price, quantity] | `l.slug` | `"USD"` |
+| checkout_redirect | `src/lib/store/cart.tsx` | currency, value, items[item_id, item_variant, quantity]; never the URL, cart id or session | `l.slug` | `"USD"` |
+| checkout_error | `src/lib/store/cart.tsx` (three sites) | reason (PRICE_CHANGED, HTTP_n, NETWORK) | none | none |
 
-Reported gaps (not fixed here, `src/` is out of scope for H05 preparation):
+Residual gaps (reported, not hidden):
 
-1. `checkout_redirect` and `checkout_error` carry no `items`, so no `item_id`. The guard test pins this as an explicit exemption list rather than hiding it.
-2. `view_item_list`, `select_item`, `view_cart` send prices without `currency` (GA4 recommends it whenever value or price is sent).
-3. `view_item` reports the from-price, not a chosen variant, and has no `item_variant`.
-4. `view_item` fires once per product id per full page load (module-level `trackOnce` set), so client-side revisits are not counted again.
-5. `view_cart` fires on every drawer open, including right after `add_to_cart`.
-6. `begin_checkout` fires before server validation, so it also counts attempts that end in `checkout_error`.
-7. `hero_shop_click` is missing.
+1. `view_item` reports the from-price for multi-variant products and has no `item_variant` there (no variant is chosen at view time). It is unknown, so it is omitted.
+2. `view_item` fires once per product id per full page load (module-level `trackOnce` set). Client-side revisits are not counted again: an undercount, never a repeat. Tested with a simulated SPA route change.
+3. `view_cart` fires on every drawer open, including right after `add_to_cart`.
+4. `begin_checkout` fires before server validation, so it also counts attempts that end in `checkout_error`.
+5. `checkout_redirect` has no per-item price; `value` is the cart subtotal.
+6. Item ids are local slugs; reconciliation with the ids Fourthwall natively sends is NOT_RUN.
+7. Everything above is verified by static reading and unit tests only. No collector has received anything (NOT_RUN).
 
 ## 3. Target contract: one setup, one meaning per event
 
@@ -84,23 +87,15 @@ Connecting one surface does not configure the other.
 
 Fetch notes: the Fourthwall and Google e-commerce pages were read through a page-summarizing fetch tool, so quotes are summaries. A direct fetch of `https://developers.google.com/analytics/devguides/tag-platform/cross-domain` returned HTTP 404, and the cross-domain page was not read directly afterwards; the cross-domain claim above rests on search-result summaries only.
 
-## 6. Cross-domain attribution test steps (all NOT_RUN)
+## 6. Cross-domain attribution test
 
-Run only after the owner picks the tool and consent policy. Use the owner's own browser and a test property or debug view. No orders, no payment; stop at the hosted checkout page (HTTP 200).
-
-1. Open `https://keepitunderground.com/?utm_source=h05test&utm_medium=qa&utm_campaign=h05` in a clean profile with consent granted. Record the session/client id seen on the site. NOT_RUN
-2. Add a product (chosen variant), open the cart, press checkout. Confirm `view_item`, `add_to_cart`, `begin_checkout`, `checkout_redirect` reach the collector (debug view, not just `dataLayer`). NOT_RUN
-3. On `keepitunderground-shop.fourthwall.com`, check whether source/medium/campaign and session id survive (same client id, no new "direct" session). Record whether `_gl` or UTM is present in the URL. Result PASS, FAIL or unknown. NOT_RUN
-4. Repeat with: browser Back from the checkout, reload on the checkout, a mobile in-app browser, and consent changed (granted, then refused). NOT_RUN
-5. Confirm Fourthwall's native events (`page_view`, view, add-to-cart) do not double-count the site's events for the same action. NOT_RUN
-6. If step 3 fails: record "attribution unknown" and propose decorating the checkout URL (linker domains for the hosted host, copy only documented linker/UTM fields, never auth secrets). Do not write cross-domain PASS from the configuration list alone. NOT_RUN
-7. `purchase`: no test. A synthetic check can verify the id mapping only and is not a real purchase. After the first real ordinary customer order, compare `transaction_id`, amount, currency and count with Fourthwall's order list. NOT_RUN
+The concrete procedure, with boolean PASS criteria, owner-gated prerequisites, evidence-hygiene rules and clearly labelled UNVERIFIED hypotheses, is in `docs/cross-domain-check.md`. Every step there is NOT_RUN. Cross-domain is PASS only when the debug view shows continuity on both hostnames; otherwise attribution is reported as unknown. No orders, no payment; stop at the hosted checkout page (HTTP 200).
 
 ## 7. Consent and privacy
 
 - Refused or unset consent must never block, delay or alter shopping: no event call may throw, await a network call, or gate the cart or checkout. Current `track()` already swallows errors; the consent gate must keep that property.
 - Before consent, the tag is not loaded. `dataLayer` pushes may buffer locally but nothing leaves the browser. Whether to use Consent Mode or no-tag-until-consent is an owner policy decision.
-- No PII in events: no email, full name, address, phone, card data, token or cookie value, and no fingerprinting. Use a field allowlist (item_id, item_variant, item_name, item_list_id, index, price, quantity, currency, value, reason, cta_id, destination, transaction_id on purchase only) in addition to `scrub()`.
+- No PII in events: no email, full name, address, phone, card data, token or cookie value, and no fingerprinting. The field allowlist is implemented per event in `EVENT_SCHEMA` (item_id, item_variant, item_name, item_list_id, index, price, quantity, currency, value, reason, cta_id, destination; no `transaction_id` exists in `src/`), with `scrub()` as the second guard.
 - Never treat checkout contact data as marketing consent. Do not import customer addresses into marketing tools.
 - Ad blockers and refusals shrink the visible data. The Fourthwall order ledger stays the financial source of truth; do not compute conversion from zero or unknown sessions.
 
@@ -122,7 +117,7 @@ Layered report when finished: code ready, Preview verified, in Production, colle
 ## 9. Blocked until the owner decides
 
 - Choice of collector (recommendation: the single GA4 setup, reusing any existing property and stream).
-- Consent policy and banner (EU and US visitors).
+- Consent policy and banner (EU and US visitors). The prepared variant is Basic consent (no script before consent).
 - Which GA4 property and web stream to use, and whether one already exists.
-- Any account creation, Tracking Pixels entry in Fourthwall, tag load, or `src/` change (hero event, currency on list events, variant on `view_item`, checkout URL decoration).
-- Wiring `tests/store/measurement-contract.test.mjs` into `npm run test:store` (needs a `package.json` edit, not done here).
+- Any account creation, Tracking Pixels entry in Fourthwall, tag load, import of `src/lib/analytics-collector.ts` into the app, or setting `ownerActivation`.
+- Checkout URL decoration for cross-domain (only if `docs/cross-domain-check.md` shows the linker does not carry over).

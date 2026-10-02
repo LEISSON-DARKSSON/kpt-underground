@@ -1,10 +1,18 @@
 // H06: contribution before acquisition for the two desk mats.
 // Read-only. No dependencies. Usage: node scripts/economics/contribution.mjs [model.json] [--json]
 //
-// Rule: a number comes out only when EVERY required input is a sourced, dated,
-// non-null number. Otherwise the status is BLOCKED_MISSING_INPUTS (or
-// BLOCKED_INVALID_INPUT) and no number derived from the retail price is printed.
-// Nothing here claims net profit or paid-acquisition readiness.
+// Two separate outputs:
+//   1. ACTUAL contribution. A number comes out only when EVERY required input is a
+//      non-null OBSERVED number with source and date (an owner PLANNING_ASSUMPTION is also
+//      accepted for sellerFundedShippingUsd and supportReserveUsd). Otherwise the status is
+//      BLOCKED_MISSING_INPUTS (or BLOCKED_INVALID_INPUT) and nothing derived from retail is printed.
+//   2. planningScenario. Status PLANNING_ONLY. Built only from OBSERVED + PUBLIC_STANDARD +
+//      explicitly supplied PLANNING_ASSUMPTION values. It is never profit, never contribution,
+//      never paid-acquisition readiness.
+//
+// Every input carries a class: OBSERVED | PUBLIC_STANDARD | PLANNING_ASSUMPTION | UNKNOWN.
+// null is never coerced to 0. The 13 USD catalog base (catalog flat fee == manufacturing cost)
+// is counted once. Buyer-collected tax and buyer-paid shipping are never revenue.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -16,9 +24,37 @@ export const STATUS = Object.freeze({
   BLOCKED_INVALID_INPUT: "BLOCKED_INVALID_INPUT",
 });
 
-// Per product (once): sale price and production cost.
-const PRODUCT_FIELDS = ["priceUsd", "manufacturingCostUsd"];
-// Per order: each line is separate. Tax is deliberately absent: pass-through.
+export const SCENARIO_STATUS = Object.freeze({
+  PLANNING_ONLY: "PLANNING_ONLY",
+  NOT_COMPUTABLE: "NOT_COMPUTABLE",
+  BLOCKED_INVALID_INPUT: "BLOCKED_INVALID_INPUT",
+});
+
+export const INPUT_CLASS = Object.freeze({
+  OBSERVED: "OBSERVED",
+  PUBLIC_STANDARD: "PUBLIC_STANDARD",
+  PLANNING_ASSUMPTION: "PLANNING_ASSUMPTION",
+  UNKNOWN: "UNKNOWN",
+});
+
+export const FEE_BASE = Object.freeze({
+  ITEM_ONLY: "ITEM_ONLY",
+  ITEM_PLUS_SHIPPING: "ITEM_PLUS_SHIPPING",
+  ITEM_PLUS_SHIPPING_PLUS_TAX: "ITEM_PLUS_SHIPPING_PLUS_TAX",
+});
+
+export const ROUNDING_RULE =
+  "Percentage fee = baseCents x rate, rounded half up to a whole cent once per transaction (integer ppm arithmetic); the fixed fee is added once per transaction, not per unit. Fourthwall's real rounding is not confirmed.";
+
+// Canonical product cost field and its aliases. They name ONE cost: catalog flat fee == production cost.
+const CATALOG_BASE_FIELD = "catalogBaseUsd";
+const CATALOG_BASE_ALIASES = [CATALOG_BASE_FIELD, "manufacturingCostUsd", "catalogFlatFeeUsd", "productionCostUsd"];
+const ACTUAL_ONLY = [INPUT_CLASS.OBSERVED];
+const ACTUAL_OR_OWNER_POLICY = [INPUT_CLASS.OBSERVED, INPUT_CLASS.PLANNING_ASSUMPTION];
+
+// Per product (once): sale price, catalog base, and the customization amount ADDITIONAL to the base.
+const PRODUCT_FIELDS = ["priceUsd", CATALOG_BASE_FIELD, "customizationAdditionalUsd"];
+// Per order: every line is required for the ACTUAL contribution.
 const ORDER_MONEY_FIELDS = [
   "platformFeeUsd",
   "paymentFeeUsd",
@@ -26,20 +62,90 @@ const ORDER_MONEY_FIELDS = [
   "sellerFundedShippingUsd",
   "supportReserveUsd",
   "quotedBuyerShippingUsd",
+  "buyerCollectedTaxUsd",
+  "actualNetPayoutUsd",
 ];
+const ORDER_ALLOWED_CLASSES = { sellerFundedShippingUsd: ACTUAL_OR_OWNER_POLICY, supportReserveUsd: ACTUAL_OR_OWNER_POLICY };
+// Read and required, but never added or subtracted.
+const PASS_THROUGH = ["quotedBuyerShippingUsd", "buyerCollectedTaxUsd"];
+const CROSS_CHECK_ONLY = ["actualNetPayoutUsd"];
 const ORDER_DATE_FIELD = "quoteCheckedAt";
 
+const SKIP_KEYS = new Set(["items", "excludedFigures", "valueFormat", "inputClasses"]);
 const isText = (v) => typeof v === "string" && v.trim().length > 0;
+const isPlainObject = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
 
-// Returns { ok: true, cents } | { ok: false, kind: "missing" | "invalid", reason }.
+// ---------- class validation ----------
+
+// Returns a list of problems for one classified node, [] when valid.
+export function classProblems(node) {
+  const c = node.class;
+  if (!Object.values(INPUT_CLASS).includes(c)) return [`class must be one of ${Object.values(INPUT_CLASS).join(", ")}`];
+  const v = node.value;
+  const p = [];
+  switch (c) {
+    case INPUT_CLASS.OBSERVED:
+      if (v === null || v === undefined) p.push("OBSERVED value is null; an unread figure is UNKNOWN");
+      if (!isText(node.source) || !isText(node.date)) p.push("OBSERVED needs source and date");
+      break;
+    case INPUT_CLASS.PUBLIC_STANDARD:
+      if (v === null || v === undefined) p.push("PUBLIC_STANDARD value is null; an unpublished figure is UNKNOWN");
+      if (!isText(node.source) || !/^https?:\/\//.test(node.source) || !isText(node.date)) p.push("PUBLIC_STANDARD needs a URL source and a date");
+      if (node.settledTransaction !== false) p.push("PUBLIC_STANDARD must declare settledTransaction: false");
+      break;
+    case INPUT_CLASS.PLANNING_ASSUMPTION:
+      if (!isText(node.owner)) p.push("PLANNING_ASSUMPTION needs an owner");
+      if (!isText(node.decisionNeeded)) p.push("PLANNING_ASSUMPTION needs decisionNeeded");
+      break;
+    case INPUT_CLASS.UNKNOWN:
+      if (v !== null) p.push("UNKNOWN must stay null; never 0 and never a guess");
+      if (!isText(node.closes)) p.push("UNKNOWN needs closes: what figure closes it");
+      break;
+    default:
+      break;
+  }
+  return p;
+}
+
+// Walks every node that has a `value` and checks its class. Returns { invalid, flagged }.
+function walkClasses(model) {
+  const invalid = [];
+  const flagged = new Set();
+  const visit = (node, where) => {
+    if (!node || typeof node !== "object") return;
+    if (Array.isArray(node)) {
+      node.forEach((el, i) => visit(el, `${where}[${isPlainObject(el) && isText(el.key) ? el.key : i}]`));
+      return;
+    }
+    if (Object.prototype.hasOwnProperty.call(node, "value")) {
+      const problems = classProblems(node);
+      for (const reason of problems) invalid.push({ input: where, reason });
+      if (problems.length) flagged.add(where);
+      return;
+    }
+    for (const [k, v] of Object.entries(node)) {
+      if (SKIP_KEYS.has(k)) continue;
+      visit(v, where ? `${where}.${k}` : k);
+    }
+  };
+  for (const k of ["platform", "products", "orders"]) if (model && k in model) visit(model[k], k);
+  return { invalid, flagged };
+}
+
+// ---------- readers (integer cents, null never coerced) ----------
+
+// Returns { ok: true, cents, cls } | { ok: false, kind: "missing" | "invalid", reason }.
 // The null check comes BEFORE any arithmetic: in JS, Number(null) and null * 100 are 0.
-function readMoney(field) {
+function readMoney(field, allowed) {
   if (field === undefined || field === null) return { ok: false, kind: "missing", reason: "field absent" };
-  if (typeof field !== "object" || Array.isArray(field)) {
-    return { ok: false, kind: "invalid", reason: "expected { value, source, date }; a bare value has no source" };
+  if (!isPlainObject(field)) {
+    return { ok: false, kind: "invalid", reason: "expected a classified { class, value, ... } node; a bare value has no class or source" };
   }
   const v = field.value;
   if (v === null || v === undefined) return { ok: false, kind: "missing", reason: "value is null" };
+  if (allowed && !allowed.includes(field.class)) {
+    return { ok: false, kind: "invalid", reason: `class ${field.class ?? "none"} is not allowed here (allowed: ${allowed.join(", ")})` };
+  }
   if (typeof v !== "number" || !Number.isFinite(v)) {
     return { ok: false, kind: "invalid", reason: "value is not a finite number (strings are never coerced)" };
   }
@@ -47,26 +153,55 @@ function readMoney(field) {
   const scaled = v * 100;
   const cents = Math.round(scaled);
   if (Math.abs(scaled - cents) > 1e-6) return { ok: false, kind: "invalid", reason: "more than two decimals" };
-  if (!isText(field.source) || !isText(field.date)) {
+  if (field.class !== INPUT_CLASS.PLANNING_ASSUMPTION && (!isText(field.source) || !isText(field.date))) {
     return { ok: false, kind: "invalid", reason: "number without source and date" };
   }
-  return { ok: true, cents };
+  return { ok: true, cents, cls: field.class };
+}
+
+function readRatePpm(field, allowed) {
+  if (field === undefined || field === null) return { ok: false, kind: "missing", reason: "field absent" };
+  if (!isPlainObject(field)) return { ok: false, kind: "invalid", reason: "expected a classified node" };
+  const v = field.value;
+  if (v === null || v === undefined) return { ok: false, kind: "missing", reason: "value is null" };
+  if (!allowed.includes(field.class)) return { ok: false, kind: "invalid", reason: `class ${field.class ?? "none"} is not allowed here` };
+  if (typeof v !== "number" || !Number.isFinite(v) || v < 0 || v > 1) return { ok: false, kind: "invalid", reason: "rate must be a finite number between 0 and 1" };
+  const scaled = v * 1e6;
+  const ppm = Math.round(scaled);
+  if (Math.abs(scaled - ppm) > 1e-6) return { ok: false, kind: "invalid", reason: "rate has more than six decimals" };
+  return { ok: true, ppm, cls: field.class };
 }
 
 function readDate(field) {
   if (field === undefined || field === null) return { ok: false, kind: "missing", reason: "field absent" };
   const v = typeof field === "object" ? field.value : undefined;
   if (v === null || v === undefined) return { ok: false, kind: "missing", reason: "value is null" };
+  if (field.class !== INPUT_CLASS.OBSERVED) return { ok: false, kind: "invalid", reason: "class must be OBSERVED" };
   if (!isText(v) || Number.isNaN(Date.parse(v))) return { ok: false, kind: "invalid", reason: "not an ISO date" };
   return { ok: true, value: v };
 }
 
+// ---------- fee arithmetic ----------
+
+// baseCents x ratePpm / 1_000_000, rounded half up. Integer arithmetic only.
+export function percentFeeCents(baseCents, ratePpm) {
+  return Math.floor((baseCents * ratePpm + 500000) / 1000000);
+}
+
+export function paymentFeeCents(baseCents, ratePpm, fixedCents) {
+  return percentFeeCents(baseCents, ratePpm) + fixedCents;
+}
+
+// ---------- model ----------
+
 export function computeContribution(model) {
   const missing = [];
   const invalid = [];
+  const classWalk = walkClasses(model);
+  invalid.push(...classWalk.invalid);
   const note = (where, r) => {
     if (r.kind === "missing") missing.push(where);
-    else invalid.push({ input: where, reason: r.reason });
+    else if (!classWalk.flagged.has(where)) invalid.push({ input: where, reason: r.reason });
   };
 
   const products = new Map();
@@ -78,7 +213,34 @@ export function computeContribution(model) {
   for (const p of productList) {
     const parsed = { key: p?.key };
     for (const f of PRODUCT_FIELDS) {
-      const r = readMoney(p?.[f]);
+      if (f === CATALOG_BASE_FIELD) {
+        // The catalog flat fee and the production cost are ONE cost. Collapse the aliases; never add them.
+        const present = CATALOG_BASE_ALIASES.filter((a) => p?.[a] !== undefined);
+        if (present.length === 0) {
+          missing.push(`products[${p?.key}].${CATALOG_BASE_FIELD}`);
+          continue;
+        }
+        const reads = present.map((a) => ({ a, r: readMoney(p[a], ACTUAL_ONLY) }));
+        let allOk = true;
+        for (const { a, r } of reads) {
+          if (!r.ok) {
+            allOk = false;
+            note(`products[${p?.key}].${a}`, r);
+          }
+        }
+        if (!allOk) continue;
+        if (new Set(reads.map(({ r }) => r.cents)).size > 1) {
+          invalid.push({
+            input: `products[${p?.key}].${present.join("/")}`,
+            reason: "catalog flat fee and production cost are one cost but the fields differ; record it once",
+          });
+          continue;
+        }
+        parsed[CATALOG_BASE_FIELD] = reads[0].r.cents;
+        parsed.catalogBaseAliasesCollapsed = present;
+        continue;
+      }
+      const r = readMoney(p?.[f], ACTUAL_ONLY);
       if (r.ok) parsed[f] = r.cents;
       else note(`products[${p?.key}].${f}`, r);
     }
@@ -87,22 +249,17 @@ export function computeContribution(model) {
 
   const parsedOrders = [];
   for (const o of orderList) {
-    const po = { key: o?.key, items: [], lines: {} };
+    const po = { key: o?.key, items: [], lines: {}, classes: {}, raw: o };
     for (const f of ORDER_MONEY_FIELDS) {
-      const r = readMoney(o?.[f]);
-      if (r.ok) po.lines[f] = r.cents;
-      else note(`orders[${o?.key}].${f}`, r);
+      const r = readMoney(o?.[f], ORDER_ALLOWED_CLASSES[f] ?? ACTUAL_ONLY);
+      if (r.ok) {
+        po.lines[f] = r.cents;
+        po.classes[f] = r.cls;
+      } else note(`orders[${o?.key}].${f}`, r);
     }
     const d = readDate(o?.[ORDER_DATE_FIELD]);
     if (d.ok) po.quoteCheckedAt = d.value;
     else note(`orders[${o?.key}].${ORDER_DATE_FIELD}`, d);
-
-    // Buyer-collected tax is optional and pass-through. It is validated but never used.
-    if (o?.buyerCollectedTaxUsd && o.buyerCollectedTaxUsd.value !== null && o.buyerCollectedTaxUsd.value !== undefined) {
-      const t = readMoney(o.buyerCollectedTaxUsd);
-      if (t.ok) po.buyerCollectedTaxCents = t.cents;
-      else note(`orders[${o?.key}].buyerCollectedTaxUsd`, t);
-    }
 
     const items = Array.isArray(o?.items) ? o.items : [];
     if (items.length === 0) invalid.push({ input: `orders[${o?.key}].items`, reason: "no items" });
@@ -120,41 +277,52 @@ export function computeContribution(model) {
 
   const base = {
     currency: model?.currency ?? "USD",
-    measure: "Contribution before acquisition. Not net profit. Not a paid-acquisition decision.",
+    measure: "ACTUAL contribution before acquisition. Not net profit. Not a paid-acquisition decision.",
     paidAcquisitionReadiness: "NOT_CLAIMED",
     requiredInputs: {
       perProduct: PRODUCT_FIELDS,
       perOrder: [...ORDER_MONEY_FIELDS, ORDER_DATE_FIELD],
-      passThroughNeverRevenue: ["quotedBuyerShippingUsd", "buyerCollectedTaxUsd"],
+      passThroughNeverRevenue: PASS_THROUGH,
+      crossCheckOnly: CROSS_CHECK_ONLY,
+      allowedClassesForActual:
+        "OBSERVED (sellerFundedShippingUsd and supportReserveUsd also accept an owner PLANNING_ASSUMPTION); PUBLIC_STANDARD never feeds the actual figure",
     },
   };
+
+  const planningScenario = computePlanningScenario(model, products, parsedOrders, invalid);
 
   if (missing.length > 0 || invalid.length > 0) {
     return {
       ...base,
-      status: missing.length > 0 ? STATUS.BLOCKED_MISSING_INPUTS : STATUS.BLOCKED_INVALID_INPUT,
+      status: invalid.length > 0 ? STATUS.BLOCKED_INVALID_INPUT : STATUS.BLOCKED_MISSING_INPUTS,
       missing,
       invalid,
-      orders: [], // no number is ever printed from a partial model
+      orders: [], // no actual number is ever printed from a partial model
+      planningScenario,
     };
   }
 
   const orders = parsedOrders.map((po) => {
     let revenueCents = 0;
-    let manufacturingCents = 0;
+    let catalogBaseCents = 0;
+    let customizationCents = 0;
     let units = 0;
+    const collapsed = new Set();
     for (const it of po.items) {
       const prod = products.get(it.productKey);
       revenueCents += prod.priceUsd * it.quantity;
-      manufacturingCents += prod.manufacturingCostUsd * it.quantity;
+      catalogBaseCents += prod[CATALOG_BASE_FIELD] * it.quantity;
+      customizationCents += prod.customizationAdditionalUsd * it.quantity;
       units += it.quantity;
+      for (const a of prod.catalogBaseAliasesCollapsed) collapsed.add(a);
     }
     const l = po.lines;
-    // Buyer shipping and buyer tax are pass-through: not revenue, not cost.
+    // Buyer shipping, buyer tax and net payout are never added or subtracted here.
     const contributionCents =
       revenueCents -
       l.discountUsd -
-      manufacturingCents -
+      catalogBaseCents -
+      customizationCents -
       l.platformFeeUsd -
       l.paymentFeeUsd -
       l.sellerFundedShippingUsd -
@@ -166,26 +334,159 @@ export function computeContribution(model) {
       lineCents: {
         merchandiseRevenue: revenueCents,
         discount: l.discountUsd,
-        manufacturingCost: manufacturingCents,
+        catalogBase: catalogBaseCents,
+        customizationAdditional: customizationCents,
         platformFee: l.platformFeeUsd,
         paymentFee: l.paymentFeeUsd,
         sellerFundedShipping: l.sellerFundedShippingUsd,
         supportReserve: l.supportReserveUsd,
       },
+      catalogBaseCountedOnce: true,
+      catalogBaseAliasesCollapsed: [...collapsed],
+      planningAssumptionsUsed: Object.entries(po.classes).filter(([, c]) => c === INPUT_CLASS.PLANNING_ASSUMPTION).map(([f]) => f),
       excludedPassThroughCents: {
         buyerPaidShipping: l.quotedBuyerShippingUsd,
-        buyerCollectedTax: po.buyerCollectedTaxCents ?? null,
+        buyerCollectedTax: l.buyerCollectedTaxUsd,
       },
+      crossCheckOnlyCents: { actualNetPayout: l.actualNetPayoutUsd },
       contributionCents,
       // Per-unit figure only when it is an exact number of cents.
       contributionPerUnitCents: contributionCents % units === 0 ? contributionCents / units : null,
     };
   });
 
-  return { ...base, status: STATUS.COMPUTED, missing: [], invalid: [], orders };
+  return { ...base, status: STATUS.COMPUTED, missing: [], invalid: [], orders, planningScenario };
 }
 
+// ---------- planning scenario ----------
+
+function computePlanningScenario(model, products, parsedOrders, invalidSoFar) {
+  const head = {
+    label: "PLANNING_ONLY",
+    notice: "Planning arithmetic from observed and public-standard inputs. NOT profit, NOT actual contribution, NOT paid-acquisition readiness.",
+    formula: "planningResidual = retail - catalogBase (counted once) - paymentFee(feeBase)",
+    roundingRule: ROUNDING_RULE,
+    paidAcquisitionReadiness: "NOT_CLAIMED",
+    feeBaseConfirmed: false,
+    excludedUnknowns: [
+      "customizationAdditionalUsd (customization quote amount, UNKNOWN)",
+      "US shipping cost to the shop and buyer shipping quote",
+      "buyer tax (pass-through, never revenue)",
+      "discount",
+      "seller-funded shipping",
+      "support / problem reserve",
+      "platform fee in dollars",
+      "actual net payout",
+      "acquisition cost",
+    ],
+  };
+  if (invalidSoFar.length > 0) {
+    return { ...head, status: SCENARIO_STATUS.BLOCKED_INVALID_INPUT, reasons: invalidSoFar.map((i) => `${i.input}: ${i.reason}`), orders: [] };
+  }
+
+  const reasons = [];
+  const plat = model?.platform;
+  const feeClasses = [INPUT_CLASS.PUBLIC_STANDARD, INPUT_CLASS.OBSERVED];
+  const rate = readRatePpm(plat?.paymentFeeRate, feeClasses);
+  const markup = readRatePpm(plat?.extraPhysicalCatalogMarkupRate, feeClasses);
+  const fixed = readMoney(plat?.paymentFeeFixedUsd, feeClasses);
+  if (!rate.ok) reasons.push(`platform.paymentFeeRate: ${rate.reason}`);
+  if (!markup.ok) reasons.push(`platform.extraPhysicalCatalogMarkupRate: ${markup.reason}`);
+  if (!fixed.ok) reasons.push(`platform.paymentFeeFixedUsd: ${fixed.reason}`);
+  for (const p of products.values()) {
+    if (p.priceUsd === undefined) reasons.push(`products[${p.key}].priceUsd: not an OBSERVED number`);
+    if (p[CATALOG_BASE_FIELD] === undefined) reasons.push(`products[${p.key}].${CATALOG_BASE_FIELD}: not an OBSERVED number`);
+  }
+  if (reasons.length > 0) return { ...head, status: SCENARIO_STATUS.NOT_COMPUTABLE, reasons, orders: [] };
+
+  const totalPpm = rate.ppm + markup.ppm;
+  const allPublic = [rate.cls, markup.cls, fixed.cls].every((c) => c === INPUT_CLASS.PUBLIC_STANDARD);
+  const feeInputs = {
+    percentRatePpm: totalPpm,
+    fixedFeeCents: fixed.cents,
+    class: allPublic ? INPUT_CLASS.PUBLIC_STANDARD : "MIXED_OBSERVED_AND_PUBLIC_STANDARD",
+    settledTransaction: false,
+  };
+
+  let computedAny = false;
+  const orders = parsedOrders.map((po) => {
+    let merchandiseCents = 0;
+    let catalogBaseCents = 0;
+    let units = 0;
+    for (const it of po.items) {
+      const prod = products.get(it.productKey);
+      merchandiseCents += prod.priceUsd * it.quantity;
+      catalogBaseCents += prod[CATALOG_BASE_FIELD] * it.quantity; // once per unit; aliases already collapsed
+      units += it.quantity;
+    }
+    const planning = po.raw?.planning ?? {};
+    const ship = readMoney(planning.plannedBuyerShippingUsd, [INPUT_CLASS.PLANNING_ASSUMPTION]);
+    const tax = readMoney(planning.plannedBuyerTaxUsd, [INPUT_CLASS.PLANNING_ASSUMPTION]);
+    const shipPath = `orders[${po.key}].planning.plannedBuyerShippingUsd`;
+    const taxPath = `orders[${po.key}].planning.plannedBuyerTaxUsd`;
+
+    const scenario = (id, baseCents, needs) => {
+      if (needs.length > 0) return { id, status: SCENARIO_STATUS.NOT_COMPUTABLE, needs };
+      const fee = paymentFeeCents(baseCents, totalPpm, fixed.cents);
+      computedAny = true;
+      return {
+        id,
+        status: SCENARIO_STATUS.PLANNING_ONLY,
+        feeBaseCents: baseCents,
+        paymentFeeCents: fee,
+        planningResidualCents: merchandiseCents - catalogBaseCents - fee,
+      };
+    };
+    const shipCents = ship.ok ? ship.cents : 0;
+    const taxCents = tax.ok ? tax.cents : 0;
+    return {
+      key: po.key,
+      units,
+      merchandiseCents,
+      catalogBaseCents,
+      catalogBaseCountedOnce: true,
+      scenarios: [
+        scenario(FEE_BASE.ITEM_ONLY, merchandiseCents, []),
+        scenario(FEE_BASE.ITEM_PLUS_SHIPPING, merchandiseCents + shipCents, ship.ok ? [] : [shipPath]),
+        scenario(
+          FEE_BASE.ITEM_PLUS_SHIPPING_PLUS_TAX,
+          merchandiseCents + shipCents + taxCents,
+          [...(ship.ok ? [] : [shipPath]), ...(tax.ok ? [] : [taxPath])],
+        ),
+      ],
+    };
+  });
+
+  return { ...head, status: computedAny ? SCENARIO_STATUS.PLANNING_ONLY : SCENARIO_STATUS.NOT_COMPUTABLE, feeInputs, reasons: [], orders };
+}
+
+// ---------- report ----------
+
 const usd = (cents) => `${cents < 0 ? "-" : ""}${Math.floor(Math.abs(cents) / 100)}.${String(Math.abs(cents) % 100).padStart(2, "0")}`;
+
+function formatScenario(s) {
+  const out = ["", `PLANNING SCENARIO: ${s.status} (label ${s.label})`, s.notice, `Rule: ${s.formula}`, `Rounding: ${s.roundingRule}`];
+  if (s.orders.length === 0) {
+    for (const r of s.reasons) out.push(`  - ${r}`);
+    return out;
+  }
+  out.push(
+    `Fee inputs: ${s.feeInputs.class}, not a settled transaction: ${s.feeInputs.percentRatePpm / 10000}% + ${usd(s.feeInputs.fixedFeeCents)} USD per transaction. Fee base NOT confirmed; every base below is a scenario.`,
+  );
+  for (const o of s.orders) {
+    out.push(`  ${o.key} (${o.units} unit${o.units === 1 ? "" : "s"}): retail ${usd(o.merchandiseCents)}, catalog base ${usd(o.catalogBaseCents)} (once per unit, never twice)`);
+    for (const sc of o.scenarios) {
+      if (sc.status === SCENARIO_STATUS.PLANNING_ONLY) {
+        out.push(`    ${sc.id}: fee base ${usd(sc.feeBaseCents)}, payment fee ${usd(sc.paymentFeeCents)}, planning residual ${usd(sc.planningResidualCents)}  [PLANNING_ONLY]`);
+      } else {
+        out.push(`    ${sc.id}: NOT_COMPUTABLE, needs planning input ${sc.needs.join(", ")}`);
+      }
+    }
+  }
+  out.push("Not in these numbers (unknown): " + s.excludedUnknowns.join("; ") + ".");
+  out.push("The planning residual is not profit and not a contribution figure; paid-acquisition readiness: NOT_CLAIMED.");
+  return out;
+}
 
 export function formatReport(result) {
   const out = [];
@@ -201,7 +502,8 @@ export function formatReport(result) {
       out.push("", `Invalid inputs (${result.invalid.length}):`);
       for (const i of result.invalid) out.push(`  - ${i.input}: ${i.reason}`);
     }
-    out.push("", "No contribution figure is printed: retail price minus base cost alone is not a margin.");
+    out.push("", "No ACTUAL figure is printed: retail price minus base cost alone is not a margin.");
+    out.push(...formatScenario(result.planningScenario));
     return out.join("\n");
   }
   for (const o of result.orders) {
@@ -209,15 +511,18 @@ export function formatReport(result) {
     const L = o.lineCents;
     out.push(`  merchandise revenue      ${usd(L.merchandiseRevenue)}`);
     out.push(`  - discount               ${usd(L.discount)}`);
-    out.push(`  - production cost        ${usd(L.manufacturingCost)}`);
+    out.push(`  - catalog base (once)    ${usd(L.catalogBase)}`);
+    out.push(`  - customization addition ${usd(L.customizationAdditional)}`);
     out.push(`  - platform fee           ${usd(L.platformFee)}`);
     out.push(`  - payment fee            ${usd(L.paymentFee)}`);
     out.push(`  - seller-funded shipping ${usd(L.sellerFundedShipping)}`);
     out.push(`  - problem reserve        ${usd(L.supportReserve)}`);
     out.push(`  = contribution per order ${usd(o.contributionCents)}`);
     out.push(`    per unit               ${o.contributionPerUnitCents === null ? "n/a (not a whole number of cents)" : usd(o.contributionPerUnitCents)}`);
-    out.push(`  excluded pass-through: buyer shipping ${usd(o.excludedPassThroughCents.buyerPaidShipping)}, buyer tax ${o.excludedPassThroughCents.buyerCollectedTax === null ? "not recorded" : usd(o.excludedPassThroughCents.buyerCollectedTax)}`);
+    out.push(`  excluded pass-through: buyer shipping ${usd(o.excludedPassThroughCents.buyerPaidShipping)}, buyer tax ${usd(o.excludedPassThroughCents.buyerCollectedTax)}; net payout ${usd(o.crossCheckOnlyCents.actualNetPayout)} is a cross-check only`);
+    if (o.planningAssumptionsUsed.length) out.push(`  uses owner planning assumption(s): ${o.planningAssumptionsUsed.join(", ")}`);
   }
+  out.push(...formatScenario(result.planningScenario));
   return out.join("\n");
 }
 

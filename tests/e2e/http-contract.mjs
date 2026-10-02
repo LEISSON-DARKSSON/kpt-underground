@@ -53,6 +53,10 @@ try {
     assert.ok(html.includes('data-size-chart') && html.includes('26.62&quot;') && html.includes('24.63&quot;'), "chart values are server-rendered");
     const hoodie = await (await fetch(base + "/shop/kpt-premium-hoodie")).text();
     assert.ok(hoodie.includes('data-fit="missing"') && !hoodie.includes('data-size-chart'), "hoodie without a verified source still says the chart is missing");
+    const crew = await (await fetch(base + "/shop/kpt-crewneck")).text();
+    assert.ok(crew.includes('data-fit="sourced"') && !crew.includes('data-fit="missing"') && crew.includes('data-size-chart'), "crewneck has the sourced chart, no missing notice");
+    assert.equal((crew.match(/data-size-row="/g) ?? []).length, 6, "crewneck chart lists S-3XL");
+    assert.ok(crew.includes('data-fit-model="Cotton Heritage M2480 Premium Sweatshirt"') && crew.includes('26.5&quot;') && crew.includes('23.5&quot;'), "crewneck chart values are server-rendered");
     assert.ok(html.includes('"@type":"AggregateOffer"') && html.includes('"lowPrice":"35.00"') && html.includes('"highPrice":"41.00"'));
     assert.ok(html.includes('rel="canonical" href="https://keepitunderground.com/shop/kpt-heavyweight-tee"'));
   });

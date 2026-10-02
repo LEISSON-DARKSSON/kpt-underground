@@ -19,7 +19,7 @@ export function ProductCard({ product, priority = false, list }: { product: Stor
   const type = itemType(product.id);
   const attr = keyAttribute(product);
   const category = categoryOf(product.id);
-  const onSelect = () => track("select_item", { item_list_id: list, items: [{ item_id: product.slug, price: product.priceFromCents / 100 }] });
+  const onSelect = () => track("select_item", { item_list_id: list, currency: "USD", items: [{ item_id: product.slug, item_name: product.name, price: product.priceFromCents / 100 }] });
   return (
     <article className="group flex flex-col border border-dim bg-ink-2 transition-colors duration-200 hover:border-green/40" data-product={product.slug} data-category={category?.key ?? "unclassified"}>
       <Link href={href} onClick={onSelect} data-cursor="shop" data-cursor-label="VIEW" tabIndex={-1} aria-hidden="true" className="relative block aspect-[4/5] overflow-hidden bg-ink-3 no-underline">

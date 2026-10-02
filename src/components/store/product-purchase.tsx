@@ -28,13 +28,17 @@ export function ProductPurchase({ product, header, details }: { product: StorePr
   const variant = product.variants.find((v) => v.id === variantId) ?? null;
   const gallery = useMemo(() => galleryFor(product, variant), [product, variant]);
 
+  // A variant is only known up front for single-variant products; size/model products start with none chosen,
+  // so view_item then carries the from-price and no item_variant (unknown is omitted, never guessed).
+  const soleVariantId = single?.id;
+  const viewCents = single?.priceCents ?? product.priceFromCents;
   useEffect(() => {
     trackOnce(`view_item:${product.id}`, "view_item", {
       currency: "USD",
-      value: product.priceFromCents / 100,
-      items: [{ item_id: product.slug, item_name: product.name, price: product.priceFromCents / 100 }],
+      value: viewCents / 100,
+      items: [{ item_id: product.slug, item_name: product.name, item_variant: soleVariantId, price: viewCents / 100 }],
     });
-  }, [product]);
+  }, [product, soleVariantId, viewCents]);
 
   const note =
     kind === "model"
