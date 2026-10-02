@@ -47,6 +47,10 @@ test("desk mats lead the catalog", () => {
   const a = normalizeProduct(raw());
   const b = normalizeProduct(raw({ id: "x", slug: "keep-it-underground-signal-01-desk-mat", variants: [{ ...raw().variants[0], id: V2 }] }));
   assert.deepEqual(sortProducts([a, b]).map((p) => p.slug), ["keep-it-underground-signal-01-desk-mat", "signal-studio-tote"]);
+  // regression: the SUBSURFACE / 02 notebook must not be ranked as a desk mat
+  const n = normalizeProduct(raw({ id: "n", slug: "project-notes-subsurface-02", variants: [{ ...raw().variants[0], id: V2 }] }));
+  const m = normalizeProduct(raw({ id: "m", slug: "keep-it-underground-subsurface-desk-mat", variants: [{ ...raw().variants[0], id: V2 }] }));
+  assert.deepEqual(sortProducts([n, a, m]).map((p) => p.slug), ["keep-it-underground-subsurface-desk-mat", "project-notes-subsurface-02", "signal-studio-tote"]);
 });
 
 test("checkout validation: only live variants, sane quantities, no client prices", () => {

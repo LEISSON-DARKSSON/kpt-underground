@@ -102,7 +102,7 @@ export function normalizeProduct(raw: unknown): StoreProduct | null {
 
 /** Desk mats lead the catalog; everything else keeps the shop's order. */
 export function sortProducts(products: StoreProduct[]): StoreProduct[] {
-  const rank = (p: StoreProduct) => (/desk-mat|subsurface-02|signal-01-desk/.test(p.slug) ? 0 : 1);
+  const rank = (p: StoreProduct) => (/-desk-mat$/.test(p.slug) ? 0 : 1);
   return products.map((p, i) => ({ p, i })).sort((a, b) => rank(a.p) - rank(b.p) || a.i - b.i).map((x) => x.p);
 }
 
