@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { useCart } from "@/lib/store/cart";
 
 const NAV_LINKS = [
-  { href: "/", label: "HOME" },
   { href: "/shop", label: "SHOP" },
   { href: "/story", label: "STORY" },
   { href: "/signal", label: "SIGNAL" },
@@ -72,7 +71,8 @@ export function Navbar() {
         {/* Logo */}
         <Link
           href="/"
-          data-cursor="hover"
+          aria-label="KEEP IT UNDERGROUND home"
+          data-cursor="h"
           data-cursor-label="HOME"
           className="font-display text-green no-underline"
           style={{ fontSize: 17, letterSpacing: "0.2em", marginRight: 32 }}

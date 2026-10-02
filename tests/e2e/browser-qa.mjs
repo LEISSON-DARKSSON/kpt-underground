@@ -85,6 +85,21 @@ try {
     });
   }
 
+  for (const w of [390, 1440]) {
+    await check(`home @${w}: one H1 with the offer, one hero CTA, proof right under it`, async () => {
+      const c = await ctx(w); const page = await c.newPage();
+      await page.goto(base + "/", { waitUntil: "networkidle" }); await settle(page); await page.waitForTimeout(3800);
+      assert.equal(await page.locator("h1").count(), 1);
+      assert.match(await page.locator("h1").innerText(), /desk mats/i);
+      assert.equal(await page.locator("#hero a[href]").count(), 1, "one link in the hero");
+      const gap = await page.evaluate(() => document.querySelector("[data-hero-proof]").getBoundingClientRect().top - document.querySelector("[data-hero-cta]").getBoundingClientRect().bottom);
+      assert.ok(gap >= 0 && gap < 80, `proof ${gap}px below CTA`);
+      assert.equal(await page.locator('#nav a:text-is("HOME")').count(), 0);
+      await page.screenshot({ path: `${OUT}/home-${w}.png` });
+      await c.close();
+    });
+  }
+
   await check("B01/B02: category filter in URL survives detail → Back; bogus filter falls back to All", async () => {
     const c = await ctx(390); const page = await c.newPage();
     await page.goto(base + "/shop", { waitUntil: "networkidle" });

@@ -53,60 +53,57 @@ export default function HomePage() {
             </span>
           </ScrollReveal>
 
-          <CharReveal text="KEEP IT" as="h1" staggerMs={40} className="stmt" />
-          <CharReveal text="UNDERGROUND" as="h1" staggerMs={40} className="stmt" accentClass="text-green" />
+          {/* Brand wordmark: visual only. The page's single H1 below states the offer (UX audit 2026-10-02). */}
+          <div aria-hidden="true">
+            <CharReveal text="KEEP IT" as="div" staggerMs={40} className="stmt" />
+            <CharReveal text="UNDERGROUND" as="div" staggerMs={40} className="stmt" accentClass="text-green" />
+          </div>
 
-          <ScrollReveal delay={2}>
-            <p
-              style={{
-                maxWidth: 560,
-                fontSize: "clamp(14px, 1.8vw, 18px)",
-                lineHeight: 1.85,
-                color: "var(--muted)",
-                marginTop: 36,
-              }}
-            >
-              Original graphic objects for the spaces where you build, work and create.{" "}
-              <strong style={{ color: "var(--paper)" }}>Make room for your next idea.</strong>
-            </p>
-          </ScrollReveal>
+          {/* Rendered without a reveal: it is the hero's main message and an LCP candidate. */}
+          <h1 className="mt-8 max-w-[760px] font-display text-[clamp(30px,4.2vw,52px)] leading-[1.02] text-paper" data-hero-h1>
+            Desk mats, notebooks, prints and wear for the people who build, work and create.
+          </h1>
+          <p className="mt-5 max-w-[560px] font-mono text-sm leading-relaxed text-slate">
+            Original graphic objects, made to order. <strong className="text-paper">Make room for your next idea.</strong>
+          </p>
 
           <HeroCTAs />
           <HeroStats />
 
-          <span
-            className="absolute hidden md:block"
-            style={{
-              bottom: 36,
-              left: 40,
-              fontSize: 8,
-              letterSpacing: "0.4em",
-              color: "rgba(112, 128, 144, 0.3)",
-              textTransform: "uppercase",
-              animation: "nudge 2.6s ease-in-out infinite",
-            }}
-          >
-            SCROLL TO EXPLORE &#x2193;
-          </span>
-          <span
-            className="absolute hidden md:block"
-            style={{
-              bottom: 36,
-              right: 40,
-              textAlign: "right",
-              fontSize: 8,
-              letterSpacing: "0.2em",
-              color: "rgba(112, 128, 144, 0.25)",
-              lineHeight: 2,
-            }}
-          >
-            SYS: OPERATIONAL
-            <br />
-            FREQ: 140HZ
-            <br />
-            SIGNAL: ACTIVE
-          </span>
         </div>
+        {/* Decorative labels anchored to the hero edge, below the content (never over the CTA proof). */}
+        <span
+          className="absolute hidden md:block"
+          style={{
+            bottom: 36,
+            left: 40,
+            fontSize: 8,
+            letterSpacing: "0.4em",
+            color: "rgba(112, 128, 144, 0.3)",
+            textTransform: "uppercase",
+            animation: "nudge 2.6s ease-in-out infinite",
+          }}
+        >
+          SCROLL TO EXPLORE &#x2193;
+        </span>
+        <span
+          className="absolute hidden md:block"
+          style={{
+            bottom: 36,
+            right: 40,
+            textAlign: "right",
+            fontSize: 8,
+            letterSpacing: "0.2em",
+            color: "rgba(112, 128, 144, 0.25)",
+            lineHeight: 2,
+          }}
+        >
+          SYS: OPERATIONAL
+          <br />
+          FREQ: 140HZ
+          <br />
+          SIGNAL: ACTIVE
+        </span>
       </section>
 
       <Ticker items={TICKER_ITEMS} />
