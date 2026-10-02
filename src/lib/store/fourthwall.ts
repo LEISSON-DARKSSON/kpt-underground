@@ -46,14 +46,18 @@ async function assertShop(): Promise<void> {
   shopVerified = true;
 }
 
-/** Public catalog ("all" collection only contains PUBLIC products). */
-export async function getProducts(): Promise<StoreProduct[]> {
+/**
+ * Public catalog ("all" collection only contains PUBLIC products).
+ * `fresh: true` bypasses the 60 s data cache (used once by checkout when the cache lags a new product).
+ */
+export async function getProducts(options: { fresh?: boolean } = {}): Promise<StoreProduct[]> {
   await assertShop();
   const found: StoreProduct[] = [];
   for (let page = 0; page < 10; page++) {
-    const data = (await api(`collections/all/products?page=${page}&size=50`, {
-      next: { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["fw-catalog"] },
-    })) as { results?: unknown[]; paging?: { hasNextPage?: boolean } } | null;
+    const data = (await api(
+      `collections/all/products?page=${page}&size=50`,
+      options.fresh ? { cache: "no-store" } : { next: { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["fw-catalog"] } },
+    )) as { results?: unknown[]; paging?: { hasNextPage?: boolean } } | null;
     for (const raw of data?.results ?? []) {
       const p = normalizeProduct(raw);
       if (p) found.push(p);

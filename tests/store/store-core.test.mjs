@@ -5,6 +5,7 @@ import { readFile, readdir } from "node:fs/promises";
 
 import {
   CHECKOUT_ORIGIN, SHOP_ID, checkoutUrl, normalizeProduct, sanitizeDescription, sortProducts, validateCheckoutLines,
+  validateAgainstCatalog,
 } from "../../src/lib/store/core.ts";
 
 const root = new URL("../../", import.meta.url);
@@ -91,7 +92,28 @@ test("no background music: no audio element, toggle or audio assets ship", async
   assert.equal(existsSync(new URL("public/audio/", root)), false);
 });
 
+test("checkout re-reads a fresh catalog once when the cached one does not know the variant", async () => {
+  const cached = [normalizeProduct(raw())];
+  const fresh = [normalizeProduct(raw()), normalizeProduct(raw({ id: "n", slug: "night-shift-studio-mug", variants: [{ ...raw().variants[0], id: V2 }] }))];
+  let freshCalls = 0;
+  const loadFresh = async () => { freshCalls++; return fresh; };
+  // just-published product: unknown in cache, known fresh -> passes with exactly one fresh read
+  assert.deepEqual(await validateAgainstCatalog({ items: [{ variantId: V2, quantity: 1 }] }, async () => cached, loadFresh), [{ variantId: V2, quantity: 1 }]);
+  assert.equal(freshCalls, 1);
+  // known in cache -> no fresh read at all
+  await validateAgainstCatalog({ items: [{ variantId: V1, quantity: 1 }] }, async () => cached, loadFresh);
+  assert.equal(freshCalls, 1);
+  // client errors never trigger a fresh read
+  await assert.rejects(validateAgainstCatalog({ items: [{ variantId: V1, quantity: 0 }] }, async () => cached, loadFresh), /INVALID_QUANTITY/);
+  assert.equal(freshCalls, 1);
+  // truly unknown variant still fails after one fresh read
+  await assert.rejects(validateAgainstCatalog({ items: [{ variantId: "00000000-0000-4000-8000-000000000000", quantity: 1 }] }, async () => cached, loadFresh), /UNKNOWN_VARIANT/);
+  assert.equal(freshCalls, 2);
+});
+
 test("checkout route validates against the live catalog before creating a cart", async () => {
   const src = await readFile(new URL("src/app/api/cart/checkout/route.ts", root), "utf8");
-  assert.ok(src.indexOf("getProducts()") < src.indexOf("validateCheckoutLines(") && src.indexOf("validateCheckoutLines(") < src.indexOf("createHostedCheckout("));
+  const v = src.indexOf("validateAgainstCatalog(");
+  assert.ok(v > 0 && v < src.indexOf("createHostedCheckout("), "validate before creating a cart");
+  assert.ok(src.includes("getProducts({ fresh: true })"), "fresh catalog fallback wired");
 });

@@ -133,6 +133,26 @@ export function validateCheckoutLines(input: unknown, catalog: StoreProduct[]): 
   return [...merged].map(([variantId, quantity]) => ({ variantId, quantity }));
 }
 
+/** Catalog-staleness errors: the cached catalog may lag a product that was just published or restocked. */
+const STALE_CATALOG_ERRORS = new Set(["UNKNOWN_VARIANT", "VARIANT_UNAVAILABLE"]);
+
+/**
+ * Validates against the cached catalog first; only if the cache does not know a variant (or still thinks it
+ * is unavailable) re-reads the catalog fresh, exactly once. Client errors never cause an upstream read.
+ */
+export async function validateAgainstCatalog(
+  input: unknown,
+  loadCached: () => Promise<StoreProduct[]>,
+  loadFresh: () => Promise<StoreProduct[]>,
+): Promise<CheckoutLine[]> {
+  try {
+    return validateCheckoutLines(input, await loadCached());
+  } catch (error) {
+    if (!(error instanceof Error) || !STALE_CATALOG_ERRORS.has(error.message)) throw error;
+    return validateCheckoutLines(input, await loadFresh());
+  }
+}
+
 export function checkoutUrl(cartId: string): string {
   if (!/^[A-Za-z0-9_-]{6,80}$/.test(cartId)) throw new Error("INVALID_CART_ID");
   const u = new URL("/checkout/", CHECKOUT_ORIGIN);
