@@ -257,6 +257,21 @@ test("case 8: a failing or slow script, blocked storage or a throwing loader nev
   assert.equal(slow.events("add_to_cart").length, MAX_QUEUED_WHILE_LOADING, "after the load there is no cap");
 });
 
+/* ---- case 10: Fourthwall sends begin_checkout natively, so the app does not (no double count) */
+
+test("case 10: begin_checkout stays local (Fourthwall sends it natively); checkout_redirect and the other funnel events still go out", () => {
+  const f = makeEnv();
+  const ga = createGa4Transport(ACTIVE, f.env);
+  withShop(ga, (win) => {
+    ga.grant();
+    track("add_to_cart", cartParams);
+    track("begin_checkout", cartParams);
+    track("checkout_redirect", { currency: "USD", value: 5, items: [{ item_id: "kpt-beanie", item_variant: "v1", quantity: 1 }] });
+    assert.deepEqual(f.events().map((c) => c[1]), ["page_view", "add_to_cart", "checkout_redirect"]);
+    assert.ok(win.dataLayer.some((e) => e.event === "begin_checkout"), "the local dataLayer still records it");
+  });
+});
+
 /* ---- case 9: this app never sends purchase */
 
 test("case 9: only schema events and page_view can reach the layer; a purchase handed to the transport is refused", () => {
