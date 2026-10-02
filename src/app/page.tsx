@@ -125,7 +125,7 @@ export default function HomePage() {
               <span style={{ color: "var(--green)" }}>WALL STUDIES.</span>
             </h2>
           </ScrollReveal>
-          <ProductGrid limit={6} />
+          <ProductGrid picks />
           <ScrollReveal delay={2}>
             <Link
               href="/shop"

@@ -1,14 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
+/**
+ * Brand intro. KPT-13: shown on the home page only — the buy path (/shop, products, help) never
+ * waits behind an artificial overlay. Timing is pure CSS (`loader-out`), so it also clears
+ * without JavaScript and can never stay stuck over the page.
+ */
 export function PageLoader() {
-  const [gone, setGone] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setGone(true), 2800);
-    return () => clearTimeout(timer);
-  }, []);
+  const pathname = usePathname();
+  if (pathname !== "/") return null;
 
   return (
     <div
@@ -23,10 +24,7 @@ export function PageLoader() {
         alignItems: "center",
         justifyContent: "center",
         gap: 10,
-        opacity: gone ? 0 : 1,
-        visibility: gone ? "hidden" : "visible",
-        transition: "opacity 0.8s ease, visibility 0.8s ease",
-        pointerEvents: gone ? "none" : "auto",
+        animation: "loader-out 0.8s ease 2.8s forwards",
       }}
     >
       {/* Brand mark */}
