@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // KPT-03: resolve metadata before streaming for every client (not only bots), so a product page can
+  // still answer 404 (unknown product) or 5xx (Fourthwall unreachable) instead of a streamed 200.
+  htmlLimitedBots: /.*/,
   async headers() {
     return [
       {
