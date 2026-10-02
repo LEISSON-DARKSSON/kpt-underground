@@ -98,10 +98,10 @@ function unionMembers() {
 
 /* ------------------------------------------------------------------ contract vs adapter vs call sites */
 
-test("contract: status is design-only and nothing claims a verified collector", () => {
-  assert.equal(contract.status, "DESIGN_ONLY_NOT_CONFIGURED");
+test("contract: the transport is wired but not activated, and nothing claims a verified collector", () => {
+  assert.equal(contract.status, "TRANSPORT_WIRED_NOT_ACTIVATED");
   assert.equal(contract.collector.configured, false);
-  assert.equal(contract.collector.variant.status, "DISABLED");
+  assert.equal(contract.collector.variant.status, "WIRED_INERT_NOT_ACTIVATED");
   assert.equal(contract.collector.variant.measurementIdInRepo, false);
   for (const k of ["collectorReceives", "crossDomain", "consent", "purchase", "idReconciliation"]) {
     assert.equal(contract.verification[k], "NOT_RUN", k);
@@ -188,10 +188,12 @@ test("purchase is never emitted from src/ (calls, event payloads, union, literal
   }
 });
 
-test("no vendor script or collector is wired in src/ (dataLayer only)", () => {
+test("no other vendor script is wired in src/, and Google's tag only in the collector rules and the one transport", () => {
+  const googleFiles = new Set(["src/lib/analytics-collector.ts", "src/lib/analytics-transport.ts"]);
   for (const file of srcFiles) {
     const code = stripComments(read(file));
-    assert.doesNotMatch(code, /googletagmanager|google-analytics|\bgtag\s*\(|posthog|plausible|fbq\s*\(|connect\.facebook\.net|analytics\.tiktok/i, `${file} references a collector`);
+    assert.doesNotMatch(code, /posthog|plausible|fbq\s*\(|connect\.facebook\.net|analytics\.tiktok/i, `${file} references a vendor`);
+    if (!googleFiles.has(file)) assert.doesNotMatch(code, /googletagmanager|google-analytics|gtag\s*\(/i, `${file} references a collector`);
   }
 });
 

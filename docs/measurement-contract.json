@@ -1,8 +1,8 @@
 {
-  "status": "DESIGN_ONLY_NOT_CONFIGURED",
+  "status": "TRANSPORT_WIRED_NOT_ACTIVATED",
   "ticket": "H05",
   "asOf": "2026-10-02",
-  "note": "Preparation only. No collector is active; events go to window.dataLayer and nowhere else. The adapter enforces a per-event allowlist (code, static reading + unit tests). Every collector/consent/cross-domain/purchase verification field below is NOT_RUN.",
+  "note": "Code ready, not activated. The one GA4 transport (direct gtag, Basic consent, manual page views) is wired but inert: with NEXT_PUBLIC_GA4_MEASUREMENT_ID or NEXT_PUBLIC_GA4_OWNER_ACTIVATION unset it loads nothing and sends nothing. No GA4 property or web stream for keepitunderground.com was found in the Google accounts visible on 2026-10-02, so no Measurement ID exists. The adapter enforces a per-event allowlist (code, static reading + unit tests). Every collector/consent/cross-domain/purchase verification field below is NOT_RUN.",
   "collector": {
     "recommended": "GA4 (single setup), owner decision pending",
     "configured": false,
@@ -13,8 +13,10 @@
     "variant": {
       "plan": "GA4, one web stream, Basic consent mode (no script before consent)",
       "module": "src/lib/analytics-collector.ts",
-      "status": "DISABLED",
-      "importedBy": [],
+      "transport": "src/lib/analytics-transport.ts",
+      "status": "WIRED_INERT_NOT_ACTIVATED",
+      "importedBy": ["src/lib/analytics-transport.ts"],
+      "activationEnv": ["NEXT_PUBLIC_GA4_MEASUREMENT_ID", "NEXT_PUBLIC_GA4_OWNER_ACTIVATION"],
       "measurementIdInRepo": false,
       "enabledOnlyWhen": [
         "ownerActivation === true",

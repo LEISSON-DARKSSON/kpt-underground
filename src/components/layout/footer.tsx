@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { AnalyticsPreference } from "@/components/analytics/analytics-preference";
 import { POLICY_LINKS } from "@/lib/store/policies";
 
 const FOOTER_LINKS = [
@@ -69,6 +70,7 @@ export function Footer() {
               </li>
             ))}
           </ul>
+          <AnalyticsPreference />
         </div>
 
         {/* Divider */}

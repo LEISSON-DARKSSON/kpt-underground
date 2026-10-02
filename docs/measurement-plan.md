@@ -1,18 +1,18 @@
 # Measurement plan (ticket H05)
 
-Status: PREPARATION, updated 2026-10-02 on branch `feat/home-nonblocking-fit-20261002`. The adapter now enforces a per-event allowlist and emits `hero_shop_click`; a GA4 one-stream, Basic-consent collector plan exists but is DISABLED and imported by nothing. No collector is active, no third-party script is loaded, no account or Measurement ID exists, no data was sent anywhere. Everything that was not run is marked NOT_RUN.
+Status: CODE READY, NOT ACTIVATED, updated 2026-10-02 on branch `feat/ga4-collector-20261002` (base `46be9fe`). One GA4 transport (direct gtag, Basic consent, manual page views) is wired into the app shell but inert: with `NEXT_PUBLIC_GA4_MEASUREMENT_ID` or `NEXT_PUBLIC_GA4_OWNER_ACTIVATION` unset it renders nothing, loads nothing and sends nothing. No GA4 property or web stream for `keepitunderground.com` was found in the Google accounts visible on 2026-10-02 (section 10), so no Measurement ID exists and no data was sent anywhere. Everything that was not run is marked NOT_RUN.
 
 Machine-readable twin: `docs/measurement-contract.json`. Guard tests: `tests/store/measurement-contract.test.mjs`, `tests/store/analytics-allowlist.test.mjs`. Cross-domain procedure: `docs/cross-domain-check.md` (every step NOT_RUN).
 
 ## 1. Current state
 
-- `src/lib/analytics.ts` pushes events to `window.dataLayer` and nowhere else. No vendor script (`gtag`, GTM, Pixel, PostHog and so on) exists in `src/`. Nothing is collected. A non-empty `dataLayer` is a browser buffer, not a report.
+- `src/lib/analytics.ts` validates every event and pushes it to `window.dataLayer` (a local array nothing reads), then hands it to the one registered forwarder. The only Google code is `src/lib/analytics-collector.ts` (pure rules) and `src/lib/analytics-transport.ts` (the sender); no GTM, Pixel, PostHog or second tag exists. A non-empty `dataLayer` is a browser buffer, not a report.
 - Privacy: every event has an explicit ALLOWLIST (`EVENT_SCHEMA`, top level and per item). Unknown params are dropped, every allowed value is shape-checked (ids, list ids, reasons, CTA ids, site paths; no free text, no URLs), and the old `scrub()` key blocklist plus redaction of values containing `@`, `ptkn_` or `://` remains as a second guard. The blocklist now also covers name, street, city, postcode, zip, ip, user/customer ids, session, cart id, checkout and url keys. The schema equals `docs/measurement-contract.json` (tested).
 - Unknown or missing values are omitted, never sent as 0. Currency USD accompanies any price or value that is sent.
 - `track()` swallows every error, so a blocked or broken `dataLayer` cannot break shopping (covered by the guard test). Events outside the schema are never pushed.
 - `purchase` does not exist in `src/` and must never be added there (CLAUDE.md commerce rule 7).
 - `hero_shop_click` is emitted by `src/components/home/hero-cta-tracker.tsx`, a client wrapper that renders the same `div` around the unchanged server-rendered hero link and never blocks navigation. Params: `cta_id`, `destination` (site path) only.
-- `src/lib/analytics-collector.ts` (`collectorPlan`) is the prepared, DISABLED GA4 variant: one web stream, Basic consent (the script is not loaded before consent). It returns `enabled:false` unless the owner activation flag is exactly true, the Measurement ID is a valid non-placeholder `G-XXXXXXXXXX` and consent is exactly `granted`. It is pure, has no imports and no side effects, and is imported by nothing (tested).
+- Collector: `collectorPlan` (pure) says whether the tag may run. `createGa4Transport` performs it: consent default (analytics granted; `ad_storage`, `ad_user_data`, `ad_personalization` denied), `js`, `config` (`send_page_view:false`, Google signals and ad personalization off), then an async `gtag.js` script request with its own layer name (`l=kptGa4Layer`) so the shop's `{event}` buffer is never consumed by Google. Every command goes through one real `gtag()` that pushes the `arguments` object (raw arrays are ignored by the consent engine). The consent choice is stored in `localStorage` key `kpt-analytics-consent-v1` and is analytics only: it is not an advertising or e-mail consent. UI: `AnalyticsRoot` (banner, shown only when configured and unset) and `AnalyticsPreference` (footer switch). Page views are manual: the first one right after a grant (or on load with a stored grant), then one per real route change (`usePathname`), deduplicated against StrictMode double effects.
 
 ## 2. Events emitted today (static code reading, 2026-10-02)
 
@@ -33,7 +33,7 @@ Money is `cents / 100` exactly once (USD dollars). `item_id` is always the produ
 Residual gaps (reported, not hidden):
 
 1. `view_item` reports the from-price for multi-variant products and has no `item_variant` there (no variant is chosen at view time). It is unknown, so it is omitted.
-2. `view_item` fires once per product id per full page load (module-level `trackOnce` set). Client-side revisits are not counted again: an undercount, never a repeat. Tested with a simulated SPA route change.
+2. `view_item` and `view_item_list` fire once per page view: `trackOnce` keys are cleared by a layout effect on every route change (`startPageScope`), so A -> B -> A counts A twice and a re-render or StrictMode re-run counts once. Tested with a simulated route change and in a real browser. Events before consent are not counted at all (no replay).
 3. `view_cart` fires on every drawer open, including right after `add_to_cart`.
 4. `begin_checkout` fires before server validation, so it also counts attempts that end in `checkout_error`.
 5. `checkout_redirect` has no per-item price; `value` is the cart subtotal.
@@ -67,7 +67,7 @@ Rules:
 
 | Surface | Collector wiring | Status |
 |---|---|---|
-| keepitunderground.com (Next.js) | Existing adapter plus a consent-gated tag for the chosen tool | Not configured |
+| keepitunderground.com (Next.js) | Existing adapter plus the consent-gated GA4 transport | Code ready, inert; no Measurement ID, not activated |
 | keepitunderground-shop.fourthwall.com (hosted checkout) | Fourthwall Analytics, Tracking Pixels, GA4 Measurement ID, plus a separate account link for reports | Not configured (Fourthwall GA report previously said Google Analytics is not connected, per strategy S09/E11) |
 
 Connecting one surface does not configure the other.
@@ -91,11 +91,13 @@ Fetch notes: the Fourthwall and Google e-commerce pages were read through a page
 
 The concrete procedure, with boolean PASS criteria, owner-gated prerequisites, evidence-hygiene rules and clearly labelled UNVERIFIED hypotheses, is in `docs/cross-domain-check.md`. Every step there is NOT_RUN. Cross-domain is PASS only when the debug view shows continuity on both hostnames; otherwise attribution is reported as unknown. No orders, no payment; stop at the hosted checkout page (HTTP 200).
 
-## 7. Consent and privacy
+## 7. Consent and privacy (policy implemented in code; a technical proposal, not legal advice)
 
-- Refused or unset consent must never block, delay or alter shopping: no event call may throw, await a network call, or gate the cart or checkout. Current `track()` already swallows errors; the consent gate must keep that property.
-- Before consent, the tag is not loaded. `dataLayer` pushes may buffer locally but nothing leaves the browser. Whether to use Consent Mode or no-tag-until-consent is an owner policy decision.
-- No PII in events: no email, full name, address, phone, card data, token or cookie value, and no fingerprinting. The field allowlist is implemented per event in `EVENT_SCHEMA` (item_id, item_variant, item_name, item_list_id, index, price, quantity, currency, value, reason, cta_id, destination; no `transaction_id` exists in `src/`), with `scrub()` as the second guard.
+- Basic consent, no advertising features. Before consent and after a refusal the Google tag is not loaded and no measurement request is made. Shopping never waits for it: no event call throws, awaits a network call or gates the cart or checkout.
+- Events from before consent are never sent and never replayed: the transport receives each event as it happens and ignores it unless consent is granted. The only buffer is the short one that builds while the script loads after the grant (capped at 25 commands; a blocked script stops it).
+- Withdrawal stops sending in the same session: `ga-disable-<ID>` is set first, a `consent update` to denied follows, the transport gate closes, and the `_ga` / `_ga_<ID>` cookies are expired. A stored refusal is honoured on the next visit.
+- Google sees `page_location` and `page_referrer` only as rebuilt by `safePageLocation` / `safeReferrer`: origin + path, plus `utm_*` campaign tags whose value is a short plain token; no search text, filters, `_gl`, ids or other parameters; an external referrer is reduced to its origin. They are added to every event, to `config` and to `gtag('set')`. UNVERIFIED until a real receipt: whether Google's own automatic events (`user_engagement`, `scroll` and so on) use the `set` values instead of `document.location`.
+- No PII in events: the field allowlist is implemented per event in `EVENT_SCHEMA`, with `scrub()` as the second guard, and the transport refuses any event name outside the schema (so a stray `purchase` cannot go out).
 - Never treat checkout contact data as marketing consent. Do not import customer addresses into marketing tools.
 - Ad blockers and refusals shrink the visible data. The Fourthwall order ledger stays the financial source of truth; do not compute conversion from zero or unknown sessions.
 
@@ -116,8 +118,21 @@ Layered report when finished: code ready, Preview verified, in Production, colle
 
 ## 9. Blocked until the owner decides
 
-- Choice of collector (recommendation: the single GA4 setup, reusing any existing property and stream).
-- Consent policy and banner (EU and US visitors). The prepared variant is Basic consent (no script before consent).
-- Which GA4 property and web stream to use, and whether one already exists.
-- Any account creation, Tracking Pixels entry in Fourthwall, tag load, import of `src/lib/analytics-collector.ts` into the app, or setting `ownerActivation`.
-- Checkout URL decoration for cross-domain (only if `docs/cross-domain-check.md` shows the linker does not carry over).
+- Which GA4 property and web stream to use (section 10: none for this site was found).
+- Any account, property or stream creation, Tracking Pixels entry in Fourthwall, setting the two env vars in Vercel, or publishing this branch to Production.
+- Checkout URL decoration for cross-domain (only if `docs/cross-domain-check.md` shows the linker does not carry over). This branch changes neither `cart.tsx` call sites nor the checkout route.
+
+## 10. Asset search and the activation decision (read-only, 2026-10-02)
+
+Searched, read only: Google Analytics in the browser profile signed in as the owner's Google account, all 10 Analytics accounts and the Tag Manager list; property names matching "keep" and "underground" (none); the data streams of the LEISSON CREATIVE account (`304551897`). Found: property `429821431` (stream `https://www.leisson.eu`) and property `554535675` PROUXAUDIT (stream `https://prouxaudit.com`); both belong to other projects and must not be used. The other signed-in Google account on the owner's company domain has no Analytics account; a third signed-in account belongs to another project and was not opened. No Google tag ID appears in the server HTML of `keepitunderground.com` or the Fourthwall shop (the Fourthwall page may inject tags with script, which was not run). Conclusion: no GA4 property or web stream for `keepitunderground.com` is visible to this login. Supermetrics GA4 was not authenticated (no OAuth grant was made).
+
+Decision needed from the owner (one question): approve creating ONE GA4 property with ONE web stream for `keepitunderground.com` under account LEISSON CREATIVE (`304551897`), or name an existing one. If approved, the activation steps are, in order, each needing the owner's go:
+
+1. Create the property and stream. Turn Enhanced Measurement "page changes based on browser history" OFF (this code sends the SPA page views itself; leaving it on double counts) and decide the other Enhanced Measurement toggles. Set a QA / internal-traffic filter and data retention.
+2. Set the two env vars on Preview only; push the branch; check on the Preview URL, in DebugView, at the exact branch SHA, that consent unset or denied sends nothing and a grant sends one `page_view` and the events. Real collection stays NOT_RUN until that receipt exists.
+3. Only then, with an explicit final-SHA confirmation, set the env vars for Production.
+
+## 11. Tests (reusable, `tests/measurement/`)
+
+- `npm run test:measurement`: transport against a fake browser (cases 1-9, URL hygiene, caps, cookies) and the negative control for the contact-capture scanner (the fixture with a signup form must fail the check, the fixture without must pass; a pattern with a raw control character is rejected).
+- `npm run test:measurement:browser`: real build, real Chromium, Google hosts intercepted, `gtag.js` replaced by a stub that plays the observable parts (reads the layer at load, honours `ga-disable`, one collect per event). It proves our command sequence, consent gating, route handling, URL hygiene and that shopping never depends on measurement. It does not prove real `gtag.js` behaviour on the wire. Needs `PLAYWRIGHT_MODULE` (and `CHROMIUM_PATH`).

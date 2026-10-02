@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import { AnalyticsRoot } from "@/components/analytics/analytics-root";
 import { CursorEngine } from "@/components/brand/cursor-engine";
 import { PageLoader } from "@/components/brand/page-loader";
 import { Navbar } from "@/components/layout/navbar";
@@ -61,6 +62,7 @@ export default function RootLayout({
             Skip to content
           </a>
           <PageLoader />
+          <AnalyticsRoot />
           <CursorEngine />
           <Navbar />
           <main id="main-content" className="relative" style={{ zIndex: 1 }}>
