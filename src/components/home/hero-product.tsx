@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { formatPrice } from "@/lib/store/core";
 import { getProducts } from "@/lib/store/fourthwall";
 import { displayName, heroProduct, itemType, keyAttribute } from "@/lib/store/merchandising";
@@ -9,6 +11,9 @@ import { displayName, heroProduct, itemType, keyAttribute } from "@/lib/store/me
  * (`.hero-figure-frame`) shows the whole mat and trims only that empty canvas. This assumes the
  * listing's first image is that flat landscape render (true for both mats on 2026-10-02); if the
  * owner reorders the listing images the crop must be re-checked (tests/e2e + qa-home-h01h02).
+ * R2: the picture is served by the Next image optimizer so the browser picks a size from a real
+ * srcset instead of always downloading the 1920 px original. The signed Fourthwall URL is passed
+ * through untouched (next.config.ts allows only imgproxy.fourthwall.dev).
  * The figure has no link: the hero keeps ONE call to action, the Shop button, and /shop lists the
  * desk mats first. If the catalog is unreachable or no desk mat qualifies, nothing is rendered.
  */
@@ -28,16 +33,14 @@ export async function HeroProduct() {
   return (
     <figure className="hero-figure" data-hero-product={product.slug}>
       <div className="hero-figure-frame">
-        {/* eslint-disable-next-line @next/next/no-img-element -- Fourthwall CDN image (already resized) */}
-        <img
+        <Image
           src={img.url}
           alt=""
-          width={img.width}
-          height={img.height}
-          loading="eager"
-          decoding="async"
+          fill
+          preload
           fetchPriority="high"
-          sizes="(min-width: 1024px) 45vw, 100vw"
+          quality={75}
+          sizes="(min-width: 1200px) 480px, (min-width: 768px) 40vw, calc(100vw - 48px)"
           className="hero-figure-img"
         />
       </div>

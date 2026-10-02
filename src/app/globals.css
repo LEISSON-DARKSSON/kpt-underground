@@ -295,11 +295,18 @@ body.clock .cr { width: 42px; height: 42px; border-color: rgba(255, 140, 0, 0.3)
   #boot-sweep { display: none; }
 }
 
-/* Home hero (H02): offer, one real object and the single CTA share the first decision view.
-   Stacked order on small screens: text, object, CTA + proof. Two columns from 768px. */
-.hero { padding: 96px 0 48px; }
-.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
-.hero-wordmark .stmt { font-size: clamp(48px, 7.2vw, 104px); }
+/* Home hero (H02 + R1): offer, the single CTA and its proof come first; the real object follows.
+   Small screens are compact so the CTA is fully visible on 320x700 and 390x844 without scrolling:
+   smaller decorative wordmark, tighter spacing. Nothing has a fixed height, so 200% zoom just scrolls.
+   Two columns from 768px: text + CTA left, object right. */
+.hero { padding: 84px 0 40px; }
+.hero .eyebrow { margin-bottom: 12px; }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+.hero-wordmark .stmt { font-size: clamp(38px, 11vw, 48px); }
+.hero-h1 { margin-top: 16px; font-size: clamp(26px, 7.4vw, 30px); }
+.hero-lede { margin-top: 12px; }
+.hero-cta > :first-child { margin-top: 0; }
+.hero-cta [data-hero-proof] { margin-top: 20px; }
 .hero-figure { margin: 0; }
 .hero-figure-frame {
   position: relative;
@@ -311,12 +318,15 @@ body.clock .cr { width: 42px; height: 42px; border-color: rgba(255, 140, 0, 0.3)
 }
 .hero-figure-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .hero-figure-caption { padding: 14px 2px 0; }
-@media (max-width: 767px) {
-  .hero-cta > :first-child { margin-top: 0; }
-}
 @media (min-width: 768px) {
   .hero { padding: 124px 0 88px; }
+  .hero .eyebrow { margin-bottom: 24px; }
   .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); column-gap: 40px; row-gap: 0; align-items: start; }
+  .hero-wordmark .stmt { font-size: clamp(48px, 7.2vw, 104px); }
+  .hero-h1 { margin-top: 32px; font-size: clamp(30px, 4.2vw, 52px); }
+  .hero-lede { margin-top: 20px; }
+  .hero-cta > :first-child { margin-top: 40px; }
+  .hero-cta [data-hero-proof] { margin-top: 40px; }
   .hero-text { grid-column: 1; grid-row: 1; }
   .hero-cta { grid-column: 1; grid-row: 2; }
   .hero-figure { grid-column: 2; grid-row: 1 / span 2; align-self: center; }

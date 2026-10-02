@@ -55,20 +55,21 @@ export default function HomePage() {
               </div>
 
               {/* Rendered without a reveal: it is the hero's main message and an LCP candidate. */}
-              <h1 className="mt-8 max-w-[760px] font-display text-[clamp(30px,4.2vw,52px)] leading-[1.02] text-paper" data-hero-h1>
+              <h1 className="hero-h1 max-w-[760px] font-display leading-[1.02] text-paper" data-hero-h1>
                 Desk mats, notebooks, prints and wear for the people who build, work and create.
               </h1>
-              <p className="mt-5 max-w-[560px] font-mono text-sm leading-relaxed text-slate">
+              <p className="hero-lede max-w-[560px] font-mono text-sm leading-relaxed text-slate">
                 Original graphic objects, made to order. <strong className="text-paper">Make room for your next idea.</strong>
               </p>
             </div>
-
-            <HeroProduct />
 
             <div className="hero-cta">
               <HeroCTAs />
               <HeroStats />
             </div>
+
+            {/* After CTA + proof in the DOM and on small screens: the CTA sits right under the offer, the object follows. */}
+            <HeroProduct />
           </div>
         </div>
         {/* Decorative labels anchored to the hero edge, below the content (never over the CTA proof). */}
