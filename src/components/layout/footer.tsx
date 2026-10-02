@@ -1,9 +1,12 @@
 import Link from "next/link";
 
+import { POLICY_LINKS } from "@/lib/store/policies";
+
 const FOOTER_LINKS = [
   { href: "/shop", label: "SHOP" },
   { href: "/story", label: "STORY" },
   { href: "/signal", label: "SIGNAL" },
+  { href: "/help", label: "SHIPPING & RETURNS" },
 ];
 
 export function Footer() {
@@ -40,11 +43,11 @@ export function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                data-cursor="hover"
+                data-cursor="h"
                 data-cursor-label={link.label}
                 style={{
-                  fontSize: 8,
-                  letterSpacing: "0.4em",
+                  fontSize: 11,
+                  letterSpacing: "0.3em",
                   textTransform: "uppercase",
                   color: "var(--muted)",
                   textDecoration: "none",
@@ -55,6 +58,17 @@ export function Footer() {
               </Link>
             ))}
           </div>
+
+          {/* Policies and contact live on the Fourthwall shop (KPT-05): visible before checkout. */}
+          <ul className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Policies and contact" data-footer-policies>
+            {POLICY_LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} target="_blank" rel="noopener" data-cursor="h" className="font-mono text-[11px] text-slate underline underline-offset-4 hover:text-green">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
         {/* Divider */}
@@ -70,9 +84,9 @@ export function Footer() {
         <div className="flex justify-between items-center flex-wrap gap-4">
           <span
             style={{
-              fontSize: 8,
+              fontSize: 10,
               letterSpacing: "0.3em",
-              color: "rgba(112, 128, 144, 0.3)",
+              color: "rgba(112, 128, 144, 0.7)",
               textTransform: "uppercase",
             }}
           >
@@ -80,9 +94,9 @@ export function Footer() {
           </span>
           <span
             style={{
-              fontSize: 8,
+              fontSize: 10,
               letterSpacing: "0.3em",
-              color: "rgba(112, 128, 144, 0.3)",
+              color: "rgba(112, 128, 144, 0.7)",
               textTransform: "uppercase",
             }}
           >
