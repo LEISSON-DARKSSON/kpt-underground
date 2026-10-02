@@ -289,6 +289,7 @@ test("KPT-03: the product page no longer turns every upstream error into notFoun
   assert.equal(/catch\s*\{\s*return null;?\s*\}/.test(page), false);
   const fw = await readFile(new URL("src/lib/store/fourthwall.ts", root), "utf8");
   assert.ok(/res\.status === 404\) return null/.test(fw), "only 404 means not found");
+  assert.ok(fw.includes("PRODUCT_LOOKUP_INCONSISTENT"), "a listed slug is cross-checked before 404");
   const { existsSync } = await import("node:fs");
   assert.ok(existsSync(new URL("src/app/shop/[slug]/error.tsx", root)), "temporary-failure boundary exists");
   // A root/shop loading.tsx flushes a 200 shell before the product is resolved (soft 404, seen live 2026-10-02).

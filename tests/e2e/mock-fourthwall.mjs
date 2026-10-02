@@ -24,6 +24,8 @@ export async function startMockFourthwall(port, fixture) {
       if (slug === "boom-product") return json(500, { error: "boom" });
       if (slug === "busy-product") return json(429, { error: "slow down" });
       if (slug === "junk-product") { res.writeHead(200, { "content-type": "application/json" }); return res.end("{not json"); }
+      // Listed in the collection, but the single-product endpoint says 404 (inconsistent upstream).
+      if (slug === "wall-studies-signal-01") return json(404, { error: "not found" });
       if (slug === "slow-product") return setTimeout(() => json(200, fixture.results[0]), 14000);
       const found = fixture.results.find((r) => r.slug === slug);
       return found ? json(200, found) : json(404, { error: "not found" });

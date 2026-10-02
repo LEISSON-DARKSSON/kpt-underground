@@ -4,8 +4,7 @@ import { commercePreviewEnabled } from "@/lib/commerce/gate";
 
 /**
  * Hard 404 for the commerce design preview outside Vercel Preview / `next dev`.
- * Runs before rendering, so the root loading.tsx stream can never turn a
- * page-level notFound() into an HTTP 200 shell on Production.
+ * Runs before rendering, so the status is decided before any page stream starts.
  */
 export function proxy() {
   if (commercePreviewEnabled()) return NextResponse.next();

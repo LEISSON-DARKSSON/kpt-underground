@@ -134,12 +134,20 @@ export async function getProduct(slug: string): Promise<StoreProduct | null> {
   if (!/^[a-z0-9-]{1,120}$/.test(slug)) return null;
   await assertShop();
   const raw = await api(`products/${slug}`, { next: { revalidate: CATALOG_REVALIDATE_SECONDS, tags: ["fw-catalog"] } });
-  if (raw === null) return null;
-  if (typeof raw !== "object" || Array.isArray(raw)) {
+  if (raw !== null && (typeof raw !== "object" || Array.isArray(raw))) {
     logUpstream("products/:slug", "INVALID_PRODUCT_RESPONSE");
     throw new StoreUnavailableError("INVALID_PRODUCT_RESPONSE");
   }
-  return normalizeProduct(raw);
+  const product = raw === null ? null : normalizeProduct(raw);
+  if (product) return product;
+  // Before answering 404: a slug the public collection still lists is a real product whose
+  // lookup failed (inconsistent/transient upstream) — a temporary fault, never "not found".
+  const listed = (await getProducts()).some((p) => p.slug === slug);
+  if (listed) {
+    logUpstream("products/:slug", "PRODUCT_LOOKUP_INCONSISTENT");
+    throw new StoreUnavailableError("PRODUCT_LOOKUP_INCONSISTENT");
+  }
+  return null;
 }
 
 /** Creates a Fourthwall cart from already-validated lines and returns the hosted checkout URL. */

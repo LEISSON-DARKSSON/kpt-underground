@@ -38,6 +38,10 @@ try {
   await check("B13: unknown slug → 404", async () => {
     assert.equal((await fetch(base + "/shop/does-not-exist")).status, 404);
   });
+  await check("KPT-03: a product the public collection lists is never answered with 404 (inconsistent upstream → 5xx)", async () => {
+    const r = await fetch(base + "/shop/wall-studies-signal-01");
+    assert.ok(r.status >= 500, `status ${r.status}`);
+  });
   await check("real product → 200 with no preselected size and a missing-size-chart notice", async () => {
     const r = await fetch(base + "/shop/kpt-heavyweight-tee");
     assert.equal(r.status, 200);
