@@ -1,5 +1,5 @@
 import { StoreUnavailableError, createHostedCheckout, getProducts } from "@/lib/store/fourthwall";
-import { validateCheckoutLines } from "@/lib/store/core";
+import { validateAgainstCatalog } from "@/lib/store/core";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -23,8 +23,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "INVALID_JSON" }, { status: 400, headers: HEADERS });
   }
   try {
-    const catalog = await getProducts();
-    const lines = validateCheckoutLines(body, catalog);
+    const lines = await validateAgainstCatalog(body, () => getProducts(), () => getProducts({ fresh: true }));
     const url = await createHostedCheckout(lines);
     return Response.json({ url }, { headers: HEADERS });
   } catch (error) {
