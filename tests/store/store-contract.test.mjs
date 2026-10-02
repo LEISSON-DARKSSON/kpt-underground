@@ -298,6 +298,11 @@ test("KPT-03: the product page no longer turns every upstream error into notFoun
   assert.ok(/htmlLimitedBots:\s*\/\.\*\//.test(cfg), "metadata resolves before streaming so status can be 404/5xx");
 });
 
+test("KPT-13: the /shop header is not hidden behind a JS reveal (it was the LCP element at ~5 s)", async () => {
+  const src = await readFile(new URL("src/app/shop/page.tsx", root), "utf8");
+  assert.equal(/<ScrollReveal/.test(src), false);
+});
+
 test("content gate: no unproven delivery, free-shipping, bestseller or review claims in shop UI", async () => {
   const dirs = ["src/components/store/", "src/app/shop/", "src/app/help/", "src/lib/store/"];
   for (const d of dirs) {
