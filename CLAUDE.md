@@ -41,13 +41,15 @@ src/
 │   ├── api/fourthwall/status/route.ts         # opt-in diagnostic (FOURTHWALL_READONLY_ENABLED)
 │   └── commerce-preview/…                     # legacy desk-mat preview (gated, reference only)
 ├── components/
-│   ├── brand/      char-reveal, cursor-engine, page-loader (home only, CSS-timed), scroll-reveal, ticker
+│   ├── brand/      char-reveal, cursor-engine, page-loader (home only: a transparent CSS scan line, never blocks the page), scroll-reveal, ticker
 │   ├── store/      shop-catalog, product-card, product-grid, product-purchase, product-gallery, add-to-cart
 │   ├── layout/     navbar (HOME / SHOP / STORY / SIGNAL), footer (+ help + Fourthwall policy links)
-│   ├── home/ story/ signal/ commerce/
+│   ├── home/       hero-ctas, hero-stats, hero-product (real Studio-pick desk mat from the live catalog), manifesto-strip
+│   ├── story/ signal/ commerce/
 ├── lib/
 │   ├── store/core.ts          # pure: normalize, parseCatalogPage, choiceKind, galleryFor, fitStatus, checkout validation
 │   ├── store/cart-model.ts    # pure cart rules (storage parsing, 20-line / 10-qty limits, price reconcile)
+│   ├── store/fit-sources.ts   # source-backed size charts (verbatim supplier numbers; only for products Fourthwall has no SIZE_AND_FIT for)
 │   ├── store/merchandising.ts # offer-id → category/type, Studio picks, search/sort (presentation only)
 │   ├── store/seo.ts, store/policies.ts
 │   ├── store/fourthwall.ts    # Storefront fetch; getProducts({ fresh? }); StoreUnavailableError vs null (=404)

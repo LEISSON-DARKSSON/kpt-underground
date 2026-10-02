@@ -1,0 +1,631 @@
+{
+  "status": "DESIGN_ONLY_NOT_CONFIGURED",
+  "ticket": "H05",
+  "asOf": "2026-10-02",
+  "note": "Preparation only. No collector is active; events go to window.dataLayer and nowhere else. The adapter enforces a per-event allowlist (code, static reading + unit tests). Every collector/consent/cross-domain/purchase verification field below is NOT_RUN.",
+  "collector": {
+    "recommended": "GA4 (single setup), owner decision pending",
+    "configured": false,
+    "surfaces": [
+      "keepitunderground.com",
+      "keepitunderground-shop.fourthwall.com"
+    ],
+    "variant": {
+      "plan": "GA4, one web stream, Basic consent mode (no script before consent)",
+      "module": "src/lib/analytics-collector.ts",
+      "status": "DISABLED",
+      "importedBy": [],
+      "measurementIdInRepo": false,
+      "enabledOnlyWhen": [
+        "ownerActivation === true",
+        "valid non-placeholder G-XXXXXXXXXX id",
+        "consent === granted"
+      ],
+      "crossDomainProcedure": "docs/cross-domain-check.md (every step NOT_RUN)"
+    }
+  },
+  "adapter": "src/lib/analytics.ts",
+  "units": {
+    "price": "major currency units (USD dollars), computed once as cents / 100",
+    "currency": "USD literal at each call site that sends price or value; the adapter also fills USD if money survives without a currency",
+    "value": "major units; set currency whenever value is sent",
+    "missing": "unknown or missing values are omitted by the adapter, never sent as 0 (price 0 is only sent if the caller really passes 0)"
+  },
+  "forbiddenParams": {
+    "keysScrubbedByAdapter": [
+      "email",
+      "e-mail",
+      "address",
+      "phone",
+      "name_full",
+      "full_name",
+      "first_name",
+      "last_name",
+      "customer*",
+      "token",
+      "cookie",
+      "card",
+      "iban",
+      "password",
+      "street",
+      "city",
+      "postcode",
+      "zip",
+      "ip",
+      "user_id",
+      "session*",
+      "cart_id",
+      "checkout*",
+      "*url*"
+    ],
+    "keysRequiredForbiddenByContract": [
+      "email",
+      "address",
+      "phone",
+      "token",
+      "cookie",
+      "card"
+    ],
+    "valuesRedacted": [
+      "any string containing @",
+      "any string containing ptkn_",
+      "any string containing ://"
+    ],
+    "knownScrubGaps": [],
+    "allowlistRequiredBeforeActivation": true,
+    "allowlistImplemented": true
+  },
+  "events": [
+    {
+      "name": "hero_shop_click",
+      "meaning": "Primary hero CTA (SHOP THE OBJECTS) activated on the home page (click or keyboard activation of the one link). Does not prevent or delay navigation.",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "cta_id",
+        "destination"
+      ],
+      "forbiddenParams": [
+        "items",
+        "value",
+        "currency"
+      ],
+      "itemsSentToday": false,
+      "itemIdRequired": false,
+      "callSites": [
+        "src/components/home/hero-cta-tracker.tsx:16"
+      ],
+      "allowedParams": [
+        "cta_id",
+        "destination"
+      ],
+      "handler": "src/components/home/hero-cta-tracker.tsx (client wrapper around the server-rendered link; DOM unchanged)"
+    },
+    {
+      "name": "view_item_list",
+      "meaning": "A defined product list was shown (catalog or Studio picks), once per list per page load.",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "items[].item_id",
+        "item_list_id"
+      ],
+      "recommendedParams": [
+        "items[].index",
+        "items[].price",
+        "currency",
+        "items[].item_name"
+      ],
+      "forbiddenParams": [
+        "transaction_id"
+      ],
+      "itemsSentToday": true,
+      "itemIdRequired": true,
+      "callSites": [
+        "src/components/store/shop-catalog.tsx:50"
+      ],
+      "gaps": [
+        "item_list_id never contains the visitor's search text (':search' suffix only)"
+      ],
+      "allowedParams": [
+        "item_list_id",
+        "currency"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_name",
+        "index",
+        "price"
+      ]
+    },
+    {
+      "name": "select_item",
+      "meaning": "User opened a product from a list.",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "items[].item_id"
+      ],
+      "recommendedParams": [
+        "item_list_id",
+        "items[].price"
+      ],
+      "forbiddenParams": [
+        "transaction_id"
+      ],
+      "itemsSentToday": true,
+      "itemIdRequired": true,
+      "callSites": [
+        "src/components/store/product-card.tsx:22"
+      ],
+      "gaps": [],
+      "allowedParams": [
+        "item_list_id",
+        "currency"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_name",
+        "price"
+      ]
+    },
+    {
+      "name": "view_item",
+      "meaning": "A product detail page was viewed.",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "items[].item_id",
+        "currency",
+        "value"
+      ],
+      "recommendedParams": [
+        "items[].item_name",
+        "items[].price",
+        "items[].item_variant"
+      ],
+      "forbiddenParams": [
+        "transaction_id"
+      ],
+      "itemsSentToday": true,
+      "itemIdRequired": true,
+      "callSites": [
+        "src/components/store/product-purchase.tsx:36"
+      ],
+      "gaps": [
+        "item_variant only for single-variant products; size/model products start with no variant chosen, so it is omitted (unknown, not 0)",
+        "price/value is the from-price for multi-variant products, not a chosen variant",
+        "fires once per product id per full page load (module-level trackOnce set); a client-side revisit is not counted again (undercount, never a repeat)"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_name",
+        "item_variant",
+        "price"
+      ]
+    },
+    {
+      "name": "view_cart",
+      "meaning": "Cart drawer opened (it also opens after add_to_cart).",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "items[].item_id"
+      ],
+      "recommendedParams": [
+        "currency",
+        "value",
+        "items[].item_variant",
+        "items[].quantity"
+      ],
+      "forbiddenParams": [
+        "transaction_id"
+      ],
+      "itemsSentToday": true,
+      "itemIdRequired": true,
+      "callSites": [
+        "src/lib/store/cart.tsx:106"
+      ],
+      "gaps": [
+        "fires on every drawer open, so one add_to_cart is followed by one view_cart",
+        "value omitted when the cart is empty (unknown, not 0)"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "price",
+        "quantity"
+      ]
+    },
+    {
+      "name": "add_to_cart",
+      "meaning": "A valid chosen variant was actually added to the local cart (not when the line limit rejected it).",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "items[].item_id",
+        "currency",
+        "value"
+      ],
+      "recommendedParams": [
+        "items[].item_variant",
+        "items[].price",
+        "items[].quantity"
+      ],
+      "forbiddenParams": [
+        "transaction_id"
+      ],
+      "itemsSentToday": true,
+      "itemIdRequired": true,
+      "callSites": [
+        "src/lib/store/cart.tsx:114"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "price",
+        "quantity"
+      ]
+    },
+    {
+      "name": "begin_checkout",
+      "meaning": "Checkout initiation from the cart drawer. Not payment.",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "items[].item_id",
+        "currency",
+        "value"
+      ],
+      "recommendedParams": [
+        "items[].item_variant",
+        "items[].price",
+        "items[].quantity"
+      ],
+      "forbiddenParams": [
+        "transaction_id"
+      ],
+      "itemsSentToday": true,
+      "itemIdRequired": true,
+      "callSites": [
+        "src/lib/store/cart.tsx:197"
+      ],
+      "gaps": [
+        "fires before server validation, so it also counts attempts that end in checkout_error"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "price",
+        "quantity"
+      ]
+    },
+    {
+      "name": "checkout_redirect",
+      "meaning": "A valid Fourthwall checkout URL was received and the browser is about to be sent there. Not a purchase. Never mark as a key event / conversion.",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "currency",
+        "value",
+        "items[].item_id",
+        "items[].quantity"
+      ],
+      "recommendedParams": [
+        "items[].item_variant"
+      ],
+      "forbiddenParams": [
+        "transaction_id",
+        "url",
+        "checkout_url",
+        "cart_id",
+        "session",
+        "any URL or query string"
+      ],
+      "itemsSentToday": true,
+      "itemIdRequired": true,
+      "callSites": [
+        "src/lib/store/cart.tsx:219"
+      ],
+      "gaps": [
+        "no per-item price (value is the cart subtotal from cents / 100)"
+      ],
+      "allowedParams": [
+        "currency",
+        "value"
+      ],
+      "allowedItemParams": [
+        "item_id",
+        "item_variant",
+        "quantity"
+      ]
+    },
+    {
+      "name": "checkout_error",
+      "meaning": "Custom technical event: checkout could not start (PRICE_CHANGED, HTTP_n, NETWORK).",
+      "source": "keepitunderground.com",
+      "emittedToday": true,
+      "requiredParams": [
+        "reason"
+      ],
+      "forbiddenParams": [
+        "items",
+        "value",
+        "transaction_id"
+      ],
+      "itemsSentToday": false,
+      "itemIdRequired": false,
+      "callSites": [
+        "src/lib/store/cart.tsx:209",
+        "src/lib/store/cart.tsx:215",
+        "src/lib/store/cart.tsx:229"
+      ],
+      "gaps": [
+        "no items array (by design: technical event)"
+      ],
+      "allowedParams": [
+        "reason"
+      ]
+    },
+    {
+      "name": "purchase",
+      "meaning": "A real paid order confirmed by the platform (Fourthwall). Never emitted by src/, a click, an HTTP 200, a redirect or a thank-you URL.",
+      "source": "Fourthwall native Tracking Pixels (order confirmation page); unverified until a real order exists",
+      "emittedToday": false,
+      "requiredParams": [
+        "transaction_id",
+        "currency",
+        "value",
+        "items[].item_id"
+      ],
+      "forbiddenParams": [
+        "any emission from src/"
+      ],
+      "itemsSentToday": false,
+      "itemIdRequired": true,
+      "callSites": [],
+      "dedupe": "one transaction_id counted once; owner test orders, samples and gifts tagged separately",
+      "verification": "NOT_RUN"
+    }
+  ],
+  "idMap": {
+    "source": "tests/store/fixtures/public-catalog-2026-10-02.json (read-only Storefront snapshot, 2026-10-02)",
+    "localItemIdToday": "product.slug as item_id; Fourthwall variant id as item_variant",
+    "offerIdField": "results[].id (Fourthwall offer id)",
+    "note": "Local slug item_id may differ from what Fourthwall natively sends. Reconcile against real Fourthwall events (offer id / variant id / SKU, whichever it emits) before any report; do not assume equality.",
+    "reconciliation": "NOT_RUN",
+    "productCount": 22,
+    "variantCount": 55,
+    "products": [
+      {
+        "slug": "kpt-minimalist-backpack",
+        "offerId": "22aeebe6-04db-4468-9b37-f078eb90267b",
+        "variantIds": [
+          "3bda0730-41e0-4ac4-a975-b7c5459a2be6"
+        ]
+      },
+      {
+        "slug": "kpt-magsafe-tough-case",
+        "offerId": "83986574-4480-4619-8e71-2d61f4ef1bbc",
+        "variantIds": [
+          "7f2b1e4e-bf08-42f8-a743-dd56447ebb5a",
+          "d80ff202-dada-4846-9793-782073131b27",
+          "ec60f66f-af4c-4719-a97e-14931327504a",
+          "de8f0767-849b-4bf9-a10e-043b2a959e7d",
+          "e33d93af-0d5b-4592-9a4a-e3cc8d0d2edf",
+          "6d828beb-2d56-4813-8607-061efe01269f",
+          "f52bd197-5bbd-4f93-9ba6-5992a7afb499",
+          "a27be900-4c2a-475f-9616-b3cd1ccc534a",
+          "530101e8-415e-4771-b3d6-e7fc281f6292",
+          "dc1b65e2-526a-48f0-a280-a6ba416c3fa9",
+          "b8b220f1-e0c6-4e00-a21e-df3651ff7aaf",
+          "a7a5f51a-a3d7-486b-a61d-b41bdbc7b119",
+          "149a15e2-a712-45aa-9e5d-41ce820e798a",
+          "20e43e25-c639-48e3-b315-6850c55330f0",
+          "d600003f-9856-460e-92e9-ece297953605",
+          "22bf8714-fa4c-45f5-974f-7fb9c2cd4660",
+          "3d5b102e-d3c3-4616-bfa8-657ccfdd9570",
+          "00c4d478-7a7c-446b-bbab-a0f7c9cdc20f"
+        ]
+      },
+      {
+        "slug": "kpt-beanie",
+        "offerId": "99cdfeba-2da7-46fe-ae2c-1d742fdc4c2a",
+        "variantIds": [
+          "426fe195-2cf5-4ded-9cae-94ceb5438d12"
+        ]
+      },
+      {
+        "slug": "kpt-crew-socks",
+        "offerId": "b37366cd-aa48-49d7-b20e-dedb8a0872c1",
+        "variantIds": [
+          "08f49b09-9f06-4534-9046-ce261cd4ec8e"
+        ]
+      },
+      {
+        "slug": "control-mouse-pad",
+        "offerId": "f3e519ab-7b12-496b-959e-6aae2ef0f7eb",
+        "variantIds": [
+          "4ec559fe-e1b6-4be3-8160-6be74cc98ce2"
+        ]
+      },
+      {
+        "slug": "kpt-studio-tumbler",
+        "offerId": "37293c60-4496-4825-b359-356b5347902a",
+        "variantIds": [
+          "9d1f4785-5a51-4af8-9e32-13246fcaa70c"
+        ]
+      },
+      {
+        "slug": "kpt-crewneck",
+        "offerId": "9b4af8fc-347b-4e56-8808-2aacea619a32",
+        "variantIds": [
+          "96132c02-3ad5-4b8c-a276-fd630887bb20",
+          "50335d78-bed9-4912-b616-f7fb3f91950c",
+          "88858a7f-83b5-44df-b8da-350589f11aae",
+          "85e26e7f-0c06-434e-8c46-29427a1a06da",
+          "56597ebe-eb79-4b02-b907-0c8bc0bfcd56",
+          "540bd55a-fcb0-4795-b711-b185237208b8"
+        ]
+      },
+      {
+        "slug": "kpt-heavyweight-tee",
+        "offerId": "6c250dd6-5ebd-4a75-a9a5-d1bc584f177f",
+        "variantIds": [
+          "e9431c80-1063-40f2-9f0f-1246ef63b754",
+          "76ec9c27-19f5-4e62-9442-ea1c7d125138",
+          "8f5017e9-dad4-428e-a77b-cfcad38ca97d",
+          "7d2aaa07-a514-4076-b5b6-d8b090295af7",
+          "c3561389-deb5-4d2d-bbb5-ccd3e79e11e2",
+          "cb9bb1db-9f3a-4111-9bc5-08266885b654",
+          "13698b07-9fb3-4500-9fe0-afe48a36e003"
+        ]
+      },
+      {
+        "slug": "kpt-premium-hoodie",
+        "offerId": "caf3e2ed-8b80-4b29-bd94-46427a9fef39",
+        "variantIds": [
+          "21be50ee-6683-481a-b743-ae8b1bdc7e01",
+          "3e2ba381-1016-43ab-bc64-254fa6d90bdb",
+          "fdc1e200-1772-475e-8a0e-704146c92841",
+          "c3eaea21-3c1a-4845-a797-9d28ce90c4c9",
+          "c5e78f62-9e47-4813-a8a3-60134fb357f1",
+          "5c54cf8a-ed09-421f-bb54-b31daaa3a247"
+        ]
+      },
+      {
+        "slug": "offline-embroidered-beanie",
+        "offerId": "ee17a091-6316-4c50-ae07-a955af9583da",
+        "variantIds": [
+          "d4a2c948-0e33-4b85-a6e0-7a0387beb744"
+        ]
+      },
+      {
+        "slug": "field-03-water-bottle",
+        "offerId": "c61e4fb7-7796-4aa3-be8d-132ebc51dd86",
+        "variantIds": [
+          "11f39be4-d616-4542-92b5-3c79c0101dc5"
+        ]
+      },
+      {
+        "slug": "night-shift-studio-mug",
+        "offerId": "2b546ac7-c52a-48be-9a8e-7a3f27eb7e0c",
+        "variantIds": [
+          "8ccf07c3-0eab-41f9-b6c9-5428aa550874"
+        ]
+      },
+      {
+        "slug": "transit-subsurface-laptop-sleeve",
+        "offerId": "c802ed05-237f-4eda-9e10-416640f92907",
+        "variantIds": [
+          "9d129bc1-03e4-4da2-bbfe-146639ba95ef"
+        ]
+      },
+      {
+        "slug": "transit-signal-laptop-sleeve",
+        "offerId": "5551ad84-b3c5-4af9-bc6a-05de2349de57",
+        "variantIds": [
+          "26b0f4cd-8ba8-4886-b705-dc6345916df3"
+        ]
+      },
+      {
+        "slug": "wall-studies-subsurface-02",
+        "offerId": "c0d71bed-0a9e-4e80-8518-061cdb58ac8b",
+        "variantIds": [
+          "4f21b9ce-a43b-4833-8989-f930eeb350d8"
+        ]
+      },
+      {
+        "slug": "wall-studies-signal-01",
+        "offerId": "04de8f0f-7b3e-430b-82b2-ca9448f82c77",
+        "variantIds": [
+          "4a8e5a76-c382-47a9-b4a8-f159b2875821"
+        ]
+      },
+      {
+        "slug": "object-studies-six-marks",
+        "offerId": "185ce494-67e8-43ff-ac2c-f80186196ebd",
+        "variantIds": [
+          "14e39452-2be6-4833-bcc9-c541fc1fbb58"
+        ]
+      },
+      {
+        "slug": "project-notes-subsurface-02",
+        "offerId": "05b191f6-6d4a-474f-ac87-1c9e2edb5894",
+        "variantIds": [
+          "615506ea-dabb-4b28-95f1-a1ce6fa3872f"
+        ]
+      },
+      {
+        "slug": "project-notes-signal-01",
+        "offerId": "bad5cb61-ad27-4e4b-94a1-5bd769f19ab8",
+        "variantIds": [
+          "8dbe5def-077d-4cd0-8bd1-63822933968f"
+        ]
+      },
+      {
+        "slug": "signal-studio-tote",
+        "offerId": "11c30deb-6d02-4590-82e6-83061fc4b21d",
+        "variantIds": [
+          "3d06e755-9c5a-4be8-96f2-76ec8b1e99c8"
+        ]
+      },
+      {
+        "slug": "keep-it-underground-subsurface-desk-mat",
+        "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+        "variantIds": [
+          "d479a574-d42e-4767-9725-f940ce0e165c"
+        ]
+      },
+      {
+        "slug": "keep-it-underground-signal-01-desk-mat",
+        "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+        "variantIds": [
+          "b28b8e38-0bd5-4303-8641-7aed66648b45"
+        ]
+      }
+    ]
+  },
+  "verification": {
+    "dataLayerOnly": "PASS (static code reading + unit tests)",
+    "collectorReceives": "NOT_RUN",
+    "crossDomain": "NOT_RUN",
+    "consent": "NOT_RUN",
+    "purchase": "NOT_RUN",
+    "idReconciliation": "NOT_RUN",
+    "allowlistEnforced": "PASS (unit tests: tests/store/analytics-allowlist.test.mjs)"
+  },
+  "allowlist": {
+    "enforced": true,
+    "schemaSource": "src/lib/analytics.ts EVENT_SCHEMA (a test compares it with allowedParams/allowedItemParams below)",
+    "rule": "unknown top-level and per-item params are dropped; each allowed value is validated by kind; scrub() stays as a second guard",
+    "valueKinds": {
+      "id": "^[A-Za-z0-9._:-]{1,100}$",
+      "label": "1-120 chars, no URL scheme",
+      "money": "finite number >= 0, 2 decimals",
+      "quantity": "integer 1-1000",
+      "index": "integer 0-10000",
+      "currency": "^[A-Z]{3}$",
+      "listId": "^[a-z0-9_:.-]{1,60}$ (never free-text search)",
+      "reason": "^[A-Za-z0-9_]{1,40}$",
+      "ctaId": "^[a-z0-9_-]{1,40}$",
+      "path": "site path only, no scheme/host/query/fragment"
+    }
+  }
+}

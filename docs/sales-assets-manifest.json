@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "ticket": "H07",
+  "status": "PREPARATION_ONLY_NOT_APPROVED",
+  "preparedAt": "2026-10-02",
+  "digitalRenderLabel": "digital visualisation",
+  "allowedOrigins": [
+    "FOURTHWALL_DIGITAL_MOCKUP",
+    "ARTWORK_SOURCE",
+    "PHYSICAL_SAMPLE_PHOTO"
+  ],
+  "allowedUses": [
+    "hero",
+    "detail",
+    "usage-context"
+  ],
+  "sources": {
+    "catalogSnapshot": "evidence/h00-20261002/public-catalog-snapshot.json (main worktree, live public catalog 2026-10-02)",
+    "fixture": "tests/store/fixtures/public-catalog-2026-10-02.json",
+    "livePages": [
+      "https://keepitunderground.com/shop/keep-it-underground-signal-01-desk-mat",
+      "https://keepitunderground.com/shop/keep-it-underground-subsurface-desk-mat"
+    ],
+    "artworkHandoff": "C:/PROJECTS/kpt-underground/KEEP-IT-UNDERGROUND-Claude-Handoff/product-assets/print/"
+  },
+  "assets": [
+    {
+      "assetId": "d90c7958-b6cd-42ea-b888-015ee654515c",
+      "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "slug": "keep-it-underground-signal-01-desk-mat",
+      "variantIds": [
+        "b28b8e38-0bd5-4303-8641-7aed66648b45"
+      ],
+      "origin": "FOURTHWALL_DIGITAL_MOCKUP",
+      "width": 1536,
+      "height": 2048,
+      "label": "digital visualisation",
+      "allowedUses": [
+        "hero"
+      ],
+      "notes": "Gallery image 1 (signal): flat, full-mat view, landscape, whole product visible. HERO. Alpha bounding box (53,640,1488,1402) in the 1536x2048 canvas (about 1436 x 763 px, about 63% of the canvas is transparent): crop to this box plus padding for any landscape or square placement; never use the full canvas. Image order is the Storefront gallery order (galleryFor keeps product.images order; the live page HTML carries no image ids, so the position-to-id mapping is by gallery order). Transparent-background cut-out: it needs a neutral backdrop chosen by the designer. Digital render: do not present it as a photo, as evidence of tested quality, or as proof of fabric, edge or print finish. The render aspect (about 1.88:1) differs from the stated 15.5 x 31.5 in (about 2.03:1): never derive dimensions from it, quote the catalog size text."
+    },
+    {
+      "assetId": "29baecd6-fef4-4f1b-8733-f6b1bb6a632f",
+      "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "slug": "keep-it-underground-signal-01-desk-mat",
+      "variantIds": [
+        "b28b8e38-0bd5-4303-8641-7aed66648b45"
+      ],
+      "origin": "FOURTHWALL_DIGITAL_MOCKUP",
+      "width": 1536,
+      "height": 2048,
+      "label": "digital visualisation",
+      "allowedUses": [
+        "hero"
+      ],
+      "notes": "Gallery image 2 (signal): full-mat view rotated to vertical, whole product visible. HERO for vertical formats (4:5, 9:16) only, secondary to image 1. Alpha bounding box about (321,179,1207,1862) in the canvas (about 887 x 1684 px). The rotated artwork is a presentation choice of the render, not a statement about how the mat is used. Image order is the Storefront gallery order (galleryFor keeps product.images order; the live page HTML carries no image ids, so the position-to-id mapping is by gallery order). Transparent-background cut-out: it needs a neutral backdrop chosen by the designer. Digital render: do not present it as a photo, as evidence of tested quality, or as proof of fabric, edge or print finish. The render aspect (about 1.88:1) differs from the stated 15.5 x 31.5 in (about 2.03:1): never derive dimensions from it, quote the catalog size text."
+    },
+    {
+      "assetId": "a81a85b4-5cb0-40f0-98ed-6fb2542e82d8",
+      "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "slug": "keep-it-underground-signal-01-desk-mat",
+      "variantIds": [
+        "b28b8e38-0bd5-4303-8641-7aed66648b45"
+      ],
+      "origin": "FOURTHWALL_DIGITAL_MOCKUP",
+      "width": 1536,
+      "height": 2048,
+      "label": "digital visualisation",
+      "allowedUses": [
+        "detail"
+      ],
+      "notes": "Gallery image 3 (signal): angled close crop of one corner with the cut-out running off the canvas (alpha bounding box about (168,0,1536,1888)). DETAIL of the artwork corner and layout only; the whole mat is not visible. The corner edge shown is a render of the supplier template: the catalog does not state an edge finish, so make no edge or stitching claim. Not a usage-context image (no desk, keyboard or mouse). Image order is the Storefront gallery order (galleryFor keeps product.images order; the live page HTML carries no image ids, so the position-to-id mapping is by gallery order). Transparent-background cut-out: it needs a neutral backdrop chosen by the designer. Digital render: do not present it as a photo, as evidence of tested quality, or as proof of fabric, edge or print finish. The render aspect (about 1.88:1) differs from the stated 15.5 x 31.5 in (about 2.03:1): never derive dimensions from it, quote the catalog size text."
+    },
+    {
+      "assetId": "4ff66fea-a872-40d4-bc2c-251902be6b32",
+      "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "slug": "keep-it-underground-subsurface-desk-mat",
+      "variantIds": [
+        "d479a574-d42e-4767-9725-f940ce0e165c"
+      ],
+      "origin": "FOURTHWALL_DIGITAL_MOCKUP",
+      "width": 1536,
+      "height": 2048,
+      "label": "digital visualisation",
+      "allowedUses": [
+        "hero"
+      ],
+      "notes": "Gallery image 1 (subsurface): flat, full-mat view, landscape, whole product visible. HERO. Alpha bounding box (53,640,1488,1402) in the 1536x2048 canvas (about 1436 x 763 px, about 63% of the canvas is transparent): crop to this box plus padding for any landscape or square placement; never use the full canvas. Image order is the Storefront gallery order (galleryFor keeps product.images order; the live page HTML carries no image ids, so the position-to-id mapping is by gallery order). Transparent-background cut-out: it needs a neutral backdrop chosen by the designer. Digital render: do not present it as a photo, as evidence of tested quality, or as proof of fabric, edge or print finish. The render aspect (about 1.88:1) differs from the stated 15.5 x 31.5 in (about 2.03:1): never derive dimensions from it, quote the catalog size text."
+    },
+    {
+      "assetId": "5da3f9c7-8dd3-41d1-826e-27cb6b7997cb",
+      "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "slug": "keep-it-underground-subsurface-desk-mat",
+      "variantIds": [
+        "d479a574-d42e-4767-9725-f940ce0e165c"
+      ],
+      "origin": "FOURTHWALL_DIGITAL_MOCKUP",
+      "width": 1536,
+      "height": 2048,
+      "label": "digital visualisation",
+      "allowedUses": [
+        "hero"
+      ],
+      "notes": "Gallery image 2 (subsurface): full-mat view rotated to vertical, whole product visible. HERO for vertical formats (4:5, 9:16) only, secondary to image 1. Alpha bounding box about (321,179,1207,1862) in the canvas (about 887 x 1684 px). The rotated artwork is a presentation choice of the render, not a statement about how the mat is used. Image order is the Storefront gallery order (galleryFor keeps product.images order; the live page HTML carries no image ids, so the position-to-id mapping is by gallery order). Transparent-background cut-out: it needs a neutral backdrop chosen by the designer. Digital render: do not present it as a photo, as evidence of tested quality, or as proof of fabric, edge or print finish. The render aspect (about 1.88:1) differs from the stated 15.5 x 31.5 in (about 2.03:1): never derive dimensions from it, quote the catalog size text."
+    },
+    {
+      "assetId": "29ac9ba5-a8a5-4600-844c-35f46e94befb",
+      "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "slug": "keep-it-underground-subsurface-desk-mat",
+      "variantIds": [
+        "d479a574-d42e-4767-9725-f940ce0e165c"
+      ],
+      "origin": "FOURTHWALL_DIGITAL_MOCKUP",
+      "width": 1536,
+      "height": 2048,
+      "label": "digital visualisation",
+      "allowedUses": [
+        "detail"
+      ],
+      "notes": "Gallery image 3 (subsurface): angled close crop of one corner with the cut-out running off the canvas (alpha bounding box about (168,0,1536,1888)). DETAIL of the artwork corner and layout only; the whole mat is not visible. The corner edge shown is a render of the supplier template: the catalog does not state an edge finish, so make no edge or stitching claim. Not a usage-context image (no desk, keyboard or mouse). Image order is the Storefront gallery order (galleryFor keeps product.images order; the live page HTML carries no image ids, so the position-to-id mapping is by gallery order). Transparent-background cut-out: it needs a neutral backdrop chosen by the designer. Digital render: do not present it as a photo, as evidence of tested quality, or as proof of fabric, edge or print finish. The render aspect (about 1.88:1) differs from the stated 15.5 x 31.5 in (about 2.03:1): never derive dimensions from it, quote the catalog size text."
+    },
+    {
+      "assetId": "artwork:SIGNAL-Desk-Mat-Upload.png",
+      "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "slug": "keep-it-underground-signal-01-desk-mat",
+      "variantIds": [
+        "b28b8e38-0bd5-4303-8641-7aed66648b45"
+      ],
+      "origin": "ARTWORK_SOURCE",
+      "width": 9921,
+      "height": 5197,
+      "label": "artwork file (flat print file, not a product photo)",
+      "allowedUses": [
+        "detail"
+      ],
+      "notes": "Print file from the sibling handoff KEEP-IT-UNDERGROUND-Claude-Handoff/product-assets/print/SIGNAL-Desk-Mat-Upload.png (not in KEEP-IT-UNDERGROUND-Products-Claude-Handoff, which has no desk-mat files). 9921 x 5197 px, 300 dpi, RGB, SHA-256 621a9f5e3a6de11fb71e9c7f9ebf44d378928ce1098db982b3bb41eee3e8e426 (matches the handoff record). Visually matches gallery image 1 (charcoal ground, light contour lines, orange disc). It is the full 33.07 x 17.32 in print canvas, not the finished 15.5 x 31.5 in mat, and the crop is not proofed by the supplier. DETAIL / artwork-study use only (draft slot 4, as a still; a clip is an owner-supplied asset). NOT hero: it shows no product shape. Never crop or resize and re-upload it to Fourthwall from this task. Print fine lines, colours, edge and material are not confirmed by a physical sample."
+    },
+    {
+      "assetId": "artwork:SUBSURFACE-Desk-Mat-Upload.png",
+      "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "slug": "keep-it-underground-subsurface-desk-mat",
+      "variantIds": [
+        "d479a574-d42e-4767-9725-f940ce0e165c"
+      ],
+      "origin": "ARTWORK_SOURCE",
+      "width": 9921,
+      "height": 5197,
+      "label": "artwork file (flat print file, not a product photo)",
+      "allowedUses": [
+        "detail"
+      ],
+      "notes": "Print file from the sibling handoff KEEP-IT-UNDERGROUND-Claude-Handoff/product-assets/print/SUBSURFACE-Desk-Mat-Upload.png (not in KEEP-IT-UNDERGROUND-Products-Claude-Handoff, which has no desk-mat files). 9921 x 5197 px, 300 dpi, RGB, SHA-256 9a8237c6da81f374941626dccba73b60e9abafe1d4ee1510e8313d3a4c415c75 (matches the handoff record). Visually matches gallery image 1 (warm off-white ground, isometric grid, orange contour). It is the full 33.07 x 17.32 in print canvas, not the finished 15.5 x 31.5 in mat, and the crop is not proofed by the supplier. DETAIL / artwork-study use only (draft slot 4, as a still; a clip is an owner-supplied asset). NOT hero: it shows no product shape. Never crop or resize and re-upload it to Fourthwall from this task. Print fine lines, colours, edge and material are not confirmed by a physical sample."
+    }
+  ],
+  "physicalSamplePhotos": {
+    "count": 0,
+    "note": "None exists on disk. Searched C:/PROJECTS/kpt-underground (both handoffs, evidence/, files/), C:/PROJECTS/kpt-underground-live and C:/PROJECTS/kpt-* for sample, photo or physical image files. The handoff states that print lines, colours, edge and material are not confirmed by a sample."
+  },
+  "usageContextAssets": {
+    "count": 0,
+    "note": "No desk-scene or usage-context image of the real mats exists. The listing renders show the mat only."
+  },
+  "excludedAssets": [
+    {
+      "path": "KEEP-IT-UNDERGROUND-Claude-Handoff/design/assets/{signal,subsurface}-mockup.webp, *-mockups.jpg, *-previews.jpg, *-art.webp",
+      "reason": "Concept boards from the web-design handoff: vector keyboard and mouse, caption 'DESK MAT - CONCEPT', 'Crop pending supplier proof'. Not Fourthwall renders, not approved sales images; the handoff says they must not be used as production files. They would also show props that are not included."
+    },
+    {
+      "path": "KEEP-IT-UNDERGROUND-Products-Claude-Handoff/assets/**",
+      "reason": "Wave 02 products (posters, notebooks, tote, stickers). Not desk mats; no new SKUs in this test."
+    },
+    {
+      "path": "KEEP-IT-UNDERGROUND-Claude-Handoff/product-assets/source/*-deskmat-SP70018.svg",
+      "reason": "Vector sources titled 'template validation pending' (1000 x 523.8 units). Listed in the md for reference; not a sales asset."
+    }
+  ]
+}

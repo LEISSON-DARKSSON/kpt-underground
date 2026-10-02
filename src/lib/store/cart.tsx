@@ -20,6 +20,7 @@ export type { CartLine } from "@/lib/store/cart-model";
 
 const KEY = "kiu-cart-v1";
 const EMPTY: CartLine[] = [];
+const subtotalOf = (ls: CartLine[]) => ls.reduce((n, l) => n + l.qty * l.unitCents, 0);
 let lines: CartLine[] = EMPTY;
 let loaded = false;
 const listeners = new Set<() => void>();
@@ -102,7 +103,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const open = useCallback((trigger?: HTMLElement | null) => {
     triggerRef.current = trigger ?? (document.activeElement as HTMLElement | null);
     setIsOpen(true);
-    track("view_cart", { items: lines.map((l) => ({ item_variant: l.variantId, item_id: l.slug, price: l.unitCents / 100, quantity: l.qty })) });
+    track("view_cart", { currency: "USD", value: lines.length > 0 ? subtotalOf(lines) / 100 : undefined, items: lines.map((l) => ({ item_variant: l.variantId, item_id: l.slug, price: l.unitCents / 100, quantity: l.qty })) });
   }, []);
   const close = useCallback(() => setIsOpen(false), []);
   const add = useCallback(
@@ -131,7 +132,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     () => ({
       lines: current,
       count: current.reduce((n, l) => n + l.qty, 0),
-      subtotalCents: current.reduce((n, l) => n + l.qty * l.unitCents, 0),
+      subtotalCents: subtotalOf(current),
       isOpen, notice, add, setQty, remove, open, close,
     }),
     [current, isOpen, notice, add, setQty, remove, open, close],
@@ -215,7 +216,12 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
         return;
       }
       // A redirect to the hosted checkout is not a purchase; purchase comes only from the platform.
-      track("checkout_redirect", { currency: "USD", value: subtotalCents / 100 });
+      track("checkout_redirect", {
+        currency: "USD",
+        value: subtotalCents / 100,
+        // What was in the cart, never the checkout URL, a cart id or a session.
+        items: snapshot.map((l) => ({ item_id: l.slug, item_variant: l.variantId, quantity: l.qty })),
+      });
       window.location.assign(data.url);
     } catch {
       setError(FALLBACK);

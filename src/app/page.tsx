@@ -4,6 +4,7 @@ import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
 import { HeroCTAs } from "@/components/home/hero-ctas";
+import { HeroProduct } from "@/components/home/hero-product";
 import { HeroStats } from "@/components/home/hero-stats";
 import { ManifestoStrip } from "@/components/home/manifesto-strip";
 import { ProductGrid } from "@/components/store/product-grid";
@@ -24,16 +25,8 @@ const TICKER_ITEMS = [
 export default function HomePage() {
   return (
     <>
-      {/* ─── HERO ─── */}
-      <section
-        id="hero"
-        className="relative overflow-hidden flex items-center"
-        style={{
-          minHeight: "100vh",
-          padding: "120px 0 80px",
-          borderBottom: "1px solid rgba(138, 206, 0, 0.06)",
-        }}
-      >
+      {/* ─── HERO ─── offer + a real object + the one CTA, all in the first decision view (H02) */}
+      <section id="hero" className="hero relative overflow-hidden" style={{ borderBottom: "1px solid rgba(138, 206, 0, 0.06)" }}>
         {/* Noise texture */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -46,34 +39,42 @@ export default function HomePage() {
         />
 
         <div className="wrap relative">
-          <ScrollReveal>
-            <span className="eyebrow">
-              <span style={{ marginRight: 4 }}>&#x25B6;</span>
-              KPT-UG // OBJECT STUDIES // SHOP OPEN
-            </span>
-          </ScrollReveal>
+          <div className="hero-grid">
+            <div className="hero-text">
+              <ScrollReveal>
+                <span className="eyebrow">
+                  <span style={{ marginRight: 4 }}>&#x25B6;</span>
+                  KPT-UG // OBJECT STUDIES // SHOP OPEN
+                </span>
+              </ScrollReveal>
 
-          {/* Brand wordmark: visual only. The page's single H1 below states the offer (UX audit 2026-10-02). */}
-          <div aria-hidden="true">
-            <CharReveal text="KEEP IT" as="div" staggerMs={40} className="stmt" />
-            <CharReveal text="UNDERGROUND" as="div" staggerMs={40} className="stmt" accentClass="text-green" />
+              {/* Brand wordmark: visual only. The page's single H1 below states the offer (UX audit 2026-10-02). */}
+              <div aria-hidden="true" className="hero-wordmark">
+                <CharReveal text="KEEP IT" as="div" staggerMs={40} className="stmt" />
+                <CharReveal text="UNDERGROUND" as="div" staggerMs={40} className="stmt" accentClass="text-green" />
+              </div>
+
+              {/* Rendered without a reveal: it is the hero's main message and an LCP candidate. */}
+              <h1 className="hero-h1 max-w-[760px] font-display leading-[1.02] text-paper" data-hero-h1>
+                Desk mats, notebooks, prints and wear for the people who build, work and create.
+              </h1>
+              <p className="hero-lede max-w-[560px] font-mono text-sm leading-relaxed text-slate">
+                Original graphic objects, made to order. <strong className="text-paper">Make room for your next idea.</strong>
+              </p>
+            </div>
+
+            <div className="hero-cta">
+              <HeroCTAs />
+              <HeroStats />
+            </div>
+
+            {/* After CTA + proof in the DOM and on small screens: the CTA sits right under the offer, the object follows. */}
+            <HeroProduct />
           </div>
-
-          {/* Rendered without a reveal: it is the hero's main message and an LCP candidate. */}
-          <h1 className="mt-8 max-w-[760px] font-display text-[clamp(30px,4.2vw,52px)] leading-[1.02] text-paper" data-hero-h1>
-            Desk mats, notebooks, prints and wear for the people who build, work and create.
-          </h1>
-          <p className="mt-5 max-w-[560px] font-mono text-sm leading-relaxed text-slate">
-            Original graphic objects, made to order. <strong className="text-paper">Make room for your next idea.</strong>
-          </p>
-
-          <HeroCTAs />
-          <HeroStats />
-
         </div>
         {/* Decorative labels anchored to the hero edge, below the content (never over the CTA proof). */}
         <span
-          className="absolute hidden md:block"
+          className="absolute hidden xl:block"
           style={{
             bottom: 36,
             left: 40,
@@ -87,7 +88,7 @@ export default function HomePage() {
           SCROLL TO EXPLORE &#x2193;
         </span>
         <span
-          className="absolute hidden md:block"
+          className="absolute hidden xl:block"
           style={{
             bottom: 36,
             right: 40,
@@ -100,26 +101,24 @@ export default function HomePage() {
         >
           SYS: OPERATIONAL
           <br />
-          FREQ: 140HZ
+          FREQ: SUB-BASS
           <br />
           SIGNAL: ACTIVE
         </span>
       </section>
 
       <Ticker items={TICKER_ITEMS} />
-      <ManifestoStrip />
 
       {/* ─── THE SHOP ─── */}
-      <section style={{ padding: "120px 0", borderBottom: "1px solid rgba(138, 206, 0, 0.06)" }}>
+      <section data-section="studio-picks" style={{ padding: "96px 0 120px", borderBottom: "1px solid rgba(138, 206, 0, 0.06)" }}>
         <div className="wrap">
           <ScrollReveal>
             <span className="eyebrow">01 // THE SHOP</span>
           </ScrollReveal>
           <ScrollReveal delay={1}>
+            {/* The six picks are two desk mats, a tee, a tote, a mug and a notebook (no wall print), so the title says what they are. */}
             <h2 className="stmt" style={{ fontSize: "clamp(36px, 6vw, 72px)", marginBottom: 56 }}>
-              DESK OBJECTS.
-              <br />
-              <span style={{ color: "var(--green)" }}>WALL STUDIES.</span>
+              STUDIO <span style={{ color: "var(--green)" }}>PICKS</span>
             </h2>
           </ScrollReveal>
           <ProductGrid picks />
@@ -136,6 +135,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Brand voice comes after the objects (H02). Wording itself is tracked in docs/claim-register.md (H03). */}
+      <ManifestoStrip />
+
       {/* ─── SIGNAL CTA ─── */}
       <section className="flex items-center justify-center text-center" style={{ padding: "160px 0", background: "var(--ink2)" }}>
         <div className="wrap">
@@ -144,9 +146,7 @@ export default function HomePage() {
           </ScrollReveal>
           <ScrollReveal delay={1}>
             <h2 className="stmt" style={{ fontSize: "clamp(36px, 6vw, 72px)", marginBottom: 24 }}>
-              THE SIGNAL
-              <br />
-              <span style={{ color: "var(--green)" }}>NETWORK</span>
+              THE <span style={{ color: "var(--green)" }}>SIGNAL</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={2}>
@@ -160,14 +160,14 @@ export default function HomePage() {
                 marginBottom: 40,
               }}
             >
-              A closed channel for those who keep it underground.
+              Notes from the studio on design and new objects. Open to everyone.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={3}>
             <Link
               href="/signal"
               data-cursor="h"
-              data-cursor-label="ENTER"
+              data-cursor-label="READ"
               style={{
                 display: "inline-block",
                 fontSize: 8,
@@ -179,7 +179,7 @@ export default function HomePage() {
                 textDecoration: "none",
               }}
             >
-              &#x25CF; ENTER SIGNAL NETWORK
+              &#x25CF; READ THE SIGNAL
             </Link>
           </ScrollReveal>
         </div>

@@ -41,12 +41,14 @@ export function CatalogView({ products, category, q, sort, interactive = false }
   const shown = useMemo(() => sortForShop(searchProducts(filterByCategory(products, category), q), sort), [products, category, q, sort]);
   const picks = useMemo(() => (category || q || sort !== "featured" ? [] : studioPicks(products)), [products, category, q, sort]);
   const counts = useMemo(() => Object.fromEntries(CATEGORIES.map((x) => [x.key, filterByCategory(products, x.key).length])), [products]);
-  const listId = `shop:${category ?? "all"}:${sort}:${q}`;
+  const listId = `shop:${category ?? "all"}:${sort}:${q}`; // dedupe key only: it contains the search text
+  // What analytics may see: never the visitor's free-text search, only that a search was used.
+  const listParam = `shop:${category ?? "all"}:${sort}${q ? ":search" : ""}`;
 
   useEffect(() => {
     if (!interactive) return;
-    trackOnce(listId, "view_item_list", { item_list_id: listId, items: shown.map((p, i) => ({ item_id: p.slug, index: i, price: p.priceFromCents / 100 })) });
-  }, [interactive, listId, shown]);
+    trackOnce(listId, "view_item_list", { item_list_id: listParam, currency: "USD", items: shown.map((p, i) => ({ item_id: p.slug, item_name: p.name, index: i, price: p.priceFromCents / 100 })) });
+  }, [interactive, listId, listParam, shown]);
 
   const go = (next: Partial<{ category: CategoryKey | null; q: string; sort: SortKey }>) =>
     router.push(href(pathname, { category, q, sort, ...next }), { scroll: false });
@@ -122,7 +124,7 @@ export function CatalogView({ products, category, q, sort, interactive = false }
       ) : (
         <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3" data-product-grid>
           {shown.map((p, i) => (
-            <ProductCard key={p.id} product={p} priority={picks.length === 0 && i < 3} list={listId} />
+            <ProductCard key={p.id} product={p} priority={picks.length === 0 && i < 3} list={listParam} />
           ))}
         </div>
       )}

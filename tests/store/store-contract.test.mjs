@@ -153,8 +153,15 @@ test("KPT-08: a phone model shows its own images; apparel sizes share the produc
 
 test("KPT-02: fit info comes from Fourthwall; missing apparel measurements are reported, not generated", () => {
   const missing = catalog.filter((p) => fitStatus(p).missing).map((p) => p.slug).sort();
-  // Snapshot 2026-10-02: Fourthwall has no SIZE_AND_FIT section / sizeGuide for these three.
-  assert.deepEqual(missing, ["kpt-crewneck", "kpt-heavyweight-tee", "kpt-premium-hoodie"]);
+  // Snapshot 2026-10-02: Fourthwall has no SIZE_AND_FIT section for these three. Tee and crewneck are covered by
+  // source-backed charts (H04, src/lib/store/fit-sources.ts); the hoodie stays honestly missing while its
+  // 2XL width conflict is open (docs/fit-hoodie-2xl-conflict.md).
+  assert.deepEqual(missing, ["kpt-premium-hoodie"]);
+  for (const slug of ["kpt-heavyweight-tee", "kpt-crewneck"]) {
+    const f = fitStatus(bySlug(slug));
+    assert.equal(f.fit, null, `Fourthwall itself publishes no ${slug} chart`);
+    assert.ok(f.source && f.missing === false, `${slug} uses the sourced chart, not a generated one`);
+  }
   for (const s of ["kpt-crew-socks", "kpt-beanie", "offline-embroidered-beanie", "transit-signal-laptop-sleeve", "transit-subsurface-laptop-sleeve"]) {
     const f = fitStatus(bySlug(s));
     assert.equal(f.needsFit, true, s);
@@ -249,7 +256,8 @@ test("KPT-14: a server price change updates the display snapshot only for that l
 
 test("KPT-09: events carry ids/prices only — no PII or secrets; no purchase event exists in the browser code", async () => {
   const e = buildEvent("add_to_cart", { currency: "USD", email: "a@b.c", items: [{ item_id: "x", address: "street", note: "me@x.com" }], token: "ptkn_abc" });
-  assert.deepEqual(e, { event: "add_to_cart", currency: "USD", items: [{ item_id: "x", note: "[redacted]" }] });
+  // The per-event allowlist drops the unknown `note` field outright (scrub's redaction is only the second guard).
+  assert.deepEqual(e, { event: "add_to_cart", currency: "USD", items: [{ item_id: "x" }] });
   assert.equal(scrub("ptkn_123"), "[redacted]");
   const files = [];
   async function walk(u) {

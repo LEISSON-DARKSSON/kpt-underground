@@ -4,19 +4,15 @@ import { ScrollReveal } from "@/components/brand/scroll-reveal";
 const SIGNALS = [
   {
     title: "WHAT IT IS",
-    body: "A closed, non-algorithmic channel. Not a newsletter. Not a loyalty programme. A direct line to events that have no public existence.",
+    body: "Notes from the studio on design and new objects. Open to everyone.",
   },
   {
-    title: "WHAT MOVES THROUGH IT",
-    body: "Location codes. Frequency callouts. Access instructions for parties not on any map. The only way in is already knowing.",
+    title: "WHAT IT CARRIES",
+    body: "Studio notes, design process, new objects.",
   },
   {
-    title: "HOW YOU ENTER",
-    body: "You find it the way you find the good parties: someone tells you. What follows cannot be described further here.",
-  },
-  {
-    title: "WHY IT WORKS",
-    body: "Because the information is real. The relationships are real. We were there before the brand existed.",
+    title: "HOW TO READ IT",
+    body: "Anyone can read it. /signal is linked from the site navigation.",
   },
 ];
 
@@ -29,19 +25,19 @@ export function StorySignalNetwork() {
             CLASSIFIED
           </span>
           <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-green border border-green/30 px-3 py-1">
-            MEMBERS ONLY
+            OPEN
           </span>
         </div>
 
         <ScrollReveal>
           <CharReveal
             as="h2"
-            text="THE SIGNAL NETWORK"
+            text="THE SIGNAL"
             className="font-display text-[clamp(3rem,10vw,7rem)] leading-[0.95] text-paper"
           />
         </ScrollReveal>
 
-        <div className="grid md:grid-cols-2 gap-8 mt-16">
+        <div className="grid md:grid-cols-3 gap-8 mt-16">
           {SIGNALS.map((signal, i) => (
             <ScrollReveal key={signal.title} delay={(i % 4) as 0 | 1 | 2 | 3}>
               <div className="border border-dim p-8 h-full">

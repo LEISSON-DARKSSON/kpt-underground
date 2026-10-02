@@ -4,7 +4,11 @@
  * the browser never decides a price. Payment happens only on Fourthwall's hosted checkout.
  */
 
-export const SHOP_ID = "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb";
+import { fitSourceFor } from "./fit-sources.ts";
+
+import type { FitSource } from "./fit-sources.ts";
+
+export const SHOP_ID ="sh_1f2e8f65-2b29-4be9-9167-7f42314361fb";
 /** Hosted checkout lives on the Fourthwall domain, not on keepitunderground.com (that is this Next.js site). */
 export const CHECKOUT_ORIGIN = "https://keepitunderground-shop.fourthwall.com";
 export const CURRENCY = "USD" as const;
@@ -116,6 +120,18 @@ function inStock(stock: unknown): boolean {
   return false;
 }
 
+/**
+ * The Fourthwall listing of the phone case says "Select your iPhone model at checkout." On this site
+ * the model is chosen before the item can be added to the cart, so that sentence would describe the
+ * wrong next step. Only that one sentence is dropped, in presentation; the listing itself is untouched.
+ */
+export function dropCheckoutModelPrompt(html: string): string {
+  return html
+    .replace(/<p>\s*Select your [^<.]{0,40}model at checkout\.?\s*<\/p>/gi, "")
+    .replace(/\s*Select your [^<.]{0,40}model at checkout\.?/gi, "")
+    .trim();
+}
+
 /** Normalize one Storefront product. Returns null for anything not publicly purchasable-shaped. */
 export function normalizeProduct(raw: unknown): StoreProduct | null {
   if (!isObj(raw)) return null;
@@ -150,7 +166,7 @@ export function normalizeProduct(raw: unknown): StoreProduct | null {
   const priced = sellable.length ? sellable : variants;
   return {
     id, slug, name,
-    descriptionHtml: sanitizeDescription(str(raw.description)),
+    descriptionHtml: dropCheckoutModelPrompt(sanitizeDescription(str(raw.description))),
     images,
     variants,
     sections: sections(raw.additionalInformation),
@@ -264,13 +280,23 @@ export function fitFamily(product: StoreProduct): FitFamily {
  * Fit information status for one product. Measurements are never generated here: if Fourthwall
  * has no SIZE_AND_FIT section for a product whose fit depends on size, it is reported as missing.
  */
-export function fitStatus(product: StoreProduct): { needsFit: boolean; fit: StoreSection | null; missing: boolean } {
+export function fitStatus(product: StoreProduct): { needsFit: boolean; fit: StoreSection | null; source: FitSource | null; missing: boolean } {
   const family = fitFamily(product);
   const needsFit = family !== "other";
   const fit = product.sections.find((s) => s.type === "SIZE_AND_FIT") ?? null;
+  // Fourthwall's own SIZE_AND_FIT wins; a source-backed chart (fit-sources.ts) fills the gap only when a size run exists for it.
+  const source = fit ? null : sourcedFit(product);
   // A phone case's "fit" is the model choice itself; it needs no measurement table.
-  const missing = needsFit && family !== "phone-case" && !fit;
-  return { needsFit, fit, missing };
+  const missing = needsFit && family !== "phone-case" && !fit && !source;
+  return { needsFit, fit, source, missing };
+}
+
+/** A source-backed chart, but only if it has a row for every size the product sells (never a partial table). */
+function sourcedFit(product: StoreProduct): FitSource | null {
+  const source = fitSourceFor(product.id);
+  if (!source) return null;
+  const sizes = new Set(source.rows.map((r) => r.size));
+  return product.variants.every((v) => sizes.has(v.size)) ? source : null;
 }
 
 /* ------------------------------------------------------------------ checkout */

@@ -1,0 +1,952 @@
+[
+  {
+    "id": "H03-001",
+    "file": "src/app/page.tsx",
+    "line": 47,
+    "text": "KPT-UG // OBJECT STUDIES // SHOP OPEN",
+    "class": "SHOP_FACT",
+    "evidence": "Fourthwall shop LIVE with 22 public offers (strategy E08); src/lib/store/fourthwall.ts",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-002",
+    "file": "src/app/page.tsx",
+    "line": 59,
+    "text": "Desk mats, notebooks, prints and wear for the people who build, work and create.",
+    "class": "SHOP_FACT",
+    "evidence": "tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-003",
+    "file": "src/app/page.tsx",
+    "line": 62,
+    "text": "Original graphic objects, made to order.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-004",
+    "file": "src/app/page.tsx",
+    "line": 62,
+    "text": "Make room for your next idea.",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-005",
+    "file": "src/app/page.tsx",
+    "line": 16,
+    "text": "\"ORIGINAL GRAPHIC OBJECTS\",",
+    "class": "SHOP_FACT",
+    "evidence": "tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-006",
+    "file": "src/app/page.tsx",
+    "line": 17,
+    "text": "\"MAKE ROOM FOR YOUR NEXT IDEA\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-007",
+    "file": "src/app/page.tsx",
+    "line": 18,
+    "text": "\"SIGNAL / 01\",",
+    "class": "SHOP_FACT",
+    "evidence": "Collection names exist in the catalog (wall-studies-signal-01, project-notes-signal-01, ...): tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-008",
+    "file": "src/app/page.tsx",
+    "line": 19,
+    "text": "\"SUBSURFACE / 02\",",
+    "class": "SHOP_FACT",
+    "evidence": "Collection names exist in the catalog (wall-studies-subsurface-02, ...): tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-009",
+    "file": "src/app/page.tsx",
+    "line": 20,
+    "text": "\"MADE ON DEMAND\",",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-010",
+    "file": "src/app/page.tsx",
+    "line": 21,
+    "text": "\"SPACE TO MAKE SOMETHING\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-011",
+    "file": "src/app/page.tsx",
+    "line": 22,
+    "text": "\"OBJECT STUDIES\",",
+    "class": "SHOP_FACT",
+    "evidence": "Catalog product object-studies-six-marks and the OBJECT STUDIES line names: tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-012",
+    "file": "src/app/page.tsx",
+    "line": 102,
+    "text": "SYS: OPERATIONAL",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-013",
+    "file": "src/app/page.tsx",
+    "line": 104,
+    "text": "FREQ: SUB-BASS",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: decorative HUD label, same wording as /story; no longer the public gate code (gate removed)",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-014",
+    "file": "src/app/page.tsx",
+    "line": 106,
+    "text": "SIGNAL: ACTIVE",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-015",
+    "file": "src/app/page.tsx",
+    "line": 145,
+    "text": "02 // THE SIGNAL",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-016",
+    "file": "src/app/page.tsx",
+    "line": 149,
+    "text": ">SIGNAL</span>",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-017",
+    "file": "src/app/page.tsx",
+    "line": 163,
+    "text": "Notes from the studio on design and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-018",
+    "file": "src/app/page.tsx",
+    "line": 182,
+    "text": "&#x25CF; READ THE SIGNAL",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-019",
+    "file": "src/components/home/hero-stats.tsx",
+    "line": 19,
+    "text": "{ value: `${catalog.count} OBJECTS`, label: `FROM ${formatPrice(catalog.fromCents)} · MADE TO ORDER` }",
+    "class": "SHOP_FACT",
+    "evidence": "Computed from the live public catalog at render time (src/lib/store/fourthwall.ts); omitted if Fourthwall is unreachable",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-020",
+    "file": "src/components/home/hero-stats.tsx",
+    "line": 20,
+    "text": "label: \"MISPRINTS REPLACED OR REFUNDED\"",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-021",
+    "file": "src/components/home/hero-stats.tsx",
+    "line": 21,
+    "text": "label: \"HOSTED BY FOURTHWALL\"",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-022",
+    "file": "src/components/home/hero-product.tsx",
+    "line": 52,
+    "text": "Digital visualisation · made to order",
+    "class": "SHOP_FACT",
+    "evidence": "Honest caption: the hero image is the Fourthwall mockup, not a photo; made to order per src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-023",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 4,
+    "text": "\"WE KEEP CREATING\",",
+    "class": "BRAND_POETRY",
+    "evidence": "Owner chose this wording 2026-10-02 (\"WE ARE INDEPENDENT\" replaced by \"WE KEEP CREATING\"); no ownership or independence claim is made. Voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-024",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 5,
+    "text": "\"WE STAY UNDERGROUND\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-025",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 6,
+    "text": "\"MAKE ROOM FOR YOUR NEXT IDEA\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-026",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 7,
+    "text": "\"THE BASS IS THE FOUNDATION\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-027",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 8,
+    "text": "\"MADE TO ORDER\",",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-028",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 9,
+    "text": "\"SPACE TO MAKE SOMETHING\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-029",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 10,
+    "text": "\"KEEP THE FREQUENCY\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-030",
+    "file": "src/components/home/manifesto-strip.tsx",
+    "line": 11,
+    "text": "\"BUILD THE SYSTEMS\",",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-031",
+    "file": "src/app/story/page.tsx",
+    "line": 9,
+    "text": "KEEP IT UNDERGROUND — original graphic objects from the underground, for the spaces where you build, work and create.",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise; objects are real: tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-032",
+    "file": "src/app/story/page.tsx",
+    "line": 22,
+    "text": "DOC TYPE: BRAND STORY // REF: KPT-UG-BS-001 // CLASS: CLANDESTINE",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: document-style flavour text, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-033",
+    "file": "src/app/story/page.tsx",
+    "line": 28,
+    "text": "text=\"YOU FELT IT BEFORE YOU UNDERSTOOD IT.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-034",
+    "file": "src/app/story/page.tsx",
+    "line": 35,
+    "text": "The pressure in your chest before the first kick hits.",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-035",
+    "file": "src/app/story/page.tsx",
+    "line": 36,
+    "text": "The moment a room stops being a room and becomes something closer to a decision.",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-036",
+    "file": "src/app/story/page.tsx",
+    "line": 37,
+    "text": "The specific quality of darkness at 3 AM when the only light is above the decks",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-037",
+    "file": "src/app/story/page.tsx",
+    "line": 38,
+    "text": "and everyone present chose to be there — really chose, not scrolled into —",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-038",
+    "file": "src/app/story/page.tsx",
+    "line": 45,
+    "text": "KEEP IT UNDERGROUND carries that feeling into the places where the work happens:",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-039",
+    "file": "src/app/story/page.tsx",
+    "line": 46,
+    "text": "the desk, the studio, the wall above the setup. Original graphic objects, made on demand.",
+    "class": "SHOP_FACT",
+    "evidence": "tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md; src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-040",
+    "file": "src/app/story/page.tsx",
+    "line": 53,
+    "text": "<span>FREQ: SUB-BASS</span>",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-041",
+    "file": "src/app/story/page.tsx",
+    "line": 54,
+    "text": "<span>KPT-UG-001</span>",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: reference-code styling, not a certificate",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-042",
+    "file": "src/app/story/page.tsx",
+    "line": 65,
+    "text": "We are the people",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-043",
+    "file": "src/app/story/page.tsx",
+    "line": 66,
+    "text": "who build the systems",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-044",
+    "file": "src/app/story/page.tsx",
+    "line": 67,
+    "text": "that other people dance inside.",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-045",
+    "file": "src/app/story/page.tsx",
+    "line": 80,
+    "text": "SIGNAL: ACTIVE // CERT: KPT-UG-001 // FREQ: 20–200HZ // CLASS: UNDERGROUND",
+    "class": "UNSUPPORTED",
+    "evidence": "None: no certification named 'KPT-UG-001' and no frequency specification exist; the numbers read as a technical claim",
+    "status": "REWRITE_PROPOSED",
+    "proposed": "Drop 'CERT' and the numeric range, e.g. 'KEEP IT UNDERGROUND // KPT-UG-001'."
+  },
+  {
+    "id": "H03-046",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 4,
+    "text": "\"WE KEEP CREATING.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Owner chose this wording 2026-10-02 (\"WE ARE INDEPENDENT\" replaced by \"WE KEEP CREATING\"); no ownership or independence claim is made. Voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-047",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 5,
+    "text": "\"WE DO NOT TREND.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-048",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 6,
+    "text": "\"WE DO NOT FOLLOW.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-049",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 7,
+    "text": "\"WE BUILD THE SYSTEMS.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-050",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 8,
+    "text": "\"WE MAKE ROOM FOR IDEAS.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-051",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 9,
+    "text": "\"WE KEEP THE FREQUENCY.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-052",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 10,
+    "text": "\"WE KEEP THE STANDARD.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise; do not read as a measured quality claim",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-053",
+    "file": "src/components/story/story-manifesto.tsx",
+    "line": 11,
+    "text": "\"WE KEEP IT UNDERGROUND.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-054",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 25,
+    "text": "CLASSIFIED",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-055",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 28,
+    "text": "OPEN",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-056",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 35,
+    "text": "text=\"THE SIGNAL\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-057",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 7,
+    "text": "Notes from the studio on design and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-058",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 11,
+    "text": "Studio notes, design process, new objects.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-059",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 15,
+    "text": "Anyone can read it. /signal is linked from the site navigation.",
+    "class": "BRAND_POETRY",
+    "evidence": "src/components/layout/navbar.tsx and src/components/layout/footer.tsx link /signal; page is open (no gate)",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-062",
+    "file": "src/app/signal/page.tsx",
+    "line": 7,
+    "text": "title: \"Signal\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-063",
+    "file": "src/app/signal/page.tsx",
+    "line": 8,
+    "text": "Studio notes from KEEP IT UNDERGROUND: design process and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-064",
+    "file": "src/app/signal/page.tsx",
+    "line": 23,
+    "text": "STUDIO JOURNAL",
+    "class": "BRAND_POETRY",
+    "evidence": "Owner chose this label 2026-10-02 (replaces CLASSIFIED on /signal; the open page no longer carries a restricted-sounding badge). Voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-065",
+    "file": "src/app/signal/page.tsx",
+    "line": 26,
+    "text": "OPEN",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-066",
+    "file": "src/app/signal/page.tsx",
+    "line": 34,
+    "text": "text=\"THE SIGNAL\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-067",
+    "file": "src/app/signal/page.tsx",
+    "line": 41,
+    "text": "Notes from the studio on design and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-069",
+    "file": "src/app/signal/page.tsx",
+    "line": 49,
+    "text": "\"SIGNAL ACTIVE\"",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-071",
+    "file": "src/app/signal/page.tsx",
+    "line": 49,
+    "text": "\"NO ALGORITHM\"",
+    "class": "BRAND_POETRY",
+    "evidence": "True of a static page; voice only",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-083",
+    "file": "src/components/signal/signal-page-client.tsx",
+    "line": 19,
+    "text": "OPEN",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-084",
+    "file": "src/components/signal/signal-page-client.tsx",
+    "line": 22,
+    "text": "SIGNAL // STUDIO JOURNAL",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-087",
+    "file": "src/components/signal/signal-page-client.tsx",
+    "line": 5,
+    "text": "title: \"STUDIO NOTES\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-088",
+    "file": "src/components/signal/signal-page-client.tsx",
+    "line": 5,
+    "text": "desc: \"Design notes and new objects as they are published.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "No promise of frequency or delivery; /signal shows the empty state until the owner publishes an entry",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-089",
+    "file": "src/components/signal/signal-page-client.tsx",
+    "line": 6,
+    "text": "title: \"NO ALGORITHM\"",
+    "class": "BRAND_POETRY",
+    "evidence": "True of a static page; voice only",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-090",
+    "file": "src/components/signal/signal-page-client.tsx",
+    "line": 6,
+    "text": "desc: \"Nothing here is ranked, boosted or sponsored.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "True of the current static list; stays true only while no paid placement is added",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-104",
+    "file": "src/components/layout/footer.tsx",
+    "line": 9,
+    "text": "label: \"SHIPPING & RETURNS\"",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-105",
+    "file": "src/components/layout/footer.tsx",
+    "line": 93,
+    "text": "KPT-UNDERGROUND // ALL RIGHTS RESERVED",
+    "class": "SHOP_FACT",
+    "evidence": "Legal boilerplate; operator is LEISSON OÜ (CLAUDE.md). Add the entity name only on owner request",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-106",
+    "file": "src/components/layout/footer.tsx",
+    "line": 103,
+    "text": "MADE ON DEMAND // CHECKOUT BY FOURTHWALL",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here; src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-107",
+    "file": "src/components/layout/navbar.tsx",
+    "line": 134,
+    "text": "LIVE",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-108",
+    "file": "src/components/layout/navbar.tsx",
+    "line": 317,
+    "text": "SIGNAL ACTIVE",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-109",
+    "file": "src/app/layout.tsx",
+    "line": 26,
+    "text": "KEEP IT UNDERGROUND — Desk mats, prints & wear for people who build",
+    "class": "SHOP_FACT",
+    "evidence": "tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-110",
+    "file": "src/app/layout.tsx",
+    "line": 30,
+    "text": "For the people who build, work and create: original graphic desk mats, notebooks, mugs, wall prints, tees, hoodies and totes. Made to order, secure checkout by Fourthwall.",
+    "class": "SHOP_FACT",
+    "evidence": "tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md; src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-111",
+    "file": "src/app/layout.tsx",
+    "line": 34,
+    "text": "Original graphic objects for the spaces where you build, work and create.",
+    "class": "BRAND_POETRY",
+    "evidence": "n/a: voice, no promise",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-112",
+    "file": "src/app/help/page.tsx",
+    "line": 9,
+    "text": "How KEEP IT UNDERGROUND orders work: made to order, hosted checkout by Fourthwall, shipping at checkout, quality guarantee and contact.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-113",
+    "file": "src/app/help/page.tsx",
+    "line": 34,
+    "text": "Every item is made to order after you buy it.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-114",
+    "file": "src/app/help/page.tsx",
+    "line": 35,
+    "text": "Checkout and payment happen on Fourthwall&apos;s secure hosted checkout. This site never sees your card details.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-115",
+    "file": "src/app/help/page.tsx",
+    "line": 36,
+    "text": "Prices are in USD. Shipping costs and taxes are calculated at checkout, before you pay.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-116",
+    "file": "src/app/help/page.tsx",
+    "line": 37,
+    "text": "Production and delivery are handled by Fourthwall. The delivery options for your address are shown at checkout.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-117",
+    "file": "src/app/help/page.tsx",
+    "line": 44,
+    "text": "Quality is guaranteed: if there is a print error or a visible quality issue, the item is replaced or refunded.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-118",
+    "file": "src/app/help/page.tsx",
+    "line": 45,
+    "text": "Because products are made to order, general returns and sizing-related returns are not accepted.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-119",
+    "file": "src/app/help/page.tsx",
+    "line": 46,
+    "text": "For a quality issue, contact us with your order number and a photo of the problem. The returns page lists the time limit.",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-120",
+    "file": "src/app/signal/page.tsx",
+    "line": 49,
+    "text": "\"STUDIO JOURNAL\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-121",
+    "file": "src/app/signal/page.tsx",
+    "line": 49,
+    "text": "\"OPEN TO EVERYONE\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-122",
+    "file": "src/components/signal/signal-feed.tsx",
+    "line": 11,
+    "text": "NO ENTRIES YET.",
+    "class": "BRAND_POETRY",
+    "evidence": "Honest empty state: the owner has supplied no journal entry (docs/signal-journal-proposal.md); no entry is invented",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-123",
+    "file": "src/components/signal/signal-feed.tsx",
+    "line": 20,
+    "text": "BROWSE THE SHOP",
+    "class": "SHOP_FACT",
+    "evidence": "Links to /shop (src/app/shop/page.tsx), live Fourthwall catalog",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-124",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 10,
+    "text": "title: \"WHAT IT CARRIES\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-125",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 14,
+    "text": "title: \"HOW TO READ IT\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  }
+]

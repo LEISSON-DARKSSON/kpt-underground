@@ -4,8 +4,8 @@ import { Ticker } from "@/components/brand/ticker";
 import { SignalPageClient } from "@/components/signal/signal-page-client";
 
 export const metadata = {
-  title: "Signal Network",
-  description: "A closed, non-algorithmic channel. Not a newsletter. A direct line to events that have no public existence.",
+  title: "Signal",
+  description: "Studio notes from KEEP IT UNDERGROUND: design process and new objects. Open to everyone.",
 };
 
 export default function SignalPage() {
@@ -20,10 +20,10 @@ export default function SignalPage() {
           <ScrollReveal>
             <div className="flex flex-wrap gap-2 mb-6">
               <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-orange border border-orange/30 px-2 py-1">
-                CLASSIFIED
+                STUDIO JOURNAL
               </span>
               <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-green border border-green/30 px-2 py-1">
-                MEMBERS ONLY
+                OPEN
               </span>
             </div>
           </ScrollReveal>
@@ -31,15 +31,14 @@ export default function SignalPage() {
           <ScrollReveal delay={1}>
             <CharReveal
               as="h1"
-              text="THE SIGNAL NETWORK"
+              text="THE SIGNAL"
               className="font-display text-[clamp(3rem,10vw,7rem)] leading-[0.95] text-green"
             />
           </ScrollReveal>
 
           <ScrollReveal delay={2}>
             <p className="max-w-[520px] mt-8 text-paper/60 leading-relaxed">
-              A closed, non-algorithmic channel. Not a newsletter. Not a loyalty programme.
-              A direct line to events that have no public existence.
+              Notes from the studio on design and new objects. Open to everyone.
             </p>
           </ScrollReveal>
         </div>
@@ -47,12 +46,12 @@ export default function SignalPage() {
 
       {/* ═══ TICKER ═══ */}
       <Ticker
-        items={["SIGNAL ACTIVE", "FREQUENCY LOCKED", "NO ALGORITHM", "DIRECT ACCESS", "MEMBERS ONLY", "140HZ"]}
+        items={["SIGNAL ACTIVE", "NO ALGORITHM", "STUDIO JOURNAL", "OPEN TO EVERYONE"]}
         duration={28}
         reverse
       />
 
-      {/* ═══ GATED CONTENT ═══ */}
+      {/* ═══ OPEN JOURNAL ═══ */}
       <SignalPageClient />
     </>
   );

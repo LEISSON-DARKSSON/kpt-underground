@@ -96,6 +96,15 @@ export function studioPicks(products: StoreProduct[]): StoreProduct[] {
   return STUDIO_PICKS.map((id) => products.find((p) => p.id === id && p.available)).filter((p): p is StoreProduct => Boolean(p)).slice(0, 6);
 }
 
+/**
+ * The one real object shown beside the home hero (H02): the first Studio pick that is a desk mat,
+ * is currently available and has a real Fourthwall image. null when none qualifies — the hero then
+ * shows no picture rather than an invented one.
+ */
+export function heroProduct(products: StoreProduct[]): StoreProduct | null {
+  return studioPicks(products).find((p) => itemType(p.id) === "Desk mat" && p.images.length > 0) ?? null;
+}
+
 /** Public products that have no category yet (shown under All; reported for classification). */
 export function unclassified(products: StoreProduct[]): StoreProduct[] {
   return products.filter((p) => !OFFERS[p.id]);

@@ -1,0 +1,123 @@
+# Claim register (H03)
+
+Every visible brand, Signal, membership, event, access, advertising and history claim in the site copy, classified. Source of truth for tests is [claim-register.json](claim-register.json); `tests/brand/claim-register.test.mjs` fails when a registered string changes or when a risky keyword appears on a line the register does not cover. Editing copy therefore means updating this register in the same change.
+
+Status: decisions D1 to D7 APPLIED_ON_BRANCH_NOT_PUBLISHED (2026-10-02, owner approved the recommended option in [signal-journal-proposal.md](signal-journal-proposal.md)). The 30 removed claims (gate, MEMBERS ONLY / ACCESS badges, seven feed entries, event and access cards) are deleted from the register; the 21 reworded claims keep their id with the new text and status OK; 6 new ids (H03-120 to H03-125) cover new strings. H03-045 (optional footer line on /story) was not part of the approved change and stays REWRITE_PROPOSED. `line` is the position when the register was last regenerated; the test matches by text, not by line.
+
+Classes: SHOP_FACT (verifiable from the Fourthwall catalog or policies), BRAND_POETRY (stance or voice, no promise), SERVICE_PROMISE (promises something a visitor can receive), UNSUPPORTED (no evidence the thing exists).
+Counts: 95 entries. SHOP_FACT 28, BRAND_POETRY 66, SERVICE_PROMISE 0, UNSUPPORTED 1. OK 94, OWNER_DECISION_NEEDED 0, REWRITE_PROPOSED 1.
+Evidence is limited to the repo, the strategy package (E/S ids) and the Fourthwall policy URLs; nothing was fetched from the network while writing this.
+
+Key finding (historical, resolved on the branch): the Signal "members only" gate was a client-side string compare. Its code was printed on the home page and in the Signal ticker, and the gated feed text shipped in the JS bundle to every visitor. The feed entries (events, venues, a named performer, a prototype jacket, an SS-2025 collection) had no evidence behind them. The gate and all seven entries are removed; `/signal` is an open studio journal and shows `NO ENTRIES YET.` until the owner supplies a real entry. Earlier deploys may still be cached or archived; treat the old entries as already published.
+
+| ID | File:line | Text | Class | Evidence | Status | Proposed neutral rewrite |
+|---|---|---|---|---|---|---|
+| H03-001 | app/page.tsx:47 | `KPT-UG // OBJECT STUDIES // SHOP OPEN` | SHOP_FACT | Fourthwall shop LIVE with 22 public offers (strategy E08); src/lib/store/fourthwall.ts | OK |  |
+| H03-002 | app/page.tsx:59 | `Desk mats, notebooks, prints and wear for the people who build, work and create.` | SHOP_FACT | tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md | OK |  |
+| H03-003 | app/page.tsx:62 | `Original graphic objects, made to order.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-004 | app/page.tsx:62 | `Make room for your next idea.` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-005 | app/page.tsx:16 | `"ORIGINAL GRAPHIC OBJECTS",` | SHOP_FACT | tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md | OK |  |
+| H03-006 | app/page.tsx:17 | `"MAKE ROOM FOR YOUR NEXT IDEA",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-007 | app/page.tsx:18 | `"SIGNAL / 01",` | SHOP_FACT | Collection names exist in the catalog (wall-studies-signal-01, project-notes-signal-01, ...): tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md | OK |  |
+| H03-008 | app/page.tsx:19 | `"SUBSURFACE / 02",` | SHOP_FACT | Collection names exist in the catalog (wall-studies-subsurface-02, ...): tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md | OK |  |
+| H03-009 | app/page.tsx:20 | `"MADE ON DEMAND",` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-010 | app/page.tsx:21 | `"SPACE TO MAKE SOMETHING",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-011 | app/page.tsx:22 | `"OBJECT STUDIES",` | SHOP_FACT | Catalog product object-studies-six-marks and the OBJECT STUDIES line names: tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md | OK |  |
+| H03-012 | app/page.tsx:102 | `SYS: OPERATIONAL` | BRAND_POETRY | n/a: decorative HUD label; revisit if Signal stays a non-service | OK |  |
+| H03-013 | app/page.tsx:104 | `FREQ: SUB-BASS` | BRAND_POETRY | n/a: decorative HUD label, same wording as /story; no longer the public gate code (gate removed) | OK |  |
+| H03-014 | app/page.tsx:106 | `SIGNAL: ACTIVE` | BRAND_POETRY | n/a: decorative HUD label; revisit if Signal stays a non-service | OK |  |
+| H03-015 | app/page.tsx:145 | `02 // THE SIGNAL` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-016 | app/page.tsx:149 | `>SIGNAL</span>` | BRAND_POETRY | n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-017 | app/page.tsx:163 | `Notes from the studio on design and new objects. Open to everyone.` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-018 | app/page.tsx:182 | `&#x25CF; READ THE SIGNAL` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-019 | components/home/hero-stats.tsx:19 | `` { value: `${catalog.count} OBJECTS`, label: `FROM ${formatPrice(catalog.fromCents)} · MADE TO ORDER` } `` | SHOP_FACT | Computed from the live public catalog at render time (src/lib/store/fourthwall.ts); omitted if Fourthwall is unreachable | OK |  |
+| H03-020 | components/home/hero-stats.tsx:20 | `label: "MISPRINTS REPLACED OR REFUNDED"` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-021 | components/home/hero-stats.tsx:21 | `label: "HOSTED BY FOURTHWALL"` | SHOP_FACT | src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts | OK |  |
+| H03-022 | components/home/hero-product.tsx:52 | `Digital visualisation · made to order` | SHOP_FACT | Honest caption: the hero image is the Fourthwall mockup, not a photo; made to order per src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-023 | components/home/manifesto-strip.tsx:4 | `"WE KEEP CREATING",` | BRAND_POETRY | Owner chose this wording 2026-10-02 ("WE ARE INDEPENDENT" replaced by "WE KEEP CREATING"); no ownership or independence claim is made. Voice, no promise | OK |  |
+| H03-024 | components/home/manifesto-strip.tsx:5 | `"WE STAY UNDERGROUND",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-025 | components/home/manifesto-strip.tsx:6 | `"MAKE ROOM FOR YOUR NEXT IDEA",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-026 | components/home/manifesto-strip.tsx:7 | `"THE BASS IS THE FOUNDATION",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-027 | components/home/manifesto-strip.tsx:8 | `"MADE TO ORDER",` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-028 | components/home/manifesto-strip.tsx:9 | `"SPACE TO MAKE SOMETHING",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-029 | components/home/manifesto-strip.tsx:10 | `"KEEP THE FREQUENCY",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-030 | components/home/manifesto-strip.tsx:11 | `"BUILD THE SYSTEMS",` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-031 | app/story/page.tsx:9 | `KEEP IT UNDERGROUND — original graphic objects from the underground, for the spaces where you build, work and create.` | BRAND_POETRY | n/a: voice, no promise; objects are real: tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md | OK |  |
+| H03-032 | app/story/page.tsx:22 | `DOC TYPE: BRAND STORY // REF: KPT-UG-BS-001 // CLASS: CLANDESTINE` | BRAND_POETRY | n/a: document-style flavour text, no promise | OK |  |
+| H03-033 | app/story/page.tsx:28 | `text="YOU FELT IT BEFORE YOU UNDERSTOOD IT."` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-034 | app/story/page.tsx:35 | `The pressure in your chest before the first kick hits.` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-035 | app/story/page.tsx:36 | `The moment a room stops being a room and becomes something closer to a decision.` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-036 | app/story/page.tsx:37 | `The specific quality of darkness at 3 AM when the only light is above the decks` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-037 | app/story/page.tsx:38 | `and everyone present chose to be there — really chose, not scrolled into —` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-038 | app/story/page.tsx:45 | `KEEP IT UNDERGROUND carries that feeling into the places where the work happens:` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-039 | app/story/page.tsx:46 | `the desk, the studio, the wall above the setup. Original graphic objects, made on demand.` | SHOP_FACT | tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md; src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-040 | app/story/page.tsx:53 | `<span>FREQ: SUB-BASS</span>` | BRAND_POETRY | n/a: decorative HUD label; revisit if Signal stays a non-service | OK |  |
+| H03-041 | app/story/page.tsx:54 | `<span>KPT-UG-001</span>` | BRAND_POETRY | n/a: reference-code styling, not a certificate | OK |  |
+| H03-042 | app/story/page.tsx:65 | `We are the people` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-043 | app/story/page.tsx:66 | `who build the systems` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-044 | app/story/page.tsx:67 | `that other people dance inside.` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-045 | app/story/page.tsx:80 | `SIGNAL: ACTIVE // CERT: KPT-UG-001 // FREQ: 20–200HZ // CLASS: UNDERGROUND` | UNSUPPORTED | None: no certification named 'KPT-UG-001' and no frequency specification exist; the numbers read as a technical claim | REWRITE_PROPOSED | Drop 'CERT' and the numeric range, e.g. 'KEEP IT UNDERGROUND // KPT-UG-001'. |
+| H03-046 | components/story/story-manifesto.tsx:4 | `"WE KEEP CREATING."` | BRAND_POETRY | Owner chose this wording 2026-10-02 ("WE ARE INDEPENDENT" replaced by "WE KEEP CREATING"); no ownership or independence claim is made. Voice, no promise | OK |  |
+| H03-047 | components/story/story-manifesto.tsx:5 | `"WE DO NOT TREND."` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-048 | components/story/story-manifesto.tsx:6 | `"WE DO NOT FOLLOW."` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-049 | components/story/story-manifesto.tsx:7 | `"WE BUILD THE SYSTEMS."` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-050 | components/story/story-manifesto.tsx:8 | `"WE MAKE ROOM FOR IDEAS."` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-051 | components/story/story-manifesto.tsx:9 | `"WE KEEP THE FREQUENCY."` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-052 | components/story/story-manifesto.tsx:10 | `"WE KEEP THE STANDARD."` | BRAND_POETRY | n/a: voice, no promise; do not read as a measured quality claim | OK |  |
+| H03-053 | components/story/story-manifesto.tsx:11 | `"WE KEEP IT UNDERGROUND."` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-054 | components/story/story-signal-network.tsx:25 | `CLASSIFIED` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-055 | components/story/story-signal-network.tsx:28 | `OPEN` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-056 | components/story/story-signal-network.tsx:35 | `text="THE SIGNAL"` | BRAND_POETRY | n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-057 | components/story/story-signal-network.tsx:7 | `Notes from the studio on design and new objects. Open to everyone.` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-058 | components/story/story-signal-network.tsx:11 | `Studio notes, design process, new objects.` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-059 | components/story/story-signal-network.tsx:15 | `Anyone can read it. /signal is linked from the site navigation.` | BRAND_POETRY | src/components/layout/navbar.tsx and src/components/layout/footer.tsx link /signal; page is open (no gate) | OK |  |
+| H03-062 | app/signal/page.tsx:7 | `title: "Signal"` | BRAND_POETRY | n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-063 | app/signal/page.tsx:8 | `Studio notes from KEEP IT UNDERGROUND: design process and new objects. Open to everyone.` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-064 | app/signal/page.tsx:23 | `STUDIO JOURNAL` | BRAND_POETRY | Owner chose this label 2026-10-02 (replaces CLASSIFIED on /signal). Voice, no promise | OK |  |
+| H03-065 | app/signal/page.tsx:26 | `OPEN` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-066 | app/signal/page.tsx:34 | `text="THE SIGNAL"` | BRAND_POETRY | n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-067 | app/signal/page.tsx:41 | `Notes from the studio on design and new objects. Open to everyone.` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-069 | app/signal/page.tsx:49 | `"SIGNAL ACTIVE"` | BRAND_POETRY | n/a: decorative HUD label; revisit if Signal stays a non-service | OK |  |
+| H03-071 | app/signal/page.tsx:49 | `"NO ALGORITHM"` | BRAND_POETRY | True of a static page; voice only | OK |  |
+| H03-083 | components/signal/signal-page-client.tsx:19 | `OPEN` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-084 | components/signal/signal-page-client.tsx:22 | `SIGNAL // STUDIO JOURNAL` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-087 | components/signal/signal-page-client.tsx:5 | `title: "STUDIO NOTES"` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-088 | components/signal/signal-page-client.tsx:5 | `desc: "Design notes and new objects as they are published."` | BRAND_POETRY | No promise of frequency or delivery; /signal shows the empty state until the owner publishes an entry | OK |  |
+| H03-089 | components/signal/signal-page-client.tsx:6 | `title: "NO ALGORITHM"` | BRAND_POETRY | True of a static page; voice only | OK |  |
+| H03-090 | components/signal/signal-page-client.tsx:6 | `desc: "Nothing here is ranked, boosted or sponsored."` | BRAND_POETRY | True of the current static list; stays true only while no paid placement is added | OK |  |
+| H03-104 | components/layout/footer.tsx:9 | `label: "SHIPPING & RETURNS"` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-105 | components/layout/footer.tsx:93 | `KPT-UNDERGROUND // ALL RIGHTS RESERVED` | SHOP_FACT | Legal boilerplate; operator is LEISSON OÜ (CLAUDE.md). Add the entity name only on owner request | OK |  |
+| H03-106 | components/layout/footer.tsx:103 | `MADE ON DEMAND // CHECKOUT BY FOURTHWALL` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here; src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts | OK |  |
+| H03-107 | components/layout/navbar.tsx:134 | `LIVE` | BRAND_POETRY | n/a: decorative HUD label; revisit if Signal stays a non-service | OK |  |
+| H03-108 | components/layout/navbar.tsx:317 | `SIGNAL ACTIVE` | BRAND_POETRY | n/a: decorative HUD label; revisit if Signal stays a non-service | OK |  |
+| H03-109 | app/layout.tsx:26 | `KEEP IT UNDERGROUND — Desk mats, prints & wear for people who build` | SHOP_FACT | tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md | OK |  |
+| H03-110 | app/layout.tsx:30 | `For the people who build, work and create: original graphic desk mats, notebooks, mugs, wall prints, tees, hoodies and totes. Made to order, secure checkout by Fourthwall.` | SHOP_FACT | tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md; src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts | OK |  |
+| H03-111 | app/layout.tsx:34 | `Original graphic objects for the spaces where you build, work and create.` | BRAND_POETRY | n/a: voice, no promise | OK |  |
+| H03-112 | app/help/page.tsx:9 | `How KEEP IT UNDERGROUND orders work: made to order, hosted checkout by Fourthwall, shipping at checkout, quality guarantee and contact.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-113 | app/help/page.tsx:34 | `Every item is made to order after you buy it.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-114 | app/help/page.tsx:35 | `Checkout and payment happen on Fourthwall&apos;s secure hosted checkout. This site never sees your card details.` | SHOP_FACT | src/app/api/cart/checkout/route.ts (hosted Fourthwall checkout); src/lib/store/policies.ts | OK |  |
+| H03-115 | app/help/page.tsx:36 | `Prices are in USD. Shipping costs and taxes are calculated at checkout, before you pay.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-116 | app/help/page.tsx:37 | `Production and delivery are handled by Fourthwall. The delivery options for your address are shown at checkout.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-117 | app/help/page.tsx:44 | `Quality is guaranteed: if there is a print error or a visible quality issue, the item is replaced or refunded.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-118 | app/help/page.tsx:45 | `Because products are made to order, general returns and sizing-related returns are not accepted.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-119 | app/help/page.tsx:46 | `For a quality issue, contact us with your order number and a photo of the problem. The returns page lists the time limit.` | SHOP_FACT | src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here | OK |  |
+| H03-120 | app/signal/page.tsx:49 | `"STUDIO JOURNAL"` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-121 | app/signal/page.tsx:49 | `"OPEN TO EVERYONE"` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-122 | components/signal/signal-feed.tsx:11 | `NO ENTRIES YET.` | BRAND_POETRY | Honest empty state: the owner has supplied no journal entry (docs/signal-journal-proposal.md); no entry is invented | OK |  |
+| H03-123 | components/signal/signal-feed.tsx:20 | `BROWSE THE SHOP` | SHOP_FACT | Links to /shop (src/app/shop/page.tsx), live Fourthwall catalog | OK |  |
+| H03-124 | components/story/story-signal-network.tsx:10 | `title: "WHAT IT CARRIES"` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+| H03-125 | components/story/story-signal-network.tsx:14 | `title: "HOW TO READ IT"` | BRAND_POETRY | Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02 | OK |  |
+
+## Decisions (applied on branch, not published)
+
+Backlog H03 asked for one combined decision (D1). The owner approved the recommendation of each item below on 2026-10-02; the copy change is on branch `feat/home-nonblocking-fit-20261002`, not merged or deployed. The recommendation text is kept as the record of what was decided.
+
+1. **D1. What does Signal actually offer?** Recommendation: an open studio journal and voluntary-updates channel. No membership, no closed events. No e-mail signup until a real receiver is connected (H09); until then there is no subscribe form and no fake success state. Keep the /signal URL.
+2. **D2. Do real events or a real community exist?** Recommendation: treat all seven feed entries and every event, location and "parties" sentence as unpublished. Re-add only items the owner confirms with real date, venue and consent of named people (NEOONDREED, LEISSON + DARKSSON). Never add invented entries.
+3. **D3. The frequency gate.** Recommendation: remove it and show the journal openly. It is not authentication, its code is public, and its content is already in the bundle. If the owner wants it, keep it only as an acknowledged easter egg without "members only", "access restricted" or "access granted" wording.
+4. **D4. Badges and labels (MEMBERS ONLY, ACCESS GRANTED, LIVE FEED, DIRECT ACCESS, "NETWORK").** Recommendation: remove the members-only family and rename "Signal Network" to "Signal". Keep CLASSIFIED/HUD labels only as visual flavour on a page that is open.
+5. **D5. "WE DO NOT ADVERTISE" and "NO CONVENTIONAL CHANNELS".** Recommendation: reword to an independence claim ("We make original graphic objects"), because the 14-day test (H06/H10) may use channels these lines forbid. Keep them verbatim only if the owner deliberately commits to never advertising.
+6. **D6. Company history ("We were there before the brand existed", "The information is real. The relationships are real.").** Recommendation: remove. Add history only as facts the owner supplies and can document.
+7. **D7. Early access and Signal-only products** (Prototype Field Jacket, SS-2025 early access, "Early drops"). Recommendation: do not promise either. Product visibility stays the owner's explicit call per CLAUDE.md; announce new objects only after they are public.
+
+Resolved 2026-10-02: the owner replaced `WE ARE INDEPENDENT` with `WE KEEP CREATING` (home strip and /story) and `CLASSIFIED` with `STUDIO JOURNAL` on /signal, so no independence claim is made. The `CLASSIFIED` badge on /story (H03-054) is unchanged and is a separate open nit. Any future copy change must update this register in the same PR.

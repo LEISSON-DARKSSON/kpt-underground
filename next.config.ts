@@ -4,6 +4,11 @@ const nextConfig: NextConfig = {
   // KPT-03: resolve metadata before streaming for every client (not only bots), so a product page can
   // still answer 404 (unknown product) or 5xx (Fourthwall unreachable) instead of a streamed 200.
   htmlLimitedBots: /.*/,
+  // R2: the home hero picture goes through the Next image optimizer (responsive srcset). Fourthwall image URLs are
+  // signed, so they are passed through unchanged; only Fourthwall's image CDN host may be optimized.
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "imgproxy.fourthwall.dev", pathname: "/**" }],
+  },
   async headers() {
     return [
       {

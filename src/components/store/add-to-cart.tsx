@@ -86,7 +86,7 @@ export function AddToCart({ product, variant, onSelect }: { product: StoreProduc
         </fieldset>
       )}
 
-      {fit.needsFit && <FitInfo product={product} family={family} />}
+      {fit.needsFit && <FitInfo product={product} family={family} selectedSize={variant?.size ?? null} />}
 
       <div className="flex items-end justify-between border-y border-dim py-5">
         <div>
@@ -144,9 +144,71 @@ export function AddToCart({ product, variant, onSelect }: { product: StoreProduc
   );
 }
 
-function FitInfo({ product, family }: { product: StoreProduct; family: ReturnType<typeof fitFamily> }) {
-  const { fit, missing } = fitStatus(product);
-  if (family === "phone-case") {
+function FitInfo({ product, family, selectedSize }: { product: StoreProduct; family: ReturnType<typeof fitFamily>; selectedSize: string | null }) {
+  const { fit, source, missing } = fitStatus(product);
+  if (source) {
+    const garment = source.columns.filter((c) => c.kind === "garment").length;
+    const body = source.columns.length - garment;
+    return (
+      <details className="group border border-dim p-4 font-mono text-[11px] text-slate open:border-slate" data-fit="sourced" data-fit-model={source.baseModel}>
+        <summary data-cursor="h" className="list-none uppercase tracking-[0.16em] text-paper focus-visible:outline-2 focus-visible:outline-green">
+          Size chart · inches <span aria-hidden="true" className="text-green group-open:hidden">+</span>
+        </summary>
+        <div className="mt-3 overflow-x-auto">
+          <table className="w-full min-w-[300px] border-collapse text-left" data-size-chart>
+            <caption className="sr-only">
+              Size chart in inches for {source.baseModel}: {body > 0 ? "garment measurements laid flat, and body measurements" : "garment measurements laid flat"}
+            </caption>
+            <thead>
+              <tr className="text-slate">
+                <td className="pb-1" />
+                <th scope="colgroup" colSpan={garment} className="pb-1 pr-3 font-normal normal-case">Garment, laid flat</th>
+                {body > 0 && <th scope="colgroup" colSpan={body} className="pb-1 font-normal normal-case">Your body</th>}
+              </tr>
+              <tr className="text-paper">
+                <th scope="col" className="border-b border-dim py-2 pr-3 font-normal">Size</th>
+                {source.columns.map((c) => (
+                  <th key={c.key} scope="col" className="border-b border-dim py-2 pr-3 font-normal">{c.label}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {source.rows.map((r) => {
+                const selected = r.size === selectedSize;
+                return (
+                  <tr key={r.size} data-size-row={r.size} aria-current={selected ? "true" : undefined} className={selected ? "text-green" : undefined}>
+                    <th scope="row" className="border-b border-dim/60 py-2 pr-3 font-normal text-paper">{r.size}</th>
+                    {r.values.map((v, i) => (
+                      <td key={source.columns[i].key} className="border-b border-dim/60 py-2 pr-3">{v}</td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <ul className="mt-3 space-y-1 [&_li]:ml-4 [&_li]:list-disc">
+          {source.notes.map((n) => (
+            <li key={n}>{n}</li>
+          ))}
+          {source.columns.map((c) => (
+            <li key={c.key}>
+              <span className="text-paper">{c.label}:</span> {c.how}
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3">
+          Sources, retrieved {source.sources[0].retrieved}:{" "}
+          {source.sources.map((s, i) => (
+            <span key={s.url}>
+              {i > 0 && " · "}
+              <a href={s.url} target="_blank" rel="noopener" data-cursor="h" className="text-green underline underline-offset-4">{s.role.split(" (")[0]}</a>
+            </span>
+          ))}
+        </p>
+      </details>
+    );
+  }  if (family === "phone-case") {
     return <p className="font-mono text-[11px] text-slate" data-fit="model">Fit is set by the model you choose. Check your exact model in Settings → General → About.</p>;
   }
   if (missing) {

@@ -2,6 +2,7 @@
 // Storefront and checks actual status codes and responses. Never talks to the real Fourthwall API.
 // Run: npm run test:http   (≈2 min: it runs its own `next build`)
 import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { MOCK_TOKEN, startMockFourthwall } from "./mock-fourthwall.mjs";
 import { readFile } from "node:fs/promises";
 import assert from "node:assert/strict";
@@ -18,7 +19,7 @@ const env = {
   FOURTHWALL_STOREFRONT_API_BASE: `http://127.0.0.1:${MOCK_PORT}/`,
   NEXT_TELEMETRY_DISABLED: "1",
 };
-const run = (args, opts = {}) => spawn(process.execPath, [new URL("node_modules/next/dist/bin/next", root).pathname, ...args], { cwd: root.pathname, env, stdio: ["ignore", "pipe", "pipe"], ...opts });
+const run = (args, opts = {}) => spawn(process.execPath, [fileURLToPath(new URL("node_modules/next/dist/bin/next", root)), ...args], { cwd: fileURLToPath(root), env, stdio: ["ignore", "pipe", "pipe"], ...opts });
 const exit = (child) => new Promise((r) => child.on("exit", r));
 
 const results = [];
@@ -42,13 +43,20 @@ try {
     const r = await fetch(base + "/shop/wall-studies-signal-01");
     assert.ok(r.status >= 500, `status ${r.status}`);
   });
-  await check("real product → 200 with no preselected size and a missing-size-chart notice", async () => {
+  await check("real product → 200 with no preselected size and a source-backed size chart (H04)", async () => {
     const r = await fetch(base + "/shop/kpt-heavyweight-tee");
     assert.equal(r.status, 200);
     const html = await r.text();
     assert.ok(html.includes("Choose a size"));
     assert.equal(/data-variant-option="[^"]+" aria-pressed="true"/.test(html), false, "no size preselected");
-    assert.ok(html.includes('data-fit="missing"'));
+    assert.ok(html.includes('data-fit="sourced"') && !html.includes('data-fit="missing"'), "tee has the sourced chart, no missing notice");
+    assert.ok(html.includes('data-size-chart') && html.includes('26.62&quot;') && html.includes('24.63&quot;'), "chart values are server-rendered");
+    const hoodie = await (await fetch(base + "/shop/kpt-premium-hoodie")).text();
+    assert.ok(hoodie.includes('data-fit="missing"') && !hoodie.includes('data-size-chart'), "hoodie without a verified source still says the chart is missing");
+    const crew = await (await fetch(base + "/shop/kpt-crewneck")).text();
+    assert.ok(crew.includes('data-fit="sourced"') && !crew.includes('data-fit="missing"') && crew.includes('data-size-chart'), "crewneck has the sourced chart, no missing notice");
+    assert.equal((crew.match(/data-size-row="/g) ?? []).length, 6, "crewneck chart lists S-3XL");
+    assert.ok(crew.includes('data-fit-model="Cotton Heritage M2480 Premium Sweatshirt"') && crew.includes('26.5&quot;') && crew.includes('23.5&quot;'), "crewneck chart values are server-rendered");
     assert.ok(html.includes('"@type":"AggregateOffer"') && html.includes('"lowPrice":"35.00"') && html.includes('"highPrice":"41.00"'));
     assert.ok(html.includes('rel="canonical" href="https://keepitunderground.com/shop/kpt-heavyweight-tee"'));
   });
@@ -95,6 +103,21 @@ try {
     assert.ok(xml.includes("https://keepitunderground.com/help</loc>"));
     const robots = await (await fetch(base + "/robots.txt")).text();
     for (const d of ["/api/", "/commerce-preview", "/shop?*"]) assert.ok(robots.includes(`Disallow: ${d}`), d);
+  });
+  await check("Signal is an open studio journal: /signal and /story answer 200 without membership, gate or invented entries", async () => {
+    const signal = await fetch(base + "/signal");
+    assert.equal(signal.status, 200);
+    const s = await signal.text();
+    assert.ok(s.includes("NO ENTRIES YET."), "honest empty state");
+    assert.equal(/MEMBERS ONLY|ACCESS GRANTED|140HZ|closed channel|<form\b|type="email"/i.test(s), false, "no gate, membership wording or signup form");
+    const story = await (await fetch(base + "/story")).text();
+    assert.equal(/closed channel|members only|140HZ/i.test(story), false, "no closed-channel promise on /story");
+    const home = await (await fetch(base + "/")).text();
+    assert.equal(/FREQ: 140HZ|ENTER SIGNAL NETWORK|closed channel/i.test(home), false, "no gate hint or network promise on the home page");
+    assert.ok(home.includes("WE KEEP CREATING"), "manifesto reads WE KEEP CREATING");
+    assert.equal(/WE ARE INDEPENDENT|WE DO NOT ADVERTISE|NO CONVENTIONAL CHANNELS/.test(home), false, "old manifesto lines are gone");
+    assert.equal(/CLASSIFIED/.test(s), false, "the open /signal page has no CLASSIFIED badge");
+    assert.ok(s.includes("STUDIO JOURNAL") && /OPEN/.test(s), "/signal badges: STUDIO JOURNAL and OPEN");
   });
   await check("/help and /shop render; shop SSR shows all 22 cards for no-JS visitors", async () => {
     assert.equal((await fetch(base + "/help")).status, 200);
