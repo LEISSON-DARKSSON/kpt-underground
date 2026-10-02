@@ -20,7 +20,7 @@ export default function SignalPage() {
           <ScrollReveal>
             <div className="flex flex-wrap gap-2 mb-6">
               <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-orange border border-orange/30 px-2 py-1">
-                CLASSIFIED
+                STUDIO JOURNAL
               </span>
               <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-green border border-green/30 px-2 py-1">
                 OPEN

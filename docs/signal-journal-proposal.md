@@ -25,7 +25,7 @@ Action: R = reworded, X = removed (no replacement string), K = kept (listed only
 | Hero HUD | `FREQ: 140HZ` | `FREQ: SUB-BASS` (already used on /story) | H03-013 | R |
 | Hero HUD | `SYS: OPERATIONAL`, `SIGNAL: ACTIVE` | unchanged (decorative, no service promised) | H03-012, H03-014 | K |
 | Home ticker | `SIGNAL / 01`, `SUBSURFACE / 02` and the other 6 items | unchanged. These are real catalog collection names, not the Signal feature | H03-005 to H03-011 | K |
-| Manifesto strip | `WE DO NOT ADVERTISE` | `WE ARE INDEPENDENT` (section e) | H03-023 | R |
+| Manifesto strip | `WE DO NOT ADVERTISE` | `WE KEEP CREATING` (section e) | H03-023 | R |
 | Manifesto strip | `NO CONVENTIONAL CHANNELS` | `MADE TO ORDER` (existing shop fact) | H03-027 | R |
 
 ### `/signal`
@@ -71,7 +71,7 @@ Action: R = reworded, X = removed (no replacement string), K = kept (listed only
 | Card 3 body | `You find it the way you find the good parties: someone tells you. What follows cannot be described further here.` | `Anyone can read it. /signal is linked from the site navigation.` | H03-059 | R |
 | Card 4 | `WHY IT WORKS` / `Because the information is real. The relationships are real. We were there before the brand existed.` | card removed (3 cards remain). Invented history | H03-060, H03-061 | X |
 | Footer line (optional, outside D1: a technical-spec claim, not a Signal promise; may be approved or deferred separately) | `SIGNAL: ACTIVE // CERT: KPT-UG-001 // FREQ: 20–200HZ // CLASS: UNDERGROUND` | `KEEP IT UNDERGROUND // KPT-UG-001` (no certification, no numeric range; register's own proposal) | H03-045 | R |
-| Manifesto line | `WE DO NOT ADVERTISE.` | `WE ARE INDEPENDENT.` | H03-046 | R |
+| Manifesto line | `WE DO NOT ADVERTISE.` | `WE KEEP CREATING.` | H03-046 | R |
 | Rest of the story page and manifesto (`FREQ: SUB-BASS`, `WE DO NOT TREND.`, ...) | unchanged (brand voice, no promise) | | H03-031 to H03-044, H03-047 to H03-053 | K |
 
 ### Nav, footer, metadata
@@ -91,7 +91,7 @@ Deviation from the register: for H03-057 and H03-067 the register suggests endin
 - **Removed (30 register entries, no replacement string):** H03-060, 061, 068, 070, 072, 073, 074, 075 to 082 (the whole gate), 085, 086, 091, 092, 093 to 103 (all seven feed entries and their type and status badges).
 - **Reworded (22):** H03-013, 016, 017, 018, 023, 027, 045 (optional), 046, 055, 056, 057, 058, 059, 062, 063, 065, 066, 067, 083, 084, 087, 088.
 - **Kept (the other 67; 119 = 30 + 22 + 67):** all `SHOP_FACT` entries (store, help, footer, metadata), the home and story brand poetry, `CLASSIFIED`, `NO ALGORITHM` and its card, the `SYS`/`SIGNAL: ACTIVE`/`LIVE` HUD labels, `FREQ: SUB-BASS`. Brand poetry stays wherever it is voice and promises nothing a visitor can receive.
-- **New strings (need new register entries, class BRAND_POETRY or SHOP_FACT, status OK):** `OPEN` (3 places), `OPEN TO EVERYONE`, `STUDIO JOURNAL`, `FREQ: SUB-BASS` (home), `NO ENTRIES YET.`, `BROWSE THE SHOP`, `WE ARE INDEPENDENT` (2 places), `WHAT IT CARRIES`, `HOW TO READ IT`, plus the reworded strings above.
+- **New strings (need new register entries, class BRAND_POETRY or SHOP_FACT, status OK):** `OPEN` (3 places), `OPEN TO EVERYONE`, `STUDIO JOURNAL`, `FREQ: SUB-BASS` (home), `NO ENTRIES YET.`, `BROWSE THE SHOP`, `WE KEEP CREATING` (2 places), `WHAT IT CARRIES`, `HOW TO READ IT`, plus the reworded strings above.
 - **Structure:** `frequency-gate.tsx` is deleted; `signal-feed.tsx` loses its data and becomes the empty state; `signal-page-client.tsx` no longer needs `"use client"` and becomes a server component (CLAUDE.md convention).
 
 ## (d) Technical note: the gate was never a gate
@@ -105,7 +105,7 @@ Deviation from the register: for H03-057 and H03-067 the register suggests endin
 
 Both are absolute statements of conduct (H03-023, 027, 046) and the shop itself is a conventional channel. The 14-day test (H06/H10) may use channels these lines forbid.
 
-Recommended rewording, one claim: **`WE ARE INDEPENDENT`** (home strip H03-023, and `WE ARE INDEPENDENT.` for /story H03-046; same cadence as `WE DO NOT TREND.`). `NO CONVENTIONAL CHANNELS` becomes `MADE TO ORDER`, which is already a documented shop fact.
+Recommended rewording, one claim: **`WE KEEP CREATING`** (home strip H03-023, and `WE KEEP CREATING.` for /story H03-046; same cadence as `WE DO NOT TREND.`). `NO CONVENTIONAL CHANNELS` becomes `MADE TO ORDER`, which is already a documented shop fact.
 
 Precondition: the owner confirms "independent" is true (owner-operated by LEISSON OÜ, no outside label, publisher or investor). If the owner does not confirm it, use the register's evidence-backed `WE MAKE ORIGINAL GRAPHIC OBJECTS` for both lines. Keep the old lines verbatim only if the owner deliberately commits to never advertising.
 
@@ -140,10 +140,14 @@ Deviations and notes:
 Files changed:
 - `src/app/page.tsx` (Signal CTA heading, body, link text and cursor label; HUD `FREQ: SUB-BASS`)
 - `src/app/signal/page.tsx` (metadata, badge, H1, paragraph, ticker)
-- `src/components/home/manifesto-strip.tsx`, `src/components/story/story-manifesto.tsx` (WE ARE INDEPENDENT, MADE TO ORDER)
+- `src/components/home/manifesto-strip.tsx`, `src/components/story/story-manifesto.tsx` (WE KEEP CREATING, MADE TO ORDER)
 - `src/components/story/story-signal-network.tsx` (badge, heading, three cards)
 - `src/components/signal/signal-page-client.tsx` (server component, open header, two cards), `src/components/signal/signal-feed.tsx` (empty state)
 - `src/components/signal/frequency-gate.tsx` (deleted)
 - `docs/claim-register.json`, `docs/claim-register.md` (30 removed, 21 reworded, 6 added: 95 entries)
 - `tests/brand/signal-journal.test.mjs` (new, pins items 2 to 4 and 6 to 7 of section f)
 - `docs/signal-journal-proposal.md` (this status)
+
+## Final owner edits (2026-10-02)
+
+The owner replaced `WE ARE INDEPENDENT` with `WE KEEP CREATING` (home strip and /story) and `CLASSIFIED` with `STUDIO JOURNAL` on the /signal hero badge (`OPEN` stays). Wherever this document says `WE ARE INDEPENDENT`, the shipped wording is `WE KEEP CREATING`. The `CLASSIFIED` badge on /story (H03-054) was not part of that decision and is unchanged.

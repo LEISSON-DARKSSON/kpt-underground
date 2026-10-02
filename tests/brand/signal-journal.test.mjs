@@ -72,3 +72,16 @@ test("nav and footer still link to /signal", async () => {
   assert.match(await read("src/components/layout/navbar.tsx"), /href: "\/signal"/);
   assert.match(await read("src/components/layout/footer.tsx"), /href: "\/signal"/);
 });
+
+test("owner final edits: WE KEEP CREATING in the manifesto, STUDIO JOURNAL badge on /signal (OPEN stays)", async () => {
+  const strip = await read("src/components/home/manifesto-strip.tsx");
+  const story = await read("src/components/story/story-manifesto.tsx");
+  assert.match(strip, /"WE KEEP CREATING"/);
+  assert.match(story, /"WE KEEP CREATING\."/);
+  for (const s of [strip, story]) assert.doesNotMatch(s, /WE ARE INDEPENDENT|WE DO NOT ADVERTISE|NO CONVENTIONAL CHANNELS/);
+  const sig = await read("src/app/signal/page.tsx");
+  const heroBadges = sig.slice(sig.indexOf("export default"));
+  assert.doesNotMatch(heroBadges, /CLASSIFIED/, "no restricted-sounding badge on the open /signal page");
+  assert.match(heroBadges, /STUDIO JOURNAL/);
+  assert.match(heroBadges, /\bOPEN\b/);
+});

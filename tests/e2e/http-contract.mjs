@@ -109,11 +109,15 @@ try {
     assert.equal(signal.status, 200);
     const s = await signal.text();
     assert.ok(s.includes("NO ENTRIES YET."), "honest empty state");
-    assert.equal(/MEMBERS ONLY|ACCESS GRANTED|140HZ|closed channel|<form|type="email"/i.test(s), false, "no gate, membership wording or signup form");
+    assert.equal(/MEMBERS ONLY|ACCESS GRANTED|140HZ|closed channel|<form\b|type="email"/i.test(s), false, "no gate, membership wording or signup form");
     const story = await (await fetch(base + "/story")).text();
     assert.equal(/closed channel|members only|140HZ/i.test(story), false, "no closed-channel promise on /story");
     const home = await (await fetch(base + "/")).text();
     assert.equal(/FREQ: 140HZ|ENTER SIGNAL NETWORK|closed channel/i.test(home), false, "no gate hint or network promise on the home page");
+    assert.ok(home.includes("WE KEEP CREATING"), "manifesto reads WE KEEP CREATING");
+    assert.equal(/WE ARE INDEPENDENT|WE DO NOT ADVERTISE|NO CONVENTIONAL CHANNELS/.test(home), false, "old manifesto lines are gone");
+    assert.equal(/CLASSIFIED/.test(s), false, "the open /signal page has no CLASSIFIED badge");
+    assert.ok(s.includes("STUDIO JOURNAL") && /OPEN/.test(s), "/signal badges: STUDIO JOURNAL and OPEN");
   });
   await check("/help and /shop render; shop SSR shows all 22 cards for no-JS visitors", async () => {
     assert.equal((await fetch(base + "/help")).status, 200);
