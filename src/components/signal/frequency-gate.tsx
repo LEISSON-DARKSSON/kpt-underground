@@ -53,7 +53,7 @@ export function FrequencyGate({ onUnlock }: FrequencyGateProps) {
           animation: shaking ? "nudge 0.4s ease" : "none",
         }}
       >
-        <span className="font-mono text-[11px] text-green px-4 py-3 border-r border-dim whitespace-nowrap">
+        <span className="shrink-0 font-mono text-[11px] text-green px-4 py-3 border-r border-dim whitespace-nowrap">
           FREQ &gt;
         </span>
         <input
@@ -63,14 +63,14 @@ export function FrequencyGate({ onUnlock }: FrequencyGateProps) {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
           placeholder="Enter frequency code"
-          className="flex-1 bg-transparent font-mono text-[11px] text-paper px-4 py-3 outline-none placeholder:text-dim"
+          className="min-w-0 flex-1 bg-transparent font-mono text-[11px] text-paper px-4 py-3 outline-none placeholder:text-dim"
           style={{ cursor: "text" }}
           autoComplete="off"
           spellCheck={false}
         />
         <button
           onClick={handleSubmit}
-          className="font-mono text-[10px] tracking-[0.14em] uppercase text-ink bg-green px-5 py-3 hover:bg-green/90 transition-colors duration-200"
+          className="shrink-0 font-mono text-[10px] tracking-[0.14em] uppercase text-ink bg-green px-5 py-3 hover:bg-green/90 transition-colors duration-200"
           data-cursor="h"
         >
           ENTER

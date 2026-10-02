@@ -65,6 +65,26 @@ try {
     });
   }
 
+  for (const w of [320, 390, 768, 1440]) {
+    await check(`headings @${w}: no word is split across lines on /, /story, /signal`, async () => {
+      const c = await ctx(w); const page = await c.newPage();
+      const split = [];
+      for (const path of ["/", "/story", "/signal"]) {
+        await page.goto(base + path, { waitUntil: "networkidle" }); await settle(page);
+        split.push(...(await page.evaluate((p) => [...document.querySelectorAll("[data-word]")].filter((wd) => {
+          const tops = [...wd.children].map((ch) => ch.offsetTop); // layout position, ignores reveal transforms
+          return new Set(tops).size > 1;
+        }).map((wd) => `${p}:${wd.textContent}`), path)));
+        const hOverflow = await page.evaluate(() => document.documentElement.scrollWidth - innerWidth);
+        if (hOverflow > 0) split.push(`${path}: page overflow ${hOverflow}px`);
+      }
+      assert.deepEqual(split, [], split.slice(0, 6).join(" | "));
+      await page.goto(base + "/story", { waitUntil: "networkidle" }); await settle(page); await page.waitForTimeout(1500);
+      await page.screenshot({ path: `${OUT}/story-${w}.png` });
+      await c.close();
+    });
+  }
+
   await check("B01/B02: category filter in URL survives detail → Back; bogus filter falls back to All", async () => {
     const c = await ctx(390); const page = await c.newPage();
     await page.goto(base + "/shop", { waitUntil: "networkidle" });

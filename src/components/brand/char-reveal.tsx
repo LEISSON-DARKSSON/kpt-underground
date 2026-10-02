@@ -20,12 +20,12 @@ export function CharReveal({
   const ref = useRef<HTMLElement>(null);
   const [revealed, setRevealed] = useState(false);
 
-  const chars = useMemo(() => {
-    return text.split("").map((char, i) => ({
-      char,
-      isSpace: char === " ",
-      index: i,
-    }));
+  // Letters are grouped per word: each word is one unbreakable unit and words are separated by
+  // normal spaces, so lines wrap only between words (per-letter inline-blocks + non-breaking spaces let the
+  // browser break inside words: "UNDERS / TOOD", "YO / U" on /story, 2026-10-02).
+  const words = useMemo(() => {
+    let index = 0;
+    return text.split(" ").filter(Boolean).map((word) => word.split("").map((char) => ({ char, index: index++ })));
   }, [text]);
 
   useEffect(() => {
@@ -56,28 +56,29 @@ export function CharReveal({
   }, []);
 
   return (
-    <Tag ref={ref as React.RefObject<HTMLHeadingElement>} className={className}>
-      {chars.map(({ char, isSpace, index }) =>
-        isSpace ? (
-          <span key={index} style={{ display: "inline" }}>
-            &nbsp;
+    <Tag ref={ref as React.RefObject<HTMLHeadingElement>} className={className} aria-label={text}>
+      {words.map((letters, w) => (
+        <span key={w} aria-hidden="true">
+          {w > 0 && " "}
+          <span data-word style={{ display: "inline-block", whiteSpace: "nowrap" }}>
+            {letters.map(({ char, index }) => (
+              <span
+                key={index}
+                className={accentClass}
+                style={{
+                  display: "inline-block",
+                  opacity: revealed ? 1 : 0,
+                  transform: revealed ? "none" : "translateY(16px) scale(0.94)",
+                  transition: `opacity 0.48s var(--snap), transform 0.48s var(--snap)`,
+                  transitionDelay: revealed ? `${index * staggerMs}ms` : "0ms",
+                }}
+              >
+                {char}
+              </span>
+            ))}
           </span>
-        ) : (
-          <span
-            key={index}
-            className={accentClass}
-            style={{
-              display: "inline-block",
-              opacity: revealed ? 1 : 0,
-              transform: revealed ? "none" : "translateY(16px) scale(0.94)",
-              transition: `opacity 0.48s var(--snap), transform 0.48s var(--snap)`,
-              transitionDelay: revealed ? `${index * staggerMs}ms` : "0ms",
-            }}
-          >
-            {char}
-          </span>
-        )
-      )}
+        </span>
+      ))}
     </Tag>
   );
 }
