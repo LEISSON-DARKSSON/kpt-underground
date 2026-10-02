@@ -3,25 +3,20 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 
-import { MAX_QTY, formatPrice } from "@/lib/store/core";
+import { CHECKOUT_ORIGIN, MAX_LINES, MAX_QTY, formatPrice } from "@/lib/store/core";
+import { addLine, applyPriceChanges, checkoutBody, parseStoredCart } from "@/lib/store/cart-model";
+import { track } from "@/lib/analytics";
 
-import type { StoreImage } from "@/lib/store/core";
+import type { AddResult, CartLine } from "@/lib/store/cart-model";
+
+export type { CartLine } from "@/lib/store/cart-model";
 
 /*
  * Browser cart for the live shop. Lines are keyed by Fourthwall variant ID and kept in
  * localStorage (display snapshot only). At checkout the server re-validates every variant
  * against the live catalog, Fourthwall prices the cart, and payment happens on the hosted checkout.
+ * Leaving for the hosted checkout does NOT empty the cart: nothing here knows whether a purchase happened.
  */
-
-export interface CartLine {
-  variantId: string;
-  slug: string;
-  name: string;
-  variantLabel: string;
-  unitCents: number;
-  image: StoreImage | null;
-  qty: number;
-}
 
 const KEY = "kiu-cart-v1";
 const EMPTY: CartLine[] = [];
@@ -33,13 +28,7 @@ function load() {
   if (loaded || typeof window === "undefined") return;
   loaded = true;
   try {
-    const parsed = JSON.parse(window.localStorage.getItem(KEY) ?? "[]");
-    if (Array.isArray(parsed)) {
-      lines = parsed
-        .filter((l) => l && typeof l.variantId === "string" && Number.isInteger(l.qty))
-        .map((l) => ({ ...l, qty: Math.max(1, Math.min(MAX_QTY, l.qty)) }))
-        .slice(0, 20);
-    }
+    lines = parseStoredCart(window.localStorage.getItem(KEY));
   } catch {
     lines = EMPTY;
   }
@@ -83,7 +72,8 @@ interface CartValue {
   count: number;
   subtotalCents: number;
   isOpen: boolean;
-  add: (line: Omit<CartLine, "qty">, qty: number, trigger?: HTMLElement | null) => void;
+  notice: string | null;
+  add: (line: Omit<CartLine, "qty">, qty: number, trigger?: HTMLElement | null) => AddResult;
   setQty: (variantId: string, qty: number) => void;
   remove: (variantId: string) => void;
   open: (trigger?: HTMLElement | null) => void;
@@ -98,40 +88,53 @@ export function useCart(): CartValue {
   return ctx;
 }
 
+const NOTICES: Partial<Record<AddResult, string>> = {
+  capped: `Quantity is limited to ${MAX_QTY} per item.`,
+  "line-limit": `Your cart holds up to ${MAX_LINES} different items. Check out or remove one to add another.`,
+};
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const current = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getServerSnapshot);
   const [isOpen, setIsOpen] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
 
   const open = useCallback((trigger?: HTMLElement | null) => {
     triggerRef.current = trigger ?? (document.activeElement as HTMLElement | null);
     setIsOpen(true);
+    track("view_cart", { items: lines.map((l) => ({ item_variant: l.variantId, item_id: l.slug, price: l.unitCents / 100, quantity: l.qty })) });
   }, []);
   const close = useCallback(() => setIsOpen(false), []);
   const add = useCallback(
     (line: Omit<CartLine, "qty">, qty: number, trigger?: HTMLElement | null) => {
-      const existing = lines.find((l) => l.variantId === line.variantId);
-      const next = existing
-        ? lines.map((l) => (l === existing ? { ...l, ...line, qty: Math.min(MAX_QTY, l.qty + qty) } : l))
-        : [...lines, { ...line, qty: Math.max(1, Math.min(MAX_QTY, qty)) }].slice(-20);
-      commit(next);
+      const { lines: next, result } = addLine(lines, line, qty);
+      if (result !== "line-limit") {
+        commit(next);
+        track("add_to_cart", { currency: "USD", value: (line.unitCents * qty) / 100, items: [{ item_id: line.slug, item_variant: line.variantId, price: line.unitCents / 100, quantity: qty }] });
+      }
+      setNotice(NOTICES[result] ?? null);
       open(trigger);
+      return result;
     },
     [open],
   );
   const setQty = useCallback((variantId: string, qty: number) => {
+    setNotice(null);
     commit(qty < 1 ? lines.filter((l) => l.variantId !== variantId) : lines.map((l) => (l.variantId === variantId ? { ...l, qty: Math.min(MAX_QTY, qty) } : l)));
   }, []);
-  const remove = useCallback((variantId: string) => commit(lines.filter((l) => l.variantId !== variantId)), []);
+  const remove = useCallback((variantId: string) => {
+    setNotice(null);
+    commit(lines.filter((l) => l.variantId !== variantId));
+  }, []);
 
   const value = useMemo<CartValue>(
     () => ({
       lines: current,
       count: current.reduce((n, l) => n + l.qty, 0),
       subtotalCents: current.reduce((n, l) => n + l.qty * l.unitCents, 0),
-      isOpen, add, setQty, remove, open, close,
+      isOpen, notice, add, setQty, remove, open, close,
     }),
-    [current, isOpen, add, setQty, remove, open, close],
+    [current, isOpen, notice, add, setQty, remove, open, close],
   );
 
   return (
@@ -142,8 +145,17 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   );
 }
 
+const MESSAGES: Record<string, string> = {
+  UNKNOWN_VARIANT: "One of these items is no longer available. Remove it and try again.",
+  VARIANT_UNAVAILABLE: "One of these items is no longer available. Remove it and try again.",
+  CART_REJECTED: "Fourthwall could not accept one of these items. Remove items that changed and try again.",
+  INVALID_QUANTITY: `Quantity is limited to ${MAX_QTY} per item.`,
+  PRICE_CHANGED: "A price changed since you added it. The cart now shows the current price — check it and continue.",
+};
+const FALLBACK = "Checkout is temporarily unavailable. Your cart is saved — please try again in a moment.";
+
 function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | null> }) {
-  const { lines: items, count, subtotalCents, setQty, remove, close, isOpen } = useCart();
+  const { lines: items, count, subtotalCents, setQty, remove, close, isOpen, notice } = useCart();
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -159,34 +171,56 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
     }
   }, [isOpen]);
 
+  // Back from the hosted checkout restores this page from bfcache: release the pending state.
+  useEffect(() => {
+    const onShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setPending(false);
+    };
+    window.addEventListener("pageshow", onShow);
+    return () => window.removeEventListener("pageshow", onShow);
+  }, []);
+
   const onClose = useCallback(() => {
     document.body.style.overflow = "";
+    setPending(false);
     close();
     const t = triggerRef.current;
     if (t && document.contains(t)) t.focus();
   }, [close, triggerRef]);
 
   async function checkout() {
+    if (pending) return;
+    const snapshot = lines; // exactly what the summary shows is what gets sent
     setPending(true);
     setError(null);
+    track("begin_checkout", { currency: "USD", value: subtotalCents / 100, items: snapshot.map((l) => ({ item_id: l.slug, item_variant: l.variantId, price: l.unitCents / 100, quantity: l.qty })) });
     try {
       const res = await fetch("/api/cart/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ items: items.map((l) => ({ variantId: l.variantId, quantity: l.qty })) }),
+        body: JSON.stringify(checkoutBody(snapshot)),
       });
-      const data = (await res.json()) as { url?: string; error?: string };
-      if (!res.ok || !data.url || !data.url.startsWith("https://keepitunderground-shop.fourthwall.com/")) {
-        setError(data.error === "UNKNOWN_VARIANT" || data.error === "VARIANT_UNAVAILABLE"
-          ? "One of these items is no longer available. Remove it and try again."
-          : "Checkout is temporarily unavailable. Please try again in a moment.");
+      const data = (await res.json().catch(() => ({}))) as { url?: string; error?: string; lines?: { variantId: string; unitCents: number }[] };
+      if (res.status === 409 && data.error === "PRICE_CHANGED" && Array.isArray(data.lines)) {
+        commit(applyPriceChanges(lines, data.lines));
+        setError(MESSAGES.PRICE_CHANGED);
         setPending(false);
+        track("checkout_error", { reason: "PRICE_CHANGED" });
         return;
       }
+      if (!res.ok || !data.url || !data.url.startsWith(`${CHECKOUT_ORIGIN}/`)) {
+        setError((data.error && MESSAGES[data.error]) || FALLBACK);
+        setPending(false);
+        track("checkout_error", { reason: data.error ?? `HTTP_${res.status}` });
+        return;
+      }
+      // A redirect to the hosted checkout is not a purchase; purchase comes only from the platform.
+      track("checkout_redirect", { currency: "USD", value: subtotalCents / 100 });
       window.location.assign(data.url);
     } catch {
-      setError("Checkout is temporarily unavailable. Please try again in a moment.");
+      setError(FALLBACK);
       setPending(false);
+      track("checkout_error", { reason: "NETWORK" });
     }
   }
 
@@ -214,6 +248,12 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
           </button>
         </header>
 
+        {notice && (
+          <p role="status" className="border-b border-dim px-6 py-3 font-mono text-[11px] text-orange" data-cart-notice>
+            {notice}
+          </p>
+        )}
+
         <div className="flex-1 overflow-y-auto px-6">
           {items.length === 0 ? (
             <div className="flex h-full flex-col items-start justify-center gap-5 py-12" data-empty-cart>
@@ -226,7 +266,7 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
           ) : (
             <ul className="divide-y divide-dim">
               {items.map((l) => (
-                <li key={l.variantId} data-cart-row className="grid grid-cols-[64px_minmax(0,1fr)] gap-x-4 gap-y-3 py-6 min-[400px]:grid-cols-[80px_minmax(0,1fr)_auto]">
+                <li key={l.variantId} data-cart-row data-variant={l.variantId} className="grid grid-cols-[64px_minmax(0,1fr)] gap-x-4 gap-y-3 py-6 min-[400px]:grid-cols-[80px_minmax(0,1fr)_auto]">
                   {l.image ? (
                     // eslint-disable-next-line @next/next/no-img-element -- Fourthwall CDN image, already resized
                     <img src={l.image.url} alt="" width={l.image.width} height={l.image.height} className="h-auto w-16 border border-dim min-[400px]:w-20" />
@@ -234,17 +274,17 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
                     <span className="h-20 w-16 border border-dim min-[400px]:w-20" />
                   )}
                   <div className="min-w-0">
-                    <Link href={`/shop/${l.slug}`} onClick={close} className="font-display text-2xl leading-none text-paper no-underline hover:text-green">
+                    <Link href={`/shop/${l.slug}?variant=${l.variantId}`} onClick={close} data-cursor="shop" className="font-display text-2xl leading-none text-paper no-underline hover:text-green">
                       {l.name}
                     </Link>
-                    <p className="mt-2 font-mono text-[11px] text-slate">{l.variantLabel}</p>
+                    <p className="mt-2 font-mono text-[11px] text-slate" data-cart-variant>{l.variantLabel} · {formatPrice(l.unitCents)} each</p>
                     <div className="mt-4 flex items-center gap-4">
                       <div className="flex items-center border border-dim" role="group" aria-label={`Quantity for ${l.name}`}>
-                        <button type="button" data-cursor="h" aria-label={`Decrease ${l.name}`} onClick={() => setQty(l.variantId, l.qty - 1)} className="flex h-9 w-9 items-center justify-center font-mono hover:text-green focus-visible:outline-2 focus-visible:outline-green">−</button>
+                        <button type="button" data-cursor="h" aria-label={`Decrease ${l.name}`} disabled={pending} onClick={() => setQty(l.variantId, l.qty - 1)} className="flex h-9 w-9 items-center justify-center font-mono hover:text-green disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-green">−</button>
                         <span className="w-8 text-center font-mono text-sm" aria-live="polite">{l.qty}</span>
-                        <button type="button" data-cursor="h" aria-label={`Increase ${l.name}`} disabled={l.qty >= MAX_QTY} onClick={() => setQty(l.variantId, l.qty + 1)} className="flex h-9 w-9 items-center justify-center font-mono hover:text-green disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-green">+</button>
+                        <button type="button" data-cursor="h" aria-label={`Increase ${l.name}`} disabled={pending || l.qty >= MAX_QTY} onClick={() => setQty(l.variantId, l.qty + 1)} className="flex h-9 w-9 items-center justify-center font-mono hover:text-green disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-green">+</button>
                       </div>
-                      <button type="button" data-cursor="h" onClick={() => remove(l.variantId)} className="font-mono text-[11px] text-slate underline underline-offset-4 hover:text-orange focus-visible:outline-2 focus-visible:outline-green">
+                      <button type="button" data-cursor="h" disabled={pending} onClick={() => remove(l.variantId)} className="font-mono text-[11px] text-slate underline underline-offset-4 hover:text-orange disabled:opacity-30 focus-visible:outline-2 focus-visible:outline-green">
                         Remove
                       </button>
                     </div>
@@ -262,12 +302,13 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
               <span className="font-mono text-sm">Subtotal · {count} item{count === 1 ? "" : "s"}</span>
               <span className="font-display text-4xl leading-none" data-subtotal-cents={subtotalCents}>{formatPrice(subtotalCents)}</span>
             </div>
-            <p className="font-mono text-[11px] text-slate">Shipping and taxes are calculated at checkout.</p>
-            {error && <p role="alert" className="font-mono text-[11px] text-orange">{error}</p>}
+            <p className="font-mono text-[11px] text-slate">Shipping and taxes are calculated at checkout. Made to order — see <Link href="/help" onClick={close} className="text-green underline underline-offset-4">shipping &amp; returns</Link>.</p>
+            {error && <p role="alert" className="font-mono text-[11px] text-orange" data-checkout-error>{error}</p>}
             <button
               type="button"
               onClick={checkout}
               disabled={pending}
+              aria-busy={pending}
               data-cursor="shop"
               data-cursor-label="PAY"
               data-checkout
