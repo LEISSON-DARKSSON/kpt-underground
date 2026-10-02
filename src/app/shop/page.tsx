@@ -7,7 +7,9 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Shop",
-  description: "Original KEEP IT UNDERGROUND desk mats, notebooks, prints, stickers and totes. Made on demand.",
+  description: "Original KEEP IT UNDERGROUND desk mats, notebooks, mugs, tees, hoodies, totes, cases and wall prints. Made to order, prices in USD.",
+  // Filter/search permutations (?category, ?q, ?sort) all canonicalise to /shop.
+  alternates: { canonical: "https://keepitunderground.com/shop" },
 };
 
 export default function ShopPage() {
@@ -31,7 +33,8 @@ export default function ShopPage() {
         </ScrollReveal>
       </div>
       <div className="mt-12 flex items-center justify-between border-y border-dim py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-slate">
-        <span>Made on demand</span>
+        <span>Made to order</span>
+        <a href="/help" data-cursor="h" className="text-slate underline underline-offset-4 hover:text-green">Shipping &amp; returns</a>
         <span>Prices in USD</span>
       </div>
       <div className="mt-10">
