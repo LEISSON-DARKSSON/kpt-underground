@@ -1,0 +1,225 @@
+{
+  "schema": "kpt-two-mats-economics/1",
+  "ticket": "H06",
+  "currency": "USD",
+  "preparedAt": "2026-10-02",
+  "model": "Contribution per fulfilled ordinary US order before acquisition cost. Not net profit. 34 USD is a price, not a profit.",
+  "valueFormat": {
+    "known": "{ \"value\": <number>, \"source\": \"<file:line or admin page>\", \"date\": \"<ISO date of the source>\" }",
+    "unknown": "{ \"value\": null, \"missing\": \"<which quote or figure is needed and where to get it>\" }",
+    "rules": [
+      "null means unknown. It is never 0. A real 0 is allowed only with a source and a date.",
+      "Money is USD with at most two decimals; scripts/economics/contribution.mjs converts to integer cents.",
+      "Do not double-subtract: if a Fourthwall profit figure is already net of production cost or payment fee, record that and fill the other lines accordingly.",
+      "Buyer-collected tax and buyer-paid shipping are pass-through. They are never merchandise revenue and never added to contribution.",
+      "Never run paid acquisition on a model with any null line. paidAcquisitionApproved stays false until the owner says otherwise."
+    ]
+  },
+  "products": [
+    {
+      "key": "SIGNAL-DESK-MAT",
+      "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+      "slug": "keep-it-underground-signal-01-desk-mat",
+      "targetMarket": "US",
+      "priceUsd": {
+        "value": 34,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h00-20261002\\public-catalog-snapshot.json:3225 (variant price, access PUBLIC)",
+        "date": "2026-10-02"
+      },
+      "manufacturingCostUsd": {
+        "value": 13,
+        "source": "C:\\PROJECTS\\kpt-underground\\execution-record.json:299 (sampleUnitPriceUsd 13.00 in the Fourthwall sample-cost checkout, same figure at execution-report.md:158 and :142); the owner handoff calls it the product base, C:\\PROJECTS\\kpt-underground\\KEEP-IT-UNDERGROUND-Claude-Handoff\\CLAUDE-HANDOFF.md:387",
+        "date": "2026-10-01",
+        "basisNote": "This is the unit price shown in a sample-cost checkout, not a base-cost line read from a 34 USD customer order. Confirm it in the Fourthwall admin product view (the view that produced baseCostUsdShown for Waves 02-04) and record whether any profit figure shown there is already net of payment fees."
+      }
+    },
+    {
+      "key": "SUBSURFACE-DESK-MAT",
+      "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+      "slug": "keep-it-underground-subsurface-desk-mat",
+      "targetMarket": "US",
+      "priceUsd": {
+        "value": 34,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h00-20261002\\public-catalog-snapshot.json:3149 (variant price, access PUBLIC)",
+        "date": "2026-10-02"
+      },
+      "manufacturingCostUsd": {
+        "value": 13,
+        "source": "C:\\PROJECTS\\kpt-underground\\execution-record.json:308 (sampleUnitPriceUsd 13.00 in the Fourthwall sample-cost checkout, same figure at execution-report.md:158 and :142); the owner handoff calls it the product base, C:\\PROJECTS\\kpt-underground\\KEEP-IT-UNDERGROUND-Claude-Handoff\\CLAUDE-HANDOFF.md:387",
+        "date": "2026-10-01",
+        "basisNote": "This is the unit price shown in a sample-cost checkout, not a base-cost line read from a 34 USD customer order. Confirm it in the Fourthwall admin product view (the view that produced baseCostUsdShown for Waves 02-04) and record whether any profit figure shown there is already net of payment fees."
+      }
+    }
+  ],
+  "orders": [
+    {
+      "key": "ORDER-SIGNAL-X1",
+      "description": "One order, one SIGNAL desk mat, shipped to a US address, Standard delivery.",
+      "items": [{ "productKey": "SIGNAL-DESK-MAT", "quantity": 1 }],
+      "platformFeeUsd": {
+        "value": null,
+        "missing": "Fourthwall platform fee on this order, if any. Read the Fourthwall plan/billing page (read-only) or the fee line of the profit panel on the offer. State whether it is already inside the payment-fee line."
+      },
+      "paymentFeeUsd": {
+        "value": null,
+        "missing": "Payment-processing fee Fourthwall charges on a US order of exactly this basket (subtotal + buyer shipping + tax as charged). Source: owner-run non-binding Fourthwall checkout quote taken to the shipping step with a US address and stopped before 'Complete order', or the admin profit panel. Do not derive it from the Estonia sample fees."
+      },
+      "discountUsd": {
+        "value": null,
+        "missing": "Discount applied to this order. Owner confirms in Fourthwall admin which promotions are active and records the USD amount per order; a recorded 0 needs a source and date."
+      },
+      "sellerFundedShippingUsd": {
+        "value": null,
+        "missing": "Shipping the shop pays instead of the buyer. Owner decision plus Fourthwall shipping settings; 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
+      },
+      "supportReserveUsd": {
+        "value": null,
+        "missing": "Reserve for reprints, refunds and replacement of print or quality errors, per order. Owner policy figure with a stated basis; it is not a Fourthwall figure."
+      },
+      "quotedBuyerShippingUsd": {
+        "value": null,
+        "missing": "Standard shipping the US buyer sees for one SIGNAL mat. Source: owner-run non-binding Fourthwall checkout quote to the shipping step with a US address, stopped before payment, or Fourthwall shipping settings. Pass-through, never revenue."
+      },
+      "buyerCollectedTaxUsd": {
+        "value": null,
+        "missing": "Optional. Tax or duties the buyer sees at the US quote step. Pass-through, excluded from revenue; fill only to show the buyer's delivered total."
+      },
+      "quoteCheckedAt": {
+        "value": null,
+        "missing": "ISO timestamp of the US quote for this order. Required together with the lines above."
+      },
+      "paidAcquisitionApproved": false
+    },
+    {
+      "key": "ORDER-SUBSURFACE-X1",
+      "description": "One order, one SUBSURFACE desk mat, shipped to a US address, Standard delivery.",
+      "items": [{ "productKey": "SUBSURFACE-DESK-MAT", "quantity": 1 }],
+      "platformFeeUsd": {
+        "value": null,
+        "missing": "Fourthwall platform fee on this order, if any. Read the Fourthwall plan/billing page (read-only) or the fee line of the profit panel on the offer. State whether it is already inside the payment-fee line."
+      },
+      "paymentFeeUsd": {
+        "value": null,
+        "missing": "Payment-processing fee Fourthwall charges on a US order of exactly this basket (subtotal + buyer shipping + tax as charged). Source: owner-run non-binding Fourthwall checkout quote taken to the shipping step with a US address and stopped before 'Complete order', or the admin profit panel. Do not derive it from the Estonia sample fees."
+      },
+      "discountUsd": {
+        "value": null,
+        "missing": "Discount applied to this order. Owner confirms in Fourthwall admin which promotions are active and records the USD amount per order; a recorded 0 needs a source and date."
+      },
+      "sellerFundedShippingUsd": {
+        "value": null,
+        "missing": "Shipping the shop pays instead of the buyer. Owner decision plus Fourthwall shipping settings; 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
+      },
+      "supportReserveUsd": {
+        "value": null,
+        "missing": "Reserve for reprints, refunds and replacement of print or quality errors, per order. Owner policy figure with a stated basis; it is not a Fourthwall figure."
+      },
+      "quotedBuyerShippingUsd": {
+        "value": null,
+        "missing": "Standard shipping the US buyer sees for one SUBSURFACE mat. Source: owner-run non-binding Fourthwall checkout quote to the shipping step with a US address, stopped before payment, or Fourthwall shipping settings. Pass-through, never revenue."
+      },
+      "buyerCollectedTaxUsd": {
+        "value": null,
+        "missing": "Optional. Tax or duties the buyer sees at the US quote step. Pass-through, excluded from revenue; fill only to show the buyer's delivered total."
+      },
+      "quoteCheckedAt": {
+        "value": null,
+        "missing": "ISO timestamp of the US quote for this order. Required together with the lines above."
+      },
+      "paidAcquisitionApproved": false
+    },
+    {
+      "key": "ORDER-TWO-MATS-SIGNAL-X1-SUBSURFACE-X1",
+      "description": "One order, one SIGNAL plus one SUBSURFACE, shipped to a US address, Standard delivery. Shipping and fees are quoted for this exact basket; they are not 2 x the one-mat figures. Whether the two mats leave in one parcel is itself part of the quote.",
+      "items": [
+        { "productKey": "SIGNAL-DESK-MAT", "quantity": 1 },
+        { "productKey": "SUBSURFACE-DESK-MAT", "quantity": 1 }
+      ],
+      "platformFeeUsd": {
+        "value": null,
+        "missing": "Fourthwall platform fee on the two-mat order, if any. Read the Fourthwall plan/billing page (read-only) or the fee line of the profit panel. State whether it is already inside the payment-fee line."
+      },
+      "paymentFeeUsd": {
+        "value": null,
+        "missing": "Payment-processing fee on a US order of exactly SIGNAL x1 + SUBSURFACE x1 (basket total as charged). Source: owner-run non-binding Fourthwall checkout quote with a US address, stopped before 'Complete order'. Do not derive it from the Estonia sample fee of 2.63 USD."
+      },
+      "discountUsd": {
+        "value": null,
+        "missing": "Discount applied to the two-mat order, including any bundle discount. Owner confirms in Fourthwall admin which promotions are active; no bundle discount without separate owner permission. A recorded 0 needs a source and date."
+      },
+      "sellerFundedShippingUsd": {
+        "value": null,
+        "missing": "Shipping the shop pays instead of the buyer on the two-mat order. Owner decision plus Fourthwall shipping settings; 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
+      },
+      "supportReserveUsd": {
+        "value": null,
+        "missing": "Reserve for reprints, refunds and replacement of print or quality errors on the two-mat order. Owner policy figure with a stated basis."
+      },
+      "quotedBuyerShippingUsd": {
+        "value": null,
+        "missing": "Standard shipping the US buyer sees for SIGNAL x1 + SUBSURFACE x1. Source: owner-run non-binding Fourthwall checkout quote with a US address, stopped before payment. Record whether the two mats ship as one parcel. Pass-through, never revenue."
+      },
+      "buyerCollectedTaxUsd": {
+        "value": null,
+        "missing": "Optional. Tax or duties the buyer sees at the US quote step for the two-mat basket. Pass-through, excluded from revenue."
+      },
+      "quoteCheckedAt": {
+        "value": null,
+        "missing": "ISO timestamp of the US quote for this order. Required together with the lines above."
+      },
+      "paidAcquisitionApproved": false
+    }
+  ],
+  "excludedFigures": [
+    {
+      "figureUsd": [80.49, 80.67],
+      "what": "Checkout totals of the one SIGNAL + one SUBSURFACE sample order to Estonia",
+      "reason": "Estonia sample totals. They include Estonian VAT and customs duties, Estonia shipping, and a sample-cost basket. Not a US customer cost and not a US shipping estimate.",
+      "source": "C:\\PROJECTS\\kpt-underground\\execution-report.md:150 (80.49, 2026-09-29) and :160 (80.67, 2026-10-01); execution-record.json:271 and :327"
+    },
+    {
+      "figureUsd": [49.64],
+      "what": "Checkout total of one SIGNAL sample to Estonia",
+      "reason": "Same Estonia sample class as above.",
+      "source": "C:\\PROJECTS\\kpt-underground\\execution-report.md:149 (2026-09-29)"
+    },
+    {
+      "figureUsd": [22.89, 31.29, 31.45],
+      "what": "Estonia Standard shipping for one sample and for the two-sample basket",
+      "reason": "Destination was Estonia. Says nothing about US shipping, and the two-mat figure is not twice the one-mat figure.",
+      "source": "C:\\PROJECTS\\kpt-underground\\execution-report.md:149, :150, :160"
+    },
+    {
+      "figureUsd": [8.61, 13.75, 13.79, 3.41, 6.82, 6.8],
+      "what": "Estonian VAT and customs duties on the samples",
+      "reason": "Destination taxes of the sample order. Buyer-collected tax is pass-through and never revenue; US tax is a separate unknown.",
+      "source": "C:\\PROJECTS\\kpt-underground\\execution-report.md:149, :150, :160"
+    },
+    {
+      "figureUsd": [0.69, 1.08, 1.73, 2.63],
+      "what": "Payment-processing fees shown on the sample checkouts",
+      "reason": "Charged on a sample-cost subtotal (13 or 26 USD) with or without Estonia shipping and VAT, not on a 34 or 68 USD US order. A percentage must not be back-calculated from them.",
+      "source": "C:\\PROJECTS\\kpt-underground\\execution-report.md:142, :149, :150, :160"
+    },
+    {
+      "figureUsd": [2, 2, 17],
+      "what": "Fee assumption, problem reserve and illustrative margin for the desk mat in the 2026-09-23 memo",
+      "reason": "Labelled planning assumptions and a budget reserve, not a platform tariff or a quote. The 17 USD is retail minus base minus assumptions.",
+      "source": "C:\\PROJECTS\\kpt-underground\\KEEP-IT-UNDERGROUND-Claude-Handoff\\reference\\2026-09-23-business-memo-HISTORICAL.md:37 and :41 (2026-09-23)"
+    },
+    {
+      "figureUsd": [21],
+      "what": "34 minus 13 base",
+      "reason": "Retail minus base cost alone. The handoff itself says it is before payment fees, shipping cover, reserves, marketing and other costs, and is not profit.",
+      "source": "C:\\PROJECTS\\kpt-underground\\KEEP-IT-UNDERGROUND-Claude-Handoff\\CLAUDE-HANDOFF.md:387 (2026-10-02)"
+    },
+    {
+      "figureUsd": [16],
+      "what": "Raw variant price field 16 on the PRIVATE desk-mat products",
+      "reason": "Stale pre-publication field. The mats were repriced 16 to 34 USD on 2026-10-02 (execution-report.md:216); the field is not a cost.",
+      "source": "C:\\PROJECTS\\kpt-underground\\KEEP-IT-UNDERGROUND-Claude-Handoff\\state\\product-manifest.json:26 and :87"
+    }
+  ]
+}
