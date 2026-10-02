@@ -104,6 +104,17 @@ try {
     const robots = await (await fetch(base + "/robots.txt")).text();
     for (const d of ["/api/", "/commerce-preview", "/shop?*"]) assert.ok(robots.includes(`Disallow: ${d}`), d);
   });
+  await check("Signal is an open studio journal: /signal and /story answer 200 without membership, gate or invented entries", async () => {
+    const signal = await fetch(base + "/signal");
+    assert.equal(signal.status, 200);
+    const s = await signal.text();
+    assert.ok(s.includes("NO ENTRIES YET."), "honest empty state");
+    assert.equal(/MEMBERS ONLY|ACCESS GRANTED|140HZ|closed channel|<form|type="email"/i.test(s), false, "no gate, membership wording or signup form");
+    const story = await (await fetch(base + "/story")).text();
+    assert.equal(/closed channel|members only|140HZ/i.test(story), false, "no closed-channel promise on /story");
+    const home = await (await fetch(base + "/")).text();
+    assert.equal(/FREQ: 140HZ|ENTER SIGNAL NETWORK|closed channel/i.test(home), false, "no gate hint or network promise on the home page");
+  });
   await check("/help and /shop render; shop SSR shows all 22 cards for no-JS visitors", async () => {
     assert.equal((await fetch(base + "/help")).status, 200);
     const html = await (await fetch(base + "/shop")).text();

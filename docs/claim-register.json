@@ -112,7 +112,7 @@
   {
     "id": "H03-012",
     "file": "src/app/page.tsx",
-    "line": 101,
+    "line": 102,
     "text": "SYS: OPERATIONAL",
     "class": "BRAND_POETRY",
     "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
@@ -122,17 +122,17 @@
   {
     "id": "H03-013",
     "file": "src/app/page.tsx",
-    "line": 103,
-    "text": "FREQ: 140HZ",
+    "line": 104,
+    "text": "FREQ: SUB-BASS",
     "class": "BRAND_POETRY",
-    "evidence": "The Signal gate code is exactly this value (frequency-gate.tsx:9), so the 'secret' is public on the home page",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Decide with the gate (D3). If the gate is removed, replace with 'FREQ: SUB-BASS' (already used on /story) or drop the line."
+    "evidence": "n/a: decorative HUD label, same wording as /story; no longer the public gate code (gate removed)",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-014",
     "file": "src/app/page.tsx",
-    "line": 105,
+    "line": 106,
     "text": "SIGNAL: ACTIVE",
     "class": "BRAND_POETRY",
     "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
@@ -142,7 +142,7 @@
   {
     "id": "H03-015",
     "file": "src/app/page.tsx",
-    "line": 144,
+    "line": 145,
     "text": "02 // THE SIGNAL",
     "class": "BRAND_POETRY",
     "evidence": "n/a: voice, no promise",
@@ -152,32 +152,32 @@
   {
     "id": "H03-016",
     "file": "src/app/page.tsx",
-    "line": 150,
-    "text": ">NETWORK</span>",
+    "line": 149,
+    "text": ">SIGNAL</span>",
     "class": "BRAND_POETRY",
-    "evidence": "None: 'network' implies a community of members; none is evidenced (E04)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Drop 'NETWORK' and title the block 'THE SIGNAL' (studio journal), following D1."
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-017",
     "file": "src/app/page.tsx",
-    "line": 164,
-    "text": "A closed channel for those who keep it underground.",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Notes from the studio on design and new objects. Open to everyone."
+    "line": 163,
+    "text": "Notes from the studio on design and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-018",
     "file": "src/app/page.tsx",
-    "line": 183,
-    "text": "&#x25CF; ENTER SIGNAL NETWORK",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "&#x25CF; READ THE SIGNAL (label only; the /signal URL stays)."
+    "line": 182,
+    "text": "&#x25CF; READ THE SIGNAL",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-019",
@@ -212,7 +212,7 @@
   {
     "id": "H03-022",
     "file": "src/components/home/hero-product.tsx",
-    "line": 50,
+    "line": 52,
     "text": "Digital visualisation · made to order",
     "class": "SHOP_FACT",
     "evidence": "Honest caption: the hero image is the Fourthwall mockup, not a photo; made to order per src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
@@ -223,11 +223,11 @@
     "id": "H03-023",
     "file": "src/components/home/manifesto-strip.tsx",
     "line": 4,
-    "text": "\"WE DO NOT ADVERTISE\",",
+    "text": "\"WE ARE INDEPENDENT\",",
     "class": "BRAND_POETRY",
-    "evidence": "None: an absolute statement of conduct; conflicts with any future paid or earned-reach test (H06/H10)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "WE MAKE ORIGINAL GRAPHIC OBJECTS (or keep only if the owner commits to never advertising)."
+    "evidence": "Owner approved the recommended wording 2026-10-02 (docs/signal-journal-proposal.md section e). Precondition stated there (owner-operated by LEISSON OU, no outside label, publisher or investor) is not separately documented in the repo",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-024",
@@ -263,11 +263,11 @@
     "id": "H03-027",
     "file": "src/components/home/manifesto-strip.tsx",
     "line": 8,
-    "text": "\"NO CONVENTIONAL CHANNELS\",",
-    "class": "BRAND_POETRY",
-    "evidence": "None: reads as a business rule against ordinary distribution; the shop itself is a conventional channel",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "MADE TO ORDER (existing shop fact) or an owner-confirmed line on independent design."
+    "text": "\"MADE TO ORDER\",",
+    "class": "SHOP_FACT",
+    "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-028",
@@ -453,11 +453,11 @@
     "id": "H03-046",
     "file": "src/components/story/story-manifesto.tsx",
     "line": 4,
-    "text": "\"WE DO NOT ADVERTISE.\"",
+    "text": "\"WE ARE INDEPENDENT.\"",
     "class": "BRAND_POETRY",
-    "evidence": "None: see home manifesto strip (D5)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "WE MAKE ORIGINAL GRAPHIC OBJECTS. (or an owner-confirmed independence line)"
+    "evidence": "Owner approved the recommended wording 2026-10-02 (docs/signal-journal-proposal.md section e). Precondition stated there (owner-operated by LEISSON OU, no outside label, publisher or investor) is not separately documented in the repo",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-047",
@@ -532,7 +532,7 @@
   {
     "id": "H03-054",
     "file": "src/components/story/story-signal-network.tsx",
-    "line": 29,
+    "line": 25,
     "text": "CLASSIFIED",
     "class": "BRAND_POETRY",
     "evidence": "n/a: voice, no promise",
@@ -542,92 +542,72 @@
   {
     "id": "H03-055",
     "file": "src/components/story/story-signal-network.tsx",
-    "line": 32,
-    "text": "MEMBERS ONLY",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04)",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove the badge (or replace with 'OPEN')."
+    "line": 28,
+    "text": "OPEN",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-056",
     "file": "src/components/story/story-signal-network.tsx",
-    "line": 39,
-    "text": "text=\"THE SIGNAL NETWORK\"",
+    "line": 35,
+    "text": "text=\"THE SIGNAL\"",
     "class": "BRAND_POETRY",
-    "evidence": "None for 'network'; see D1",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "THE SIGNAL (studio journal)."
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-057",
     "file": "src/components/story/story-signal-network.tsx",
     "line": 7,
-    "text": "A closed, non-algorithmic channel. Not a newsletter. Not a loyalty programme. A direct line to events that have no public existence.",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy); None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Open studio journal: notes on design and process, new objects. Open to everyone; no membership, no event access."
+    "text": "Notes from the studio on design and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-058",
     "file": "src/components/story/story-signal-network.tsx",
     "line": 11,
-    "text": "Location codes. Frequency callouts. Access instructions for parties not on any map. The only way in is already knowing.",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "What it carries: studio notes, design process, new objects. Link to /signal."
+    "text": "Studio notes, design process, new objects.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-059",
     "file": "src/components/story/story-signal-network.tsx",
     "line": 15,
-    "text": "You find it the way you find the good parties: someone tells you. What follows cannot be described further here.",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04); the page is public and indexable",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Anyone can read it: /signal is linked from the site navigation."
-  },
-  {
-    "id": "H03-060",
-    "file": "src/components/story/story-signal-network.tsx",
-    "line": 19,
-    "text": "Because the information is real. The relationships are real.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no source for the information or relationships claimed",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove (no replacement needed)."
-  },
-  {
-    "id": "H03-061",
-    "file": "src/components/story/story-signal-network.tsx",
-    "line": 19,
-    "text": "We were there before the brand existed.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: company-history claim with no source; CLAUDE.md and the brief forbid invented history",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove, or replace with a fact the owner supplies and can document."
+    "text": "Anyone can read it. /signal is linked from the site navigation.",
+    "class": "BRAND_POETRY",
+    "evidence": "src/components/layout/navbar.tsx and src/components/layout/footer.tsx link /signal; page is open (no gate)",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-062",
     "file": "src/app/signal/page.tsx",
     "line": 7,
-    "text": "title: \"Signal Network\"",
+    "text": "title: \"Signal\"",
     "class": "BRAND_POETRY",
-    "evidence": "None for 'network'; see D1",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "title: \"Signal\" (rendered 'Signal — KEEP IT UNDERGROUND')."
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-063",
     "file": "src/app/signal/page.tsx",
     "line": 8,
-    "text": "A closed, non-algorithmic channel. Not a newsletter. A direct line to events that have no public existence.",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy); the text is indexable metadata",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Studio notes from KEEP IT UNDERGROUND: design process and new objects. Open to everyone."
+    "text": "Studio notes from KEEP IT UNDERGROUND: design process and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-064",
@@ -643,46 +623,36 @@
     "id": "H03-065",
     "file": "src/app/signal/page.tsx",
     "line": 26,
-    "text": "MEMBERS ONLY",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04)",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove the badge (or replace with 'OPEN')."
+    "text": "OPEN",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-066",
     "file": "src/app/signal/page.tsx",
     "line": 34,
-    "text": "text=\"THE SIGNAL NETWORK\"",
+    "text": "text=\"THE SIGNAL\"",
     "class": "BRAND_POETRY",
-    "evidence": "None for 'network'; see D1",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "THE SIGNAL"
+    "evidence": "n/a: voice, no promise; owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-067",
     "file": "src/app/signal/page.tsx",
     "line": 41,
-    "text": "A closed, non-algorithmic channel. Not a newsletter. Not a loyalty programme.",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04); 'not a newsletter' would contradict an e-mail signup (H09)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Open studio journal: notes on design and process, new objects. Open to everyone; no membership, no event access."
-  },
-  {
-    "id": "H03-068",
-    "file": "src/app/signal/page.tsx",
-    "line": 42,
-    "text": "A direct line to events that have no public existence.",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove the events sentence; see D2."
+    "text": "Notes from the studio on design and new objects. Open to everyone.",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-069",
     "file": "src/app/signal/page.tsx",
-    "line": 50,
+    "line": 49,
     "text": "\"SIGNAL ACTIVE\"",
     "class": "BRAND_POETRY",
     "evidence": "n/a: decorative HUD label; revisit if Signal stays a non-service",
@@ -690,19 +660,9 @@
     "proposed": ""
   },
   {
-    "id": "H03-070",
-    "file": "src/app/signal/page.tsx",
-    "line": 50,
-    "text": "\"FREQUENCY LOCKED\"",
-    "class": "BRAND_POETRY",
-    "evidence": "The lock is client-side only (S11); 'locked' describes a UI state, not access control",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Drop with the gate (D3); otherwise keep as flavour."
-  },
-  {
     "id": "H03-071",
     "file": "src/app/signal/page.tsx",
-    "line": 50,
+    "line": 49,
     "text": "\"NO ALGORITHM\"",
     "class": "BRAND_POETRY",
     "evidence": "True of a static page; voice only",
@@ -710,179 +670,49 @@
     "proposed": ""
   },
   {
-    "id": "H03-072",
-    "file": "src/app/signal/page.tsx",
-    "line": 50,
-    "text": "\"DIRECT ACCESS\"",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy); access to what is not stated",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove, or name the real thing that is offered."
-  },
-  {
-    "id": "H03-073",
-    "file": "src/app/signal/page.tsx",
-    "line": 50,
-    "text": "\"MEMBERS ONLY\"",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04)",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove from the ticker."
-  },
-  {
-    "id": "H03-074",
-    "file": "src/app/signal/page.tsx",
-    "line": 50,
-    "text": "\"140HZ\"",
-    "class": "BRAND_POETRY",
-    "evidence": "None: gate is a client-side string compare (frequency-gate.tsx:9,19; S11) and its code is printed publicly (home HUD, Signal ticker)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Drop with the gate (D3)."
-  },
-  {
-    "id": "H03-075",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 33,
-    "text": "FREQ-GATED",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: gate is a client-side string compare (frequency-gate.tsx:9,19; S11) and its code is printed publicly (home HUD, Signal ticker)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove with the gate, or relabel 'CODE PUZZLE' if kept as an acknowledged easter egg."
-  },
-  {
-    "id": "H03-076",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 36,
-    "text": "CLASSIFIED",
-    "class": "BRAND_POETRY",
-    "evidence": "n/a: voice, no promise",
-    "status": "OK",
-    "proposed": ""
-  },
-  {
-    "id": "H03-077",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 41,
-    "text": "ACCESS<br />RESTRICTED.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: gate is a client-side string compare (frequency-gate.tsx:9,19; S11) and its code is printed publicly (home HUD, Signal ticker)",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove with the gate; if kept: 'STUDIO PUZZLE.'"
-  },
-  {
-    "id": "H03-078",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 45,
-    "text": "A closed channel exists beyond this point. The access code was embedded in a recent broadcast.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no broadcast, closed channel or hidden content exists; the code is shown on the public home page",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Hint: the code is printed somewhere on this site. (Only if the gate is kept as an easter egg.)"
-  },
-  {
-    "id": "H03-079",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 46,
-    "text": "Those who were listening will already know.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no broadcast or audience exists",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove."
-  },
-  {
-    "id": "H03-080",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 65,
-    "text": "placeholder=\"Enter frequency code\"",
-    "class": "BRAND_POETRY",
-    "evidence": "n/a: control label",
-    "status": "OK",
-    "proposed": ""
-  },
-  {
-    "id": "H03-081",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 82,
-    "text": "{\"// FREQUENCY NOT RECOGNISED\"}",
-    "class": "BRAND_POETRY",
-    "evidence": "n/a: feedback label",
-    "status": "OK",
-    "proposed": ""
-  },
-  {
-    "id": "H03-082",
-    "file": "src/components/signal/frequency-gate.tsx",
-    "line": 87,
-    "text": "{\"// CORRECT CODE UNLOCKS ACCESS\"}",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: gate is a client-side string compare (frequency-gate.tsx:9,19; S11) and its code is printed publicly (home HUD, Signal ticker)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "// CORRECT CODE SHOWS THE LOG"
-  },
-  {
     "id": "H03-083",
     "file": "src/components/signal/signal-page-client.tsx",
-    "line": 28,
-    "text": "ACCESS GRANTED",
-    "class": "UNSUPPORTED",
-    "evidence": "None: gate is a client-side string compare (frequency-gate.tsx:9,19; S11) and its code is printed publicly (home HUD, Signal ticker); the feed text ships in the client bundle for everyone",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove with the gate."
+    "line": 19,
+    "text": "OPEN",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-084",
     "file": "src/components/signal/signal-page-client.tsx",
-    "line": 31,
-    "text": "SIGNAL NETWORK // LIVE FEED",
-    "class": "UNSUPPORTED",
-    "evidence": "None: the feed is a hard-coded array dated 2025-03 (signal-feed.tsx), not live",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "SIGNAL // STUDIO JOURNAL"
-  },
-  {
-    "id": "H03-085",
-    "file": "src/components/signal/signal-page-client.tsx",
-    "line": 43,
-    "text": "title: \"DIRECT EVENT ACCESS\"",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove (D2)."
-  },
-  {
-    "id": "H03-086",
-    "file": "src/components/signal/signal-page-client.tsx",
-    "line": 43,
-    "text": "desc: \"Location coordinates for parties with no public existence.\"",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove (D2)."
+    "line": 22,
+    "text": "SIGNAL // STUDIO JOURNAL",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-087",
     "file": "src/components/signal/signal-page-client.tsx",
-    "line": 44,
-    "text": "title: \"CULTURE PARTICIPATION\"",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no participation mechanism exists",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "STUDIO NOTES"
+    "line": 5,
+    "text": "title: \"STUDIO NOTES\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-088",
     "file": "src/components/signal/signal-page-client.tsx",
-    "line": 44,
-    "text": "desc: \"Early drops. Direct communication. Closed broadcast channels.\"",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: all 22 products are public (tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md); no early-access or broadcast channel exists",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Design notes and new objects as they are published."
+    "line": 5,
+    "text": "desc: \"Design notes and new objects as they are published.\"",
+    "class": "BRAND_POETRY",
+    "evidence": "No promise of frequency or delivery; /signal shows the empty state until the owner publishes an entry",
+    "status": "OK",
+    "proposed": ""
   },
   {
     "id": "H03-089",
     "file": "src/components/signal/signal-page-client.tsx",
-    "line": 45,
+    "line": 6,
     "text": "title: \"NO ALGORITHM\"",
     "class": "BRAND_POETRY",
     "evidence": "True of a static page; voice only",
@@ -892,142 +722,12 @@
   {
     "id": "H03-090",
     "file": "src/components/signal/signal-page-client.tsx",
-    "line": 45,
+    "line": 6,
     "text": "desc: \"Nothing here is ranked, boosted or sponsored.\"",
     "class": "BRAND_POETRY",
     "evidence": "True of the current static list; stays true only while no paid placement is added",
     "status": "OK",
     "proposed": ""
-  },
-  {
-    "id": "H03-091",
-    "file": "src/components/signal/signal-page-client.tsx",
-    "line": 46,
-    "text": "title: \"WORD OF MOUTH\"",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: no membership or login exists; the Signal door was not passed in the audit and no membership agreement was verified (E04)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove, or 'OPEN TO EVERYONE'."
-  },
-  {
-    "id": "H03-092",
-    "file": "src/components/signal/signal-page-client.tsx",
-    "line": 46,
-    "text": "desc: \"The way in is already knowing someone who knows.\"",
-    "class": "SERVICE_PROMISE",
-    "evidence": "None: contradicted by the public gate code and the public URL",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove."
-  },
-  {
-    "id": "H03-093",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 24,
-    "text": "type: \"FREQUENCY\",",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove with the entries (D2)."
-  },
-  {
-    "id": "H03-094",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 31,
-    "text": "type: \"EVENT\",",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove with the entries (D2)."
-  },
-  {
-    "id": "H03-095",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 59,
-    "text": "type: \"EVENT\",",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove with the entries (D2)."
-  },
-  {
-    "id": "H03-096",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 33,
-    "text": "status: \"UPCOMING\",",
-    "class": "UNSUPPORTED",
-    "evidence": "None: the only 'upcoming' entry is dated 2025-03-18, already in the past",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove with the entries (D2)."
-  },
-  {
-    "id": "H03-097",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 18,
-    "text": "52.4934°N, 13.4437°E — Warehouse district. Gate 7. No signage. Follow the sub-bass.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove (sig-007). Do not invent replacement entries."
-  },
-  {
-    "id": "H03-098",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 25,
-    "text": "New transmission on 33Hz. Duration: 4 hours. Participants: unknown. Dress code: dark.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove (sig-006)."
-  },
-  {
-    "id": "H03-099",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 32,
-    "text": "NEOONDREED live techno set — 3 hours. Location broadcast 60 minutes before start. No recording.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy); names a performer",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove (sig-005) unless the owner confirms the event and the performer's consent."
-  },
-  {
-    "id": "H03-100",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 39,
-    "text": "Prototype Field Jacket — 12 units. Available through Signal Network only. No public sale.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no jacket in the 22-product catalog; Signal-only sales contradict the shop; product visibility is the owner's call (CLAUDE.md)",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove (sig-004)."
-  },
-  {
-    "id": "H03-101",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 46,
-    "text": "Frequency embedded in last week's mix. First 20 to decode receive early access to SS-2025 collection.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no SS-2025 collection, no mix and no early-access scheme exist (tests/store/fixtures/public-catalog-2026-10-02.json (22 public products); docs/store-operations.md)",
-    "status": "REWRITE_PROPOSED",
-    "proposed": "Remove (sig-003)."
-  },
-  {
-    "id": "H03-102",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 53,
-    "text": "51.5074°N, 0.1278°W — Arch 42. Service entrance. The door is unmarked.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy)",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Remove (sig-002)."
-  },
-  {
-    "id": "H03-103",
-    "file": "src/components/signal/signal-feed.tsx",
-    "line": 60,
-    "text": "LEISSON + DARKSSON — joint set. Krematoorium. Capacity: 200. No phones.",
-    "class": "UNSUPPORTED",
-    "evidence": "None: no event schedule, organiser or venue agreement in repo, docs or Fourthwall data (strategy E03/E04 show only the copy); may be a real past event: the owner knows",
-    "status": "OWNER_DECISION_NEEDED",
-    "proposed": "Keep only if the owner confirms it happened, with a real date and venue; otherwise remove (sig-001)."
   },
   {
     "id": "H03-104",
@@ -1186,6 +886,66 @@
     "text": "For a quality issue, contact us with your order number and a photo of the problem. The returns page lists the time limit.",
     "class": "SHOP_FACT",
     "evidence": "src/app/help/page.tsx policy summary (read 2026-10-02) + keepitunderground-shop.fourthwall.com/pages/returns-faq; not re-fetched here",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-120",
+    "file": "src/app/signal/page.tsx",
+    "line": 49,
+    "text": "\"STUDIO JOURNAL\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-121",
+    "file": "src/app/signal/page.tsx",
+    "line": 49,
+    "text": "\"OPEN TO EVERYONE\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-122",
+    "file": "src/components/signal/signal-feed.tsx",
+    "line": 11,
+    "text": "NO ENTRIES YET.",
+    "class": "BRAND_POETRY",
+    "evidence": "Honest empty state: the owner has supplied no journal entry (docs/signal-journal-proposal.md); no entry is invented",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-123",
+    "file": "src/components/signal/signal-feed.tsx",
+    "line": 20,
+    "text": "BROWSE THE SHOP",
+    "class": "SHOP_FACT",
+    "evidence": "Links to /shop (src/app/shop/page.tsx), live Fourthwall catalog",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-124",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 10,
+    "text": "title: \"WHAT IT CARRIES\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
+    "status": "OK",
+    "proposed": ""
+  },
+  {
+    "id": "H03-125",
+    "file": "src/components/story/story-signal-network.tsx",
+    "line": 14,
+    "text": "title: \"HOW TO READ IT\"",
+    "class": "BRAND_POETRY",
+    "evidence": "Page is open: no gate, login or membership (src/components/signal/signal-page-client.tsx); owner approved docs/signal-journal-proposal.md 2026-10-02",
     "status": "OK",
     "proposed": ""
   }

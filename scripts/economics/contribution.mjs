@@ -4,15 +4,20 @@
 // Two separate outputs:
 //   1. ACTUAL contribution. A number comes out only when EVERY required input is a
 //      non-null OBSERVED number with source and date (an owner PLANNING_ASSUMPTION is also
-//      accepted for sellerFundedShippingUsd and supportReserveUsd). Otherwise the status is
-//      BLOCKED_MISSING_INPUTS (or BLOCKED_INVALID_INPUT) and nothing derived from retail is printed.
+//      accepted for discountUsd, sellerFundedShippingUsd and supportReserveUsd). Otherwise the
+//      status is BLOCKED_MISSING_INPUTS (or BLOCKED_INVALID_INPUT) and nothing derived from
+//      retail is printed.
 //   2. planningScenario. Status PLANNING_ONLY. Built only from OBSERVED + PUBLIC_STANDARD +
 //      explicitly supplied PLANNING_ASSUMPTION values. It is never profit, never contribution,
-//      never paid-acquisition readiness.
+//      never paid-acquisition readiness. The fee-base variants use the OBSERVED buyer
+//      shipping and tax quote lines when present (and a quoteCheckedAt); otherwise the owner's
+//      planning fallback values; otherwise they are NOT_COMPUTABLE.
 //
 // Every input carries a class: OBSERVED | PUBLIC_STANDARD | PLANNING_ASSUMPTION | UNKNOWN.
 // null is never coerced to 0. The 13 USD catalog base (catalog flat fee == manufacturing cost)
-// is counted once. Buyer-collected tax and buyer-paid shipping are never revenue.
+// is counted once. Buyer-collected tax and buyer-paid shipping are validated and read as inputs
+// but are never revenue and never added to or subtracted from contribution; they only set the
+// fee base in the planning scenario. An observed quote is valid for its own destination and date only.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -65,9 +70,16 @@ const ORDER_MONEY_FIELDS = [
   "buyerCollectedTaxUsd",
   "actualNetPayoutUsd",
 ];
-const ORDER_ALLOWED_CLASSES = { sellerFundedShippingUsd: ACTUAL_OR_OWNER_POLICY, supportReserveUsd: ACTUAL_OR_OWNER_POLICY };
+const ORDER_ALLOWED_CLASSES = {
+  discountUsd: ACTUAL_OR_OWNER_POLICY,
+  sellerFundedShippingUsd: ACTUAL_OR_OWNER_POLICY,
+  supportReserveUsd: ACTUAL_OR_OWNER_POLICY,
+};
 // Read and required, but never added or subtracted.
 const PASS_THROUGH = ["quotedBuyerShippingUsd", "buyerCollectedTaxUsd"];
+// Optional observed quote total: when present it is read and cross-checked against
+// merchandise - discount + buyer shipping + buyer tax. Never revenue, never contribution.
+const OPTIONAL_PASS_THROUGH = ["quotedBuyerTotalUsd"];
 const CROSS_CHECK_ONLY = ["actualNetPayoutUsd"];
 const ORDER_DATE_FIELD = "quoteCheckedAt";
 
@@ -257,6 +269,12 @@ export function computeContribution(model) {
         po.classes[f] = r.cls;
       } else note(`orders[${o?.key}].${f}`, r);
     }
+    for (const f of OPTIONAL_PASS_THROUGH) {
+      if (o?.[f] === undefined) continue; // optional; an absent total is fine, a bad one is reported
+      const r = readMoney(o[f], ACTUAL_ONLY);
+      if (r.ok) po.lines[f] = r.cents;
+      else if (r.kind !== "missing") note(`orders[${o?.key}].${f}`, r);
+    }
     const d = readDate(o?.[ORDER_DATE_FIELD]);
     if (d.ok) po.quoteCheckedAt = d.value;
     else note(`orders[${o?.key}].${ORDER_DATE_FIELD}`, d);
@@ -275,6 +293,28 @@ export function computeContribution(model) {
     parsedOrders.push(po);
   }
 
+  // Consistency of an observed quote: total = merchandise - discount + buyer shipping + buyer tax.
+  // A validation only. The total, shipping and tax never enter revenue or contribution.
+  for (const po of parsedOrders) {
+    const l = po.lines;
+    if (l.quotedBuyerTotalUsd === undefined || l.quotedBuyerShippingUsd === undefined || l.buyerCollectedTaxUsd === undefined || l.discountUsd === undefined) continue;
+    let merchandise = 0;
+    let priced = po.items.length > 0;
+    for (const it of po.items) {
+      const price = products.get(it.productKey)?.priceUsd;
+      if (price === undefined) priced = false;
+      else merchandise += price * it.quantity;
+    }
+    if (!priced) continue;
+    const expected = merchandise - l.discountUsd + l.quotedBuyerShippingUsd + l.buyerCollectedTaxUsd;
+    if (expected !== l.quotedBuyerTotalUsd) {
+      invalid.push({
+        input: `orders[${po.key}].quotedBuyerTotalUsd`,
+        reason: `observed total ${l.quotedBuyerTotalUsd} cents does not equal merchandise - discount + buyer shipping + buyer tax = ${expected} cents`,
+      });
+    }
+  }
+
   const base = {
     currency: model?.currency ?? "USD",
     measure: "ACTUAL contribution before acquisition. Not net profit. Not a paid-acquisition decision.",
@@ -283,9 +323,10 @@ export function computeContribution(model) {
       perProduct: PRODUCT_FIELDS,
       perOrder: [...ORDER_MONEY_FIELDS, ORDER_DATE_FIELD],
       passThroughNeverRevenue: PASS_THROUGH,
+      optionalPassThroughNeverRevenue: OPTIONAL_PASS_THROUGH,
       crossCheckOnly: CROSS_CHECK_ONLY,
       allowedClassesForActual:
-        "OBSERVED (sellerFundedShippingUsd and supportReserveUsd also accept an owner PLANNING_ASSUMPTION); PUBLIC_STANDARD never feeds the actual figure",
+        "OBSERVED (discountUsd, sellerFundedShippingUsd and supportReserveUsd also accept an owner PLANNING_ASSUMPTION); PUBLIC_STANDARD never feeds the actual figure",
     },
   };
 
@@ -347,6 +388,7 @@ export function computeContribution(model) {
       excludedPassThroughCents: {
         buyerPaidShipping: l.quotedBuyerShippingUsd,
         buyerCollectedTax: l.buyerCollectedTaxUsd,
+        buyerQuotedTotal: l.quotedBuyerTotalUsd ?? null,
       },
       crossCheckOnlyCents: { actualNetPayout: l.actualNetPayoutUsd },
       contributionCents,
@@ -370,12 +412,12 @@ function computePlanningScenario(model, products, parsedOrders, invalidSoFar) {
     feeBaseConfirmed: false,
     excludedUnknowns: [
       "customizationAdditionalUsd (customization quote amount, UNKNOWN)",
-      "US shipping cost to the shop and buyer shipping quote",
-      "buyer tax (pass-through, never revenue)",
-      "discount",
-      "seller-funded shipping",
+      "shop-side shipping treatment: whether Fourthwall deducts or passes through the buyer-paid shipping, and any seller-funded share",
+      "buyer shipping and buyer tax (pass-through): only the fee base, never revenue, never subtracted or added",
+      "discount (owner standing rule 0, PLANNING_ASSUMPTION; nothing is subtracted)",
       "support / problem reserve",
       "platform fee in dollars",
+      "actual payment fee in dollars and its assessment base",
       "actual net payout",
       "acquisition cost",
     ],
@@ -419,11 +461,19 @@ function computePlanningScenario(model, products, parsedOrders, invalidSoFar) {
       catalogBaseCents += prod[CATALOG_BASE_FIELD] * it.quantity; // once per unit; aliases already collapsed
       units += it.quantity;
     }
+    // Buyer shipping and tax for the fee-base variants: the OBSERVED quote line wins (it is only
+    // usable together with quoteCheckedAt); the owner's planning value is a fallback; else NOT_COMPUTABLE.
     const planning = po.raw?.planning ?? {};
-    const ship = readMoney(planning.plannedBuyerShippingUsd, [INPUT_CLASS.PLANNING_ASSUMPTION]);
-    const tax = readMoney(planning.plannedBuyerTaxUsd, [INPUT_CLASS.PLANNING_ASSUMPTION]);
-    const shipPath = `orders[${po.key}].planning.plannedBuyerShippingUsd`;
-    const taxPath = `orders[${po.key}].planning.plannedBuyerTaxUsd`;
+    const quoteUsable = po.quoteCheckedAt !== undefined;
+    const pick = (observedCents, plannedField) => {
+      if (quoteUsable && observedCents !== undefined) return { ok: true, cents: observedCents, source: INPUT_CLASS.OBSERVED };
+      const planned = readMoney(plannedField, [INPUT_CLASS.PLANNING_ASSUMPTION]);
+      return planned.ok ? { ok: true, cents: planned.cents, source: INPUT_CLASS.PLANNING_ASSUMPTION } : { ok: false };
+    };
+    const ship = pick(po.lines.quotedBuyerShippingUsd, planning.plannedBuyerShippingUsd);
+    const tax = pick(po.lines.buyerCollectedTaxUsd, planning.plannedBuyerTaxUsd);
+    const shipPath = `orders[${po.key}].quotedBuyerShippingUsd (OBSERVED, with quoteCheckedAt) or orders[${po.key}].planning.plannedBuyerShippingUsd`;
+    const taxPath = `orders[${po.key}].buyerCollectedTaxUsd (OBSERVED, with quoteCheckedAt) or orders[${po.key}].planning.plannedBuyerTaxUsd`;
 
     const scenario = (id, baseCents, needs) => {
       if (needs.length > 0) return { id, status: SCENARIO_STATUS.NOT_COMPUTABLE, needs };
@@ -445,6 +495,11 @@ function computePlanningScenario(model, products, parsedOrders, invalidSoFar) {
       merchandiseCents,
       catalogBaseCents,
       catalogBaseCountedOnce: true,
+      // Pass-through amounts used only as fee-base components. Never revenue.
+      buyerShippingCents: ship.ok ? ship.cents : null,
+      buyerShippingSource: ship.ok ? ship.source : null,
+      buyerTaxCents: tax.ok ? tax.cents : null,
+      buyerTaxSource: tax.ok ? tax.source : null,
       scenarios: [
         scenario(FEE_BASE.ITEM_ONLY, merchandiseCents, []),
         scenario(FEE_BASE.ITEM_PLUS_SHIPPING, merchandiseCents + shipCents, ship.ok ? [] : [shipPath]),
@@ -475,6 +530,8 @@ function formatScenario(s) {
   );
   for (const o of s.orders) {
     out.push(`  ${o.key} (${o.units} unit${o.units === 1 ? "" : "s"}): retail ${usd(o.merchandiseCents)}, catalog base ${usd(o.catalogBaseCents)} (once per unit, never twice)`);
+    const part = (label, cents, source) => (cents === null ? `${label} not available` : `${label} ${usd(cents)} [${source}]`);
+    out.push(`    buyer-paid pass-through, fee base only, never revenue: ${part("shipping", o.buyerShippingCents, o.buyerShippingSource)}, ${part("tax", o.buyerTaxCents, o.buyerTaxSource)}`);
     for (const sc of o.scenarios) {
       if (sc.status === SCENARIO_STATUS.PLANNING_ONLY) {
         out.push(`    ${sc.id}: fee base ${usd(sc.feeBaseCents)}, payment fee ${usd(sc.paymentFeeCents)}, planning residual ${usd(sc.planningResidualCents)}  [PLANNING_ONLY]`);
@@ -482,6 +539,9 @@ function formatScenario(s) {
         out.push(`    ${sc.id}: NOT_COMPUTABLE, needs planning input ${sc.needs.join(", ")}`);
       }
     }
+  }
+  if (s.orders.some((o) => o.buyerShippingSource === INPUT_CLASS.OBSERVED || o.buyerTaxSource === INPUT_CLASS.OBSERVED)) {
+    out.push("OBSERVED buyer shipping and tax come from a quote for one destination on one date (Standard method); other destinations are not covered and the amounts can change.");
   }
   out.push("Not in these numbers (unknown): " + s.excludedUnknowns.join("; ") + ".");
   out.push("The planning residual is not profit and not a contribution figure; paid-acquisition readiness: NOT_CLAIMED.");
@@ -519,7 +579,7 @@ export function formatReport(result) {
     out.push(`  - problem reserve        ${usd(L.supportReserve)}`);
     out.push(`  = contribution per order ${usd(o.contributionCents)}`);
     out.push(`    per unit               ${o.contributionPerUnitCents === null ? "n/a (not a whole number of cents)" : usd(o.contributionPerUnitCents)}`);
-    out.push(`  excluded pass-through: buyer shipping ${usd(o.excludedPassThroughCents.buyerPaidShipping)}, buyer tax ${usd(o.excludedPassThroughCents.buyerCollectedTax)}; net payout ${usd(o.crossCheckOnlyCents.actualNetPayout)} is a cross-check only`);
+    out.push(`  excluded pass-through: buyer shipping ${usd(o.excludedPassThroughCents.buyerPaidShipping)}, buyer tax ${usd(o.excludedPassThroughCents.buyerCollectedTax)}${o.excludedPassThroughCents.buyerQuotedTotal === null ? "" : `, buyer total ${usd(o.excludedPassThroughCents.buyerQuotedTotal)}`}; net payout ${usd(o.crossCheckOnlyCents.actualNetPayout)} is a cross-check only`);
     if (o.planningAssumptionsUsed.length) out.push(`  uses owner planning assumption(s): ${o.planningAssumptionsUsed.join(", ")}`);
   }
   out.push(...formatScenario(result.planningScenario));

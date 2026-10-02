@@ -1,7 +1,7 @@
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 
 const MANIFESTO_ITEMS = [
-  { text: "WE DO NOT ADVERTISE.", color: "text-paper" },
+  { text: "WE ARE INDEPENDENT.", color: "text-paper" },
   { text: "WE DO NOT TREND.", color: "text-paper" },
   { text: "WE DO NOT FOLLOW.", color: "text-paper" },
   { text: "WE BUILD THE SYSTEMS.", color: "text-paper" },

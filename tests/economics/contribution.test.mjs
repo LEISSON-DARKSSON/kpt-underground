@@ -201,7 +201,7 @@ test("class validation: unclassified, UNKNOWN non-null, PLANNING without owner, 
   assert.match(noUrl.invalid[0].reason, /URL source/);
 });
 
-test("PUBLIC_STANDARD and PLANNING_ASSUMPTION never feed the actual figure; owner policy may for reserve and seller shipping", () => {
+test("PUBLIC_STANDARD and PLANNING_ASSUMPTION never feed the actual figure; owner policy may for discount, reserve and seller shipping", () => {
   const pub = complete();
   pub.orders[0].paymentFeeUsd = publicStd(1.29);
   const r1 = computeContribution(pub);
@@ -285,35 +285,71 @@ test("planningScenario is labelled PLANNING_ONLY, never profit, never readiness"
   assert.equal(s.orders[1].scenarios[0].planningResidualCents, 6800 - 2650 - 227);
 });
 
-test("shipping and tax scenarios need explicit owner planning values; null is never coerced to 0", () => {
-  const none = computeContribution(complete()).planningScenario.orders[0].scenarios;
+test("shipping and tax scenarios fall back to owner planning values; null is never coerced to 0", () => {
+  // Exercise the planning fallback: no observed quote lines on the order.
+  const noQuote = () => {
+    const m = complete();
+    m.orders[0].quotedBuyerShippingUsd = unknown();
+    m.orders[0].buyerCollectedTaxUsd = unknown();
+    return m;
+  };
+  const none = computeContribution(noQuote()).planningScenario.orders[0].scenarios;
   assert.equal(none[1].status, SCENARIO_STATUS.NOT_COMPUTABLE);
-  assert.deepEqual(none[1].needs, ["orders[ONE-A].planning.plannedBuyerShippingUsd"]);
+  assert.deepEqual(none[1].needs, [
+    "orders[ONE-A].quotedBuyerShippingUsd (OBSERVED, with quoteCheckedAt) or orders[ONE-A].planning.plannedBuyerShippingUsd",
+  ]);
   assert.equal(none[1].feeBaseCents, undefined);
-  assert.deepEqual(none[2].needs, ["orders[ONE-A].planning.plannedBuyerShippingUsd", "orders[ONE-A].planning.plannedBuyerTaxUsd"]);
+  assert.equal(none[2].needs.length, 2);
 
-  const m = complete();
+  const m = noQuote();
   m.orders[0].planning.plannedBuyerShippingUsd = planning(9.99);
-  const withShip = computeContribution(m).planningScenario.orders[0].scenarios;
+  const withShip = computeContribution(m).planningScenario.orders[0];
   // base 3400 + 999 = 4399; 4399 x 2.9% = 127.571 -> 128; + 30 = 158; 3400 - 1300 - 158 = 1942
-  assert.equal(withShip[1].status, SCENARIO_STATUS.PLANNING_ONLY);
-  assert.equal(withShip[1].feeBaseCents, 4399);
-  assert.equal(withShip[1].paymentFeeCents, 158);
-  assert.equal(withShip[1].planningResidualCents, 1942, "buyer shipping raises the fee base but is never added as revenue");
-  assert.equal(withShip[2].status, SCENARIO_STATUS.NOT_COMPUTABLE, "tax scenario still needs a tax planning value");
+  assert.equal(withShip.scenarios[1].status, SCENARIO_STATUS.PLANNING_ONLY);
+  assert.equal(withShip.scenarios[1].feeBaseCents, 4399);
+  assert.equal(withShip.scenarios[1].paymentFeeCents, 158);
+  assert.equal(withShip.scenarios[1].planningResidualCents, 1942, "buyer shipping raises the fee base but is never added as revenue");
+  assert.equal(withShip.buyerShippingSource, "PLANNING_ASSUMPTION");
+  assert.equal(withShip.scenarios[2].status, SCENARIO_STATUS.NOT_COMPUTABLE, "tax scenario still needs a tax value");
 
   m.orders[0].planning.plannedBuyerTaxUsd = planning(2.8);
-  const withBoth = computeContribution(m).planningScenario.orders[0].scenarios;
+  const withBoth = computeContribution(m).planningScenario.orders[0];
   // base 4679; 4679 x 2.9% = 135.691 -> 136; + 30 = 166; 3400 - 1300 - 166 = 1934
-  assert.equal(withBoth[2].feeBaseCents, 4679);
-  assert.equal(withBoth[2].paymentFeeCents, 166);
-  assert.equal(withBoth[2].planningResidualCents, 1934);
-  assert.equal(computeContribution(m).planningScenario.orders[0].merchandiseCents, 3400, "tax and shipping never become merchandise revenue");
+  assert.equal(withBoth.scenarios[2].feeBaseCents, 4679);
+  assert.equal(withBoth.scenarios[2].paymentFeeCents, 166);
+  assert.equal(withBoth.scenarios[2].planningResidualCents, 1934);
+  assert.equal(withBoth.merchandiseCents, 3400, "tax and shipping never become merchandise revenue");
 
-  // A planning value in an OBSERVED node is a class error, not a scenario input.
-  const wrong = complete();
+  // A planning value in an OBSERVED-only slot is a class error, not a scenario input.
+  const wrong = noQuote();
   wrong.orders[0].planning.plannedBuyerShippingUsd = obs(9.99);
   assert.equal(computeContribution(wrong).planningScenario.orders[0].scenarios[1].status, SCENARIO_STATUS.NOT_COMPUTABLE);
+});
+
+test("observed buyer shipping and tax win over owner planning values and need a quoteCheckedAt", () => {
+  const m = complete(); // ONE-A: observed shipping 9.99, tax 2.87, with quoteCheckedAt
+  m.orders[0].planning.plannedBuyerShippingUsd = planning(1);
+  m.orders[0].planning.plannedBuyerTaxUsd = planning(1);
+  const o = computeContribution(m).planningScenario.orders[0];
+  assert.equal(o.buyerShippingSource, "OBSERVED");
+  assert.equal(o.buyerTaxSource, "OBSERVED");
+  // base 3400 + 999 + 287 = 4686; 4686 x 2.9% = 135.894 -> 136; + 30 = 166
+  assert.equal(o.scenarios[1].feeBaseCents, 4399);
+  assert.equal(o.scenarios[2].feeBaseCents, 4686);
+  assert.equal(o.scenarios[2].paymentFeeCents, 166);
+  assert.equal(o.scenarios[2].planningResidualCents, 3400 - 1300 - 166);
+  assert.equal(o.merchandiseCents, 3400);
+
+  // Without a quoteCheckedAt the observed lines are not usable; the planning fallback is used.
+  const noDate = complete();
+  noDate.orders[0].quoteCheckedAt = unknown();
+  noDate.orders[0].planning.plannedBuyerShippingUsd = planning(1);
+  const d = computeContribution(noDate);
+  assert.equal(d.status, STATUS.BLOCKED_MISSING_INPUTS);
+  assert.equal(d.planningScenario.orders[0].buyerShippingSource, "PLANNING_ASSUMPTION");
+  assert.equal(d.planningScenario.orders[0].scenarios[1].feeBaseCents, 3500);
+  assert.equal(d.planningScenario.orders[0].buyerTaxSource, null, "no tax value at all: not coerced to 0");
+  assert.equal(d.planningScenario.orders[0].scenarios[2].status, SCENARIO_STATUS.NOT_COMPUTABLE);
 });
 
 test("2.9% on 3400 cents is computed in integer cents, rounded half up once per transaction", () => {
@@ -356,6 +392,13 @@ test("unknown product or bad quantity in an order is invalid", () => {
   assert.equal(computeContribution(q).status, STATUS.BLOCKED_INVALID_INPUT);
 });
 
+const OBSERVED_QUOTE = {
+  "ORDER-SIGNAL-X1": { ship: 719, tax: 366, total: 4485, merch: 3400, base: 1300 },
+  "ORDER-SUBSURFACE-X1": { ship: 719, tax: 366, total: 4485, merch: 3400, base: 1300 },
+  "ORDER-TWO-MATS-SIGNAL-X1-SUBSURFACE-X1": { ship: 984, tax: 691, total: 8475, merch: 6800, base: 2600 },
+};
+const STILL_UNKNOWN_ORDER_FIELDS = ["platformFeeUsd", "paymentFeeUsd", "sellerFundedShippingUsd", "supportReserveUsd", "actualNetPayoutUsd"];
+
 test("the real docs/economics/two-mats.json: actual contribution BLOCKED, planning scenario PLANNING_ONLY", () => {
   const model = real();
   const r = computeContribution(model);
@@ -366,32 +409,172 @@ test("the real docs/economics/two-mats.json: actual contribution BLOCKED, planni
     "keep-it-underground-subsurface-desk-mat",
   ]);
   assert.equal(model.orders.length, 3);
-  assert.deepEqual(r.invalid, [], "every node is validly classified");
+  assert.deepEqual(r.invalid, [], "every node is validly classified and the observed quote totals are consistent");
   assert.equal(r.status, STATUS.BLOCKED_MISSING_INPUTS);
-  assert.equal(r.orders.length, 0);
-  assert.equal(r.missing.length, 2 + 3 * 9);
-  assert.ok(r.missing.includes("orders[ORDER-SIGNAL-X1].paymentFeeUsd"));
-  assert.ok(r.missing.includes("orders[ORDER-SIGNAL-X1].buyerCollectedTaxUsd"));
-  assert.ok(r.missing.includes("orders[ORDER-SIGNAL-X1].actualNetPayoutUsd"));
-  assert.ok(r.missing.includes("orders[ORDER-TWO-MATS-SIGNAL-X1-SUBSURFACE-X1].quotedBuyerShippingUsd"));
+  assert.equal(r.orders.length, 0, "no actual number while platform fee, payment fee, shipping treatment, reserve or net payout is unknown");
+  assert.equal(r.missing.length, 2 + 3 * STILL_UNKNOWN_ORDER_FIELDS.length);
+  for (const o of model.orders) {
+    for (const f of STILL_UNKNOWN_ORDER_FIELDS) assert.ok(r.missing.includes(`orders[${o.key}].${f}`), `${o.key}.${f} still blocks`);
+    for (const f of ["quotedBuyerShippingUsd", "buyerCollectedTaxUsd", "quotedBuyerTotalUsd", "discountUsd", "quoteCheckedAt"]) {
+      assert.ok(!r.missing.includes(`orders[${o.key}].${f}`), `${o.key}.${f} is recorded`);
+    }
+  }
   assert.ok(r.missing.includes("products[SIGNAL-DESK-MAT].customizationAdditionalUsd"));
   assert.ok(!r.missing.some((m) => m.endsWith(".catalogBaseUsd") || m.endsWith(".priceUsd")), "price and the 13 USD catalog base are observed");
   assert.equal(r.paidAcquisitionReadiness, "NOT_CLAIMED");
+  assert.doesNotMatch(formatReport(r), /contribution per order/);
 
   const s = r.planningScenario;
   assert.equal(s.status, SCENARIO_STATUS.PLANNING_ONLY);
+  assert.equal(s.label, "PLANNING_ONLY");
+  assert.equal(s.feeBaseConfirmed, false);
+  assert.equal(s.paidAcquisitionReadiness, "NOT_CLAIMED");
   const [signal, subsurface, both] = s.orders;
   assert.equal(signal.scenarios[0].planningResidualCents, 1971);
   assert.equal(subsurface.scenarios[0].planningResidualCents, 1971);
-  assert.equal(both.catalogBaseCents, 2600);
+  assert.equal(both.catalogBaseCents, 2600, "13 USD per unit, counted once");
   assert.equal(both.scenarios[0].planningResidualCents, 3973);
-  for (const o of s.orders) {
-    assert.equal(o.scenarios[1].status, SCENARIO_STATUS.NOT_COMPUTABLE, "no owner shipping planning value supplied");
-    assert.equal(o.scenarios[2].status, SCENARIO_STATUS.NOT_COMPUTABLE);
+});
+
+test("the three observed New York baskets feed all three fee-base scenarios (integer cents, half up, once per transaction)", () => {
+  const s = computeContribution(real()).planningScenario;
+  const byKey = Object.fromEntries(s.orders.map((o) => [o.key, o]));
+  for (const [key, q] of Object.entries(OBSERVED_QUOTE)) {
+    const o = byKey[key];
+    assert.equal(o.merchandiseCents, q.merch, `${key}: tax and shipping are never merchandise revenue`);
+    assert.equal(o.catalogBaseCents, q.base);
+    assert.equal(o.buyerShippingCents, q.ship);
+    assert.equal(o.buyerTaxCents, q.tax);
+    assert.equal(o.buyerShippingSource, "OBSERVED");
+    assert.equal(o.buyerTaxSource, "OBSERVED");
+    for (const sc of o.scenarios) assert.equal(sc.status, SCENARIO_STATUS.PLANNING_ONLY, `${key} ${sc.id}`);
+    const [itemOnly, itemShip, itemShipTax] = o.scenarios;
+    assert.equal(itemOnly.feeBaseCents, q.merch);
+    assert.equal(itemShip.feeBaseCents, q.merch + q.ship);
+    assert.equal(itemShipTax.feeBaseCents, q.merch + q.ship + q.tax);
+    for (const sc of o.scenarios) {
+      assert.equal(sc.paymentFeeCents, percentFeeCents(sc.feeBaseCents, 29000) + 30, `${key} ${sc.id}: 2.9% half up plus 30 cents once`);
+      assert.equal(sc.planningResidualCents, q.merch - q.base - sc.paymentFeeCents, `${key} ${sc.id}: residual never includes buyer shipping or tax`);
+    }
+  }
+  const triple = (o) => o.scenarios.map((x) => [x.feeBaseCents, x.paymentFeeCents, x.planningResidualCents]);
+  // One mat: item+shipping 41.19 -> 119.451 -> 119 + 30 = 149; item+shipping+tax 44.85 -> 130.065 -> 130 + 30 = 160.
+  const oneMat = [
+    [3400, 129, 1971],
+    [4119, 149, 1951],
+    [4485, 160, 1940],
+  ];
+  assert.deepEqual(triple(byKey["ORDER-SIGNAL-X1"]), oneMat);
+  assert.deepEqual(triple(byKey["ORDER-SUBSURFACE-X1"]), oneMat);
+  // Both mats: 68.00 -> 197.2 -> 197 + 30 = 227; 77.84 -> 225.736 -> 226 + 30 = 256;
+  // 84.75 = 8475 cents -> 245.775 -> 246 + 30 = 276.
+  assert.deepEqual(triple(byKey["ORDER-TWO-MATS-SIGNAL-X1-SUBSURFACE-X1"]), [
+    [6800, 227, 3973],
+    [7784, 256, 3944],
+    [8475, 276, 3924],
+  ]);
+  assert.equal(percentFeeCents(8475, 29000), 246);
+  assert.equal(paymentFeeCents(8475, 29000, 30), 276, "the 0.30 USD is added once, not once per mat");
+  const text = formatReport(computeContribution(real()));
+  assert.match(text, /ITEM_PLUS_SHIPPING_PLUS_TAX: fee base 84\.75, payment fee 2\.76/);
+  assert.match(text, /one destination on one date/);
+  assert.doesNotMatch(text, /contribution per order/);
+});
+
+test("the checkout combined shipping for the two-mat basket: 9.84 is not 2 x 7.19", () => {
+  const model = real();
+  const get = (key) => model.orders.find((o) => o.key === key);
+  const both = get("ORDER-TWO-MATS-SIGNAL-X1-SUBSURFACE-X1");
+  const one = get("ORDER-SIGNAL-X1").quotedBuyerShippingUsd.value;
+  assert.equal(one, 7.19);
+  assert.equal(get("ORDER-SUBSURFACE-X1").quotedBuyerShippingUsd.value, 7.19);
+  assert.equal(both.quotedBuyerShippingUsd.value, 9.84);
+  assert.notEqual(Math.round(both.quotedBuyerShippingUsd.value * 100), 2 * Math.round(one * 100), "shipping for two mats is not twice the one-mat figure");
+  assert.ok(both.quotedBuyerShippingUsd.value < 2 * one);
+  // Tax and totals are per basket too.
+  assert.notEqual(both.buyerCollectedTaxUsd.value, 2 * get("ORDER-SIGNAL-X1").buyerCollectedTaxUsd.value);
+  assert.match(both.description, /combined shipping line/);
+});
+
+test("observed quote arithmetic: total = items + shipping + tax; tax = 8.875% of items + shipping (observation, one destination)", () => {
+  const model = real();
+  for (const o of model.orders) {
+    const q = OBSERVED_QUOTE[o.key];
+    assert.equal(Math.round(o.quotedBuyerShippingUsd.value * 100), q.ship);
+    assert.equal(Math.round(o.buyerCollectedTaxUsd.value * 100), q.tax);
+    assert.equal(Math.round(o.quotedBuyerTotalUsd.value * 100), q.total);
+    assert.equal(q.merch + q.ship + q.tax, q.total);
+    // 8.875% = 88750 ppm, half up. An observation for these three baskets only.
+    assert.equal(Math.floor(((q.merch + q.ship) * 88750 + 500000) / 1000000), q.tax, `${o.key}: 8.875% of items + shipping`);
+    for (const f of ["quotedBuyerShippingUsd", "buyerCollectedTaxUsd", "quotedBuyerTotalUsd", "quoteCheckedAt", "deliveryMethod", "deliveryWindow"]) {
+      assert.equal(o[f].class, "OBSERVED", `${o.key}.${f}`);
+      assert.match(o[f].source, /h-pr12-fix-20261002/, `${o.key}.${f} cites the evidence folder`);
+      assert.equal(o[f].date, "2026-10-02");
+    }
+    for (const f of ["quotedBuyerShippingUsd", "buyerCollectedTaxUsd", "quotedBuyerTotalUsd", "deliveryMethod", "deliveryWindow"]) {
+      assert.match(o[f].source, /New York, NY 10118/);
+      assert.match(o[f].source, /one NY destination only/);
+    }
+    assert.equal(o.deliveryMethod.value, "Standard");
+    assert.equal(o.deliveryWindow.value, "Friday, Oct 16 - Tuesday, Oct 20 (Standard)");
+    assert.equal(o.quoteCheckedAt.value, "2026-10-02T12:41:30.759Z");
+  }
+  assert.match(model.observedQuote.scope, /ONE destination/);
+  assert.match(model.observedQuote.taxArithmeticObservation, /NOT a rule/);
+  assert.match(model.observedQuote.notEstablishedByThisQuote.join(" "), /payment fee in dollars and its assessment base/);
+  assert.doesNotMatch(JSON.stringify(model), /needs the owner's separate permission|test destination and/);
+});
+
+test("a wrong quote total is invalid; tax and shipping never enter revenue or the actual contribution", () => {
+  const m = complete();
+  m.orders[0].quotedBuyerTotalUsd = obs(46.86); // 34 + 9.99 + 2.87, discount 0
+  const ok = computeContribution(m);
+  assert.equal(ok.status, STATUS.COMPUTED, "a consistent total is accepted");
+  assert.equal(ok.orders[0].excludedPassThroughCents.buyerQuotedTotal, 4686);
+  assert.equal(ok.orders[0].contributionCents, 1637, "the total never changes the contribution");
+  m.orders[0].quotedBuyerTotalUsd = obs(50);
+  const bad = computeContribution(m);
+  assert.equal(bad.status, STATUS.BLOCKED_INVALID_INPUT);
+  assert.equal(bad.invalid[0].input, "orders[ONE-A].quotedBuyerTotalUsd");
+  assert.equal(bad.orders.length, 0);
+  assert.equal(bad.planningScenario.status, SCENARIO_STATUS.BLOCKED_INVALID_INPUT);
+  m.orders[0].quotedBuyerTotalUsd = unknown(); // an unknown optional total is ignored, not a blocker
+  assert.equal(computeContribution(m).status, STATUS.COMPUTED);
+
+  // Raising observed tax or shipping changes only the fee base in the scenario, never revenue or contribution.
+  const lo = computeContribution(complete());
+  const hi = complete();
+  hi.orders[0].buyerCollectedTaxUsd = obs(50);
+  hi.orders[0].quotedBuyerShippingUsd = obs(40);
+  const h = computeContribution(hi);
+  assert.equal(h.orders[0].contributionCents, lo.orders[0].contributionCents);
+  assert.equal(h.orders[0].lineCents.merchandiseRevenue, 3400);
+  const hs = h.planningScenario.orders[0];
+  assert.equal(hs.merchandiseCents, 3400);
+  assert.equal(hs.scenarios[2].feeBaseCents, 3400 + 4000 + 5000);
+  assert.ok(hs.scenarios[2].paymentFeeCents > lo.planningScenario.orders[0].scenarios[2].paymentFeeCents);
+  assert.equal(hs.scenarios[2].planningResidualCents, 3400 - 1300 - hs.scenarios[2].paymentFeeCents, "residual = merchandise - base - fee; tax and shipping are not in it");
+});
+
+test("discount: the owner standing rule 0 is a PLANNING_ASSUMPTION; PUBLIC_STANDARD is rejected; it is not an observed fact", () => {
+  const m = complete();
+  m.orders[0].discountUsd = planning(0);
+  const r = computeContribution(m);
+  assert.equal(r.status, STATUS.COMPUTED);
+  assert.ok(r.orders[0].planningAssumptionsUsed.includes("discountUsd"));
+  assert.equal(r.orders[0].contributionCents, 1637);
+  m.orders[0].discountUsd = publicStd(0);
+  assert.match(computeContribution(m).invalid[0].reason, /class PUBLIC_STANDARD is not allowed here/);
+
+  for (const o of real().orders) {
+    assert.equal(o.discountUsd.class, "PLANNING_ASSUMPTION");
+    assert.equal(o.discountUsd.value, 0);
+    assert.equal(o.discountUsd.owner, "owner standing rule 2026-10-02");
+    assert.ok(o.discountUsd.decisionNeeded);
   }
 });
 
-test("real model input classes: observed base and plan, public-standard fees, unknowns stay null", () => {
+test("real model input classes: observed base, plan and quote; public-standard fees; remaining unknowns stay null", () => {
   const model = real();
   for (const p of model.products) {
     assert.equal(p.priceUsd.class, "OBSERVED");
@@ -418,15 +601,16 @@ test("real model input classes: observed base and plan, public-standard fees, un
     assert.equal(pl[f].settledTransaction, false);
     assert.match(pl[f].source, /^https:\/\/fourthwall\.com\/pricing/);
   }
-  assert.equal(pl.paymentFeeAssessmentBase.class, "UNKNOWN");
+  assert.equal(pl.paymentFeeAssessmentBase.class, "UNKNOWN", "the quote did not establish the payment-fee base");
   assert.equal(pl.paymentFeeAssessmentBase.value, null);
   for (const o of model.orders) {
-    for (const f of ORDER_FIELDS) {
+    for (const f of STILL_UNKNOWN_ORDER_FIELDS) {
       assert.equal(o[f].class, "UNKNOWN", `${o.key}.${f}`);
       assert.equal(o[f].value, null, `${o.key}.${f}`);
+      assert.ok(o[f].closes);
     }
     assert.equal(o.planning.plannedBuyerShippingUsd.class, "PLANNING_ASSUMPTION");
-    assert.equal(o.planning.plannedBuyerShippingUsd.value, null, "no planning shipping value was supplied by the owner");
+    assert.equal(o.planning.plannedBuyerShippingUsd.value, null, "no owner planning shipping value was supplied; the observed quote is used");
     assert.ok(o.planning.plannedBuyerShippingUsd.owner);
     assert.equal(o.paidAcquisitionApproved, false);
   }

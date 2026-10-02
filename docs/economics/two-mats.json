@@ -14,11 +14,41 @@
     "rules": [
       "Every node with a 'value' has a class: OBSERVED, PUBLIC_STANDARD, PLANNING_ASSUMPTION or UNKNOWN. The calculator rejects unclassified or mis-classified nodes.",
       "null means unknown. It is never 0. A real 0 is allowed only for a non-UNKNOWN class with source and date (or owner for PLANNING_ASSUMPTION).",
-      "The ACTUAL contribution takes only OBSERVED values (sellerFundedShippingUsd and supportReserveUsd may also be an owner PLANNING_ASSUMPTION). PUBLIC_STANDARD never feeds it.",
+      "The ACTUAL contribution takes only OBSERVED values (sellerFundedShippingUsd, supportReserveUsd and discountUsd may also be an owner PLANNING_ASSUMPTION). PUBLIC_STANDARD never feeds it.",
       "The 13 USD catalog base is counted once. 'Catalog flat fee' and 'manufacturing cost' are the same cost; if both fields exist they must be equal and are collapsed into one.",
       "Money is USD with at most two decimals; scripts/economics/contribution.mjs converts to integer cents.",
+      "Observed buyer quote lines (shipping, tax, total, delivery window) are valid only for the destination, date and method in observedQuote. They are validated by the calculator and used as the fee base in planningScenario, but never counted as revenue or contribution.",
       "Buyer-collected tax and buyer-paid shipping are pass-through. They are never merchandise revenue and never added to contribution.",
       "planningScenario output is PLANNING_ONLY. It is not profit, not contribution and not paid-acquisition readiness. paidAcquisitionApproved stays false until the owner says otherwise."
+    ]
+  },
+  "observedQuote": {
+    "id": "US-QUOTE-2026-10-02",
+    "kind": "Owner-approved non-binding Fourthwall hosted-checkout quote. Stopped before payment. No order, no payment, no sample, no shop credit.",
+    "takenAtUtc": "2026-10-02T12:41:30.759Z",
+    "takenAtLocalApprox": "2026-10-02 about 15:40 local",
+    "destination": "350 5th Ave, New York, NY 10118 (a public commercial address used only as a test destination)",
+    "deliveryMethod": "Standard",
+    "evidenceFolder": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote",
+    "evidenceFiles": [
+      "quote-results.json",
+      "signal-x1-page-text.txt",
+      "subsurface-x1-page-text.txt",
+      "both-x1-page-text.txt",
+      "signal-x1-1-after-address.png",
+      "subsurface-x1-1-after-address.png",
+      "both-x1-1-after-address.png"
+    ],
+    "scope": "ONE destination (New York) on ONE date, Standard method only. Other states, zones and methods are NOT covered. Shipping and tax can change with the destination, the date, the basket and Fourthwall's settings.",
+    "combinedShippingObservation": "The both-mats basket showed one shipping line of 9.84 USD, not 2 x 7.19 = 14.38: the checkout combined the shipping. Parcel count is not shown.",
+    "taxArithmeticObservation": "In each basket the displayed tax equals 8.875% of (items + shipping) rounded to the cent: 41.19 x 0.08875 = 3.656 -> 3.66; 77.84 x 0.08875 = 6.908 -> 6.91. An observation for these three baskets and this destination, NOT a rule and NOT to be applied to other destinations.",
+    "notEstablishedByThisQuote": [
+      "platform fee in dollars",
+      "payment fee in dollars and its assessment base",
+      "whether Fourthwall deducts or passes through the buyer-paid shipping, and any seller-funded share",
+      "customization quote amount",
+      "net payout",
+      "support / problem reserve"
     ]
   },
   "platform": {
@@ -38,7 +68,7 @@
       "settledTransaction": false,
       "source": "https://fourthwall.com/pricing (US credit card, percentage part)",
       "date": "2026-10-02",
-      "caveat": "Published standard, not a settled transaction. The assessment base (item only vs item+shipping+tax) is NOT confirmed. Rounding at Fourthwall is not confirmed; the calculator rounds half up to the cent."
+      "caveat": "Published standard, not a settled transaction. The assessment base (item only vs item+shipping vs item+shipping+tax) is NOT confirmed; the 2026-10-02 hosted-checkout quote did not show it. Rounding at Fourthwall is not confirmed; the calculator rounds half up to the cent."
     },
     "paymentFeeFixedUsd": {
       "class": "PUBLIC_STANDARD",
@@ -59,7 +89,7 @@
     "paymentFeeAssessmentBase": {
       "class": "UNKNOWN",
       "value": null,
-      "closes": "Fourthwall written answer (draft in docs/unit-economics.md, NOT_SENT) or a non-binding US quote that shows the fee line: is the payment fee assessed on item only, item+shipping, or item+shipping+tax? Provisional dossier (scratchpad autoresearch/fourthwall-fees-shipping.md): help center says fees are charged on item+shipping+tax and US sales tax is excluded from payouts. Provisional, not confirmed.",
+      "closes": "Fourthwall written answer (draft in docs/unit-economics.md, NOT_SENT) or a settled order's fee line: is the payment fee assessed on item only, item+shipping, or item+shipping+tax? The 2026-10-02 hosted-checkout quote showed buyer-side amounts only and did not establish the base. Provisional dossier (scratchpad autoresearch/fourthwall-fees-shipping.md): help center says fees are charged on item+shipping+tax and US sales tax is excluded from payouts. Provisional, not confirmed.",
       "candidates": [
         "ITEM_ONLY",
         "ITEM_PLUS_SHIPPING",
@@ -124,7 +154,7 @@
   "orders": [
     {
       "key": "ORDER-SIGNAL-X1",
-      "description": "One order, one SIGNAL desk mat, shipped to a US address, Standard delivery.",
+      "description": "One order, one SIGNAL desk mat, shipped to a US address, Standard delivery. Quoted 2026-10-02 for one New York destination.",
       "items": [
         {
           "productKey": "SIGNAL-DESK-MAT",
@@ -139,17 +169,19 @@
       "paymentFeeUsd": {
         "class": "UNKNOWN",
         "value": null,
-        "closes": "Actual payment fee in dollars Fourthwall charges on a US order of exactly this basket. Closes with a non-binding Fourthwall US quote (stopped before Complete order, needs the owner's separate permission) or a written Fourthwall answer on the fee-assessment base. The public 2.9% + 0.30 USD is a PUBLIC_STANDARD, not this figure. Never derive it from the Estonia sample fees."
+        "closes": "Actual payment fee in dollars Fourthwall charges on a US order of exactly this basket. The 2026-10-02 hosted-checkout quote recorded buyer-side amounts only (items, shipping, tax, total); it did not establish this fee or its base. Closes with a settled order's fee line or a written Fourthwall answer on the fee-assessment base. The public 2.9% + 0.30 USD is a PUBLIC_STANDARD, not this figure. Never derive it from the Estonia sample fees."
       },
       "discountUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Discount applied to this order. Owner confirms in Fourthwall admin which promotions are active and records the USD amount; a recorded 0 needs a source and date. No new or bundle discount without separate owner permission."
+        "class": "PLANNING_ASSUMPTION",
+        "value": 0,
+        "owner": "owner standing rule 2026-10-02",
+        "decisionNeeded": "None pending. Standing rule: no discounts and no price changes. Revisit only on an explicit owner command naming the discount.",
+        "note": "Policy, not an observed account fact. The three 2026-10-02 quote baskets showed no discount line. Never presented as a fact."
       },
       "sellerFundedShippingUsd": {
         "class": "UNKNOWN",
         "value": null,
-        "closes": "Shipping the shop pays instead of the buyer. Owner decision plus Fourthwall shipping settings; 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
+        "closes": "Whether any part of the shipping the buyer is charged at checkout (observed 7.19 USD in the 2026-10-02 New York quote) is funded by the shop, and whether Fourthwall deducts or passes through that amount. The buyer charge is observed; the seller side is not. Closes with the owner's shipping settings plus a settled order's shipping line, or a written Fourthwall answer. 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
       },
       "supportReserveUsd": {
         "class": "UNKNOWN",
@@ -157,14 +189,26 @@
         "closes": "Reserve for reprints, refunds and replacement of print or quality errors per order. Owner policy figure with a stated basis (may be recorded as PLANNING_ASSUMPTION with owner); it is not a Fourthwall figure."
       },
       "quotedBuyerShippingUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Standard shipping the US buyer sees for one SIGNAL mat. Source: non-binding Fourthwall US quote stopped before payment (needs the owner's separate permission) or a written Fourthwall answer. Pass-through, never revenue."
+        "class": "OBSERVED",
+        "value": 7.19,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket signal-x1, moneyLines \"Shipping $7.19\") and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\signal-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Buyer-paid pass-through. Never revenue, never added to or subtracted from contribution. One NY destination, one date; can change."
       },
       "buyerCollectedTaxUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Tax or duties the US buyer sees at the quote step for one SIGNAL mat. Pass-through, never revenue, never in contribution. Required because the payment-fee base may include tax."
+        "class": "OBSERVED",
+        "value": 3.66,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket signal-x1, moneyLines \"Tax $3.66\") and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\signal-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Buyer-collected pass-through. Never revenue, never in contribution.",
+        "observationNote": "Equals 8.875% of (items + shipping) for this basket, rounded to the cent. An observation for this basket and destination, not a rule."
+      },
+      "quotedBuyerTotalUsd": {
+        "class": "OBSERVED",
+        "value": 44.85,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket signal-x1, moneyLines \"Total $44.85\", subtotal $34.00) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\signal-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "What the buyer sees, displayed in USD. Equals items + shipping + tax in this basket. Pass-through cross-check; never revenue, never contribution."
       },
       "actualNetPayoutUsd": {
         "class": "UNKNOWN",
@@ -172,29 +216,43 @@
         "closes": "Net payout Fourthwall reports for a settled order of one SIGNAL mat. Cross-check only; never added or subtracted again (fees and base are counted from their own lines). US sales tax is reportedly excluded from payouts (provisional)."
       },
       "quoteCheckedAt": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "ISO timestamp of the US quote or settled order these lines come from. Required together with the lines above."
+        "class": "OBSERVED",
+        "value": "2026-10-02T12:41:30.759Z",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json field \"at\" (about 15:40 local)",
+        "date": "2026-10-02"
+      },
+      "deliveryMethod": {
+        "class": "OBSERVED",
+        "value": "Standard",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket signal-x1, delivery method line) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\signal-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02"
+      },
+      "deliveryWindow": {
+        "class": "OBSERVED",
+        "value": "Friday, Oct 16 - Tuesday, Oct 20 (Standard)",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket signal-x1, delivery line) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\signal-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Estimate shown at checkout on 2026-10-02 for one New York destination. Not a promise and not a US-wide delivery time."
       },
       "planning": {
         "plannedBuyerShippingUsd": {
           "class": "PLANNING_ASSUMPTION",
           "value": null,
           "owner": "Gert Leisson (owner)",
-          "decisionNeeded": "Owner picks a planning figure for buyer-paid US shipping on one SIGNAL mat, or leaves it null. Used ONLY for the item+shipping fee-base planning scenario; never an observed fact, never revenue."
+          "decisionNeeded": "Fallback only. The OBSERVED 2026-10-02 New York quote line takes precedence when present. Owner picks a planning figure for buyer-paid US shipping on one SIGNAL mat, or leaves it null. Used ONLY for the item+shipping fee-base planning scenario when no observed line is usable; never an observed fact, never revenue."
         },
         "plannedBuyerTaxUsd": {
           "class": "PLANNING_ASSUMPTION",
           "value": null,
           "owner": "Gert Leisson (owner)",
-          "decisionNeeded": "Owner picks a planning figure for buyer tax on one SIGNAL mat, or leaves it null. Used ONLY for the item+shipping+tax fee-base planning scenario; never revenue."
+          "decisionNeeded": "Fallback only. The OBSERVED 2026-10-02 New York quote line takes precedence when present. Owner picks a planning figure for buyer tax on one SIGNAL mat, or leaves it null. Used ONLY for the item+shipping+tax fee-base planning scenario when no observed line is usable; never revenue."
         }
       },
       "paidAcquisitionApproved": false
     },
     {
       "key": "ORDER-SUBSURFACE-X1",
-      "description": "One order, one SUBSURFACE desk mat, shipped to a US address, Standard delivery.",
+      "description": "One order, one SUBSURFACE desk mat, shipped to a US address, Standard delivery. Quoted 2026-10-02 for one New York destination.",
       "items": [
         {
           "productKey": "SUBSURFACE-DESK-MAT",
@@ -209,17 +267,19 @@
       "paymentFeeUsd": {
         "class": "UNKNOWN",
         "value": null,
-        "closes": "Actual payment fee in dollars Fourthwall charges on a US order of exactly this basket. Closes with a non-binding Fourthwall US quote (stopped before Complete order, needs the owner's separate permission) or a written Fourthwall answer on the fee-assessment base. The public 2.9% + 0.30 USD is a PUBLIC_STANDARD, not this figure. Never derive it from the Estonia sample fees."
+        "closes": "Actual payment fee in dollars Fourthwall charges on a US order of exactly this basket. The 2026-10-02 hosted-checkout quote recorded buyer-side amounts only (items, shipping, tax, total); it did not establish this fee or its base. Closes with a settled order's fee line or a written Fourthwall answer on the fee-assessment base. The public 2.9% + 0.30 USD is a PUBLIC_STANDARD, not this figure. Never derive it from the Estonia sample fees."
       },
       "discountUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Discount applied to this order. Owner confirms in Fourthwall admin which promotions are active and records the USD amount; a recorded 0 needs a source and date. No new or bundle discount without separate owner permission."
+        "class": "PLANNING_ASSUMPTION",
+        "value": 0,
+        "owner": "owner standing rule 2026-10-02",
+        "decisionNeeded": "None pending. Standing rule: no discounts and no price changes. Revisit only on an explicit owner command naming the discount.",
+        "note": "Policy, not an observed account fact. The three 2026-10-02 quote baskets showed no discount line. Never presented as a fact."
       },
       "sellerFundedShippingUsd": {
         "class": "UNKNOWN",
         "value": null,
-        "closes": "Shipping the shop pays instead of the buyer. Owner decision plus Fourthwall shipping settings; 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
+        "closes": "Whether any part of the shipping the buyer is charged at checkout (observed 7.19 USD in the 2026-10-02 New York quote) is funded by the shop, and whether Fourthwall deducts or passes through that amount. The buyer charge is observed; the seller side is not. Closes with the owner's shipping settings plus a settled order's shipping line, or a written Fourthwall answer. 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
       },
       "supportReserveUsd": {
         "class": "UNKNOWN",
@@ -227,14 +287,26 @@
         "closes": "Reserve for reprints, refunds and replacement of print or quality errors per order. Owner policy figure with a stated basis (may be recorded as PLANNING_ASSUMPTION with owner); it is not a Fourthwall figure."
       },
       "quotedBuyerShippingUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Standard shipping the US buyer sees for one SUBSURFACE mat. Source: non-binding Fourthwall US quote stopped before payment (needs the owner's separate permission) or a written Fourthwall answer. Pass-through, never revenue."
+        "class": "OBSERVED",
+        "value": 7.19,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket subsurface-x1, moneyLines \"Shipping $7.19\") and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\subsurface-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Buyer-paid pass-through. Never revenue, never added to or subtracted from contribution. One NY destination, one date; can change."
       },
       "buyerCollectedTaxUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Tax or duties the US buyer sees at the quote step for one SUBSURFACE mat. Pass-through, never revenue, never in contribution. Required because the payment-fee base may include tax."
+        "class": "OBSERVED",
+        "value": 3.66,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket subsurface-x1, moneyLines \"Tax $3.66\") and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\subsurface-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Buyer-collected pass-through. Never revenue, never in contribution.",
+        "observationNote": "Equals 8.875% of (items + shipping) for this basket, rounded to the cent. An observation for this basket and destination, not a rule."
+      },
+      "quotedBuyerTotalUsd": {
+        "class": "OBSERVED",
+        "value": 44.85,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket subsurface-x1, moneyLines \"Total $44.85\", subtotal $34.00) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\subsurface-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "What the buyer sees, displayed in USD. Equals items + shipping + tax in this basket. Pass-through cross-check; never revenue, never contribution."
       },
       "actualNetPayoutUsd": {
         "class": "UNKNOWN",
@@ -242,29 +314,43 @@
         "closes": "Net payout Fourthwall reports for a settled order of one SUBSURFACE mat. Cross-check only; never added or subtracted again (fees and base are counted from their own lines). US sales tax is reportedly excluded from payouts (provisional)."
       },
       "quoteCheckedAt": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "ISO timestamp of the US quote or settled order these lines come from. Required together with the lines above."
+        "class": "OBSERVED",
+        "value": "2026-10-02T12:41:30.759Z",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json field \"at\" (about 15:40 local)",
+        "date": "2026-10-02"
+      },
+      "deliveryMethod": {
+        "class": "OBSERVED",
+        "value": "Standard",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket subsurface-x1, delivery method line) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\subsurface-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02"
+      },
+      "deliveryWindow": {
+        "class": "OBSERVED",
+        "value": "Friday, Oct 16 - Tuesday, Oct 20 (Standard)",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket subsurface-x1, delivery line) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\subsurface-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Estimate shown at checkout on 2026-10-02 for one New York destination. Not a promise and not a US-wide delivery time."
       },
       "planning": {
         "plannedBuyerShippingUsd": {
           "class": "PLANNING_ASSUMPTION",
           "value": null,
           "owner": "Gert Leisson (owner)",
-          "decisionNeeded": "Owner picks a planning figure for buyer-paid US shipping on one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping fee-base planning scenario; never an observed fact, never revenue."
+          "decisionNeeded": "Fallback only. The OBSERVED 2026-10-02 New York quote line takes precedence when present. Owner picks a planning figure for buyer-paid US shipping on one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping fee-base planning scenario when no observed line is usable; never an observed fact, never revenue."
         },
         "plannedBuyerTaxUsd": {
           "class": "PLANNING_ASSUMPTION",
           "value": null,
           "owner": "Gert Leisson (owner)",
-          "decisionNeeded": "Owner picks a planning figure for buyer tax on one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping+tax fee-base planning scenario; never revenue."
+          "decisionNeeded": "Fallback only. The OBSERVED 2026-10-02 New York quote line takes precedence when present. Owner picks a planning figure for buyer tax on one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping+tax fee-base planning scenario when no observed line is usable; never revenue."
         }
       },
       "paidAcquisitionApproved": false
     },
     {
       "key": "ORDER-TWO-MATS-SIGNAL-X1-SUBSURFACE-X1",
-      "description": "One order, one SIGNAL plus one SUBSURFACE, shipped to a US address, Standard delivery. Shipping and fees are quoted for this exact basket; they are not 2 x the one-mat figures. Whether the two mats leave in one parcel is itself part of the quote.",
+      "description": "One order, one SIGNAL plus one SUBSURFACE, shipped to a US address, Standard delivery. The 2026-10-02 New York quote showed one combined shipping line of 9.84 USD (not 2 x the one-mat 7.19 USD); parcel count was not shown.",
       "items": [
         {
           "productKey": "SIGNAL-DESK-MAT",
@@ -283,17 +369,19 @@
       "paymentFeeUsd": {
         "class": "UNKNOWN",
         "value": null,
-        "closes": "Actual payment fee in dollars Fourthwall charges on a US order of exactly this basket (SIGNAL x1 + SUBSURFACE x1). Closes with a non-binding Fourthwall US quote (stopped before Complete order, needs the owner's separate permission) or a written Fourthwall answer on the fee-assessment base. The public 2.9% + 0.30 USD is a PUBLIC_STANDARD, not this figure. Never derive it from the Estonia sample fees."
+        "closes": "Actual payment fee in dollars Fourthwall charges on a US order of exactly this basket (SIGNAL x1 + SUBSURFACE x1). The 2026-10-02 hosted-checkout quote recorded buyer-side amounts only (items, shipping, tax, total); it did not establish this fee or its base. Closes with a settled order's fee line or a written Fourthwall answer on the fee-assessment base. The public 2.9% + 0.30 USD is a PUBLIC_STANDARD, not this figure. Never derive it from the Estonia sample fees."
       },
       "discountUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Discount applied to this order. Owner confirms in Fourthwall admin which promotions are active and records the USD amount; a recorded 0 needs a source and date. No new or bundle discount without separate owner permission."
+        "class": "PLANNING_ASSUMPTION",
+        "value": 0,
+        "owner": "owner standing rule 2026-10-02",
+        "decisionNeeded": "None pending. Standing rule: no discounts and no price changes. Revisit only on an explicit owner command naming the discount.",
+        "note": "Policy, not an observed account fact. The three 2026-10-02 quote baskets showed no discount line. Never presented as a fact."
       },
       "sellerFundedShippingUsd": {
         "class": "UNKNOWN",
         "value": null,
-        "closes": "Shipping the shop pays instead of the buyer. Owner decision plus Fourthwall shipping settings; 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
+        "closes": "Whether any part of the shipping the buyer is charged at checkout (observed 9.84 USD in the 2026-10-02 New York quote) is funded by the shop, and whether Fourthwall deducts or passes through that amount. The buyer charge is observed; the seller side is not. Closes with the owner's shipping settings plus a settled order's shipping line, or a written Fourthwall answer. 0 only if the owner states the buyer pays all shipping. No free shipping without separate owner permission."
       },
       "supportReserveUsd": {
         "class": "UNKNOWN",
@@ -301,14 +389,26 @@
         "closes": "Reserve for reprints, refunds and replacement of print or quality errors per order. Owner policy figure with a stated basis (may be recorded as PLANNING_ASSUMPTION with owner); it is not a Fourthwall figure."
       },
       "quotedBuyerShippingUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Standard shipping the US buyer sees for one SIGNAL and one SUBSURFACE mat. Source: non-binding Fourthwall US quote stopped before payment (needs the owner's separate permission) or a written Fourthwall answer. Pass-through, never revenue. Record whether the two mats ship as one parcel."
+        "class": "OBSERVED",
+        "value": 9.84,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket both-x1, moneyLines \"Shipping $9.84\") and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\both-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Buyer-paid pass-through. Never revenue, never added to or subtracted from contribution. One NY destination, one date; can change."
       },
       "buyerCollectedTaxUsd": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "Tax or duties the US buyer sees at the quote step for one SIGNAL and one SUBSURFACE mat. Pass-through, never revenue, never in contribution. Required because the payment-fee base may include tax."
+        "class": "OBSERVED",
+        "value": 6.91,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket both-x1, moneyLines \"Tax $6.91\") and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\both-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Buyer-collected pass-through. Never revenue, never in contribution.",
+        "observationNote": "Equals 8.875% of (items + shipping) for this basket, rounded to the cent. An observation for this basket and destination, not a rule."
+      },
+      "quotedBuyerTotalUsd": {
+        "class": "OBSERVED",
+        "value": 84.75,
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket both-x1, moneyLines \"Total $84.75\", subtotal $68.00) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\both-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "What the buyer sees, displayed in USD. Equals items + shipping + tax in this basket. Pass-through cross-check; never revenue, never contribution."
       },
       "actualNetPayoutUsd": {
         "class": "UNKNOWN",
@@ -316,22 +416,36 @@
         "closes": "Net payout Fourthwall reports for a settled order of one SIGNAL and one SUBSURFACE mat. Cross-check only; never added or subtracted again (fees and base are counted from their own lines). US sales tax is reportedly excluded from payouts (provisional)."
       },
       "quoteCheckedAt": {
-        "class": "UNKNOWN",
-        "value": null,
-        "closes": "ISO timestamp of the US quote or settled order these lines come from. Required together with the lines above."
+        "class": "OBSERVED",
+        "value": "2026-10-02T12:41:30.759Z",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json field \"at\" (about 15:40 local)",
+        "date": "2026-10-02"
+      },
+      "deliveryMethod": {
+        "class": "OBSERVED",
+        "value": "Standard",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket both-x1, delivery method line) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\both-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02"
+      },
+      "deliveryWindow": {
+        "class": "OBSERVED",
+        "value": "Friday, Oct 16 - Tuesday, Oct 20 (Standard)",
+        "source": "C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\quote-results.json (basket both-x1, delivery line) and C:\\PROJECTS\\kpt-underground\\evidence\\h-pr12-fix-20261002\\us-quote\\both-x1-page-text.txt; owner-approved non-binding Fourthwall hosted-checkout quote, no payment, no order; destination 350 5th Ave, New York, NY 10118 (one NY destination only; other states and zones are not covered); delivery method Standard",
+        "date": "2026-10-02",
+        "note": "Estimate shown at checkout on 2026-10-02 for one New York destination. Not a promise and not a US-wide delivery time."
       },
       "planning": {
         "plannedBuyerShippingUsd": {
           "class": "PLANNING_ASSUMPTION",
           "value": null,
           "owner": "Gert Leisson (owner)",
-          "decisionNeeded": "Owner picks a planning figure for buyer-paid US shipping on one SIGNAL and one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping fee-base planning scenario; never an observed fact, never revenue."
+          "decisionNeeded": "Fallback only. The OBSERVED 2026-10-02 New York quote line takes precedence when present. Owner picks a planning figure for buyer-paid US shipping on one SIGNAL and one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping fee-base planning scenario when no observed line is usable; never an observed fact, never revenue."
         },
         "plannedBuyerTaxUsd": {
           "class": "PLANNING_ASSUMPTION",
           "value": null,
           "owner": "Gert Leisson (owner)",
-          "decisionNeeded": "Owner picks a planning figure for buyer tax on one SIGNAL and one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping+tax fee-base planning scenario; never revenue."
+          "decisionNeeded": "Fallback only. The OBSERVED 2026-10-02 New York quote line takes precedence when present. Owner picks a planning figure for buyer tax on one SIGNAL and one SUBSURFACE mat, or leaves it null. Used ONLY for the item+shipping+tax fee-base planning scenario when no observed line is usable; never revenue."
         }
       },
       "paidAcquisitionApproved": false

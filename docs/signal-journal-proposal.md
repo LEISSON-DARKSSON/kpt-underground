@@ -1,8 +1,8 @@
 # Signal as an open studio journal: decision proposal (H03 / D1)
 
-Status: PROPOSED_NOT_APPLIED
+Status: APPLIED_ON_BRANCH_NOT_PUBLISHED (2026-10-02, branch `feat/home-nonblocking-fit-20261002`; owner approved the recommended option, nothing merged or deployed)
 
-This is a content diff for owner approval. No file under `src/` and neither claim-register file has been changed. Source of truth for ids: [claim-register.md](claim-register.md) and [claim-register.json](claim-register.json) (119 claims, not re-audited here). Line numbers below are the register's.
+This was a content diff for owner approval; it is now applied on the branch (see section g). The text below is kept unchanged as the spec that was applied. Source of truth for ids: [claim-register.md](claim-register.md) and [claim-register.json](claim-register.json) (119 claims, not re-audited here). Line numbers below are the register's.
 
 ## (a) The decision
 
@@ -129,4 +129,21 @@ Precondition: the owner confirms "independent" is true (owner-operated by LEISSO
 
 ## (g) Status
 
-PROPOSED_NOT_APPLIED. Applying it is a separate ticket and a separate PR, after the owner approves D1 and answers the inputs above.
+APPLIED_ON_BRANCH_NOT_PUBLISHED, 2026-10-02. The owner approved D1 (open studio journal) and the section (e) wording, and supplied no first journal entry, so `/signal` shows the empty state `NO ENTRIES YET.` and no entry, date, event or person was invented. Not merged, not deployed.
+
+Deviations and notes:
+- Not applied: H03-045 (optional footer line on /story). It is marked optional and outside D1, so it stays as is and stays `REWRITE_PROPOSED` in the register.
+- `signal-page-client.tsx` keeps its file and export name but is now a server component without `"use client"`.
+- Still open for the owner: confirm that "independent" is true (section e); otherwise use `WE MAKE ORIGINAL GRAPHIC OBJECTS` in both places.
+- `not-found.tsx` ("... does not exist in this network.") is unchanged, as the proposal says.
+
+Files changed:
+- `src/app/page.tsx` (Signal CTA heading, body, link text and cursor label; HUD `FREQ: SUB-BASS`)
+- `src/app/signal/page.tsx` (metadata, badge, H1, paragraph, ticker)
+- `src/components/home/manifesto-strip.tsx`, `src/components/story/story-manifesto.tsx` (WE ARE INDEPENDENT, MADE TO ORDER)
+- `src/components/story/story-signal-network.tsx` (badge, heading, three cards)
+- `src/components/signal/signal-page-client.tsx` (server component, open header, two cards), `src/components/signal/signal-feed.tsx` (empty state)
+- `src/components/signal/frequency-gate.tsx` (deleted)
+- `docs/claim-register.json`, `docs/claim-register.md` (30 removed, 21 reworded, 6 added: 95 entries)
+- `tests/brand/signal-journal.test.mjs` (new, pins items 2 to 4 and 6 to 7 of section f)
+- `docs/signal-journal-proposal.md` (this status)

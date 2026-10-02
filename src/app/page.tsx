@@ -101,7 +101,7 @@ export default function HomePage() {
         >
           SYS: OPERATIONAL
           <br />
-          FREQ: 140HZ
+          FREQ: SUB-BASS
           <br />
           SIGNAL: ACTIVE
         </span>
@@ -146,9 +146,7 @@ export default function HomePage() {
           </ScrollReveal>
           <ScrollReveal delay={1}>
             <h2 className="stmt" style={{ fontSize: "clamp(36px, 6vw, 72px)", marginBottom: 24 }}>
-              THE SIGNAL
-              <br />
-              <span style={{ color: "var(--green)" }}>NETWORK</span>
+              THE <span style={{ color: "var(--green)" }}>SIGNAL</span>
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={2}>
@@ -162,14 +160,14 @@ export default function HomePage() {
                 marginBottom: 40,
               }}
             >
-              A closed channel for those who keep it underground.
+              Notes from the studio on design and new objects. Open to everyone.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={3}>
             <Link
               href="/signal"
               data-cursor="h"
-              data-cursor-label="ENTER"
+              data-cursor-label="READ"
               style={{
                 display: "inline-block",
                 fontSize: 8,
@@ -181,7 +179,7 @@ export default function HomePage() {
                 textDecoration: "none",
               }}
             >
-              &#x25CF; ENTER SIGNAL NETWORK
+              &#x25CF; READ THE SIGNAL
             </Link>
           </ScrollReveal>
         </div>
