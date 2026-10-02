@@ -2,6 +2,7 @@
 // Storefront and checks actual status codes and responses. Never talks to the real Fourthwall API.
 // Run: npm run test:http   (≈2 min: it runs its own `next build`)
 import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { MOCK_TOKEN, startMockFourthwall } from "./mock-fourthwall.mjs";
 import { readFile } from "node:fs/promises";
 import assert from "node:assert/strict";
@@ -18,7 +19,7 @@ const env = {
   FOURTHWALL_STOREFRONT_API_BASE: `http://127.0.0.1:${MOCK_PORT}/`,
   NEXT_TELEMETRY_DISABLED: "1",
 };
-const run = (args, opts = {}) => spawn(process.execPath, [new URL("node_modules/next/dist/bin/next", root).pathname, ...args], { cwd: root.pathname, env, stdio: ["ignore", "pipe", "pipe"], ...opts });
+const run = (args, opts = {}) => spawn(process.execPath, [fileURLToPath(new URL("node_modules/next/dist/bin/next", root)), ...args], { cwd: fileURLToPath(root), env, stdio: ["ignore", "pipe", "pipe"], ...opts });
 const exit = (child) => new Promise((r) => child.on("exit", r));
 
 const results = [];
@@ -42,13 +43,16 @@ try {
     const r = await fetch(base + "/shop/wall-studies-signal-01");
     assert.ok(r.status >= 500, `status ${r.status}`);
   });
-  await check("real product → 200 with no preselected size and a missing-size-chart notice", async () => {
+  await check("real product → 200 with no preselected size and a source-backed size chart (H04)", async () => {
     const r = await fetch(base + "/shop/kpt-heavyweight-tee");
     assert.equal(r.status, 200);
     const html = await r.text();
     assert.ok(html.includes("Choose a size"));
     assert.equal(/data-variant-option="[^"]+" aria-pressed="true"/.test(html), false, "no size preselected");
-    assert.ok(html.includes('data-fit="missing"'));
+    assert.ok(html.includes('data-fit="sourced"') && !html.includes('data-fit="missing"'), "tee has the sourced chart, no missing notice");
+    assert.ok(html.includes('data-size-chart') && html.includes('26.62&quot;') && html.includes('24.63&quot;'), "chart values are server-rendered");
+    const hoodie = await (await fetch(base + "/shop/kpt-premium-hoodie")).text();
+    assert.ok(hoodie.includes('data-fit="missing"') && !hoodie.includes('data-size-chart'), "hoodie without a verified source still says the chart is missing");
     assert.ok(html.includes('"@type":"AggregateOffer"') && html.includes('"lowPrice":"35.00"') && html.includes('"highPrice":"41.00"'));
     assert.ok(html.includes('rel="canonical" href="https://keepitunderground.com/shop/kpt-heavyweight-tee"'));
   });

@@ -3,6 +3,7 @@
 // navigation to the hosted checkout origin is intercepted and recorded.
 // Run: PLAYWRIGHT_MODULE=/path/to/node_modules/playwright/index.mjs OUT=evidence-dir node tests/e2e/browser-qa.mjs
 import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import assert from "node:assert/strict";
 
@@ -10,13 +11,13 @@ import { MOCK_TOKEN, startMockFourthwall } from "./mock-fourthwall.mjs";
 
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ?? "playwright");
 const root = new URL("../../", import.meta.url);
-const OUT = process.env.OUT ?? new URL("evidence/browser-qa/", root).pathname;
+const OUT = process.env.OUT ?? fileURLToPath(new URL("evidence/browser-qa/", root));
 await mkdir(OUT, { recursive: true });
 const fixture = JSON.parse(await readFile(new URL("tests/store/fixtures/public-catalog-2026-10-02.json", root), "utf8"));
 const MOCK_PORT = 39227, APP_PORT = 39228;
 const { server: mock } = await startMockFourthwall(MOCK_PORT, fixture);
 const env = { ...process.env, FOURTHWALL_STOREFRONT_TOKEN: MOCK_TOKEN, FOURTHWALL_STOREFRONT_API_BASE: `http://127.0.0.1:${MOCK_PORT}/`, NEXT_TELEMETRY_DISABLED: "1" };
-const next = (args) => spawn(process.execPath, [new URL("node_modules/next/dist/bin/next", root).pathname, ...args], { cwd: root.pathname, env, stdio: ["ignore", "pipe", "pipe"] });
+const next = (args) => spawn(process.execPath, [fileURLToPath(new URL("node_modules/next/dist/bin/next", root)), ...args], { cwd: fileURLToPath(root), env, stdio: ["ignore", "pipe", "pipe"] });
 const done = (c) => new Promise((r) => c.on("exit", r));
 
 const results = [];
@@ -133,7 +134,8 @@ try {
     await page.click("[data-add-to-cart]");
     assert.equal(await page.locator("dialog#cart[open]").count(), 0, "cart must not open without a size");
     assert.match(await page.locator("[data-choice-hint]").innerText(), /No size selected/);
-    assert.equal(await page.locator('[data-fit="missing"]').count(), 1, "missing size chart is said plainly");
+    assert.equal(await page.locator('[data-fit="missing"]').count(), 0, "tee no longer says the chart is missing");
+    assert.equal(await page.locator('[data-fit="sourced"] [data-size-row]').count(), 7, "source-backed chart lists every size");
     await page.click('[data-variant-option="13698b07-9fb3-4500-9fe0-afe48a36e003"]');
     assert.equal(await page.locator("[data-price-cents]").getAttribute("data-price-cents"), "4100");
     await page.click("[data-add-to-cart]");
