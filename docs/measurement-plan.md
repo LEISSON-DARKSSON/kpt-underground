@@ -35,7 +35,7 @@ Residual gaps (reported, not hidden):
 1. `view_item` reports the from-price for multi-variant products and has no `item_variant` there (no variant is chosen at view time). It is unknown, so it is omitted.
 2. `view_item` and `view_item_list` fire once per page view: `trackOnce` keys are cleared by a layout effect on every route change (`startPageScope`), so A -> B -> A counts A twice and a re-render or StrictMode re-run counts once. Tested with a simulated route change and in a real browser. Events before consent are not counted at all (no replay).
 3. `view_cart` fires on every drawer open, including right after `add_to_cart`.
-4. `begin_checkout` fires before server validation, so it also counts attempts that end in `checkout_error`.
+4. `begin_checkout` fires before server validation, so it also counts attempts that end in `checkout_error`. It is no longer forwarded to Google: Fourthwall's hosted checkout sends its own `begin_checkout` into the same stream.
 5. `checkout_redirect` has no per-item price; `value` is the cart subtotal.
 6. Item ids are local slugs; reconciliation with the ids Fourthwall natively sends is NOT_RUN.
 7. Everything above is verified by static reading and unit tests only. No collector has received anything (NOT_RUN).
@@ -49,7 +49,7 @@ One GA4 setup, subject to owner confirmation. Reuse an existing property and web
 | hero_shop_click | The home hero CTA was actually activated | Next.js site |
 | view_item | A product detail page was viewed | Next.js site |
 | add_to_cart | A valid chosen variant was actually added to the cart | Next.js site |
-| begin_checkout | Checkout initiation. Not payment | Next.js site |
+| begin_checkout | Checkout initiation. Not payment | Fourthwall native only (observed from the hosted checkout page, 2026-10-02). The app records it in the local dataLayer but does not forward it, so a checkout is not counted twice |
 | checkout_redirect | A valid Fourthwall checkout URL was received. Not a purchase. Never a key event / conversion | Next.js site |
 | purchase | A real paid order confirmed by the platform, with `transaction_id`, `currency`, `value`, `items` | Fourthwall native only |
 
@@ -106,7 +106,7 @@ The concrete procedure, with boolean PASS criteria, owner-gated prerequisites, e
 
 PASS needs all of the following, each with evidence (collector debug view or report screenshot, SHA, environment, time). Today every item is NOT_RUN.
 
-1. Collector receives at least one real `view_item`, `add_to_cart` and `begin_checkout` with correct `item_id` (and `item_variant`) and USD values. A non-empty `dataLayer` is not a PASS. NOT_RUN
+1. Collector receives at least one real `view_item` and `add_to_cart` (and, from Fourthwall natively, `begin_checkout`) with correct `item_id` (and `item_variant`) and USD values. A non-empty `dataLayer` is not a PASS. NOT_RUN
 2. Consent refused: add to cart and checkout still work, nothing is sent; consent granted: events arrive. NOT_RUN
 3. No forbidden field in any received payload (allowlist enforced, inspected in the collector). NOT_RUN
 4. Cross-domain test (section 6) recorded as PASS, or recorded as unknown with attribution reported as unknown. NOT_RUN
@@ -139,3 +139,11 @@ Decision needed from the owner (one question): approve creating ONE GA4 property
 
 - `npm run test:measurement`: transport against a fake browser (cases 1-9, URL hygiene, caps, cookies) and the negative control for the contact-capture scanner (the fixture with a signup form must fail the check, the fixture without must pass; a pattern with a raw control character is rejected).
 - `npm run test:measurement:browser`: real build, real Chromium, Google hosts intercepted, `gtag.js` replaced by a stub that plays the observable parts (reads the layer at load, honours `ga-disable`, one collect per event). It proves our command sequence, consent gating, route handling, URL hygiene and that shopping never depends on measurement. It does not prove real `gtag.js` behaviour on the wire. Needs `PLAYWRIGHT_MODULE` (and `CHROMIUM_PATH`).
+
+## 12. Hosted shop and checkout, observed 2026-10-02 (after the owner entered the Measurement ID in Fourthwall Tracking pixels)
+
+- The hosted shop and checkout load `gtag.js` for our ID through Fourthwall's own GTM, next to Fourthwall's own tags (its GA ids, Google Ads remarketing, Microsoft Clarity and others). Hits with our ID arrive from the hosted pages, and a `_ga_` cookie for our stream exists on the hosted domain.
+- Fourthwall's "Enable cookie policy" is ON and shows a banner (Accept all, Reject all, Manage preferences). It runs Google Consent Mode in its ADVANCED form, not our Basic form: before a choice, and after Reject all, hits with our ID are still sent as cookieless pings (consent state `G100`, `npa=1`); after Accept all they carry full consent. Our own banner choice is not passed to the hosted side. Fourthwall's other platform tags (for example Clarity) kept loading after Reject all; those are Fourthwall's, not ours.
+- So the "nothing is sent before consent" rule holds for keepitunderground.com only. On the hosted side the owner has accepted Fourthwall's behaviour by entering the ID; clearing the field in Fourthwall admin (Analytics, Options, Tracking pixels) stops our ID there.
+- No linker is added on the handoff, so hosted hits use their own client id and appear as a separate user and session unless a later check proves otherwise. Cross-domain stays NOT_RUN.
+- An automated browser gets `403 Forbidden` from the hosted shop (bot protection); this was not bypassed. Observations used the owner's real Chrome with the stored Fourthwall consent cookie removed first.

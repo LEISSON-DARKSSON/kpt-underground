@@ -285,6 +285,8 @@
       "name": "begin_checkout",
       "meaning": "Checkout initiation from the cart drawer. Not payment.",
       "source": "keepitunderground.com",
+      "forwardedToCollector": false,
+      "forwardedToCollectorWhy": "Fourthwall's hosted checkout sends begin_checkout natively into the same stream; forwarding ours would count it twice",
       "emittedToday": true,
       "requiredParams": [
         "items[].item_id",

@@ -28,6 +28,13 @@ import { EVENT_SCHEMA } from "./analytics.ts";
 
 type Params = Record<string, unknown>;
 
+/**
+ * Events the app records locally but never sends to Google, because Fourthwall's hosted checkout already sends
+ * them natively into the same stream (observed 2026-10-02: begin_checkout from the checkout page). Sending both
+ * would count every checkout twice. `checkout_redirect` stays: it is the app's own handoff signal.
+ */
+const NATIVE_ON_HOSTED_SIDE: ReadonlySet<string> = new Set(["begin_checkout"]);
+
 export const CONSENT_STORAGE_KEY = "kpt-analytics-consent-v1";
 /** Events that may queue while the Google script is still loading after a grant. Beyond this they are dropped. */
 export const MAX_QUEUED_WHILE_LOADING = 25;
@@ -229,6 +236,7 @@ export function createGa4Transport(config: TransportConfig, env: TransportEnv): 
         const { event, ...params } = built;
         // Second gate behind buildEvent: only schema events go out, so a stray "purchase" can never be sent from here.
         if (typeof event !== "string" || !Object.prototype.hasOwnProperty.call(EVENT_SCHEMA, event)) return;
+        if (NATIVE_ON_HOSTED_SIDE.has(event)) return;
         send(event, { ...params, page_location: lastLocation ?? here().location, page_referrer: lastReferrer });
       } catch {
         /* same */
