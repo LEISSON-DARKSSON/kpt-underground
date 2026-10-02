@@ -5,7 +5,7 @@ const MANIFESTO_ITEMS = [
   { text: "WE DO NOT TREND.", color: "text-paper" },
   { text: "WE DO NOT FOLLOW.", color: "text-paper" },
   { text: "WE BUILD THE SYSTEMS.", color: "text-paper" },
-  { text: "WE SUSTAIN THE ARTISTS.", color: "text-green" },
+  { text: "WE MAKE ROOM FOR IDEAS.", color: "text-green" },
   { text: "WE KEEP THE FREQUENCY.", color: "text-paper" },
   { text: "WE KEEP THE STANDARD.", color: "text-orange" },
   { text: "WE KEEP IT UNDERGROUND.", color: "text-green" },

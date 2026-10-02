@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 import { Space_Mono, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { CursorEngine } from "@/components/brand/cursor-engine";
@@ -7,8 +6,7 @@ import { AudioToggle } from "@/components/brand/audio-toggle";
 import { PageLoader } from "@/components/brand/page-loader";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { CartProvider } from "@/lib/cart-context";
-import { CartDrawer } from "@/components/shop/cart-drawer";
+import { CartProvider } from "@/lib/store/cart";
 
 const spaceMono = Space_Mono({
   variable: "--font-space-mono",
@@ -26,15 +24,15 @@ const bebasNeue = Bebas_Neue({
 
 export const metadata: Metadata = {
   title: {
-    default: "KEEP IT UNDERGROUND — Soundsystem Workwear",
-    template: "%s — KPT UNDERGROUND",
+    default: "KEEP IT UNDERGROUND — Original graphic objects",
+    template: "%s — KEEP IT UNDERGROUND",
   },
   description:
-    "Soundsystem workwear for the people who build the systems. Equipment engineered for the underground.",
+    "Original graphic objects for the spaces where you build, work and create. Desk mats, notebooks, prints, stickers and totes, made on demand.",
   metadataBase: new URL("https://keepitunderground.com"),
   openGraph: {
     title: "KEEP IT UNDERGROUND",
-    description: "Soundsystem workwear for the people who build the systems.",
+    description: "Original graphic objects for the spaces where you build, work and create.",
     siteName: "KPT Underground",
     locale: "en_US",
     type: "website",
@@ -71,7 +69,6 @@ export default function RootLayout({
           </main>
           <Footer />
           <AudioToggle />
-          <CartDrawer />
         </CartProvider>
       </body>
     </html>

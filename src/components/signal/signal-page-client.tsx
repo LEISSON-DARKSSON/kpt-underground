@@ -42,8 +42,8 @@ export function SignalPageClient() {
             {[
               { num: "01", title: "DIRECT EVENT ACCESS", desc: "Location coordinates for parties with no public existence." },
               { num: "02", title: "CULTURE PARTICIPATION", desc: "Early drops. Direct communication. Closed broadcast channels." },
-              { num: "03", title: "AUTOMATIC ACTIVATION", desc: "Your order number is your access key. No signup required." },
-              { num: "04", title: "NO EXPIRATION", desc: "Lifetime access. Multiple purchases expand your access level." },
+              { num: "03", title: "NO ALGORITHM", desc: "Nothing here is ranked, boosted or sponsored." },
+              { num: "04", title: "WORD OF MOUTH", desc: "The way in is already knowing someone who knows." },
             ].map((item, i) => (
               <ScrollReveal key={item.num} delay={(i % 4) as 0 | 1 | 2 | 3}>
                 <div className="border border-dim p-6">

@@ -1,28 +1,30 @@
+import Link from "next/link";
+
 import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
 import { Ticker } from "@/components/brand/ticker";
-import { HeroStats } from "@/components/home/hero-stats";
 import { HeroCTAs } from "@/components/home/hero-ctas";
+import { HeroStats } from "@/components/home/hero-stats";
 import { ManifestoStrip } from "@/components/home/manifesto-strip";
-import { ProductLines } from "@/components/home/product-lines";
-import { ArtistFundPreview } from "@/components/home/artist-fund-preview";
-import Link from "next/link";
+import { ProductGrid } from "@/components/store/product-grid";
+
+export const revalidate = 60;
 
 const TICKER_ITEMS = [
-  "SOUNDSYSTEM WORKWEAR",
   "KEEP IT UNDERGROUND",
-  "10% ARTIST FUND",
-  "EQUIPMENT NOT FASHION",
-  "BASS CULTURE SINCE 2024",
-  "SIGNAL NETWORK ACTIVE",
-  "140HZ FREQUENCY",
-  "UNDERGROUND INFRASTRUCTURE",
+  "ORIGINAL GRAPHIC OBJECTS",
+  "MAKE ROOM FOR YOUR NEXT IDEA",
+  "SIGNAL / 01",
+  "SUBSURFACE / 02",
+  "MADE ON DEMAND",
+  "SPACE TO MAKE SOMETHING",
+  "OBJECT STUDIES",
 ];
 
 export default function HomePage() {
   return (
     <>
-      {/* ═══ HERO ═══ */}
+      {/* ─── HERO ─── */}
       <section
         id="hero"
         className="relative overflow-hidden flex items-center"
@@ -44,30 +46,16 @@ export default function HomePage() {
         />
 
         <div className="wrap relative">
-          {/* System badge */}
           <ScrollReveal>
             <span className="eyebrow">
               <span style={{ marginRight: 4 }}>&#x25B6;</span>
-              KPT-UG // SYSTEM ACTIVE // V3
+              KPT-UG // OBJECT STUDIES // SHOP OPEN
             </span>
           </ScrollReveal>
 
-          {/* Hero text */}
-          <CharReveal
-            text="KEEP IT"
-            as="h1"
-            staggerMs={40}
-            className="stmt"
-          />
-          <CharReveal
-            text="UNDERGROUND"
-            as="h1"
-            staggerMs={40}
-            className="stmt"
-            accentClass="text-green"
-          />
+          <CharReveal text="KEEP IT" as="h1" staggerMs={40} className="stmt" />
+          <CharReveal text="UNDERGROUND" as="h1" staggerMs={40} className="stmt" accentClass="text-green" />
 
-          {/* Subtitle */}
           <ScrollReveal delay={2}>
             <p
               style={{
@@ -78,20 +66,14 @@ export default function HomePage() {
                 marginTop: 36,
               }}
             >
-              Soundsystem workwear for the people who build the systems.{" "}
-              <strong style={{ color: "var(--paper)" }}>
-                Equipment engineered for the underground.
-              </strong>
+              Original graphic objects for the spaces where you build, work and create.{" "}
+              <strong style={{ color: "var(--paper)" }}>Make room for your next idea.</strong>
             </p>
           </ScrollReveal>
 
-          {/* CTAs */}
           <HeroCTAs />
-
-          {/* Stats bar */}
           <HeroStats />
 
-          {/* Bottom meta */}
           <span
             className="absolute hidden md:block"
             style={{
@@ -127,119 +109,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ TICKER ═══ */}
       <Ticker items={TICKER_ITEMS} />
-
-      {/* ═══ MANIFESTO STRIP ═══ */}
       <ManifestoStrip />
 
-      {/* ═══ PRODUCT LINES ═══ */}
-      <section
-        style={{
-          padding: "120px 0",
-          borderBottom: "1px solid rgba(138, 206, 0, 0.06)",
-        }}
-      >
+      {/* ─── THE SHOP ─── */}
+      <section style={{ padding: "120px 0", borderBottom: "1px solid rgba(138, 206, 0, 0.06)" }}>
         <div className="wrap">
           <ScrollReveal>
-            <span className="eyebrow">02 // THE EQUIPMENT</span>
+            <span className="eyebrow">01 // THE SHOP</span>
           </ScrollReveal>
           <ScrollReveal delay={1}>
-            <h2
-              className="stmt"
-              style={{ fontSize: "clamp(36px, 6vw, 72px)", marginBottom: 64 }}
-            >
-              FOUR LINES.
+            <h2 className="stmt" style={{ fontSize: "clamp(36px, 6vw, 72px)", marginBottom: 56 }}>
+              DESK OBJECTS.
               <br />
-              <span style={{ color: "var(--green)" }}>ONE STANDARD.</span>
+              <span style={{ color: "var(--green)" }}>WALL STUDIES.</span>
             </h2>
           </ScrollReveal>
-          <ProductLines />
-        </div>
-      </section>
-
-      {/* ═══ ARTIST FUND ═══ */}
-      <section
-        style={{
-          padding: "120px 0",
-          borderBottom: "1px solid rgba(138, 206, 0, 0.06)",
-        }}
-      >
-        <div className="wrap">
-          <ScrollReveal>
-            <span className="eyebrow">03 // THE ARTISTS</span>
-          </ScrollReveal>
-          <ScrollReveal delay={1}>
-            <h2
-              className="stmt"
-              style={{ fontSize: "clamp(36px, 6vw, 72px)", marginBottom: 24 }}
-            >
-              10% OF EVERY
-              <br />
-              <span style={{ color: "var(--orange)" }}>TRANSACTION.</span>
-            </h2>
-          </ScrollReveal>
+          <ProductGrid limit={6} />
           <ScrollReveal delay={2}>
-            <p
-              style={{
-                maxWidth: 560,
-                fontSize: "clamp(14px, 1.6vw, 17px)",
-                lineHeight: 1.85,
-                color: "var(--muted)",
-                marginBottom: 48,
-              }}
-            >
-              Every purchase directly funds the underground artists who build
-              the soundsystems, run the raves, and keep the culture alive.
-            </p>
-          </ScrollReveal>
-          <ArtistFundPreview />
-          <ScrollReveal delay={3}>
             <Link
-              href="/artists"
-              data-cursor="hover"
-              data-cursor-label="VIEW"
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 12,
-                fontSize: 9,
-                letterSpacing: "0.45em",
-                textTransform: "uppercase",
-                color: "var(--green)",
-                textDecoration: "none",
-                borderBottom: "1px solid rgba(138, 206, 0, 0.22)",
-                paddingBottom: 4,
-                marginTop: 48,
-                transition: "color var(--mid), border-color var(--mid)",
-              }}
+              href="/shop"
+              data-cursor="shop"
+              data-cursor-label="SHOP"
+              className="mt-12 inline-flex items-center gap-3 border-b border-green/25 pb-1 font-mono text-[11px] uppercase tracking-[0.3em] text-green no-underline hover:border-green"
             >
-              VIEW ALL RECIPIENTS <span>&#x2192;</span>
+              VIEW THE FULL SHOP <span>&#x2192;</span>
             </Link>
           </ScrollReveal>
         </div>
       </section>
 
-      {/* ═══ SIGNAL CTA ═══ */}
-      <section
-        className="flex items-center justify-center text-center"
-        style={{
-          padding: "160px 0",
-          background: "var(--ink2)",
-        }}
-      >
+      {/* ─── SIGNAL CTA ─── */}
+      <section className="flex items-center justify-center text-center" style={{ padding: "160px 0", background: "var(--ink2)" }}>
         <div className="wrap">
           <ScrollReveal>
-            <span className="eyebrow">04 // THE SIGNAL</span>
+            <span className="eyebrow">02 // THE SIGNAL</span>
           </ScrollReveal>
           <ScrollReveal delay={1}>
-            <h2
-              className="stmt"
-              style={{
-                fontSize: "clamp(36px, 6vw, 72px)",
-                marginBottom: 24,
-              }}
-            >
+            <h2 className="stmt" style={{ fontSize: "clamp(36px, 6vw, 72px)", marginBottom: 24 }}>
               THE SIGNAL
               <br />
               <span style={{ color: "var(--green)" }}>NETWORK</span>
@@ -257,8 +164,6 @@ export default function HomePage() {
               }}
             >
               A closed channel for those who keep it underground.
-              <br />
-              Access granted through purchase or frequency.
             </p>
           </ScrollReveal>
           <ScrollReveal delay={3}>
@@ -275,7 +180,6 @@ export default function HomePage() {
                 border: "1px solid rgba(255, 140, 0, 0.22)",
                 padding: "10px 24px",
                 textDecoration: "none",
-                transition: "background 0.3s ease, color 0.3s ease",
               }}
             >
               &#x25CF; ENTER SIGNAL NETWORK
@@ -284,7 +188,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ BOTTOM TICKER ═══ */}
       <Ticker items={TICKER_ITEMS} duration={35} reverse />
     </>
   );

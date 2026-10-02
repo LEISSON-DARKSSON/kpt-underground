@@ -12,7 +12,7 @@ const SIGNALS = [
   },
   {
     title: "HOW YOU ENTER",
-    body: "You buy the clothing. You receive access. What follows cannot be described further here.",
+    body: "You find it the way you find the good parties: someone tells you. What follows cannot be described further here.",
   },
   {
     title: "WHY IT WORKS",
@@ -46,7 +46,7 @@ export function StorySignalNetwork() {
             <ScrollReveal key={signal.title} delay={(i % 4) as 0 | 1 | 2 | 3}>
               <div className="border border-dim p-8 h-full">
                 <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-green">
-                  {String(i + 1).padStart(2, "0")} // {signal.title}
+                  {String(i + 1).padStart(2, "0")} {"//"} {signal.title}
                 </span>
                 <p className="text-paper/80 leading-relaxed mt-4">
                   {signal.body}

@@ -1,74 +1,42 @@
-import type { Metadata } from "next";
-import { CharReveal } from "@/components/brand/char-reveal";
 import { ScrollReveal } from "@/components/brand/scroll-reveal";
-import { Ticker } from "@/components/brand/ticker";
-import { ShopGrid } from "@/components/shop/shop-grid";
-import { SecretDrop } from "@/components/shop/secret-drop";
-import Link from "next/link";
+import { ProductGrid } from "@/components/store/product-grid";
+
+import type { Metadata } from "next";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
-  title: "Equipment",
-  description: "The Collection — SS 2025. Equipment engineered for the underground. Ravewear, Festivalwear, Everyday, Accessories. Limited quantities.",
+  title: "Shop",
+  description: "Original KEEP IT UNDERGROUND desk mats, notebooks, prints, stickers and totes. Made on demand.",
 };
 
 export default function ShopPage() {
   return (
-    <>
-      {/* ═══ HEADER ═══ */}
-      <section
-        className="relative overflow-hidden flex items-end"
-        style={{ paddingTop: "calc(56px + 60px)", paddingBottom: 0 }}
-      >
-        <div className="wrap">
-          <ScrollReveal>
-            <span className="eyebrow">COLLECTION // SS-2025 // LIMITED QUANTITIES</span>
-          </ScrollReveal>
-
-          <ScrollReveal delay={1}>
-            <CharReveal
-              as="h1"
-              text="THE COLLECTION."
-              className="font-display text-[clamp(56px,9vw,120px)] leading-[0.86] text-paper mt-4"
-            />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ═══ PRODUCT GRID (with meta row, filters, sort built in) ═══ */}
-      <ShopGrid />
-
-      {/* ═══ SECRET DROP GATE ═══ */}
-      <div className="wrap py-16">
-        <ScrollReveal>
-          <SecretDrop />
+    <section className="wrap pb-32" style={{ paddingTop: "calc(120px + var(--sat))" }}>
+      <ScrollReveal>
+        <p className="eyebrow">KPT / Object studies</p>
+      </ScrollReveal>
+      <div className="mt-6 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+        <ScrollReveal delay={1}>
+          <h1 className="font-display text-[clamp(52px,9vw,128px)] leading-[0.86] text-paper">
+            THE
+            <br />
+            <span className="text-green">SHOP.</span>
+          </h1>
+        </ScrollReveal>
+        <ScrollReveal delay={2}>
+          <p className="max-w-sm font-mono text-sm leading-relaxed text-slate">
+            Original graphic objects for the spaces where you build, work and create. Make room for your next idea.
+          </p>
         </ScrollReveal>
       </div>
-
-      {/* ═══ TICKER ═══ */}
-      <Ticker
-        items={["EQUIPMENT NOT FASHION", "440GSM FRENCH TERRY", "AQL 2.5 STANDARD", "10% ARTIST FUND", "SOUNDSYSTEM WORKWEAR"]}
-        duration={35}
-      />
-
-      {/* ═══ SIGNAL CTA ═══ */}
-      <section className="py-24 border-t border-dim">
-        <div className="wrap text-center">
-          <ScrollReveal>
-            <p className="font-display text-[clamp(1.2rem,3vw,2rem)] text-paper leading-tight">
-              EVERY PURCHASE ACTIVATES<br />SIGNAL NETWORK ACCESS.
-            </p>
-          </ScrollReveal>
-          <ScrollReveal delay={1}>
-            <Link
-              href="/signal"
-              className="inline-block mt-8 font-mono text-[11px] tracking-[0.14em] uppercase text-green border border-green/30 px-6 py-3 hover:bg-green hover:text-ink transition-colors duration-200 no-underline"
-              data-cursor="h"
-            >
-              ENTER SIGNAL NETWORK &rarr;
-            </Link>
-          </ScrollReveal>
-        </div>
-      </section>
-    </>
+      <div className="mt-12 flex items-center justify-between border-y border-dim py-4 font-mono text-[11px] uppercase tracking-[0.2em] text-slate">
+        <span>Made on demand</span>
+        <span>Prices in USD</span>
+      </div>
+      <div className="mt-10">
+        <ProductGrid />
+      </div>
+    </section>
   );
 }

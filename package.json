@@ -9,15 +9,14 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test:commerce-preview": "node scripts/commerce-preview/build-preview-assets.mjs --check && node --test tests/commerce-preview/preview-guard.test.mjs tests/commerce-preview/react-preview.test.mjs"
+    "test:commerce-preview": "node scripts/commerce-preview/build-preview-assets.mjs --check && node --test tests/commerce-preview/preview-guard.test.mjs tests/commerce-preview/react-preview.test.mjs",
+    "test:store": "node --test tests/store/store-core.test.mjs"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.5",
-    "@stripe/stripe-js": "^8.11.0",
     "next": "^16.2.1",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "stripe": "^20.4.1",
     "zod": "^4.3.6"
   },
   "devDependencies": {
