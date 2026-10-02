@@ -2,7 +2,7 @@
 
 Status: PROCEDURE ONLY, written 2026-10-02. Every step below is NOT_RUN. Nothing here was executed, no collector exists, no Measurement ID exists in this repository, no account was touched. DNS and the checkout host stay as they are: `keepitunderground.com` (Next.js) and `keepitunderground-shop.fourthwall.com` (Fourthwall hosted checkout).
 
-Companion files: `docs/measurement-plan.md` (plan), `docs/measurement-contract.json` (machine-readable contract), `src/lib/analytics-collector.ts` (disabled GA4 one-stream, Basic-consent plan).
+Companion files: `docs/measurement-plan.md` (plan), `docs/measurement-contract.json` (machine-readable contract), `src/lib/analytics-collector.ts` and `src/lib/analytics-transport.ts` (GA4 one-stream, Basic-consent rules and the inert transport).
 
 ## 1. What is NOT assumed
 
@@ -25,7 +25,7 @@ Companion files: `docs/measurement-plan.md` (plan), `docs/measurement-contract.j
 
 1. The owner approves one collector (recommended: the single GA4 setup) and names the property and web stream, reusing an existing one if it exists.
 2. A test property or stream (or DebugView on a throwaway stream) is available so real reporting data is not polluted.
-3. The owner decides the consent policy and banner, and approves activation of `collectorPlan` (a separate PR; `ownerActivation` stays false until then).
+3. The owner approves the consent policy (Basic consent, banner already coded and inert) and activation: the two env vars `NEXT_PUBLIC_GA4_MEASUREMENT_ID` and `NEXT_PUBLIC_GA4_OWNER_ACTIVATION` stay unset until then, and the owner activation flag stays false in Production.
 4. The owner enters the same Measurement ID in Fourthwall (Analytics, Tracking Pixels) or explicitly decides not to.
 5. Owner-controlled browser profile, clean (no extensions, no earlier `_ga` cookies), plus one mobile device.
 6. Hard limits: no order, no payment, no sample, no shop credit. Stop at the hosted checkout page (HTTP 200).
@@ -89,3 +89,10 @@ Verdict rules:
 - Record the failing booleans and report attribution as unknown.
 - A fix is a separate, owner-approved `src/` change: decorate the checkout URL at the `window.location.assign` call using the collector's documented linker mechanism for the checkout host, copying only documented linker fields, never auth secrets or contact data. Re-run XD04 to XD08 afterwards.
 - Do not change DNS, the checkout host or the Fourthwall checkout flow to make this pass.
+
+## 8. Partial run, 2026-10-02 (booleans only; `crossDomain` stays NOT_RUN)
+
+- XD05 on the shop root only (headers-only, synthetic linker value, no cookies, no order): `redirect_chain_recorded: true` (HTTP 200, 0 redirects), `redirects_preserve_linker_param: true` (nothing redirects the root, so nothing strips the parameter). The real checkout path (`/checkout/...`) was not requested, so XD05 is PARTIAL, not PASS.
+- XD01 and XD02 (no collector, no analytics cookie, shopping works before consent and after a refusal) are covered for OUR site by `npm run test:measurement:browser` against a mock; XD01/XD02 on the real Preview and on the checkout host stay NOT_RUN.
+- XD03, XD04, XD06 to XD10: NOT_RUN. There is no GA4 property or Measurement ID yet (`docs/measurement-plan.md` section 10), and this branch does not decorate the checkout URL.
+

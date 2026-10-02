@@ -305,7 +305,7 @@ test("trackOnce: repeated effect runs / re-renders within one page view emit onc
   assert.equal(layer.filter((e) => e.event === "view_item_list").length, 1);
 });
 
-test("trackOnce: a simulated SPA route change (A -> B -> A -> B) yields at most one view_item per product", async () => {
+test("trackOnce: without a page-view scope, a simulated SPA route change (A -> B -> A -> B) yields at most one view_item per product (page-load scope)", async () => {
   const mod = await import("../../src/lib/analytics.ts?spa-navigation");
   // Each route render runs the product page effect (twice, like StrictMode) with the same key scheme as product-purchase.
   const visit = (id, slug) => {
@@ -326,6 +326,28 @@ test("trackOnce: a simulated SPA route change (A -> B -> A -> B) yields at most 
   assert.equal(after.filter((e) => e.event === "view_item").length, 1);
   function visitFresh(m) {
     for (let run = 0; run < 3; run++) m.trackOnce("view_item:offer-a", "view_item", { currency: "USD", value: 5, items: [{ item_id: "kpt-beanie", price: 5 }] });
+  }
+});
+
+test("trackOnce: with startPageScope() on every route change, A -> B -> A is three views, and re-runs inside one view stay one", async () => {
+  const mod = await import("../../src/lib/analytics.ts?page-scope");
+  const visit = (id, slug) => {
+    mod.startPageScope();
+    for (let run = 0; run < 2; run++) mod.trackOnce(`view_item:${id}`, "view_item", { currency: "USD", value: 5, items: [{ item_id: slug, price: 5 }] });
+  };
+  const layer = captureDataLayer(() => {
+    visit("offer-a", "kpt-beanie");
+    visit("offer-b", "kpt-crewneck");
+    visit("offer-a", "kpt-beanie");
+  });
+  assert.deepEqual(layer.filter((e) => e.event === "view_item").map((e) => e.items[0].item_id), ["kpt-beanie", "kpt-crewneck", "kpt-beanie"]);
+});
+
+test("the app shell starts a page-view scope in a layout effect (it runs before the pages' own passive effects)", () => {
+  const root = stripComments(read("src/components/analytics/analytics-root.tsx"));
+  assert.match(root, /useLayoutEffect\(\(\) => \{\s*startPageScope\(\);\s*\}, \[pathname\]\)/);
+  for (const f of ["src/components/store/product-purchase.tsx", "src/components/store/shop-catalog.tsx"]) {
+    assert.doesNotMatch(stripComments(read(f)), /useLayoutEffect/, `${f} must keep its tracking in a passive effect`);
   }
 });
 
@@ -374,16 +396,14 @@ test("collector: Basic consent means no loadScript before consent, whatever else
   }
 });
 
-test("collector: the module is imported by nothing in src/ or the app config (it stays disabled and unused)", () => {
-  const importers = [];
-  for (const file of [...srcFiles, "next.config.ts"]) {
-    if (file === "src/lib/analytics-collector.ts") continue;
-    if (/analytics-collector/.test(stripComments(read(file)))) importers.push(file);
-  }
-  assert.deepEqual(importers, []);
+test("collector: wired through exactly one transport, and only the app shell imports that transport (inert until activated)", () => {
+  const importers = (needle, self) => [...srcFiles, "next.config.ts"].filter((file) => file !== self && needle.test(stripComments(read(file))));
+  assert.deepEqual(importers(/analytics-collector/, "src/lib/analytics-collector.ts"), ["src/lib/analytics-transport.ts"]);
+  assert.deepEqual(importers(/analytics-transport/, "src/lib/analytics-transport.ts"), ["src/components/analytics/analytics-preference.tsx", "src/components/analytics/analytics-root.tsx"]);
   const contractVariant = contract.collector.variant;
-  assert.deepEqual(contractVariant.importedBy, []);
-  assert.equal(contractVariant.status, "DISABLED");
+  assert.deepEqual(contractVariant.importedBy, ["src/lib/analytics-transport.ts"]);
+  assert.equal(contractVariant.status, "WIRED_INERT_NOT_ACTIVATED");
+  assert.deepEqual(contractVariant.activationEnv, ["NEXT_PUBLIC_GA4_MEASUREMENT_ID", "NEXT_PUBLIC_GA4_OWNER_ACTIVATION"]);
 });
 
 test("collector: no side effects at import (no DOM, storage, network or script creation in its code)", () => {
@@ -392,11 +412,16 @@ test("collector: no side effects at import (no DOM, storage, network or script c
   assert.doesNotMatch(code, /^\s*import\b/m, "self-contained, no imports");
 });
 
-test("no Google tag or gtag script exists in src/ or the app config (comments excluded)", () => {
+const GOOGLE_TAG_FILES = new Set(["src/lib/analytics-collector.ts", "src/lib/analytics-transport.ts"]);
+
+test("a Google tag is referenced only in the collector rules and the one transport (comments excluded); no script loader anywhere", () => {
   for (const file of [...srcFiles, "next.config.ts"]) {
     const code = stripComments(read(file));
-    assert.doesNotMatch(code, /googletagmanager|google-analytics|\bgtag\b/i, `${file} references a Google tag`);
-    assert.doesNotMatch(code, /<Script\b|next\/script/, `${file} uses a script loader`);
-    assert.doesNotMatch(code, /<script\b[^>]*\bsrc\s*=/i, `${file} has an external <script src>`);
+    if (!GOOGLE_TAG_FILES.has(file)) assert.doesNotMatch(code, /googletagmanager|google-analytics|gtag/i, `${file} references a Google tag`);
+    assert.doesNotMatch(code, /<Script|next\/script/, `${file} uses a script loader`);
+    assert.doesNotMatch(code, /<script[^>]*src\s*=/i, `${file} has an external <script src>`);
   }
+  // the transport is the only place that creates a script element
+  const creators = srcFiles.filter((f) => /createElement\(\s*["']script["']\s*\)/.test(stripComments(read(f))));
+  assert.deepEqual(creators, ["src/lib/analytics-transport.ts"]);
 });

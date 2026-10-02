@@ -41,6 +41,7 @@ src/
 │   ├── api/fourthwall/status/route.ts         # opt-in diagnostic (FOURTHWALL_READONLY_ENABLED)
 │   └── commerce-preview/…                     # legacy desk-mat preview (gated, reference only)
 ├── components/
+│   ├── analytics/  analytics-root (banner + page views), analytics-preference (footer switch); render nothing unless configured
 │   ├── brand/      char-reveal, cursor-engine, page-loader (home only: a transparent CSS scan line, never blocks the page), scroll-reveal, ticker
 │   ├── store/      shop-catalog, product-card, product-grid, product-purchase, product-gallery, add-to-cart
 │   ├── layout/     navbar (HOME / SHOP / STORY / SIGNAL), footer (+ help + Fourthwall policy links)
@@ -54,7 +55,8 @@ src/
 │   ├── store/seo.ts, store/policies.ts
 │   ├── store/fourthwall.ts    # Storefront fetch; getProducts({ fresh? }); StoreUnavailableError vs null (=404)
 │   ├── store/cart.tsx         # client cart state + drawer
-│   ├── analytics.ts           # dataLayer adapter only (no vendor script, no purchase event)
+│   ├── analytics.ts           # event allowlist + dataLayer buffer + forwarder hook (no purchase event, ever)
+│   ├── analytics-collector.ts, analytics-transport.ts  # GA4 rules (pure) + the one gtag sender; inert unless NEXT_PUBLIC_GA4_MEASUREMENT_ID and NEXT_PUBLIC_GA4_OWNER_ACTIVATION are set and the visitor consented
 │   └── fourthwall-storefront.ts, utils.ts
 tests/
 ├── store/store-core.test.mjs, store-contract.test.mjs   # unit + contract tests; fixture = real public catalog snapshot
@@ -117,6 +119,7 @@ Product artwork palette (print files): background `#0B0C0C`, paper `#EBE7DF`, or
    ```
    npm run test:store      # unit + contract tests (real-catalog fixture)
    npm run test:docs       # CLAUDE.md + docs/*.md: no BOM/mojibake, no stale instructions
+   npm run test:measurement  # GA4 transport against a fake browser + contact-form negative control (browser variant: test:measurement:browser)
    npm run typecheck
    npm run lint
    npm run build

@@ -1,12 +1,15 @@
 /**
- * Measurement adapter (KPT-09, H05). Events are pushed to `window.dataLayer` only: no third-party
- * script is loaded and nothing leaves the browser until the owner chooses, approves and activates a
- * collector (see `docs/measurement-plan.md`, `src/lib/analytics-collector.ts`).
+ * Measurement adapter (KPT-09, H05). Every event is validated against an allowlist and pushed to
+ * `window.dataLayer`, a local array that nothing reads. It reaches a collector only through the single
+ * forwarder registered by `src/lib/analytics-transport.ts`, and that forwarder sends only after the
+ * visitor granted analytics consent, the owner activation flag is set and a valid GA4 Measurement ID is
+ * configured (see `docs/measurement-plan.md`, `src/lib/analytics-collector.ts`). Events that happen
+ * before consent are never buffered for Google and never replayed.
  *
  * Event names follow the GA4 e-commerce schema. `hero_shop_click`, `checkout_redirect` and
  * `checkout_error` are custom technical events. There is deliberately no purchase event here: a
  * purchase can only come from a platform-confirmed order (Fourthwall), never from a click, an HTTP
- * 200 or a thank-you URL.
+ * 200 or a thank-you URL. `page_view` is not a ShopEvent either: the transport sends it itself.
  *
  * Privacy model: every event has an explicit ALLOWLIST of top-level and per-item parameters. Anything
  * not listed is dropped, anything listed must pass its own value check (so free text, URLs and ids of
@@ -161,8 +164,18 @@ export function buildEvent(event: ShopEvent, params: Params = {}): Params | null
 const once = new Set<string>();
 
 /**
- * Fires an event at most once per key for this page load (e.g. list impressions across re-renders).
- * The set lives in module memory, so a client-side (SPA) revisit of the same key is not counted again.
+ * Starts a new page-view scope: the once-per-page keys are forgotten, so a client-side revisit
+ * (A -> B -> A) counts as a new view of A, while re-renders and StrictMode effect re-runs inside one
+ * page view still emit once. Call it from a layout effect on every route change, which runs before the
+ * pages' own effects.
+ */
+export function startPageScope(): void {
+  once.clear();
+}
+
+/**
+ * Fires an event at most once per key within the current page-view scope (e.g. list impressions across
+ * re-renders). Without `startPageScope()` the scope is the whole page load.
  */
 export function trackOnce(key: string, event: ShopEvent, params: Params = {}): void {
   if (once.has(key)) return;
@@ -170,14 +183,33 @@ export function trackOnce(key: string, event: ShopEvent, params: Params = {}): v
   track(event, params);
 }
 
+type Forwarder = (built: Params) => void;
+let forwarder: Forwarder | null = null;
+
+/** Registers the one forwarder that may send built events to a collector; `null` removes it. */
+export function setForwarder(fn: Forwarder | null): void {
+  forwarder = fn;
+}
+
 export function track(event: ShopEvent, params: Params = {}): void {
   if (typeof window === "undefined") return;
+  const built = (() => {
+    try {
+      return buildEvent(event, params);
+    } catch {
+      return null;
+    }
+  })();
+  if (!built) return;
   try {
-    const built = buildEvent(event, params);
-    if (!built) return;
     const w = window as unknown as { dataLayer?: unknown[] };
     (w.dataLayer ??= []).push(built);
   } catch {
     /* measurement must never break shopping */
+  }
+  try {
+    forwarder?.(built);
+  } catch {
+    /* same */
   }
 }
