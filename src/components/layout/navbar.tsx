@@ -79,7 +79,7 @@ export function Navbar() {
           aria-label="KEEP IT UNDERGROUND home"
           data-cursor="h"
           data-cursor-label="HOME"
-          className="font-display text-green no-underline"
+          className="font-display text-green no-underline inline-flex min-h-11 items-center"
           style={{ fontSize: 17, letterSpacing: "0.2em", marginRight: 32 }}
         >
           KPT
@@ -129,7 +129,7 @@ export function Navbar() {
         <span
           className="hidden md:inline-block"
           style={{
-            fontSize: 10,
+            fontSize: 11,
             letterSpacing: "0.3em",
             color: "var(--green)",
             opacity: 0.4,
