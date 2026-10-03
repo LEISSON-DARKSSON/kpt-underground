@@ -55,7 +55,7 @@ export function CatalogView({ products, category, q, sort, interactive = false }
 
   return (
     <div data-catalog data-category={category ?? "all"}>
-      <nav aria-label="Shop categories" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
+      <nav aria-label="Shop categories" className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
         <Link href={href(pathname, { category: null, q, sort })} scroll={false} aria-current={category === null ? "page" : undefined} data-cursor="h" data-category-link="all" className={chip(category === null)}>
           All <span className="ml-2 opacity-70">{products.length}</span>
         </Link>
