@@ -25,7 +25,7 @@ export async function HeroStats() {
       {facts.map((f) => (
         <li key={f.value} className="border-b border-green/10 px-4 py-3 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0">
           <span className="block font-display text-[22px] leading-none text-green">{f.value}</span>
-          <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.18em] text-slate">{f.label}</span>
+          <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.18em] text-slate">{f.label}</span>
         </li>
       ))}
     </ul>

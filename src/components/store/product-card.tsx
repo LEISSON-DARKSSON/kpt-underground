@@ -38,17 +38,17 @@ export function ProductCard({ product, priority = false, list }: { product: Stor
           />
         )}
         {!product.available && (
-          <span className="absolute right-3 top-3 border border-orange/60 bg-ink/80 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-orange">Sold out</span>
+          <span className="absolute right-3 top-3 border border-orange/60 bg-ink/80 px-2 py-1 font-mono text-[11px] uppercase tracking-[0.16em] text-orange">Sold out</span>
         )}
       </Link>
       <div className="flex flex-1 flex-col gap-3 border-t border-dim p-5">
         {(type || attr) && (
-          <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-slate" data-card-meta>
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-slate" data-card-meta>
             {[type, attr].filter(Boolean).join(" · ")}
           </p>
         )}
         <h3 className="font-display text-[clamp(24px,2.4vw,32px)] leading-none text-paper">
-          <Link href={href} onClick={onSelect} data-cursor="shop" data-cursor-label="VIEW" className="text-inherit no-underline hover:text-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green">
+          <Link href={href} onClick={onSelect} data-cursor="shop" data-cursor-label="VIEW" className="inline-block min-h-11 py-2 text-inherit no-underline hover:text-green focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green">
             {displayName(product.name)}
           </Link>
         </h3>
@@ -57,7 +57,7 @@ export function ProductCard({ product, priority = false, list }: { product: Stor
             {multi ? "From " : ""}
             {formatPrice(product.priceFromCents)}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-slate">{product.available ? "Made to order" : "Sold out"}</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-slate">{product.available ? "Made to order" : "Sold out"}</span>
         </div>
       </div>
     </article>

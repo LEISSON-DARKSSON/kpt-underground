@@ -16,6 +16,7 @@ export function ManifestoStrip() {
 
   return (
     <section
+      aria-hidden="true"
       style={{
         background: "var(--ink2)",
         borderBottom: "1px solid rgba(138, 206, 0, 0.06)",

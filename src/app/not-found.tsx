@@ -51,7 +51,7 @@ export default function NotFound() {
         </ScrollReveal>
 
         <ScrollReveal delay={4}>
-          <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-dim mt-12">
+          <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-slate mt-12">
             ERR: ROUTE_NOT_FOUND // STATUS: 404 // CLASS: SIGNAL_VOID
           </p>
         </ScrollReveal>

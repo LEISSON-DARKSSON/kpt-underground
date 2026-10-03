@@ -14,11 +14,11 @@ export function SignalPageClient() {
         <div className="wrap">
           <ScrollReveal>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-green border border-green/30 px-2 py-1">
+              <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-green border border-green/30 px-2 py-1">
                 <span style={{ animation: "blink 1.6s step-end infinite" }}>&#x25CF; </span>
                 OPEN
               </span>
-              <span className="font-mono text-[9px] tracking-[0.14em] uppercase text-muted">
+              <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">
                 SIGNAL // STUDIO JOURNAL
               </span>
             </div>
@@ -33,8 +33,8 @@ export function SignalPageClient() {
               <ScrollReveal key={item.num} delay={(i % 4) as 0 | 1 | 2 | 3}>
                 <div className="border border-dim p-6">
                   <span className="font-display text-2xl text-green">{item.num}</span>
-                  <h3 className="font-mono text-[10px] tracking-[0.14em] uppercase text-paper mt-3">{item.title}</h3>
-                  <p className="font-mono text-[10px] text-paper/50 leading-relaxed mt-2">{item.desc}</p>
+                  <h3 className="font-mono text-[11px] tracking-[0.14em] uppercase text-paper mt-3">{item.title}</h3>
+                  <p className="font-mono text-[11px] text-paper/50 leading-relaxed mt-2">{item.desc}</p>
                 </div>
               </ScrollReveal>
             ))}

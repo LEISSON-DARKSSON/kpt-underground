@@ -244,7 +244,7 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
       <div className="flex h-full flex-col">
         <header className="flex items-start justify-between gap-4 border-b border-dim p-6">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-green">KEEP IT UNDERGROUND</p>
+            <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-green">KEEP IT UNDERGROUND</p>
             <h2 id="cart-title" className="font-display text-[40px] leading-none">
               YOUR <span className="text-green">CART.</span>
             </h2>
@@ -322,7 +322,7 @@ function CartDrawer({ triggerRef }: { triggerRef: React.RefObject<HTMLElement | 
             >
               {pending ? "OPENING CHECKOUT…" : "CHECKOUT"} <span aria-hidden="true">→</span>
             </button>
-            <p className="font-mono text-[10px] leading-relaxed text-slate">Secure checkout and payment by Fourthwall.</p>
+            <p className="font-mono text-[11px] leading-relaxed text-slate">Secure checkout and payment by Fourthwall.</p>
           </footer>
         )}
       </div>

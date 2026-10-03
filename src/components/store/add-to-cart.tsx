@@ -128,7 +128,7 @@ export function AddToCart({ product, variant, onSelect }: { product: StoreProduc
             e.currentTarget,
           );
         }}
-        className={`flex min-h-14 w-full items-center justify-center gap-3 font-display text-2xl tracking-[0.06em] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green motion-safe:transition-colors motion-safe:duration-200 disabled:bg-dim disabled:text-muted ${variant ? "bg-green text-ink hover:bg-paper" : "border border-green/50 bg-transparent text-green"}`}
+        className={`flex min-h-14 w-full items-center justify-center gap-3 font-display text-2xl tracking-[0.06em] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green motion-safe:transition-colors motion-safe:duration-200 disabled:bg-ink-3 disabled:text-slate disabled:border disabled:border-dim ${variant ? "bg-green text-ink hover:bg-paper" : "border border-green/50 bg-transparent text-green"}`}
       >
         {!product.available || (variant && !variant.available) ? "SOLD OUT" : variant ? "ADD TO CART" : `CHOOSE A ${noun.toUpperCase()}`} <span aria-hidden="true">→</span>
       </button>

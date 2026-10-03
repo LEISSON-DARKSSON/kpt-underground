@@ -2,6 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
+/* Dark halo + soft glow keep the crosshair readable on any surface, incl. the dimmed cart backdrop */
+const CROSS_GLOW = "0 0 0 1px rgba(5,5,5,0.95), 0 0 8px rgba(138,206,0,0.55)";
+
 export function CursorEngine() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const posRef = useRef({ x: -100, y: -100 });
@@ -83,20 +86,20 @@ export function CursorEngine() {
       <div
         className="cc relative"
         style={{
-          width: 18,
-          height: 18,
+          width: 26,
+          height: 26,
           transition: "width var(--mid) var(--ease), height var(--mid) var(--ease)",
         }}
       >
         {/* Vertical line */}
         <span
-          className="absolute left-1/2 -translate-x-1/2 w-px h-full"
-          style={{ background: "var(--green)" }}
+          className="absolute left-1/2 -translate-x-1/2 h-full"
+          style={{ width: 2, background: "var(--green)", boxShadow: CROSS_GLOW }}
         />
         {/* Horizontal line */}
         <span
-          className="absolute top-1/2 -translate-y-1/2 w-full h-px"
-          style={{ background: "var(--green)" }}
+          className="absolute top-1/2 -translate-y-1/2 w-full"
+          style={{ height: 2, background: "var(--green)", boxShadow: CROSS_GLOW }}
         />
       </div>
 
@@ -104,8 +107,8 @@ export function CursorEngine() {
       <div
         className="cg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
         style={{
-          width: 5,
-          height: 5,
+          width: 8,
+          height: 8,
           background: "var(--ink)",
           zIndex: 1,
           transition: "width var(--mid) var(--ease), height var(--mid) var(--ease)",

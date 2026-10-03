@@ -53,6 +53,9 @@ export function Footer() {
                   color: "var(--muted)",
                   textDecoration: "none",
                   transition: "color var(--mid)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  minHeight: 44,
                 }}
               >
                 {link.label}
@@ -64,7 +67,7 @@ export function Footer() {
           <ul className="flex flex-wrap gap-x-6 gap-y-2" aria-label="Policies and contact" data-footer-policies>
             {POLICY_LINKS.map((l) => (
               <li key={l.href}>
-                <a href={l.href} target="_blank" rel="noopener" data-cursor="h" className="font-mono text-[11px] text-slate underline underline-offset-4 hover:text-green">
+                <a href={l.href} target="_blank" rel="noopener" data-cursor="h" className="inline-flex min-h-11 items-center font-mono text-[11px] text-slate underline underline-offset-4 hover:text-green">
                   {l.label}
                 </a>
               </li>
@@ -86,9 +89,9 @@ export function Footer() {
         <div className="flex justify-between items-center flex-wrap gap-4">
           <span
             style={{
-              fontSize: 10,
+              fontSize: 12,
               letterSpacing: "0.3em",
-              color: "rgba(112, 128, 144, 0.7)",
+              color: "var(--slate)",
               textTransform: "uppercase",
             }}
           >
@@ -96,9 +99,9 @@ export function Footer() {
           </span>
           <span
             style={{
-              fontSize: 10,
+              fontSize: 12,
               letterSpacing: "0.3em",
-              color: "rgba(112, 128, 144, 0.7)",
+              color: "var(--slate)",
               textTransform: "uppercase",
             }}
           >
