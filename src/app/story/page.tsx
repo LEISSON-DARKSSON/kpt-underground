@@ -48,7 +48,7 @@ export default function StoryPage() {
           </ScrollReveal>
 
           <ScrollReveal delay={4}>
-            <div className="flex flex-wrap gap-8 mt-8 text-muted font-mono text-[10px] tracking-[0.14em] uppercase">
+            <div className="flex flex-wrap gap-8 mt-8 text-muted font-mono text-[11px] tracking-[0.14em] uppercase">
               <span>KEEP IT UNDERGROUND</span>
               <span>FREQ: SUB-BASS</span>
               <span>KPT-UG-001</span>
@@ -76,7 +76,7 @@ export default function StoryPage() {
       <section className="py-16 border-t border-dim">
         <div className="wrap text-center">
           <ScrollReveal>
-            <p className="font-mono text-[10px] tracking-[0.14em] uppercase text-muted">
+            <p className="font-mono text-[11px] tracking-[0.14em] uppercase text-muted">
               SIGNAL: ACTIVE // CERT: KPT-UG-001 // FREQ: 20–200HZ // CLASS: UNDERGROUND
             </p>
           </ScrollReveal>

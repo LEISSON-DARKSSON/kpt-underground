@@ -78,7 +78,7 @@ export default function HomePage() {
           style={{
             bottom: 36,
             left: 40,
-            fontSize: 8,
+            fontSize: 11,
             letterSpacing: "0.4em",
             color: "rgba(112, 128, 144, 0.3)",
             textTransform: "uppercase",
@@ -93,7 +93,7 @@ export default function HomePage() {
             bottom: 36,
             right: 40,
             textAlign: "right",
-            fontSize: 8,
+            fontSize: 11,
             letterSpacing: "0.2em",
             color: "rgba(112, 128, 144, 0.25)",
             lineHeight: 2,
@@ -127,7 +127,7 @@ export default function HomePage() {
               href="/shop"
               data-cursor="shop"
               data-cursor-label="SHOP"
-              className="mt-12 inline-flex items-center gap-3 border-b border-green/25 pb-1 font-mono text-[11px] uppercase tracking-[0.3em] text-green no-underline hover:border-green"
+              className="mt-12 inline-flex min-h-11 items-center gap-3 border-b border-green/25 pb-1 font-mono text-[11px] uppercase tracking-[0.3em] text-green no-underline hover:border-green"
             >
               VIEW THE FULL SHOP <span>&#x2192;</span>
             </Link>
@@ -169,9 +169,11 @@ export default function HomePage() {
               data-cursor="h"
               data-cursor-label="READ"
               style={{
-                display: "inline-block",
-                fontSize: 8,
-                letterSpacing: "0.5em",
+                display: "inline-flex",
+                alignItems: "center",
+                minHeight: 44,
+                fontSize: 12,
+                letterSpacing: "0.3em",
                 color: "var(--orange)",
                 textTransform: "uppercase",
                 border: "1px solid rgba(255, 140, 0, 0.22)",

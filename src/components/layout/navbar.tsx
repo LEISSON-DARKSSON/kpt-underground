@@ -12,8 +12,7 @@ const NAV_LINKS = [
 ];
 
 export function Navbar() {
-  const [show, setShow] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
   /* Menu remembers the path it was opened on, so any route change closes it without an effect. */
   const [menuPath, setMenuPath] = useState<string | null>(null);
   const pathname = usePathname();
@@ -45,10 +44,17 @@ export function Navbar() {
   }, [menuOpen]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShow(true), 3000);
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuPath(null);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      clearTimeout(timer);
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
@@ -65,7 +71,6 @@ export function Navbar() {
           background: scrolled || menuOpen ? "rgba(5, 5, 5, 0.96)" : "rgba(5, 5, 5, 0)",
           borderBottom: `1px solid ${scrolled ? "rgba(138, 206, 0, 0.07)" : "rgba(138, 206, 0, 0)"}`,
           backdropFilter: scrolled ? "blur(16px)" : "blur(0px)",
-          opacity: show ? 1 : 0,
         }}
       >
         {/* Logo */}
@@ -88,11 +93,12 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? "page" : undefined}
                 data-cursor="hover"
                 data-cursor-label={link.label}
                 className="flex items-center no-underline transition-colors"
                 style={{
-                  fontSize: 8,
+                  fontSize: 12,
                   letterSpacing: "0.35em",
                   textTransform: "uppercase",
                   color: isActive ? "var(--green)" : "var(--muted)",
@@ -123,7 +129,7 @@ export function Navbar() {
         <span
           className="hidden md:inline-block"
           style={{
-            fontSize: 7,
+            fontSize: 10,
             letterSpacing: "0.3em",
             color: "var(--green)",
             opacity: 0.4,
@@ -140,7 +146,7 @@ export function Navbar() {
           hidden={inCommercePreview}
           className="hidden md:flex items-center gap-2 no-underline transition-colors"
           style={{
-            fontSize: 9,
+            fontSize: 12,
             letterSpacing: "0.4em",
             textTransform: "uppercase",
             color: "var(--green)",
@@ -168,7 +174,7 @@ export function Navbar() {
           CART
           {totalItems > 0 && (
             <span
-              className="font-mono text-[9px] bg-green text-ink px-1.5 py-0.5 leading-none"
+              className="font-mono text-[11px] bg-green text-ink px-1.5 py-0.5 leading-none"
               style={{ minWidth: 18, textAlign: "center", letterSpacing: 0 }}
             >
               {totalItems}
@@ -185,10 +191,10 @@ export function Navbar() {
           data-cursor="h"
           aria-label={`Shopping cart with ${totalItems} items`}
         >
-          <span className="font-mono text-[9px] tracking-[0.2em] text-green">CART</span>
+          <span className="font-mono text-[11px] tracking-[0.2em] text-green">CART</span>
           {totalItems > 0 && (
             <span
-              className="absolute font-mono text-[8px] bg-green text-ink rounded-full leading-none"
+              className="absolute font-mono text-[10px] bg-green text-ink rounded-full leading-none"
               style={{ top: 6, right: 2, width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center" }}
             >
               {totalItems}
@@ -210,6 +216,7 @@ export function Navbar() {
           }}
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
           data-cursor="h"
           onClick={() => setMenuOpen((v) => !v)}
         >
@@ -255,7 +262,9 @@ export function Navbar() {
           pointerEvents: menuOpen ? "auto" : "none",
           transform: menuOpen ? "none" : "translateY(-8px)",
         }}
+        id="mobile-menu"
         aria-hidden={!menuOpen}
+        inert={!menuOpen}
       >
         <div className="flex flex-col items-center" style={{ gap: 8 }}>
           {NAV_LINKS.map((link) => {
@@ -264,6 +273,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? "page" : undefined}
                 data-cursor="h"
                 className="font-display no-underline text-center transition-colors duration-200"
                 style={{
@@ -307,10 +317,10 @@ export function Navbar() {
         <span
           className="mt-10 font-mono uppercase"
           style={{
-            fontSize: 8,
+            fontSize: 12,
             letterSpacing: "0.3em",
             color: "var(--green)",
-            opacity: 0.3,
+            opacity: 0.7,
           }}
         >
           <span style={{ animation: "blink 1.6s step-end infinite" }}>&#x25CF; </span>

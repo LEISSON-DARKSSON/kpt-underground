@@ -22,7 +22,7 @@ export function AnalyticsPreference() {
       data-cursor-label={on ? "TURN OFF" : "TURN ON"}
       aria-pressed={on}
       onClick={on ? ga.deny : ga.grant}
-      className="font-mono text-[11px] text-slate underline underline-offset-4 hover:text-green bg-transparent p-0 text-left"
+      className="font-mono text-[11px] text-slate underline underline-offset-4 hover:text-green bg-transparent min-h-11 py-2 text-left"
     >
       Analytics: {on ? "on" : "off"} (turn {on ? "off" : "on"})
     </button>

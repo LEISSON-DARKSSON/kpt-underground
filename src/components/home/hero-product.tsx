@@ -45,11 +45,11 @@ export async function HeroProduct() {
         />
       </div>
       <figcaption className="hero-figure-caption">
-        <span className="block font-mono text-[10px] uppercase tracking-[0.18em] text-slate">{meta}</span>
+        <span className="block font-mono text-[11px] uppercase tracking-[0.18em] text-slate">{meta}</span>
         <span className="mt-1 block font-display text-[24px] leading-none text-paper">
           {displayName(product.name)} <span className="text-green">{multi ? "From " : ""}{formatPrice(product.priceFromCents)}</span>
         </span>
-        <span className="mt-1 block font-mono text-[10px] uppercase tracking-[0.16em] text-slate">Digital visualisation · made to order</span>
+        <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.16em] text-slate">Digital visualisation · made to order</span>
       </figcaption>
     </figure>
   );

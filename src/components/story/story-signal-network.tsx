@@ -21,10 +21,10 @@ export function StorySignalNetwork() {
     <section className="py-32 border-t border-dim">
       <div className="wrap">
         <div className="flex flex-wrap gap-3 mb-8">
-          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-orange border border-orange/30 px-3 py-1">
+          <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-orange border border-orange/30 px-3 py-1">
             CLASSIFIED
           </span>
-          <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-green border border-green/30 px-3 py-1">
+          <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-green border border-green/30 px-3 py-1">
             OPEN
           </span>
         </div>
@@ -41,7 +41,7 @@ export function StorySignalNetwork() {
           {SIGNALS.map((signal, i) => (
             <ScrollReveal key={signal.title} delay={(i % 4) as 0 | 1 | 2 | 3}>
               <div className="border border-dim p-8 h-full">
-                <span className="font-mono text-[10px] tracking-[0.14em] uppercase text-green">
+                <span className="font-mono text-[11px] tracking-[0.14em] uppercase text-green">
                   {String(i + 1).padStart(2, "0")} {"//"} {signal.title}
                 </span>
                 <p className="text-paper/80 leading-relaxed mt-4">

@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 interface TickerProps {
   items: string[];
   duration?: number;
@@ -12,6 +14,7 @@ export function Ticker({
   reverse = false,
 }: TickerProps) {
   const doubled = [...items, ...items];
+  const [paused, setPaused] = useState(false);
 
   return (
     <div
@@ -49,37 +52,37 @@ export function Ticker({
         style={{
           animation: `ticker-scroll ${duration}s linear infinite`,
           animationDirection: reverse ? "reverse" : "normal",
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLElement).style.animationPlayState = "paused";
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLElement).style.animationPlayState = "running";
+          animationPlayState: paused ? "paused" : "running",
         }}
       >
         {doubled.map((item, i) => (
           <span
             key={i}
             style={{
-              fontSize: 9,
+              fontSize: 11,
               letterSpacing: "0.35em",
               textTransform: "uppercase",
               color: "var(--muted)",
               padding: "0 24px",
               transition: "color var(--mid)",
-              cursor: "none",
             }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "var(--green)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.color = "var(--muted)";
-            }}
+            aria-hidden={i >= items.length ? true : undefined}
           >
             {item}
           </span>
         ))}
       </div>
+      <button
+        type="button"
+        onClick={() => setPaused((p) => !p)}
+        aria-pressed={paused}
+        aria-label={paused ? "Play moving text" : "Pause moving text"}
+        data-cursor="h"
+        className="absolute top-1/2 right-2 -translate-y-1/2 font-mono text-[11px] text-green bg-ink border border-green/30"
+        style={{ zIndex: 3, minWidth: 32, height: 32 }}
+      >
+        {paused ? "▶" : "❚❚"}
+      </button>
     </div>
   );
 }
