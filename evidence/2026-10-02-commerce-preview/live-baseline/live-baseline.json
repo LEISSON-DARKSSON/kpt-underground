@@ -1,0 +1,64 @@
+{
+  "capturedAt": "2026-10-01T22:14:56.530Z",
+  "readOnly": true,
+  "meta": [
+    {
+      "url": "https://keepitunderground.com/",
+      "width": 1440,
+      "status": 200,
+      "loaded": [
+        "Space Mono 400",
+        "Space Mono 700",
+        "Space Mono Fallback normal",
+        "Bebas Neue 400",
+        "Bebas Neue Fallback normal"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "bg": "rgb(5, 5, 5)",
+      "file": "live-home-1440.png"
+    },
+    {
+      "url": "https://keepitunderground.com/shop",
+      "width": 1440,
+      "status": 200,
+      "loaded": [
+        "Space Mono 400",
+        "Space Mono 700",
+        "Space Mono Fallback normal",
+        "Bebas Neue 400"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "bg": "rgb(5, 5, 5)",
+      "file": "live-shop-1440.png"
+    },
+    {
+      "url": "https://keepitunderground.com/",
+      "width": 390,
+      "status": 200,
+      "loaded": [
+        "Space Mono 400",
+        "Space Mono 700",
+        "Space Mono Fallback normal",
+        "Bebas Neue 400",
+        "Bebas Neue Fallback normal"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "bg": "rgb(5, 5, 5)",
+      "file": "live-home-390.png"
+    },
+    {
+      "url": "https://keepitunderground.com/shop",
+      "width": 390,
+      "status": 200,
+      "loaded": [
+        "Space Mono 400",
+        "Space Mono 700",
+        "Space Mono Fallback normal",
+        "Bebas Neue 400"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "bg": "rgb(5, 5, 5)",
+      "file": "live-shop-390.png"
+    }
+  ]
+}

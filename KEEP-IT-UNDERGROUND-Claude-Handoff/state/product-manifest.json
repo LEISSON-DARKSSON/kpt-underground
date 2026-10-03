@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "preparedOn": "2026-10-02",
+  "source": "Fourthwalle get-offers-by-ids + original local PNG checks",
+  "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+  "products": [
+    {
+      "key": "SIGNAL",
+      "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+      "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+      "customizationId": "cud_6nZ6I9XbTF6ZWVLwPt6tFQ",
+      "catalogProductId": "pro_a0e4db25108747b496",
+      "name": "KEEP IT UNDERGROUND Signal 01 Desk Mat",
+      "slug": "keep-it-underground-signal-01-desk-mat",
+      "sku": "Q4K3-NC7G015",
+      "statusObserved": "PRIVATE",
+      "availableObserved": true,
+      "fulfilledBy": "FOURTHWALL",
+      "variantsCount": 1,
+      "size": "15.5\" x 31.5\"",
+      "color": "All-Over Print",
+      "variantPriceFieldObserved": {
+        "value": 16,
+        "currency": "USD",
+        "meaning": "Raw field on PRIVATE product; not established public retail or manufacturing cost."
+      },
+      "retailTarget": {
+        "value": 34,
+        "currency": "USD",
+        "applied": false,
+        "sourceKind": "USER_APPROVED_TARGET"
+      },
+      "sampleBaseCostPreviouslyObserved": {
+        "value": 13,
+        "currency": "USD",
+        "sourceKind": "OWNER_CHECKOUT_SCREENSHOT",
+        "notTotalCost": true
+      },
+      "sourceKind": "FRESH_CONNECTED_ACCOUNT_READ_WITH_LOCAL_ASSET_VERIFICATION",
+      "apiUpdatedAt": "2026-09-24T05:01:36.880366Z",
+      "printFile": "product-assets/print/SIGNAL-Desk-Mat-Upload.png",
+      "sha256": "621a9f5e3a6de11fb71e9c7f9ebf44d378928ce1098db982b3bb41eee3e8e426",
+      "technical": {
+        "width": 9921,
+        "height": 5197,
+        "mode": "RGB",
+        "dpi": [
+          299.9994,
+          299.9994
+        ],
+        "iccProfilePresent": true
+      },
+      "imageUrls": [
+        "https://cdn.fourthwall.com/customizations/sh_1f2e8f65-2b29-4be9-9167-7f42314361fb/3569c5d8-fb13-40da-87c0-aa4a576fa115.webp",
+        "https://cdn.fourthwall.com/customizations/sh_1f2e8f65-2b29-4be9-9167-7f42314361fb/bd8df8e3-0391-456e-ba3e-259257187025.webp",
+        "https://cdn.fourthwall.com/customizations/sh_1f2e8f65-2b29-4be9-9167-7f42314361fb/025ba3c0-2d14-4ace-aa4c-6ebdac444996.webp"
+      ],
+      "imageUrlsCount": 3,
+      "imagesVisuallyReverifiedThisHandoff": false,
+      "descriptionHtml": "<p>Make room for your next idea.</p>\n<p>SIGNAL / 01 combines a charcoal background, flowing contour lines and a warm orange focal point. The artwork sits mainly to the right and along the lower edge, leaving a quieter center for your keyboard and everyday work.</p>\n<p>An original KEEP IT UNDERGROUND design for creative desks, home studios and workspaces.</p>\n<p>Size: 31.5″ wide × 15.5″ deep (approximately 80 × 39.4 cm).</p>\n<p>Includes one desk mat. Keyboard, mouse and other props are not included.</p>\n<p>Product images are digital mockups; printed colors and texture may vary.</p>",
+      "rules": [
+        "Do not create another product.",
+        "Do not alter print file or visibility in design work.",
+        "Match offer ID, variant ID and artwork before any future write."
+      ]
+    },
+    {
+      "key": "SUBSURFACE",
+      "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+      "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+      "customizationId": "cud_j0r1BZMxQbm2L1iyKP0jFg",
+      "catalogProductId": "pro_a0e4db25108747b496",
+      "name": "KEEP IT UNDERGROUND SUBSURFACE / 02",
+      "slug": "keep-it-underground-subsurface-desk-mat",
+      "sku": "QRRN-M0UG015",
+      "statusObserved": "PRIVATE",
+      "availableObserved": true,
+      "fulfilledBy": "FOURTHWALL",
+      "variantsCount": 1,
+      "size": "15.5\" x 31.5\"",
+      "color": "All-Over Print",
+      "variantPriceFieldObserved": {
+        "value": 16,
+        "currency": "USD",
+        "meaning": "Raw field on PRIVATE product; not established public retail or manufacturing cost."
+      },
+      "retailTarget": {
+        "value": 34,
+        "currency": "USD",
+        "applied": false,
+        "sourceKind": "USER_APPROVED_TARGET"
+      },
+      "sampleBaseCostPreviouslyObserved": {
+        "value": 13,
+        "currency": "USD",
+        "sourceKind": "OWNER_CHECKOUT_SCREENSHOT",
+        "notTotalCost": true
+      },
+      "sourceKind": "FRESH_CONNECTED_ACCOUNT_READ_WITH_LOCAL_ASSET_VERIFICATION",
+      "apiUpdatedAt": "2026-09-29T07:54:10.822437Z",
+      "printFile": "product-assets/print/SUBSURFACE-Desk-Mat-Upload.png",
+      "sha256": "9a8237c6da81f374941626dccba73b60e9abafe1d4ee1510e8313d3a4c415c75",
+      "technical": {
+        "width": 9921,
+        "height": 5197,
+        "mode": "RGB",
+        "dpi": [
+          299.9994,
+          299.9994
+        ],
+        "iccProfilePresent": true
+      },
+      "imageUrls": [
+        "https://cdn.fourthwall.com/customizations/sh_1f2e8f65-2b29-4be9-9167-7f42314361fb/8925ac16-9ea4-4fe6-a0aa-c170f411fa6f.webp",
+        "https://cdn.fourthwall.com/customizations/sh_1f2e8f65-2b29-4be9-9167-7f42314361fb/fea576e4-32d0-4ca5-97ad-7d38139bf1fe.webp",
+        "https://cdn.fourthwall.com/customizations/sh_1f2e8f65-2b29-4be9-9167-7f42314361fb/5eea45ee-6e98-4d27-a26e-408919271e65.webp"
+      ],
+      "imageUrlsCount": 3,
+      "imagesVisuallyReverifiedThisHandoff": false,
+      "descriptionHtml": "<p>A different perspective for your everyday workspace.</p>\n<p>SUBSURFACE / 02 pairs a warm off-white background with an abstract architectural grid and an orange contour. The open center keeps the composition calm, while the geometry gives the right side a distinct visual focus.</p>\n<p>An original KEEP IT UNDERGROUND design for creative desks, home studios and workspaces.</p>\n<p>Size: 31.5″ wide × 15.5″ deep (approximately 80 × 39.4 cm).</p>\n<p>Includes one desk mat. Keyboard, mouse and other props are not included.</p>\n<p>Product images are digital mockups; printed colors and texture may vary.</p>",
+      "rules": [
+        "Do not create another product.",
+        "Do not alter print file or visibility in design work.",
+        "Match offer ID, variant ID and artwork before any future write."
+      ]
+    }
+  ]
+}

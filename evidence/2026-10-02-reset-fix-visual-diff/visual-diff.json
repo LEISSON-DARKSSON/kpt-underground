@@ -1,0 +1,135 @@
+{
+  "before": "https://keepitunderground.com",
+  "after": "https://kpt-underground-9nvfe3pvw-leisson-creative.vercel.app",
+  "checkedAt": "2026-10-01T23:30:54.408Z",
+  "rows": [
+    {
+      "route": "/",
+      "width": 1440,
+      "beforeHeight": 4580,
+      "afterHeight": 4685,
+      "heightDelta": 105,
+      "changedPct": 1.86
+    },
+    {
+      "route": "/",
+      "width": 390,
+      "beforeHeight": 5369,
+      "afterHeight": 5508,
+      "heightDelta": 139,
+      "changedPct": 3.07
+    },
+    {
+      "route": "/story",
+      "width": 1440,
+      "beforeHeight": 3188,
+      "afterHeight": 5886,
+      "heightDelta": 2698,
+      "changedPct": 13.39
+    },
+    {
+      "route": "/story",
+      "width": 390,
+      "beforeHeight": 4146,
+      "afterHeight": 7229,
+      "heightDelta": 3083,
+      "changedPct": 16.34
+    },
+    {
+      "route": "/artists",
+      "width": 1440,
+      "beforeHeight": 3739,
+      "afterHeight": 5063,
+      "heightDelta": 1324,
+      "changedPct": 16.03
+    },
+    {
+      "route": "/artists",
+      "width": 390,
+      "beforeHeight": 6555,
+      "afterHeight": 8787,
+      "heightDelta": 2232,
+      "changedPct": 22.49
+    },
+    {
+      "route": "/shop",
+      "width": 1440,
+      "beforeHeight": 3331,
+      "afterHeight": 3797,
+      "heightDelta": 466,
+      "changedPct": 4.02
+    },
+    {
+      "route": "/shop",
+      "width": 390,
+      "beforeHeight": 2755,
+      "afterHeight": 3597,
+      "heightDelta": 842,
+      "changedPct": 8.77
+    },
+    {
+      "route": "/shop/rigger-boxy-hoodie",
+      "width": 1440,
+      "beforeHeight": 1654,
+      "afterHeight": 2079,
+      "heightDelta": 425,
+      "changedPct": 5.15
+    },
+    {
+      "route": "/shop/rigger-boxy-hoodie",
+      "width": 390,
+      "beforeHeight": 2088,
+      "afterHeight": 2757,
+      "heightDelta": 669,
+      "changedPct": 8.81
+    },
+    {
+      "route": "/signal",
+      "width": 1440,
+      "beforeHeight": 1057,
+      "afterHeight": 1469,
+      "heightDelta": 412,
+      "changedPct": 3.48
+    },
+    {
+      "route": "/signal",
+      "width": 390,
+      "beforeHeight": 1021,
+      "afterHeight": 1422,
+      "heightDelta": 401,
+      "changedPct": 10.31
+    },
+    {
+      "route": "/checkout",
+      "width": 1440,
+      "beforeHeight": 1303,
+      "afterHeight": 1927,
+      "heightDelta": 624,
+      "changedPct": 4.6
+    },
+    {
+      "route": "/checkout",
+      "width": 390,
+      "beforeHeight": 1348,
+      "afterHeight": 1972,
+      "heightDelta": 624,
+      "changedPct": 10.74
+    },
+    {
+      "route": "/confirmation",
+      "width": 1440,
+      "beforeHeight": 2238,
+      "afterHeight": 3567,
+      "heightDelta": 1329,
+      "changedPct": 4.46
+    },
+    {
+      "route": "/confirmation",
+      "width": 390,
+      "beforeHeight": 2442,
+      "afterHeight": 3835,
+      "heightDelta": 1393,
+      "changedPct": 11.28
+    }
+  ]
+}

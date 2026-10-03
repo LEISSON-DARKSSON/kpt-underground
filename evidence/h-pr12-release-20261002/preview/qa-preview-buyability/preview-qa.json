@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "base": "https://kpt-underground-dypdgjqou-leisson-creative.vercel.app",
+    "chrome": "153.0.8010.53",
+    "at": "2026-10-02T13:30:42.298Z"
+  },
+  "results": [
+    {
+      "s": "PASS",
+      "name": "unknown product → HTTP 404 (prod today: 200)",
+      "note": ""
+    },
+    {
+      "s": "PASS",
+      "name": "sitemap: 22 public product URLs",
+      "note": ""
+    },
+    {
+      "s": "PASS",
+      "name": "all 22 product pages → 200 with JSON-LD price",
+      "note": ""
+    },
+    {
+      "s": "PASS",
+      "name": "/shop @390: 22 cards, real images load, categories 9/6/5/2, no overflow, no loader",
+      "note": ""
+    },
+    {
+      "s": "PASS",
+      "name": "/shop @1440: 22 cards, real images load, categories 9/6/5/2, no overflow, no loader",
+      "note": ""
+    },
+    {
+      "s": "PASS",
+      "name": "tee: nothing preselected, 4XL → $41, cart row 4XL $41",
+      "note": ""
+    },
+    {
+      "s": "PASS",
+      "name": "checkout: server builds a hosted Fourthwall checkout link (intercepted, no order)",
+      "note": "events: "
+    },
+    {
+      "s": "PASS",
+      "name": "phone case: model select → that model's images, cart gets that id",
+      "note": "Showing the iPhone 15 Pro case."
+    },
+    {
+      "s": "PASS",
+      "name": "help page + policy links reachable",
+      "note": ""
+    }
+  ]
+}

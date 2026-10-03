@@ -1,0 +1,205 @@
+{
+  "created": "2026-10-02",
+  "market": "US",
+  "products": [
+    {
+      "key": "W2-POSTER-PAIR",
+      "category": "wall-art",
+      "name": "SIGNAL / SUBSURFACE — Wall Studies v2",
+      "variants": [
+        "signal",
+        "subsurface"
+      ],
+      "catalogProductId": "pro_15bc29bc8a324d449d",
+      "model": "Allcolor P001",
+      "slug": "enhanced-matte-paper-poster-printed",
+      "candidateSize": "18\" x 24\"",
+      "catalogPriceFromUsd": 5.5,
+      "catalogPriceToUsd": 18,
+      "selectedVariantCostUsd": null,
+      "targetRetailUsdPerPrint": 29,
+      "fulfillment": "ON_DEMAND",
+      "shipsFrom": [
+        "US",
+        "EU",
+        "CA",
+        "UK",
+        "JP",
+        "AU"
+      ],
+      "orderMinimum": 0,
+      "availability": "Public product page says under maintenance; connector still lists product. Resolve before creating an offer.",
+      "artwork": [
+        "wave02-signal-poster-v2",
+        "wave02-subsurface-poster-v2"
+      ],
+      "designRationale": "Build the wall around the existing desk-art family. Two complementary compositions, sold as separate prints; a pair is not a configured bundle.",
+      "constraints": [
+        "No frame included",
+        "Nominal trim artworks; bleed and crop not yet verified",
+        "Not physical sample photos",
+        "No claim of current demand"
+      ],
+      "state": "LOCAL_DESIGN_ONLY",
+      "shopOfferId": null,
+      "priceStatus": "TEST_HYPOTHESIS_NOT_APPLIED_TAX_AND_SHIPPING_EXTRA",
+      "canPublish": false,
+      "gates": {
+        "supplierTemplateApproved": false,
+        "selectedVariantQuoteApproved": false,
+        "physicalSampleApproved": false,
+        "checkoutVerified": false,
+        "ownerPublicationApproved": false
+      }
+    },
+    {
+      "key": "W2-GRAPHBOOK",
+      "category": "notebook",
+      "name": "PROJECT NOTES — SIGNAL / SUBSURFACE",
+      "variants": [
+        "signal",
+        "subsurface"
+      ],
+      "catalogProductId": "pro_JBZ8pRVlR-m84AwNl7WbnQ",
+      "model": "Spoke SP40004",
+      "slug": "spiral-bound-notebook-graph-printed",
+      "candidateSize": "One Size",
+      "dimensions": "6 x 8 in",
+      "pages": 120,
+      "interior": "Supplier-standard graph paper; no custom interior pages in this product",
+      "catalogPriceFromUsd": 10.95,
+      "catalogPriceToUsd": 10.95,
+      "selectedVariantCostUsd": null,
+      "targetRetailUsd": 24,
+      "fulfillment": "ON_DEMAND",
+      "shipsFrom": [
+        "US"
+      ],
+      "orderMinimum": 0,
+      "artwork": [
+        "wave02-signal-graph-notebook-cover",
+        "wave02-subsurface-graph-notebook-cover"
+      ],
+      "designRationale": "Usable analog companion for sketching, planning and notes, without custom-interior production complexity.",
+      "constraints": [
+        "Front cover only",
+        "Binding holes, crop and fullSize vs front template need confirmation",
+        "Not the earlier Sublicolor 1013 notebook",
+        "No productivity, therapeutic or performance promises"
+      ],
+      "state": "LOCAL_DESIGN_ONLY",
+      "shopOfferId": null,
+      "priceStatus": "TEST_HYPOTHESIS_NOT_APPLIED_TAX_AND_SHIPPING_EXTRA",
+      "canPublish": false,
+      "gates": {
+        "supplierTemplateApproved": false,
+        "selectedVariantQuoteApproved": false,
+        "physicalSampleApproved": false,
+        "checkoutVerified": false,
+        "ownerPublicationApproved": false
+      }
+    },
+    {
+      "key": "W2-TOTE",
+      "category": "bag",
+      "name": "SIGNAL — Studio Tote",
+      "variants": [
+        "Black"
+      ],
+      "catalogProductId": "pro_zvJp6rm7Rd2ILcwdxA16cA",
+      "model": "BagBase W101",
+      "slug": "bagbase-cotton-color-tote-bag-dtfx",
+      "candidateSize": "One size",
+      "dimensions": "15 x 16.5 in",
+      "material": "100% cotton, 140 gsm; 10 litre main compartment",
+      "region": "front_dtf_tote",
+      "catalogPriceFromUsd": 9.98,
+      "catalogPriceToUsd": 16.23,
+      "selectedVariantCostUsd": null,
+      "targetRetailUsd": 29,
+      "fulfillment": "ON_DEMAND",
+      "shipsFrom": [
+        "EU",
+        "US"
+      ],
+      "orderMinimum": 0,
+      "artwork": [
+        "wave02-signal-studio-tote-front"
+      ],
+      "designRationale": "Carry the identity outside the workspace with one color, one size and one front print. Larger letters and fewer heavier contours for cloth.",
+      "constraints": [
+        "No lining, zip, pockets or stiff gusset implied",
+        "Lightweight cotton, not a heavy technical equipment bag",
+        "One front print only; back blank",
+        "DTFx transfer area and color workflow require proof",
+        "Transparent sRGB PNG is artwork source, not a certified CMYK production proof"
+      ],
+      "state": "LOCAL_DESIGN_ONLY",
+      "shopOfferId": null,
+      "priceStatus": "TEST_HYPOTHESIS_NOT_APPLIED_TAX_AND_SHIPPING_EXTRA",
+      "canPublish": false,
+      "gates": {
+        "supplierTemplateApproved": false,
+        "selectedVariantQuoteApproved": false,
+        "physicalSampleApproved": false,
+        "checkoutVerified": false,
+        "ownerPublicationApproved": false
+      }
+    },
+    {
+      "key": "W2-STICKERS",
+      "category": "stickers",
+      "name": "OBJECT STUDIES — Six Marks",
+      "variants": [
+        "White"
+      ],
+      "catalogProductId": "pro_6a8bdd4fd14d4cf687",
+      "model": "Allcolor 5495",
+      "slug": "kiss-cut-sticker-sheet-with-custom-background-sticker",
+      "candidateSize": "5.83″ × 8.27″",
+      "catalogPriceFromUsd": 5.05,
+      "catalogPriceToUsd": 5.05,
+      "selectedVariantCostUsd": null,
+      "targetRetailUsd": 12,
+      "fulfillment": "ON_DEMAND",
+      "shipsFrom": [
+        "US",
+        "EU",
+        "CA",
+        "UK",
+        "JP",
+        "AU"
+      ],
+      "orderMinimum": 0,
+      "artwork": [
+        "wave02-sticker-01",
+        "wave02-sticker-02",
+        "wave02-sticker-03",
+        "wave02-sticker-04",
+        "wave02-sticker-05",
+        "wave02-sticker-06",
+        "wave02-sticker-backer"
+      ],
+      "designRationale": "Low-ticket add-on for notebook/laptop surfaces, not a standalone paid-ad acquisition product.",
+      "constraints": [
+        "Indoor use only, glossy finish",
+        "Six actual artwork assets + optional backing; a printed background alone is not a sticker set",
+        "Supplier white cut border; do not double-add a white border",
+        "Placement proof is a layout concept, not a pre-approved cutting template",
+        "No guaranteed combined shipment or cheap marginal shipping"
+      ],
+      "state": "LOCAL_DESIGN_ONLY",
+      "shopOfferId": null,
+      "priceStatus": "TEST_HYPOTHESIS_NOT_APPLIED_TAX_AND_SHIPPING_EXTRA",
+      "canPublish": false,
+      "gates": {
+        "supplierTemplateApproved": false,
+        "selectedVariantQuoteApproved": false,
+        "physicalSampleApproved": false,
+        "checkoutVerified": false,
+        "ownerPublicationApproved": false
+      }
+    }
+  ],
+  "existingDeskMatProductsChanged": false
+}

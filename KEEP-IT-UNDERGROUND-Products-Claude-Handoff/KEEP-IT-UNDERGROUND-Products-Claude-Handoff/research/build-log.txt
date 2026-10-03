@@ -1,0 +1,12 @@
+EXPORTED wave02-signal-poster-v2 5400 7200 RGB
+EXPORTED wave02-signal-graph-notebook-cover 1800 2400 RGB
+EXPORTED wave02-subsurface-poster-v2 5400 7200 RGB
+EXPORTED wave02-subsurface-graph-notebook-cover 1800 2400 RGB
+EXPORTED wave02-signal-studio-tote-front 5000 5000 RGBA
+EXPORTED wave02-sticker-01 1800 1800 RGBA
+EXPORTED wave02-sticker-02 1800 1800 RGBA
+EXPORTED wave02-sticker-03 1800 1800 RGBA
+EXPORTED wave02-sticker-04 1800 1800 RGBA
+EXPORTED wave02-sticker-05 1800 1800 RGBA
+EXPORTED wave02-sticker-06 1800 1800 RGBA
+EXPORTED wave02-sticker-backer 1749 2481 RGB

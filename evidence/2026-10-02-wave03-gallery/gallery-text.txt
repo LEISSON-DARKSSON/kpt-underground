@@ -1,0 +1,427 @@
+KEEP IT UNDERGROUND / CLAUDE HANDOFF / 02.10.2026
+TOOTEKUNST.
+TÕENDATUD FAILISEOSED.
+
+19 päris SVG-d · 19 PNG-tööfaili · 2 algset kontseptsioonikollaaži · 28 paneeliväljalõiget. Galerii ei ole e-pood, maksevorm ega tootja kvaliteediproov.
+
+Viis uut vektorit on kontaktlehe järgi taastatud kavandid, mitte leitud originaalmasterid. Viimase kahe kollaaži kõigil toodetel ei ole vastavat vektorit, tarnijat ega hinnakinnitust. Neid lünki ei täideta varjatult sarnase failiga.
+Wave 03 võrdlus
+Hinnainfo
+Varasemad originaalid
+2 algset kollaaži
+28 paneeli
+Claude’i juhised
+01 / REKONSTRUKTSIOONID
+Viis uut SVG-tööversiooni
+
+Vasakul on tegeliku kontaktlehe rasterväljalõige, paremal uus vektorist eksporditud ülevaade. Võrdle paigutust ja kirjatüüpi enne kinnitamist. Tumedad eelvaatetaustad ei lisandu läbipaistvatele PNG-dele.
+
+TAASTATUD KAVAND · KINNITAMATA
+FIELD / 03 — Water Bottle
+Algne rasterviide
+Uus SVG-st renderdatud kavand
+
+710 ml, not the 750 ml insulated bottle on either roadmap board. Do not claim vacuum insulation. Hand wash. Nominal front-art aspect ratio, not a validated UV print area.
+
+$29 uus hinnakatse; kataloog $13.45–13.45. Täpne konfiguratsioonikulu kinnitamata.
+
+SVG lähtefail
+PNG tööfail
+
+PNG: 1600 × 4000 px · RGBA · sRGB · mitte kinnitatud trükimall
+
+TAASTATUD KAVAND · KINNITAMATA
+NIGHT SHIFT — Studio Mug
+Algne rasterviide
+Uus SVG-st renderdatud kavand
+
+Front motif only. Not a complete validated mug-wrap file. Preserve transparency. Check black-background handling and handle clearance. 15oz is not automatically selected.
+
+$24 uus hinnakatse; kataloog $8.95–10.50. Täpne konfiguratsioonikulu kinnitamata.
+
+SVG lähtefail
+PNG tööfail
+
+PNG: 3600 × 3600 px · RGBA · sRGB · mitte kinnitatud trükimall
+
+TAASTATUD KAVAND · KINNITAMATA
+OFFLINE — Embroidered Beanie
+Algne rasterviide
+Uus SVG-st renderdatud kavand
+
+Two-color flat artwork, not DST/PES or a stitch program. Do not stitch the preview background. Thread mapping, minimum details, digitization cost and actual region size require manufacturer confirmation.
+
+$29 uus hinnakatse; kataloog $13.79–13.79. Täpne konfiguratsioonikulu kinnitamata.
+
+SVG lähtefail
+PNG tööfail
+
+PNG: 3600 × 1080 px · RGBA · sRGB · mitte kinnitatud trükimall
+
+TAASTATUD KAVAND · KINNITAMATA
+TRANSIT — SIGNAL Laptop Sleeve
+Algne rasterviide
+Uus SVG-st renderdatud kavand
+
+Front art only. 13″ starting candidate; optional 15″ price proposal 42 USD but requires its own template and fitting check. No universal laptop-fit promise.
+
+$39 uus hinnakatse; kataloog $21.16–23.20. Täpne konfiguratsioonikulu kinnitamata.
+
+SVG lähtefail
+PNG tööfail
+
+PNG: 5400 × 4050 px · RGB · sRGB · mitte kinnitatud trükimall
+
+TAASTATUD KAVAND · KINNITAMATA
+TRANSIT — SUBSURFACE Laptop Sleeve
+Algne rasterviide
+Uus SVG-st renderdatud kavand
+
+Light front-art variant. Same model as SIGNAL. Separate art-to-offer mapping; do not combine by name alone.
+
+$39 uus hinnakatse; kataloog $21.16–23.20. Täpne konfiguratsioonikulu kinnitamata.
+
+SVG lähtefail
+PNG tööfail
+
+PNG: 5400 × 4050 px · RGB · sRGB · mitte kinnitatud trükimall
+
+02 / HINNA ERI ALLIKAD
+Kataloogihind ei ole jaehind
+
+USD katsehinnad on ettepanekud enne makse ja saatmist. Need pole poes rakendatud. Uued Wave 03 hinnad on koostaja ettepanek, Wave 02 hinnad varasemad plaanid. Täpne trükikonfiguratsiooni hind, digitaliseerimine, USA tarne, tasud ja tegelik kate vajavad kontrolli.
+
+Toode	Baasmudel	Kataloog USD	Katsehind USD
+NIGHT SHIFT — Studio Mug	WGM79B	8.95–10.50	24.00 — kavand
+FIELD / 03 — Water Bottle	BP20033	13.45	29.00 — kavand
+TRANSIT — SIGNAL Laptop Sleeve	LS0042	21.16–23.20	39.00 — kavand
+TRANSIT — SUBSURFACE Laptop Sleeve	LS0042	21.16–23.20	39.00 — kavand
+OFFLINE — Embroidered Beanie	1501KC	13.79	29.00 — kavand
+SIGNAL — Studio Tote	W101	9.98–16.23	29.00 — kavand
+PROJECT NOTES — SIGNAL / 01	SP40004	10.95	24.00 — kavand
+PROJECT NOTES — SUBSURFACE / 02	SP40004	10.95	24.00 — kavand
+WALL STUDIES — SIGNAL / 01	P001	5.50–18.00	29.00 — kavand
+WALL STUDIES — SUBSURFACE / 02	P001	5.50–18.00	29.00 — kavand
+OBJECT STUDIES — Six Marks	5495	5.05	12.00 — kavand
+
+Pudeli 710 ml mudelile ei kanta üle kollaaži 750 ml ja isolatsiooni väiteid. Tikkimisel on vaja täpset konfiguratsiooni ja niidiproovi.
+
+03 / SÄILITATUD ALLIKAD
+12 varasemat Wave 02 vektorit
+
+Need failid kopeeriti varasemast tootepaketist muutmata. Need ei ole kõigi uusimate kollaažide täpsed vasted. SVG- ja PNG-paarid on eraldi lingitud.
+
+VARASEM ORIGINAAL
+signal graph notebook cover
+SVG
+PNG
+VARASEM ORIGINAAL
+signal poster v2
+SVG
+PNG
+VARASEM ORIGINAAL
+signal studio tote front
+SVG
+PNG
+VARASEM ORIGINAAL
+sticker 01
+SVG
+PNG
+VARASEM ORIGINAAL
+sticker 02
+SVG
+PNG
+VARASEM ORIGINAAL
+sticker 03
+SVG
+PNG
+VARASEM ORIGINAAL
+sticker 04
+SVG
+PNG
+VARASEM ORIGINAAL
+sticker 05
+SVG
+PNG
+VARASEM ORIGINAAL
+sticker 06
+SVG
+PNG
+VARASEM ORIGINAAL
+sticker backer
+SVG
+PNG
+VARASEM ORIGINAAL
+subsurface graph notebook cover
+SVG
+PNG
+VARASEM ORIGINAAL
+subsurface poster v2
+SVG
+PNG
+Kaks kaitstud lauamatti
+
+Need on lisatud ainult võrdlemiseks. Olemasolevate toodete kujundusi, nähtavust ega hindu ei muudeta.
+
+KAITSTUD / ÄRA MUUDA
+KEEP IT UNDERGROUND Signal 01 Desk Mat
+
+74c2ace1-4f7c-469b-a607-5555432019b4
+
+SVG originaal
+PNG originaal
+KAITSTUD / ÄRA MUUDA
+KEEP IT UNDERGROUND SUBSURFACE / 02
+
+97704a85-a6b6-4090-894f-a7b5bc71a374
+
+SVG originaal
+PNG originaal
+04 / ALGPILDID
+Kaks muutmata ideekollaaži
+
+Piltidel olevad mudelid, materjalid ja numbrid ei ole tarnija kinnitused. Kogu pilt on säilitatud; vastuolud on eraldi järgmises jaotises, mitte vaikselt üle joonistatud.
+
+Tahvel A
+Algne PNG
+Tahvel B
+Algne PNG
+05 / TOODE-FAIL-VASTAVUS
+Iga paneeli järgmine vajalik samm
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+A01 / SIGNAL desk mat
+
+Varasem SIGNAL-i täpne tootmisfail on kaitstud kaustas. Kollaaž ei ole selle faili asendus.
+
+Seotud register: W1-SIGNAL-DESKMAT
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+A02 / SUBSURFACE desk mat
+
+Varasem SUBSURFACE-i täpne tootmisfail on kaitstud kaustas. Kollaaž ei ole selle faili asendus.
+
+Seotud register: W1-SUBSURFACE-DESKMAT
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A03 / TECH TEE
+
+TECH TEE: täpne baasmudel, oversized-lõige, suurused ja sellele pildile vastav vektorkunst pole kinnitatud.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A04 / HOODIE
+
+HOODIE: baasmudel, kangas, lõige, varrukatrükk ja eraldi trükifailid puuduvad; üldine pilditekst ei ole tehniline tõend.
+
+Seotud register: puudub
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+A05 / STUDIO TOTE
+
+Seotud varasem kavand on kerge BagBase W101 140 g/m² kott. Pildi heavy cotton ja 16×18×6 tolli pole selle mudeli andmed. Kompositsioon erineb.
+
+Seotud register: W2-TOTE
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A06 / 5-PANEL CAP
+
+5-PANEL CAP: Yupoong 6245CM on ainult kontrollitud hinnaga alternatiivkandidaat. Viie paneeli vastavust ega pildiga identset tikkimiskunsti ei kinnitatud.
+
+Seotud register: puudub
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+A07 / INSULATED BOTTLE
+
+Pildil 750 ml insulated bottle. FIELD on teine kandidaat: H2Go BP20033, 710 ml, isolatsiooni kinnitust pole. Thor BP20002 on eraldi 651 ml isoleeritud alternatiiv. Kumbagi ei tohi nimetada pildi täpseks tooteks.
+
+Seotud register: W3-FIELD
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+A08 / PROJECT NOTES
+
+SP40004: 6×8 tolli, 120 ruudulist lehekülge, mitte A5. Olemasoleva kaane kujundus on seotud variant, mitte kollaaži täpne master.
+
+Seotud register: W2-NOTES-SIGNAL
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+A09 / SIX MARKS
+
+Kuue kleebise originaalid on olemas, kuid pildil olevad motiivid pole kõigis detailides samad. Kinnitatud mudel on läikiv, siseruumides kasutatav 5495.
+
+Seotud register: W2-SIX-MARKS
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A10 / SYSTEM MAP
+
+SYSTEM MAP: pildile vastav eraldi vektor ja A2 baastoode puuduvad. Ära kasuta WALL STUDIES faili sama teose nime all.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A11 / CONTROL mouse pad
+
+CONTROL: väikese hiiremati mudel, mõõt ja selle ruudustiku vektor on kinnitamata. Suure SIGNAL-mati mõõdu muutmine pole kinnitatud asendus.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A12 / MAGNETIC GRIP
+
+MAGNETIC GRIP: tarnija, magnetiline/MagSafe sobivus, mõõt ja trükifail puuduvad. Mitte müügivalmis tehniline lisatarvik.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A13 / SYSTEM TAG keychain
+
+SYSTEM TAG: kootud võtmerihma tarnija, materjal, rõngas, mõõdud ja tootmisfail puuduvad.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+A14 / FREQUENCY art print
+
+FREQUENCY: eraldi helilainekujunduse vektorit ega A2 varianti pole. Limited edition väide ei ole kinnitatud.
+
+Seotud register: puudub
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+B01 / SIGNAL desk mat
+
+Lauamati originaal on juba olemas. Uut toodet või uut disaini selle kollaaži põhjal ei looda.
+
+Seotud register: W1-SIGNAL-DESKMAT
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+B02 / SUBSURFACE desk mat
+
+Lauamati originaal on juba olemas. Uut toodet või uut disaini selle kollaaži põhjal ei looda.
+
+Seotud register: W1-SUBSURFACE-DESKMAT
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B03 / CORE T-SHIRT
+
+CORE T-SHIRT: mudel, lõige, kangas, suurused ning rinna/selja eraldi failid puuduvad.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B04 / SYSTEMS HOODIE
+
+SYSTEMS HOODIE: paksu kanga, lõike ja paigutuste tõendamata kontseptsioon; eraldi vektoreid pole.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B05 / FIELD CAP
+
+FIELD CAP: 6245CM on võimalik alternatiiv, mitte selle mütsipildi kinnitatud mudel. Tikkimiskunst pole taastatud.
+
+Seotud register: puudub
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+B06 / STUDIO TOTE
+
+Pildil heavy canvas ning 35×40 cm; kontrollitud W101 on 140 g/m² ja umbes38×42 cm. Säilita pilt inspiratsioonina, ära kopeeri selle materjaliteksti listingusse.
+
+Seotud register: W2-TOTE
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+B07 / PROJECT NOTEBOOK
+
+Pildil A5 ja dotted; SP40004 on 6×8 tolli ja graph. Varasem kaanekunst on seotud, mitte täpne koopia.
+
+Seotud register: W2-NOTES-SIGNAL
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+B08 / SIGNALS STICKERS
+
+Pildil matte ja teine motiivivalik; 5495 on glossy/indoor. Kuus originaali on toote lähtematerjal, mitte pildi kuue sümboli täpne koopia.
+
+Seotud register: W2-SIX-MARKS
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B09 / WAVE POSTER
+
+WAVE POSTER: eraldi uue teose vektor ning50×70 cm mudel puuduvad. Varasem SIGNAL/SUBSURFACE Wall Studies ei ole sama plakat.
+
+Seotud register: puudub
+
+Rasterviide
+SEOTUD KAVAND, MITTE TÄPNE VASTE
+B10 / FLOW WATER BOTTLE
+
+Pildil750 ml double wall; H2Go on710 ml ja isolatsioon kinnitamata. Ärge kandke pildi termoomadusi H2Go listingusse.
+
+Seotud register: W3-FIELD
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B11 / GRID PHONE CASE
+
+GRID PHONE CASE: täpne telefonimudel, kaitseomadused ja kaameraavade trükimall puuduvad. iPhone/Samsung üldsõnaline pilditekst pole mudeliloend.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B12 / ORBIT KEYCHAIN
+
+ORBIT KEYCHAIN: tarnija ja kootud rihma tootmisfail puuduvad. Pilt ei kinnita materjali ega mõõtu.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B13 / PRECISION MOUSE PAD
+
+PRECISION MOUSE PAD:25×21 cm on kontseptsioonitekst; tarnija, pind, libisemiskindlus ja vektor pole kontrollitud.
+
+Seotud register: puudub
+
+Rasterviide
+KONTSEPTSIOON · VEKTOR PUUDUB
+B14 / MODULE DESK ORGANIZER
+
+MODULE DESK ORGANIZER: alumiinium, modulaarsus ja tarne on kinnitamata; puudub CAD/tootmisfail ja tellimuspõhine tarnija.
+
+Seotud register: puudub
+
+Rasterviide
+06 / JÄTKAMINE
+Üks pakett, üks loetav tööjärjekord
+
+Paki ZIP lahti. Suhtelised SVG/PNG ja dokumentide lingid töötavad paketi kaustas. Eraldi galerii HTML sisaldab vaatamiseks pilte, kuid ei sisalda kõiki suure resolutsiooniga faile.
+
+README
+Claude’i käivitusülesanne
+Hinnainfo
+Failide kasutus
+Tooteregister
+Vastuolude kaart
+SVG on redigeeritav kunstialus. Fourthwalli üleslaadimiseks kasutatakse tootjamalli järgi kinnitatud PNG-d. HIDDEN ei ole PRIVATE. Ükski siin olev fail ega hinnasiht ei käivita tellimust, makset ega toote avaldamist.
+KEEP IT UNDERGROUND / WAVE 03 / LOCAL HANDOFF • Ainult kohalikud failid; võrgu-, tellimis- ja maksetoiminguid pole.

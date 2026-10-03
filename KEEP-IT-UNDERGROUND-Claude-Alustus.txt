@@ -1,0 +1,71 @@
+Jätka KEEP IT UNDERGROUND e-poe arendust. Loe esmalt kaasasolev
+CLAUDE-HANDOFF.md täielikult, seejärel state/current-state.json,
+state/product-manifest.json, design/README.md ja design/CODEX-IMPLEMENTATION.md.
+
+Minu eesmärk: e-pood peab säilitama täpselt praeguse
+keepitunderground.com visuaalse identiteedi. Ära kujunda uut brändi.
+Must #050505, roheline #8ACE00, hele #E8E4DC, Bebas Neue pealkirjad,
+Space Mono, kandilised nupud, peen ruudustik ja CRT-tunnetus.
+Toodete endi oranž, hele ja tume kujundus peab jääma muutmata.
+
+Tee tegelik arendustöö, mitte veel üks üldine plaan. Esimene kohustuslik
+väljund on kontrollitud ja kaitstud kujunduse Preview olemasolevas
+Next.js/Verceli projektis. Kasuta kaasa pandud toimivat maketti ja
+ettevalmistatud /commerce-preview marsruuti; seejärel kanna võimalusel
+kujundus olemasolevatesse React-komponentidesse sama feature-haru sees.
+Erista prototüübi teostus päris e-poe integratsioonist.
+
+Õige repo: LEISSON-DARKSSON/kpt-underground.
+Kohalik teadaolev tee: C:\PROJECTS\kpt-underground. Kontrolli enne remote’i
+ja kasutaja pooleliolevat tööpuud. Ära kasuta sarnase nimega DJ-tarkvara repot.
+Loe repo CLAUDE.md / AGENTS.md, aga ära asenda neid selle paketiga.
+Praeguse töö feature/Preview ja maksepiirid jäävad ülimuslikuks.
+
+Vercel team: leisson-creative
+Team ID: team_AM95AHo0HzxOqVMyK8uCsfKw
+Project: kpt-underground
+Project ID: prj_YJhnEFeOnrCoodkZ9k201ReLeGfq
+
+PR #1 on juba merged. Üleandmisel kontrollitud main on
+99d224189757db3fad1882085fe43f7ff6508ccf. Kontrolli värske seis,
+jätka olemasolevat sama eesmärgiga tööd või loo uus feature-haru.
+Ära alusta vana diagnostikaharu merge’imisest.
+
+Fourthwall shop: sh_1f2e8f65-2b29-4be9-9167-7f42314361fb
+SIGNAL offer: 74c2ace1-4f7c-469b-a607-5555432019b4
+SUBSURFACE offer: 97704a85-a6b6-4090-894f-a7b5bc71a374
+Mõlemad tooted on PRIVATE, väljamaksed ACTIVE, pood COMING_SOON.
+Serveri Storefront-ühendus on kasutaja/Codexi raporti järgi PASS.
+Ära korda lõpetatud MCP/OIDC/SSO seadistamist ega küsi uut tokenit.
+
+34 USD on hinnasiht, mitte praegu rakendatud avalik jaehind.
+Päris ostuteekond peab tulevikus kasutama Fourthwalli hostitud kassat.
+Ära ühenda matte vana /api/checkout Stripe-EUR/demo-voo külge.
+Disainidemo ei loo päris kassaseanssi, tellimust ega makset.
+
+Kontrolli laetud lähtefonte ning 1440/768/390/320 px vaateid, kataloogi,
+mõlemat detailvaadet, pilte, korvi, Tab/Escape/fookust ja reduced motion’it.
+Production ning tundmatu hostitud keskkond ei tohi /commerce-preview’d näidata.
+Säilita deployment protection ja prototüübi CSP.
+
+Fourthwalli teemas salvesta ainult tõendatult eraldatud avaldamata draft’i.
+Kui native UI seda ei võimalda, raporteeri selle alamtöö piirang ja jätka
+Next.js Preview lõpetamist. Hostitud kassa täielikku 1:1 kohandatavust ära luba.
+
+Ära loo ega avalda tooteid, muuda nende hinda, trükifaili või Private-olekut.
+Ära tee makset/tellimust, kasuta poekrediiti ega käivita tasulist teenust.
+Varasem 80,49 USD näidisteluba ei kata viimast 80,67 USD pakkumist.
+Ära muuda DNS-i, Productionit või avalikku avalehte ega merge’i main-harusse.
+Ära kustuta kasutaja muudatusi ega kirjuta tokenit logidesse/GitHubi.
+
+Kasuta enda päriselt ühendatud tööriistu. Vajaduse korral lase mul samas
+brauseris autentida; ära küsi iga klõpsu järel uut ekraanipilti. Ära väida,
+et näed minu arvutit või olemasolevaid ühendusi enne selle kontrollimist.
+Ühe sõltumatu alamtöö tõrke korral lõpeta teised lubatud tööd.
+
+Lõpus anna eestikeelne koondraport: muudetud failid, branch/SHA,
+Preview-link ja deployment, tegelikud PASS/FAIL/BLOCKED/NOT_RUN tulemused,
+fontide seis, prototüüp vs päris komponendid, Fourthwalli native-piirangud
+ja kinnitus, millised konto/makse/Production toimingud jäid puutumata.
+Salvesta tõendid ja lisa olemasolevatele raportitele uus kontrollkirje,
+säilitades varasemad tulemused. Ära märgi Save-nupuklikki kontrollitud tulemuseks.

@@ -1,0 +1,126 @@
+{
+  "base": "https://kpt-underground-h9j6r7hop-leisson-creative.vercel.app",
+  "at": "2026-10-02T00:17:20.488Z",
+  "results": [
+    {
+      "name": "catalog shows products",
+      "ok": true,
+      "info": "cards=7"
+    },
+    {
+      "name": "fonts loaded",
+      "ok": true,
+      "info": "Space Mono,Space Mono Fallback,Bebas Neue"
+    },
+    {
+      "name": "body bg #050505",
+      "ok": true,
+      "info": "rgb(5, 5, 5)"
+    },
+    {
+      "name": "card images load",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "desk mat first",
+      "ok": false,
+      "info": "project-notes-subsurface-02"
+    },
+    {
+      "name": "home shows shop grid",
+      "ok": true,
+      "info": "cards=6"
+    },
+    {
+      "name": "no artist copy on home",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "/artists -> /shop",
+      "ok": true,
+      "info": "https://kpt-underground-h9j6r7hop-leisson-creative.vercel.app/shop"
+    },
+    {
+      "name": "PDP price 34 USD",
+      "ok": true,
+      "info": "cents=3400"
+    },
+    {
+      "name": "cart row added",
+      "ok": true,
+      "info": ""
+    },
+    {
+      "name": "checkout api 200",
+      "ok": true,
+      "info": "status=200"
+    },
+    {
+      "name": "redirect to hosted checkout",
+      "ok": true,
+      "info": "https://keepitunderground-shop.fourthwall.com/checkout/?cartCurrency=USD&cartId=…"
+    },
+    {
+      "name": "no h-overflow / @1440",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop @1440",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop/signal-studio-tote @1440",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow / @768",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop @768",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop/signal-studio-tote @768",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow / @390",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop @390",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop/signal-studio-tote @390",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow / @320",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop @320",
+      "ok": true,
+      "info": "over=0"
+    },
+    {
+      "name": "no h-overflow /shop/signal-studio-tote @320",
+      "ok": true,
+      "info": "over=0"
+    }
+  ]
+}

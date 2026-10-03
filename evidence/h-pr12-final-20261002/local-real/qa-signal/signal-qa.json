@@ -1,0 +1,77 @@
+{
+  "base": "http://127.0.0.1:3417",
+  "at": "2026-10-02T12:55:02.653Z",
+  "fails": 0,
+  "results": [
+    {
+      "s": "PASS",
+      "name": "@390 /: HTTP 200, no gate/membership/network/advertising-ban wording in the visible text",
+      "detail": "status 200"
+    },
+    {
+      "s": "PASS",
+      "name": "@390 /signal: HTTP 200, no gate/membership/network/advertising-ban wording in the visible text",
+      "detail": "status 200"
+    },
+    {
+      "s": "PASS",
+      "name": "@390 /signal: honest empty state, no form or e-mail field, no gate input",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@390 /signal: H1 is THE SIGNAL and exactly one H1",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@390 /signal: no horizontal overflow",
+      "detail": "0"
+    },
+    {
+      "s": "PASS",
+      "name": "@390 /story: HTTP 200, no gate/membership/network/advertising-ban wording in the visible text",
+      "detail": "status 200"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: shipped JS bundles contain neither the old gate code nor the old feed text",
+      "detail": "33 bundles scanned"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440 /: HTTP 200, no gate/membership/network/advertising-ban wording in the visible text",
+      "detail": "status 200"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440 /signal: HTTP 200, no gate/membership/network/advertising-ban wording in the visible text",
+      "detail": "status 200"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440 /signal: honest empty state, no form or e-mail field, no gate input",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@1440 /signal: H1 is THE SIGNAL and exactly one H1",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@1440 /signal: no horizontal overflow",
+      "detail": "0"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440 /story: HTTP 200, no gate/membership/network/advertising-ban wording in the visible text",
+      "detail": "status 200"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: shipped JS bundles contain neither the old gate code nor the old feed text",
+      "detail": "33 bundles scanned"
+    }
+  ]
+}

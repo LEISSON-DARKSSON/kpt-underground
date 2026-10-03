@@ -1,0 +1,30 @@
+{
+  "base": "https://keepitunderground.com",
+  "at": "2026-10-02T13:37:13.357Z",
+  "results": [
+    {
+      "s": "PASS",
+      "w": 320,
+      "words": 14,
+      "problems": []
+    },
+    {
+      "s": "PASS",
+      "w": 390,
+      "words": 14,
+      "problems": []
+    },
+    {
+      "s": "PASS",
+      "w": 768,
+      "words": 14,
+      "problems": []
+    },
+    {
+      "s": "PASS",
+      "w": 1440,
+      "words": 14,
+      "problems": []
+    }
+  ]
+}

@@ -1,0 +1,467 @@
+{
+  "base": "https://kpt-underground-dai4jfp1f-leisson-creative.vercel.app",
+  "at": "2026-10-02T12:12:53.706Z",
+  "fails": 0,
+  "results": [
+    {
+      "s": "PASS",
+      "name": "R1 @320x700: CTA fully inside the first view at scrollY=0 (before any scroll/click), clear of the fixed nav, every corner/centre hit-test lands on it",
+      "detail": "{\"scrollY\":0,\"vw\":320,\"vh\":700,\"top\":384,\"bottom\":440,\"left\":24,\"right\":285,\"w\":261,\"h\":56,\"navBottom\":56,\"aboveFold\":true,\"allPointsHit\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @320: touch target >= 44 px and CTA label size kept",
+      "detail": "261x56"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @320: readable type kept (H1 >= 26 px, lede >= 14 px, CTA >= 20 px)",
+      "detail": "{\"h1\":26,\"lede\":14,\"cta\":22}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @320: negative control — with the CTA pushed down the same check reports aboveFold=false",
+      "detail": "{\"top\":1584,\"vh\":700}"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: no horizontal overflow",
+      "detail": "0"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: hero object loaded, 3:2 window, whole mat inside the crop (fractions of the canvas)",
+      "detail": "{\"natural\":[272,362],\"naturalRatio\":0.751,\"frameRatio\":1.503,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: caption states type, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: STUDIO PICKS with 6 undistorted cards",
+      "detail": "STUDIO PICKS n=6"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @320: proof sits directly under the CTA (old PR #11 requirement: gap 0..80 px)",
+      "detail": "gap=20"
+    },
+    {
+      "s": "INFO",
+      "name": "R3 @320x700: proofVisibleAtLoad",
+      "detail": "true (proof top 460px of 700px viewport)"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @320: proofUsableAfterScroll (3 facts reachable and not covered once scrolled into view)",
+      "detail": ""
+    },
+    {
+      "s": "INFO",
+      "name": "R1 @320x700: first view",
+      "detail": "CTA 384-440; object frame 685-867 → object partly in the first view"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: CTA click works immediately and reaches /shop",
+      "detail": "111 ms (click latency, NOT a performance metric)"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: back navigation shows home, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @390x844: CTA fully inside the first view at scrollY=0 (before any scroll/click), clear of the fixed nav, every corner/centre hit-test lands on it",
+      "detail": "{\"scrollY\":0,\"vw\":390,\"vh\":844,\"top\":379,\"bottom\":435,\"left\":24,\"right\":285,\"w\":261,\"h\":56,\"navBottom\":56,\"aboveFold\":true,\"allPointsHit\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @390: touch target >= 44 px and CTA label size kept",
+      "detail": "261x56"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @390: readable type kept (H1 >= 26 px, lede >= 14 px, CTA >= 20 px)",
+      "detail": "{\"h1\":28.86,\"lede\":14,\"cta\":22}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @390: negative control — with the CTA pushed down the same check reports aboveFold=false",
+      "detail": "{\"top\":1579,\"vh\":844}"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: no horizontal overflow",
+      "detail": "0"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: hero object loaded, 3:2 window, whole mat inside the crop (fractions of the canvas)",
+      "detail": "{\"natural\":[342,456],\"naturalRatio\":0.75,\"frameRatio\":1.5,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: caption states type, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: STUDIO PICKS with 6 undistorted cards",
+      "detail": "STUDIO PICKS n=6"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @390: proof sits directly under the CTA (old PR #11 requirement: gap 0..80 px)",
+      "detail": "gap=20"
+    },
+    {
+      "s": "INFO",
+      "name": "R3 @390x844: proofVisibleAtLoad",
+      "detail": "true (proof top 455px of 844px viewport)"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @390: proofUsableAfterScroll (3 facts reachable and not covered once scrolled into view)",
+      "detail": ""
+    },
+    {
+      "s": "INFO",
+      "name": "R1 @390x844: first view",
+      "detail": "CTA 379-435; object frame 680-908 → object partly in the first view"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: CTA click works immediately and reaches /shop",
+      "detail": "105 ms (click latency, NOT a performance metric)"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: back navigation shows home, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @768x1024: CTA fully inside the first view at scrollY=0 (before any scroll/click), clear of the fixed nav, every corner/centre hit-test lands on it",
+      "detail": "{\"scrollY\":0,\"vw\":768,\"vh\":1024,\"top\":493,\"bottom\":549,\"left\":24,\"right\":285,\"w\":261,\"h\":56,\"navBottom\":56,\"aboveFold\":true,\"allPointsHit\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @768: touch target >= 44 px and CTA label size kept",
+      "detail": "261x56"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @768: readable type kept (H1 >= 26 px, lede >= 14 px, CTA >= 20 px)",
+      "detail": "{\"h1\":32.256,\"lede\":14,\"cta\":22}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @768: negative control — with the CTA pushed down the same check reports aboveFold=false",
+      "detail": "{\"top\":1693,\"vh\":1024}"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: no horizontal overflow",
+      "detail": "0"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: hero object loaded, 3:2 window, whole mat inside the crop (fractions of the canvas)",
+      "detail": "{\"natural\":[307,409],\"naturalRatio\":0.751,\"frameRatio\":1.497,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: caption states type, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: STUDIO PICKS with 6 undistorted cards",
+      "detail": "STUDIO PICKS n=6"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @768: proof sits directly under the CTA (old PR #11 requirement: gap 0..80 px)",
+      "detail": "gap=40"
+    },
+    {
+      "s": "INFO",
+      "name": "R3 @768x1024: proofVisibleAtLoad",
+      "detail": "true (proof top 589px of 1024px viewport)"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @768: proofUsableAfterScroll (3 facts reachable and not covered once scrolled into view)",
+      "detail": ""
+    },
+    {
+      "s": "INFO",
+      "name": "R1 @768x1024: first view",
+      "detail": "CTA 493-549; object frame 274-467 → object fully in the first view"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: CTA click works immediately and reaches /shop",
+      "detail": "149 ms (click latency, NOT a performance metric)"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: back navigation shows home, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @1440x900: CTA fully inside the first view at scrollY=0 (before any scroll/click), clear of the fixed nav, every corner/centre hit-test lands on it",
+      "detail": "{\"scrollY\":0,\"vw\":1440,\"vh\":900,\"top\":645,\"bottom\":701,\"left\":160,\"right\":421,\"w\":261,\"h\":56,\"navBottom\":56,\"aboveFold\":true,\"allPointsHit\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @1440: touch target >= 44 px and CTA label size kept",
+      "detail": "261x56"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @1440: readable type kept (H1 >= 26 px, lede >= 14 px, CTA >= 20 px)",
+      "detail": "{\"h1\":52,\"lede\":14,\"cta\":22}"
+    },
+    {
+      "s": "PASS",
+      "name": "R1 @1440: negative control — with the CTA pushed down the same check reports aboveFold=false",
+      "detail": "{\"top\":1845,\"vh\":900}"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: no horizontal overflow",
+      "detail": "0"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: hero object loaded, 3:2 window, whole mat inside the crop (fractions of the canvas)",
+      "detail": "{\"natural\":[480,639],\"naturalRatio\":0.751,\"frameRatio\":1.502,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: caption states type, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: STUDIO PICKS with 6 undistorted cards",
+      "detail": "STUDIO PICKS n=6"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @1440: proof sits directly under the CTA (old PR #11 requirement: gap 0..80 px)",
+      "detail": "gap=40"
+    },
+    {
+      "s": "INFO",
+      "name": "R3 @1440x900: proofVisibleAtLoad",
+      "detail": "true (proof top 741px of 900px viewport)"
+    },
+    {
+      "s": "PASS",
+      "name": "R3 @1440: proofUsableAfterScroll (3 facts reachable and not covered once scrolled into view)",
+      "detail": ""
+    },
+    {
+      "s": "INFO",
+      "name": "R1 @1440x900: first view",
+      "detail": "CTA 645-701; object frame 280-599 → object fully in the first view"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: CTA click works immediately and reaches /shop",
+      "detail": "175 ms (click latency, NOT a performance metric)"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: back navigation shows home, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @320x700 DPR2: served by the optimizer with a real srcset, upstream is Fourthwall's image CDN",
+      "detail": "{\"srcset\":\"256w 384w 640w 750w 828w 1080w 1200w 1920w 2048w 3840w\",\"upstream\":\"imgproxy.fourthwall.dev\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @320x700 DPR2: chosen width covers the displayed size and is smaller than the 1920 original",
+      "detail": "cssW 270 x DPR 2 = 540px needed; fetched w=640; natural 272x362"
+    },
+    {
+      "s": "INFO",
+      "name": "R2 @320x700 DPR2: network size of the hero image",
+      "detail": "encodedBodySize=26178 B transfer=0 B (q=75)"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @390x844 DPR3: served by the optimizer with a real srcset, upstream is Fourthwall's image CDN",
+      "detail": "{\"srcset\":\"256w 384w 640w 750w 828w 1080w 1200w 1920w 2048w 3840w\",\"upstream\":\"imgproxy.fourthwall.dev\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @390x844 DPR3: chosen width covers the displayed size and is smaller than the 1920 original",
+      "detail": "cssW 340 x DPR 3 = 1020px needed; fetched w=1080; natural 342x456"
+    },
+    {
+      "s": "INFO",
+      "name": "R2 @390x844 DPR3: network size of the hero image",
+      "detail": "encodedBodySize=68028 B transfer=68328 B (q=75)"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @768x1024 DPR2: served by the optimizer with a real srcset, upstream is Fourthwall's image CDN",
+      "detail": "{\"srcset\":\"256w 384w 640w 750w 828w 1080w 1200w 1920w 2048w 3840w\",\"upstream\":\"imgproxy.fourthwall.dev\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @768x1024 DPR2: chosen width covers the displayed size and is smaller than the 1920 original",
+      "detail": "cssW 287 x DPR 2 = 574px needed; fetched w=640; natural 307x409"
+    },
+    {
+      "s": "INFO",
+      "name": "R2 @768x1024 DPR2: network size of the hero image",
+      "detail": "encodedBodySize=26178 B transfer=0 B (q=75)"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @1440x900 DPR1: served by the optimizer with a real srcset, upstream is Fourthwall's image CDN",
+      "detail": "{\"srcset\":\"256w 384w 640w 750w 828w 1080w 1200w 1920w 2048w 3840w\",\"upstream\":\"imgproxy.fourthwall.dev\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @1440x900 DPR1: chosen width covers the displayed size and is smaller than the 1920 original",
+      "detail": "cssW 477 x DPR 1 = 477px needed; fetched w=640; natural 480x639"
+    },
+    {
+      "s": "INFO",
+      "name": "R2 @1440x900 DPR1: network size of the hero image",
+      "detail": "encodedBodySize=26178 B transfer=0 B (q=75)"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @1440x900 DPR2: served by the optimizer with a real srcset, upstream is Fourthwall's image CDN",
+      "detail": "{\"srcset\":\"256w 384w 640w 750w 828w 1080w 1200w 1920w 2048w 3840w\",\"upstream\":\"imgproxy.fourthwall.dev\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "R2 @1440x900 DPR2: chosen width covers the displayed size and is smaller than the 1920 original",
+      "detail": "cssW 477 x DPR 2 = 954px needed; fetched w=1080; natural 480x640"
+    },
+    {
+      "s": "INFO",
+      "name": "R2 @1440x900 DPR2: network size of the hero image",
+      "detail": "encodedBodySize=68028 B transfer=0 B (q=75)"
+    },
+    {
+      "s": "INFO",
+      "name": "R2 reference: the unoptimized original (signed 1920 px file) weighs",
+      "detail": "{\"bytes\":132991,\"type\":\"image/avif\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "zoom 1440 @200%: no horizontal scroll, hero not forced to a fixed height, CTA uncovered and unclipped",
+      "detail": "{\"overflow\":0,\"heroHeightFixed\":false,\"minHeight\":\"0px\",\"hit\":true,\"ctaClipped\":false,\"h1Clipped\":false}"
+    },
+    {
+      "s": "PASS",
+      "name": "zoom 1280 @200%: no horizontal scroll, hero not forced to a fixed height, CTA uncovered and unclipped",
+      "detail": "{\"overflow\":0,\"heroHeightFixed\":false,\"minHeight\":\"0px\",\"hit\":true,\"ctaClipped\":false,\"h1Clipped\":false}"
+    },
+    {
+      "s": "PASS",
+      "name": "zoom 1280 @400% (WCAG reflow 320 css px): no horizontal scroll, hero not forced to a fixed height, CTA uncovered and unclipped",
+      "detail": "{\"overflow\":0,\"heroHeightFixed\":false,\"minHeight\":\"0px\",\"hit\":true,\"ctaClipped\":false,\"h1Clipped\":false}"
+    },
+    {
+      "s": "PASS",
+      "name": "reduced motion: intro line display:none and CTA fully in the first view at scrollY=0",
+      "detail": "none {\"top\":379,\"bottom\":435,\"vh\":844}"
+    },
+    {
+      "s": "PASS",
+      "name": "no JavaScript @320x700: CTA (/shop) is fully in the first view at scrollY=0; H1 and hero object are in the server HTML",
+      "detail": "{\"x\":24,\"y\":384.328125,\"width\":260.875,\"height\":56}"
+    },
+    {
+      "s": "PASS",
+      "name": "no JavaScript @390x844: CTA (/shop) is fully in the first view at scrollY=0; H1 and hero object are in the server HTML",
+      "detail": "{\"x\":24,\"y\":378.734375,\"width\":260.875,\"height\":56}"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard @390: CTA reachable by Tab, visible focus ring, not covered when focused",
+      "detail": "tabs=9 {\"style\":\"solid\",\"width\":\"2px\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard @390: hero has exactly one tab stop",
+      "detail": "1"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard @390: Enter on the CTA opens /shop",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard @1440: CTA reachable by Tab, visible focus ring, not covered when focused",
+      "detail": "tabs=7 {\"style\":\"solid\",\"width\":\"2px\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard @1440: hero has exactly one tab stop",
+      "detail": "1"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard @1440: Enter on the CTA opens /shop",
+      "detail": ""
+    }
+  ]
+}

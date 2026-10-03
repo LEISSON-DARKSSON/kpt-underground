@@ -1,0 +1,1122 @@
+{
+  "checkedAt": "2026-09-24T05:50:20Z",
+  "team": "leisson-creative",
+  "project": "kpt-underground",
+  "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+  "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+  "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+  "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+  "method": "vercel-cli",
+  "result": "BLOCKED",
+  "httpStatus": 302,
+  "contentType": "text/plain",
+  "responseBody": "Redirecting...",
+  "obstacle": "Vercel SSO/protection redirect; controlled Chrome and the SSO URL were blocked by the client with ERR_BLOCKED_BY_CLIENT. No JSON response was observed.",
+  "browserAttempt": {
+    "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+    "result": "BLOCKED",
+    "obstacle": "ERR_BLOCKED_BY_CLIENT"
+  },
+  "passCriteriaObserved": false,
+  "priorReportFilesPresent": false,
+  "credentialsSaved": false,
+  "followUpChecks": [
+    {
+      "checkedAt": "2026-09-24T13:55:06Z",
+      "team": "leisson-creative",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "method": "vercel-cli",
+      "result": "BLOCKED",
+      "httpStatus": 302,
+      "contentType": "text/plain",
+      "responseBody": "Redirecting...",
+      "obstacle": "Vercel protection redirect; no Fourthwall endpoint JSON response was observed.",
+      "browserAttempt": {
+        "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+        "result": "BLOCKED",
+        "obstacle": "ERR_BLOCKED_BY_CLIENT before any Vercel sign-in page appeared"
+      },
+      "deploymentIdentityVerifiedByCli": true,
+      "shaSource": "fixed target supplied for this check",
+      "passCriteriaObserved": false,
+      "credentialsSaved": false
+    },
+    {
+      "checkedAt": "2026-09-28T17:23:21Z",
+      "team": "leisson-creative",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "method": "vercel-cli",
+      "additionalMethod": "connected Vercel read-only fetch",
+      "result": "BLOCKED",
+      "httpStatus": 302,
+      "contentType": "text/plain",
+      "responseBody": "Redirecting...",
+      "obstacle": "Vercel SSO redirect; no Fourthwall endpoint JSON response was observed.",
+      "browserAttempt": {
+        "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+        "result": "BLOCKED",
+        "obstacle": "Browser tool could not load request-header policy on two attempts; no login page was displayed."
+      },
+      "deploymentIdentityVerifiedByConnector": true,
+      "passCriteriaObserved": false,
+      "credentialsSaved": false
+    },
+    {
+      "checkedAt": "2026-09-29T06:54:01Z",
+      "checkType": "existing access-path review",
+      "team": "leisson-creative",
+      "teamId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "workspace": "C:\\PROJECTS\\kpt-underground",
+      "cliVersion": "60.1.3",
+      "cliAccount": "gertleisson-2037",
+      "localProjectJsonPresent": false,
+      "processBypassSecretPresent": false,
+      "newGetSent": false,
+      "reasonNoNewGet": "The exact correctly scoped, deployment-bound vercel curl command previously returned 302 with the available CLI authentication; no changed access condition was found.",
+      "priorExactGetCommand": "vercel curl /api/fourthwall/status --deployment https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app --scope leisson-creative -- --silent --include",
+      "priorExactGetReportTime": "2026-09-24T05:50:20Z",
+      "priorExactGetCliVersion": "59.19.0",
+      "priorExactGetHttpStatus": 302,
+      "priorExactGetContentType": "text/plain",
+      "priorExactGetResponseBody": "Redirecting...",
+      "currentResponseObserved": false,
+      "result": "BLOCKED",
+      "obstacle": "Vercel Deployment Protection redirects the authenticated CLI GET to SSO before endpoint JSON can be read.",
+      "passCriteriaObserved": false,
+      "credentialsSaved": false
+    },
+    {
+      "checkedAt": "2026-09-29T07:02:28Z",
+      "responseCheckedAt": "2026-09-29T07:02:07.468Z",
+      "team": "leisson-creative",
+      "teamId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "workspace": "C:\\PROJECTS\\kpt-underground",
+      "cliVersion": "60.1.3",
+      "method": "vercel curl",
+      "getCommand": "vercel curl /api/fourthwall/status --deployment https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app --scope leisson-creative -- --silent --include",
+      "localProjectLinkVerified": true,
+      "localProjectJsonProjectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "localProjectJsonOrgId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+      "chromeResult": "ERR_BLOCKED_BY_CLIENT",
+      "connectorFetchHttpStatus": 302,
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseJson": {
+        "checkedAt": "2026-09-29T07:02:07.468Z",
+        "connection": "ok",
+        "identityPinned": true,
+        "shop": {
+          "id": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+          "name": "KEEP IT UNDERGROUND",
+          "domain": "keepitunderground-shop",
+          "publicDomain": "keepitunderground.com"
+        },
+        "collections": [
+          {
+            "id": "col_vXBDW7HUQGOiRKmrIxU_Iw",
+            "name": "All Products",
+            "slug": "all",
+            "description": "Collection including all items on sale!"
+          }
+        ],
+        "products": [],
+        "publicProductCount": 0,
+        "salesReady": false
+      },
+      "result": "PASS",
+      "passCriteriaObserved": true,
+      "postCleanupVerification": {
+        "checkedAt": "2026-09-29T07:03:51Z",
+        "envLocalPresent": false,
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "connection": "ok",
+        "identityPinned": true,
+        "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+        "shopName": "KEEP IT UNDERGROUND",
+        "salesReady": false
+      },
+      "credentialsSaved": false
+    }
+  ],
+  "supplementalEvidence": [
+    {
+      "reviewedAt": "2026-09-24T14:10:22Z",
+      "sourceType": "user-supplied observation file",
+      "sourcePath": "C:\\Users\\gert\\Downloads\\Fourthwall-Preview-observations-20260924.json",
+      "sourceSha256": "403F4FB8496B34EAAEF3F122C20AB11AC46BAD73120C97C27897614CDD4FE487",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "reportedRuntimeEntries": [
+        {
+          "atUTC": "2026-09-24T13:54:14Z",
+          "method": "GET",
+          "path": "/api/fourthwall/status",
+          "httpStatus": 200
+        },
+        {
+          "atUTC": "2026-09-24T14:00:17Z",
+          "method": "GET",
+          "path": "/api/fourthwall/status",
+          "httpStatus": 200
+        }
+      ],
+      "runtimeResponseBodyCaptured": false,
+      "runtimeContentTypeCaptured": false,
+      "runtimeRequestActorIdentified": false,
+      "attachmentReportedFetch": {
+        "atUTC": "2026-09-24T14:02:14Z",
+        "method": "GET",
+        "httpStatus": 302,
+        "contentType": "text/plain",
+        "responseBody": "Redirecting...\n"
+      },
+      "assessment": "Reported runtime 200 entries are indirect evidence only; the required endpoint JSON assertions remain unobserved.",
+      "result": "BLOCKED",
+      "credentialsSaved": false
+    }
+  ],
+  "fourthwallReadinessFollowUp": {
+    "checkedAt": "2026-09-29T07:58:30Z",
+    "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+    "payoutStatus": "INACTIVE",
+    "sampleCreditBalance": null,
+    "sampleCreditBalanceWithIncentive": null,
+    "products": [
+      {
+        "key": "SIGNAL",
+        "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+        "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+        "status": "PRIVATE",
+        "descriptionChanged": false
+      },
+      {
+        "key": "SUBSURFACE",
+        "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+        "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+        "status": "PRIVATE",
+        "descriptionChanged": true,
+        "descriptionRereadAfterSave": true,
+        "approvedDescriptionOpening": "A different perspective for your everyday workspace."
+      }
+    ],
+    "sampleQuotesBeforeShipping": [
+      {
+        "items": "SIGNAL:1",
+        "subtotalUsd": 13.00,
+        "processingFeeUsd": 0.69,
+        "provisionalTotalUsd": 13.69,
+        "shippingVerified": false,
+        "taxVerified": false,
+        "orderPlaced": false
+      },
+      {
+        "items": "SIGNAL:1,SUBSURFACE:1",
+        "subtotalUsd": 26.00,
+        "processingFeeUsd": 1.08,
+        "provisionalTotalUsd": 27.08,
+        "shippingVerified": false,
+        "taxVerified": false,
+        "orderPlaced": false
+      }
+    ],
+    "payoutOnboardingCompleted": false,
+    "paymentMade": false,
+    "publicPriceChanged": false,
+    "visibilityChanged": false,
+    "postOwnerInputVerification": {
+      "checkedAt": "2026-09-29T08:14:09Z",
+      "payoutStatus": "ACTIVE",
+      "payoutOwner": "CUSTOM",
+      "payoutConnectedAt": "2026-09-29T08:06:08.022561Z",
+      "payoutDashboardShowsConnected": true,
+      "shippingCountry": "EE",
+      "deliveryMethod": "Standard",
+      "shippingAddressSavedInReport": false,
+      "quotes": [
+        {
+          "items": "SIGNAL:1",
+          "subtotalUsd": 13.00,
+          "shippingUsd": 22.89,
+          "vatUsd": 8.61,
+          "customsDutiesUsd": 3.41,
+          "processingFeeUsd": 1.73,
+          "checkoutTotalUsd": 49.64
+        },
+        {
+          "items": "SIGNAL:1,SUBSURFACE:1",
+          "subtotalUsd": 26.00,
+          "shippingUsd": 31.29,
+          "vatUsd": 13.75,
+          "customsDutiesUsd": 6.82,
+          "processingFeeUsd": 2.63,
+          "checkoutTotalUsd": 80.49
+        }
+      ],
+      "orderSubmittedDuringRun": false,
+      "paymentMadeDuringRun": false,
+      "sampleCreditSpentDuringRun": false
+    }
+  },
+  "sampleOrderPrePaymentChecks": [
+    {
+      "checkedAt": "2026-10-01T08:14:50Z",
+      "result": "BLOCKED",
+      "reasonCode": "AUTHORIZED_TOTAL_EXCEEDED",
+      "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+      "checkoutId": "ch_UvuaYXwNSIakvDOieIFRJQ",
+      "method": "existing Fourthwall checkout reopened in Chrome; Fourthwall read-only order and offer checks",
+      "authorizedMaxUsd": 80.49,
+      "duplicateCheck": {
+        "method": "get_orders filtered by both authorized offer IDs",
+        "matchingOrdersReturned": 0,
+        "paidDuplicateObserved": false
+      },
+      "items": [
+        {
+          "key": "SIGNAL",
+          "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+          "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+          "quantity": 1,
+          "sampleUnitPriceUsd": 13.00,
+          "status": "PRIVATE",
+          "packshotVisuallyMatched": true
+        },
+        {
+          "key": "SUBSURFACE",
+          "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+          "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+          "quantity": 1,
+          "sampleUnitPriceUsd": 13.00,
+          "status": "PRIVATE",
+          "packshotVisuallyMatched": true
+        }
+      ],
+      "sampleCostCheckout": true,
+      "shippingCountry": "EE",
+      "retainedAddressComparedWithPriorCheckout": true,
+      "addressComparisonNote": "Same existing session retained the corresponding owner-entered address; street spelling was ASCII transliteration. No field was edited.",
+      "shippingAddressSavedInReport": false,
+      "deliveryMethod": "Standard",
+      "estimatedDelivery": "2026-10-12/2026-10-19",
+      "quote": {
+        "currency": "USD",
+        "subtotalUsd": 26.00,
+        "shippingUsd": 31.45,
+        "vatUsd": 13.79,
+        "customsDutiesUsd": 6.80,
+        "processingFeeUsd": 2.63,
+        "checkoutTotalUsd": 80.67,
+        "previousCheckoutTotalUsd": 80.49,
+        "limitExceededByUsd": 0.18,
+        "shopCreditLeftAfterOrderUsd": 0.00
+      },
+      "extraItemsOrPaidAddons": false,
+      "completeOrderClickCount": 0,
+      "orderSubmittedDuringRun": false,
+      "paymentMadeDuringRun": false,
+      "sampleCreditSpentDuringRun": false,
+      "orderId": null,
+      "paymentStatus": "NOT_SUBMITTED",
+      "paymentFieldsObservation": "Card-entry fields were empty; no payment information was entered.",
+      "checkoutLeftOpenForOwner": true,
+      "productChangesMade": false,
+      "countedAsCustomerSale": false,
+      "paymentDataOrAuthenticationSecretsSaved": false
+    }
+  ],
+  "commerceDesignPreviewChecks": [
+    {
+      "checkedAt": "2026-10-01T23:00:00Z",
+      "checkedAtLocal": "2026-10-02 ~01:05–02:00 Europe/Tallinn",
+      "scope": "Commerce design preview (feature branch + protected Vercel Preview). Not a sale, checkout, order or payment.",
+      "result": "PARTIAL",
+      "resultReason": "Design preview (prototype + React port) PASS on protected Preview; Fourthwall theme draft BLOCKED (no isolated unpublished draft); full-repo lint FAIL on 12 pre-existing errors outside the new code.",
+      "repository": "LEISSON-DARKSSON/kpt-underground",
+      "baseSha": "99d224189757db3fad1882085fe43f7ff6508ccf",
+      "branch": "feat/commerce-design-parity-20261002",
+      "commits": [
+        "93f26895ac4a7f39959ef2f64e26925572960719",
+        "1985fe22cbaae5eb1b427378aba053887bd83ce7",
+        "5fc21189c87ff561d7ba959b819b7947d38168cc",
+        "e7c7f69009ccb7c0978e06410cd647b31ec90b39"
+      ],
+      "headSha": "e7c7f69009ccb7c0978e06410cd647b31ec90b39",
+      "worktree": "C:/PROJECTS/kpt-underground-commerce (git worktree; owner's main checkout and untracked files untouched)",
+      "team": "leisson-creative",
+      "teamId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deployment": {
+        "id": "dpl_BYQ3sbxRCWo17TBMqJwT6Xn2GANd",
+        "url": "https://kpt-underground-5iqbh90k6-leisson-creative.vercel.app",
+        "target": "preview",
+        "state": "READY",
+        "sha": "e7c7f69009ccb7c0978e06410cd647b31ec90b39",
+        "prototypeRoute": "/commerce-preview",
+        "reactRoutes": [
+          "/commerce-preview/shop",
+          "/commerce-preview/shop/signal-01",
+          "/commerce-preview/shop/subsurface-02",
+          "/commerce-preview/shop/handoff"
+        ],
+        "unauthenticatedResponse": "302 to Vercel SSO (Deployment Protection active, ssoProtection all_except_custom_domains)"
+      },
+      "productionChecks": {
+        "https://keepitunderground.com/commerce-preview": 404,
+        "https://keepitunderground.com/commerce-preview/shop": 404,
+        "https://keepitunderground.com/": 200
+      },
+      "localGateChecks": "next start without VERCEL_ENV: all /commerce-preview/* = 404 (src/proxy.ts); with VERCEL_ENV=preview = 200",
+      "tests": {
+        "typecheck": "PASS",
+        "build": "PASS (next build, Next 16.2.1)",
+        "lintNewCode": "PASS (eslint on all new/changed commerce files)",
+        "lintFullRepo": "FAIL — 12 errors / 4 warnings, all pre-existing in public components (char-reveal, cursor-engine, navbar, cart-context, jsx comment text nodes); `next lint` was removed in Next 16 and is replaced by `eslint .`",
+        "unitGuards": "PASS 22/22 (npm run test:commerce-preview)",
+        "hostedPrototypeQA": "PASS 124/124 at 1440/768/390/320 + reduced motion",
+        "hostedReactQA": "PASS 162/162 at 1440/768/390/320 + reduced motion",
+        "issuesFoundAndFixedDuringQA": [
+          "globals.css unlayered `* { margin:0; padding:0 }` overrides all Tailwind 4 margin/padding utilities site-wide (commerce now uses commerce.module.css; public reset unchanged)",
+          "page-level notFound() streamed HTTP 200 because of root loading.tsx (fixed with src/proxy.ts hard 404)",
+          "320 px cart: price covered the Remove button (fixed)"
+        ]
+      },
+      "fonts": {
+        "prototype": "Bebas Neue 400 + Space Mono 400/700 loaded from Google Fonts on the hosted Preview; page font-status = loaded",
+        "react": "Bebas Neue 400 + Space Mono 400 in use via next/font (self-hosted); Space Mono 700 face loads on demand",
+        "previousBlocked": "The 3 earlier BLOCKED font checks (offline fallback) are now PASS on the hosted Preview"
+      },
+      "products": {
+        "readMethod": "Fourthwall admin products list (read-only, owner browser session)",
+        "74c2ace1-4f7c-469b-a607-5555432019b4": {
+          "name": "KEEP IT UNDERGROUND Signal 01 Desk Mat",
+          "status": "Private",
+          "sold": 0
+        },
+        "97704a85-a6b6-4090-894f-a7b5bc71a374": {
+          "name": "KEEP IT UNDERGROUND SUBSURFACE / 02",
+          "status": "Private",
+          "sold": 0
+        },
+        "shopFront": "keepitunderground-shop.fourthwall.com shows 'Coming soon'"
+      },
+      "fourthwallTheme": {
+        "result": "BLOCKED",
+        "observed": {
+          "themes": [
+            "Clean Frame (Active / Live, last modified Sep 30)"
+          ],
+          "drafts": 0,
+          "colors": {
+            "primary": "#000000",
+            "background": "#FFFFFF",
+            "text": "#000000",
+            "textOverPrimary": "#FFFFFF"
+          }
+        },
+        "reason": "Only the live theme exists; the editor's Save writes to it. Fourthwall help: adding a theme applies it and style settings apply to the active theme. No isolated unpublished draft was demonstrated, so nothing was saved.",
+        "saved": false,
+        "published": false,
+        "desired": {
+          "primary": "#8ACE00",
+          "background": "#050505",
+          "text": "#E8E4DC",
+          "textOverPrimary": "#050505",
+          "heading": "Bebas Neue 400",
+          "body": "Space Mono 400/700",
+          "buttons": "Square",
+          "checkoutSkin": "Dark mode"
+        }
+      },
+      "commerce": {
+        "realCartConnected": false,
+        "checkoutSessionCreated": false,
+        "orderCreated": false,
+        "paymentMade": false,
+        "legacyApiCheckoutUsed": false,
+        "plannedPriceUSD": 34,
+        "plannedPriceApplied": false
+      },
+      "untouched": [
+        "Fourthwall products, prices, print files, variants, Private status",
+        "shop COMING_SOON status",
+        "orders, payments, store credit, 80.49 USD sample authorization",
+        "DNS",
+        "Vercel Production, settings, env vars, protection",
+        "main branch (no merge, no PR merge)",
+        "public homepage content"
+      ],
+      "evidence": [
+        "evidence/2026-10-02-commerce-preview/prototype/",
+        "evidence/2026-10-02-commerce-preview/react/",
+        "evidence/2026-10-02-commerce-preview/live-baseline/",
+        "evidence/2026-10-02-commerce-preview/report-backups/"
+      ],
+      "credentialsSaved": false
+    }
+  ],
+  "wave02ProductChecks": [
+    {
+      "checkedAt": "2026-10-01T23:32:24.016Z",
+      "scope": "Wave 02 products created in Fourthwall admin as Hidden (not published). No orders, payments or publishing.",
+      "method": "Fourthwall admin product designer via Claude in Chrome (file uploads); read-back via built-in browser",
+      "result": "PARTIAL",
+      "created": [
+        {
+          "key": "W2-TOTE",
+          "name": "SIGNAL - Studio Tote",
+          "offerId": "11c30deb-6d02-4590-82e6-83061fc4b21d",
+          "status": "HIDDEN",
+          "priceUsd": 29,
+          "baseCostUsdShown": 9.98,
+          "profitShownUsd": 19.02,
+          "base": "BagBase W101 cotton tote, Black, Printed (DTFx, Printful), front only",
+          "artwork": "assets/artwork/wave02-signal-studio-tote-front.png",
+          "placement": "auto-fit to 9.5x9.5 in front area; back blank",
+          "descriptionSaved": true
+        },
+        {
+          "key": "W2-GRAPHBOOK-SIGNAL",
+          "name": "PROJECT NOTES - SIGNAL / 01",
+          "offerId": "bad5cb61-ad27-4e4b-94a1-5bd769f19ab8",
+          "status": "HIDDEN",
+          "priceUsd": 24,
+          "baseCostUsdShown": 10.95,
+          "profitShownUsd": 13.05,
+          "base": "Spoke SP40004 spiral notebook, graph, 6x8 in",
+          "artwork": "assets/artwork/wave02-signal-graph-notebook-cover.png",
+          "placement": "art 6.03x8.04 in on 6.03x8.45 in template; canvas set to #181B1B (art edge colour) to avoid white bands",
+          "descriptionSaved": true
+        },
+        {
+          "key": "W2-GRAPHBOOK-SUBSURFACE",
+          "name": "PROJECT NOTES - SUBSURFACE / 02",
+          "offerId": "05b191f6-6d4a-474f-ac87-1c9e2edb5894",
+          "status": "HIDDEN",
+          "priceUsd": 24,
+          "baseCostUsdShown": 10.95,
+          "profitShownUsd": 13.05,
+          "base": "Spoke SP40004 spiral notebook, graph, 6x8 in",
+          "artwork": "assets/artwork/wave02-subsurface-graph-notebook-cover.png",
+          "placement": "same as SIGNAL; canvas #EBE7DF",
+          "descriptionSaved": true
+        },
+        {
+          "key": "W2-STICKERS",
+          "name": "OBJECT STUDIES - Six Marks",
+          "offerId": "185ce494-67e8-43ff-ac2c-f80186196ebd",
+          "status": "HIDDEN",
+          "priceUsd": 12,
+          "baseCostUsdShown": 5.05,
+          "profitShownUsd": 6.95,
+          "base": "Allcolor 5495 kiss-cut sticker sheet 5.83x8.27 in",
+          "artwork": "stickers layer: evidence/2026-10-02-wave02-products/wave02-sticker-sheet-stickers-layer.png (6 sticker PNGs composited at the placement-proof positions, transparent background); background layer: assets/artwork/wave02-sticker-backer.png",
+          "placement": "layout follows wave02-sticker-placement-proof.jpg; not a supplier-approved cut template",
+          "descriptionSaved": true
+        },
+        {
+          "key": "W2-POSTER-SIGNAL",
+          "name": "WALL STUDIES - SIGNAL / 01",
+          "offerId": "04de8f0f-7b3e-430b-82b2-ca9448f82c77",
+          "status": "HIDDEN",
+          "priceUsd": 29,
+          "sizes": [
+            "18x24 only"
+          ],
+          "baseCostUsdShown": 13,
+          "profitShownUsd": 16,
+          "base": "Allcolor P001 enhanced matte poster (admin catalog showed no maintenance notice on 2026-10-02)",
+          "artwork": "assets/artwork/wave02-signal-poster-v2.png",
+          "placement": "exact 18x24 fit (5400x7200 px)",
+          "descriptionSaved": true
+        },
+        {
+          "key": "W2-POSTER-SUBSURFACE",
+          "name": "WALL STUDIES - SUBSURFACE / 02",
+          "offerId": null,
+          "status": "NOT_CREATED",
+          "result": "BLOCKED",
+          "reason": "Artwork upload step was refused by this session's permission check; per the denial the step was not retried another way. An unsaved designer draft (18x24 only, no artwork) was left; nothing was created.",
+          "artwork": "assets/artwork/wave02-subsurface-poster-v2.png"
+        }
+      ],
+      "variantIds": "NOT_RUN — the admin UI does not expose variant IDs; read later with get-offers-by-ids on the offer IDs above",
+      "existingDeskMats": {
+        "74c2ace1-4f7c-469b-a607-5555432019b4": "Private (unchanged)",
+        "97704a85-a6b6-4090-894f-a7b5bc71a374": "Private (unchanged)"
+      },
+      "untouched": [
+        "desk mats",
+        "shop COMING_SOON",
+        "theme",
+        "orders/payments/credit",
+        "DNS",
+        "Production",
+        "main"
+      ],
+      "copyNotes": "Customer copy adapted from product-copy.en.md; internal notes (test price, pending quotes) removed; only catalog-verified specs stated.",
+      "resetFixPr": {
+        "url": "https://github.com/LEISSON-DARKSSON/kpt-underground/pull/2",
+        "branch": "fix/globals-reset-cascade-layer",
+        "sha": "489b6ad306470f61dbbe8fa4db7c25fcb61b242a",
+        "deployment": "dpl_Eiy9pcQnvuWBnz3nUmPhpQvMachK",
+        "state": "draft, not merged",
+        "visualDiff": "evidence/2026-10-02-reset-fix-visual-diff/visual-diff.json"
+      },
+      "commercePreviewPr": {
+        "url": "https://github.com/LEISSON-DARKSSON/kpt-underground/pull/3",
+        "state": "draft, not merged"
+      }
+    }
+  ],
+  "liveStoreRelease": {
+    "date": "2026-10-02",
+    "pr": 4,
+    "branch": "feat/live-store-20261002",
+    "mergeCommit": "8ffa67ddcd6f591924ed672a2f15e882196130f1",
+    "productionDeployment": "dpl_62SZj23cz3Nf7qyNS3ys46Lw82vK",
+    "fourthwall": {
+      "productsPublic": 7,
+      "deskMatPriceUsd": 34,
+      "shopStatus": "LIVE"
+    },
+    "previewQa": [
+      {
+        "name": "catalog shows products",
+        "ok": true,
+        "info": "cards=7"
+      },
+      {
+        "name": "fonts loaded",
+        "ok": true,
+        "info": "Space Mono,Space Mono Fallback,Bebas Neue"
+      },
+      {
+        "name": "body bg #050505",
+        "ok": true,
+        "info": "rgb(5, 5, 5)"
+      },
+      {
+        "name": "card images load",
+        "ok": true,
+        "info": ""
+      },
+      {
+        "name": "desk mat first",
+        "ok": false,
+        "info": "project-notes-subsurface-02"
+      },
+      {
+        "name": "home shows shop grid",
+        "ok": true,
+        "info": "cards=6"
+      },
+      {
+        "name": "no artist copy on home",
+        "ok": true,
+        "info": ""
+      },
+      {
+        "name": "/artists -> /shop",
+        "ok": true,
+        "info": "https://kpt-underground-h9j6r7hop-leisson-creative.vercel.app/shop"
+      },
+      {
+        "name": "PDP price 34 USD",
+        "ok": true,
+        "info": "cents=3400"
+      },
+      {
+        "name": "cart row added",
+        "ok": true,
+        "info": ""
+      },
+      {
+        "name": "checkout api 200",
+        "ok": true,
+        "info": "status=200"
+      },
+      {
+        "name": "redirect to hosted checkout",
+        "ok": true,
+        "info": "https://keepitunderground-shop.fourthwall.com/checkout/?cartCurrency=USD&cartId=…"
+      },
+      {
+        "name": "no h-overflow / @1440",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @1440",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @1440",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow / @768",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @768",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @768",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow / @390",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @390",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @390",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow / @320",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @320",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @320",
+        "ok": true,
+        "info": "over=0"
+      }
+    ],
+    "productionQa": [
+      {
+        "name": "catalog shows products",
+        "ok": true,
+        "info": "cards=7"
+      },
+      {
+        "name": "fonts loaded",
+        "ok": true,
+        "info": "Space Mono,Space Mono Fallback,Bebas Neue"
+      },
+      {
+        "name": "body bg #050505",
+        "ok": true,
+        "info": "rgb(5, 5, 5)"
+      },
+      {
+        "name": "card images load",
+        "ok": true,
+        "info": ""
+      },
+      {
+        "name": "desk mat first",
+        "ok": true,
+        "info": "keep-it-underground-subsurface-desk-mat"
+      },
+      {
+        "name": "home shows shop grid",
+        "ok": true,
+        "info": "cards=6"
+      },
+      {
+        "name": "no artist copy on home",
+        "ok": true,
+        "info": ""
+      },
+      {
+        "name": "/artists -> /shop",
+        "ok": true,
+        "info": "https://keepitunderground.com/shop"
+      },
+      {
+        "name": "PDP price 34 USD",
+        "ok": true,
+        "info": "cents=3400"
+      },
+      {
+        "name": "cart row added",
+        "ok": true,
+        "info": ""
+      },
+      {
+        "name": "checkout api 200",
+        "ok": true,
+        "info": "status=200"
+      },
+      {
+        "name": "redirect to hosted checkout",
+        "ok": true,
+        "info": "https://keepitunderground-shop.fourthwall.com/checkout/?cartCurrency=USD&cartId=…"
+      },
+      {
+        "name": "no h-overflow / @1440",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @1440",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @1440",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow / @768",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @768",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @768",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow / @390",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @390",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @390",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow / @320",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop @320",
+        "ok": true,
+        "info": "over=0"
+      },
+      {
+        "name": "no h-overflow /shop/signal-studio-tote @320",
+        "ok": true,
+        "info": "over=0"
+      }
+    ],
+    "realBrowserCheckout": "PASS (checkout page reached, no order/payment)",
+    "blocked": [
+      "SUBSURFACE wall poster upload denied by permission classifier"
+    ]
+  },
+  "wave03ProductChecks": {
+    "date": "2026-10-02",
+    "products": [
+      {
+        "key": "W2-WALL-STUDIES-SUBSURFACE",
+        "name": "WALL STUDIES - SUBSURFACE / 02",
+        "offerId": "c0d71bed-0a9e-4e80-8518-061cdb58ac8b",
+        "base": "Allcolor P001 Enhanced Matte Paper Poster 18x24",
+        "baseCostUsd": 13,
+        "priceUsd": 29,
+        "file": "W2-SUBSURFACE-POSTER.png",
+        "fileSha256": "3dc210e1a2cae61fd833125f86ff15e72ca01092f47801d4bf97bb4816d9e57b",
+        "visibility": "PRIVATE",
+        "flow": "designer Save as hidden -> Private within seconds (owner decision)",
+        "verified": "admin list shows Private; product page selling price re-read after save; storefront collections/all still 7 PUBLIC"
+      },
+      {
+        "key": "W3-TRANSIT-SIGNAL",
+        "name": "TRANSIT - SIGNAL Laptop Sleeve",
+        "offerId": "5551ad84-b3c5-4af9-bc6a-05de2349de57",
+        "base": "Allcolor LS0042 Laptop Sleeve 13in (15in removed)",
+        "baseCostUsd": 21.16,
+        "priceUsd": 39,
+        "file": "W3-TRANSIT-SIGNAL-SLEEVE-13in-safe.png",
+        "note": "padded to print area at 72% so all content sits inside the designer safe area; canvas #181B1B",
+        "fileSha256": "089b1a05810f363f5dab9abf851fad385a6d835efa66c9163bf26731363733dc",
+        "visibility": "PRIVATE",
+        "flow": "designer Save as hidden -> Private within seconds (owner decision)",
+        "verified": "admin list shows Private; product page selling price re-read after save; storefront collections/all still 7 PUBLIC"
+      },
+      {
+        "key": "W3-TRANSIT-SUBSURFACE",
+        "name": "TRANSIT - SUBSURFACE Laptop Sleeve",
+        "offerId": "c802ed05-237f-4eda-9e10-416640f92907",
+        "base": "Allcolor LS0042 Laptop Sleeve 13in (15in removed)",
+        "baseCostUsd": 21.16,
+        "priceUsd": 39,
+        "file": "W3-TRANSIT-SUBSURFACE-SLEEVE-13in-safe.png",
+        "note": "same padding; canvas #EBE7DF",
+        "fileSha256": "654c65de64b74fe2adef9bd550489275049c783b938b12f529397870cf92f023",
+        "visibility": "PRIVATE",
+        "flow": "designer Save as hidden -> Private within seconds (owner decision)",
+        "verified": "admin list shows Private; product page selling price re-read after save; storefront collections/all still 7 PUBLIC"
+      },
+      {
+        "key": "W3-NIGHT-SHIFT",
+        "name": "NIGHT SHIFT - Studio Mug",
+        "offerId": "2b546ac7-c52a-48be-9a8e-7a3f27eb7e0c",
+        "base": "Mugz WGM79B Black Glossy Mug 11oz (15oz removed)",
+        "baseCostUsd": 8.95,
+        "priceUsd": 24,
+        "file": "W3-NIGHT-SHIFT-MUG-v2.png",
+        "note": "v2 ring motif redrawn from contact sheet (owner-approved direction); placed in designer Front zone",
+        "fileSha256": "d047605c7bfadc3a635eb8fa8a8e617b2ab7fe885dab983ebee47f8f7e08ccc0",
+        "visibility": "PRIVATE",
+        "flow": "designer Save as hidden -> Private within seconds (owner decision)",
+        "verified": "admin list shows Private; product page selling price re-read after save; storefront collections/all still 7 PUBLIC"
+      },
+      {
+        "key": "W3-FIELD",
+        "name": "FIELD / 03 - Water Bottle",
+        "offerId": "c61e4fb7-7796-4aa3-be8d-132ebc51dd86",
+        "base": "Spoke H2Go Bolt BP20033 710ml, UV print, ships from US",
+        "baseCostUsd": 13.45,
+        "priceUsd": 29,
+        "file": "W3-FIELD-BOTTLE-v2.png",
+        "note": "v2 ring motif; no insulation claimed",
+        "fileSha256": "eae22fe85c0bead4cb81ea78df139eef7f39941e6c49479b6099a7cf940a5bba",
+        "visibility": "PRIVATE",
+        "flow": "designer Save as hidden -> Private within seconds (owner decision)",
+        "verified": "admin list shows Private; product page selling price re-read after save; storefront collections/all still 7 PUBLIC"
+      },
+      {
+        "key": "W3-OFFLINE",
+        "name": "OFFLINE - Embroidered Beanie",
+        "offerId": "ee17a091-6316-4c50-ae07-a955af9583da",
+        "base": "Yupoong 1501KC Cuffed Beanie Black",
+        "baseCostUsd": 13.79,
+        "priceUsd": 29,
+        "file": "W3-OFFLINE-BEANIE.png",
+        "note": "Standard embroidery (6 colours max), threads White + Orange; no digitising fee shown",
+        "fileSha256": "ce5f27d21f1b05217ed54d8eb74d3ca01629e18049adbdc22c82c141992b7a74",
+        "visibility": "PRIVATE",
+        "flow": "designer Save as hidden -> Private within seconds (owner decision)",
+        "verified": "admin list shows Private; product page selling price re-read after save; storefront collections/all still 7 PUBLIC"
+      }
+    ],
+    "storefrontPublicCountAfter": 7,
+    "galleryQa": "PASS 54/54 images, 74/74 local links, 0 console errors, no overflow at 1440/768/390/320",
+    "packageVerify": "PASS (verify_package.py)"
+  },
+  "wave04ProductChecks": {
+    "date": "2026-10-02",
+    "status": "PUBLISHED_9_OF_9",
+    "products": [
+      {
+        "name": "KPT - Premium Hoodie",
+        "offerId": "caf3e2ed-8b80-4b29-bd94-46427a9fef39",
+        "priceUsd": 59,
+        "visibility": "PUBLIC",
+        "verification": "PASS"
+      },
+      {
+        "name": "KPT - Heavyweight Tee",
+        "offerId": "6c250dd6-5ebd-4a75-a9a5-d1bc584f177f",
+        "priceUsd": 35,
+        "visibility": "PUBLIC",
+        "verification": "PASS"
+      },
+      {
+        "name": "KPT - Crewneck",
+        "offerId": "9b4af8fc-347b-4e56-8808-2aacea619a32",
+        "priceUsd": 49,
+        "visibility": "PUBLIC",
+        "verification": "PASS"
+      },
+      {
+        "name": "KPT - Studio Tumbler",
+        "offerId": "37293c60-4496-4825-b359-356b5347902a",
+        "priceUsd": 39,
+        "visibility": "PUBLIC",
+        "verification": "PASS"
+      },
+      {
+        "name": "CONTROL - Mouse Pad",
+        "offerId": "f3e519ab-7b12-496b-959e-6aae2ef0f7eb",
+        "priceUsd": 19,
+        "visibility": "PUBLIC",
+        "verification": "PASS"
+      },
+      {
+        "name": "KPT - Crew Socks",
+        "offerId": "b37366cd-aa48-49d7-b20e-dedb8a0872c1",
+        "priceUsd": 19,
+        "visibility": "PUBLIC",
+        "verification": "PASS"
+      },
+      {
+        "name": "KPT - Beanie",
+        "offerId": "99cdfeba-2da7-46fe-ae2c-1d742fdc4c2a",
+        "priceUsd": 29,
+        "visibility": "PUBLIC",
+        "verification": "PASS"
+      }
+    ],
+    "blocked": [],
+    "storefrontPublicCount": 22,
+    "checkoutPage": 200,
+    "sampleQuality": "NOT_RUN",
+    "publishedAt": "2026-10-02",
+    "siteShopCards": 22,
+    "checkout": "cart 200 with kpt-beanie, checkout page 200, site checkout api 200",
+    "notes": "XL+ sizes carry Fourthwall size upcharge (+2/+4/+6 USD)",
+    "unblocked": [
+      {
+        "name": "KPT - MagSafe Tough Case",
+        "offerId": "83986574-4480-4619-8e71-2d61f4ef1bbc",
+        "base": "Allcolor 057 Matte",
+        "priceUsd": 29,
+        "marginUsd": 13.05,
+        "visibility": "PUBLIC",
+        "placement": "fill #000, image 3.40x6.80 units centred, 517 DPI"
+      },
+      {
+        "name": "KPT - Minimalist Backpack",
+        "offerId": "22aeebe6-04db-4468-9b37-f078eb90267b",
+        "base": "Sublicolor 601A",
+        "priceUsd": 69,
+        "marginUsd": 35.05,
+        "visibility": "PUBLIC",
+        "placement": "fill #0B0C0C all placements, image 11.4 units wide centred, black stitches"
+      }
+    ],
+    "uploadRoute": "Printful embedded designer: owner picks file in native dialog, Claude does placement/listing"
+  },
+  "shopBuyability20261002": {
+    "date": "2026-10-02",
+    "branch": "feat/shop-buyability-20261002",
+    "sha": "be5b569e680bce0f20df6bdc670b24e7a0f9638c",
+    "pr": 8,
+    "merged": false,
+    "previewDeployment": "dpl_141taFkDBQhVxSn4sEhVfWVztbBD",
+    "productionDeployment": "dpl_FFnnW693Hr4AWRF1aEioFYAtJUHU",
+    "productionSha": "febac3d0804ac6e4a1df0424a29711b74e34e67d",
+    "catalog": {
+      "publicOffers": 22,
+      "variants": 55,
+      "source": "Storefront collections/all/products read-only"
+    },
+    "tickets": {
+      "KPT-00": {
+        "status": "PASS",
+        "note": "main febac3d = prod dpl_FFnnW693 (docs-only on top of audit SHA e15e229); no open PRs; 22 public offers / 55 variants (read-only snapshot); baseline test:store, test:commerce-preview, test:docs, typecheck, lint, build all PASS"
+      },
+      "KPT-01": {
+        "status": "PASS",
+        "note": "no preselected size/model; grouped 18-model select; 4XL tee = $41 in buy box + cart (unit, local browser, real-data local build)"
+      },
+      "KPT-02": {
+        "status": "PARTIAL",
+        "note": "Fourthwall SIZE_AND_FIT/MORE_DETAILS/RETURNS rendered at the choice; tee/hoodie/crewneck have NO size data in Fourthwall -> honest 'size chart not published' notice; owner must add supplier size charts; no inch/cm toggle"
+      },
+      "KPT-03": {
+        "status": "PASS",
+        "note": "unknown slug 404 (prod today 200 = soft 404), upstream 500/429/bad JSON/timeout -> 5xx + retry; listed slug never 404 (cross-check); real HTTP via test:http + real-data run"
+      },
+      "KPT-04": {
+        "status": "PASS",
+        "note": "fail-closed currency/visibility/stock, malformed catalog != empty, origin 403, qty>10 refused, 409 PRICE_CHANGED before cart, 413 cap; test:http 13/13"
+      },
+      "KPT-05": {
+        "status": "PASS",
+        "note": "/help + footer links to live Fourthwall Returns/Terms/Privacy/Contact (all 200); trust lines at buy button; no unproven promises (content gate test)"
+      },
+      "KPT-06": {
+        "status": "PASS",
+        "note": "All 22 / Desk&Studio 9 / Wear 6 / Carry 5 / Wall Art 2, URL state, Back restore, search + price sort, 6 Studio picks; real data 22 cards"
+      },
+      "KPT-07": {
+        "status": "PARTIAL",
+        "note": "type + decisive attribute, short name, whole image (object-contain); apparel back print not surfaced (back image cannot be identified from API data)"
+      },
+      "KPT-08": {
+        "status": "PASS",
+        "note": "one selection drives gallery/price/cart; iPhone 15 Pro shows its own 2 images (real data); 8 thumbs + more"
+      },
+      "KPT-09": {
+        "status": "PARTIAL",
+        "note": "dataLayer adapter + schema, no purchase in browser, PII scrub, view_item_list once; BLOCKED on owner choosing the analytics tool/consent; purchase source (Fourthwall integration) not configured"
+      },
+      "KPT-10": {
+        "status": "NOT_RUN",
+        "note": "needs Fourthwall cost/quote data; no prices touched"
+      },
+      "KPT-11": {
+        "status": "NOT_RUN",
+        "note": "Signal claims need owner confirmation of what actually exists"
+      },
+      "KPT-12": {
+        "status": "PARTIAL",
+        "note": "Product/Offer|AggregateOffer JSON-LD, canonical, sitemap 22, robots; Rich Results Test + Search Console resubmit need production"
+      },
+      "KPT-13": {
+        "status": "PARTIAL",
+        "note": "intro loader removed from buy path (was 2.8s+0.8s overlay on every page; stuck without JS); no overflow 320-1440, fonts loaded; CWV lab medians NOT_RUN; product pages are no-store in prod too (follow-up)"
+      },
+      "KPT-14": {
+        "status": "PASS",
+        "note": "storage shape validation, 21st item refused w/o eviction, price reconcile, pending lock, bfcache, cart kept after redirect"
+      },
+      "KPT-15": {
+        "status": "BLOCKED",
+        "note": "Vercel Preview dpl_141taFkD READY but Preview has no Storefront token for this branch (token scoped to an old branch) -> preview cannot read the catalog; same SHA verified locally against real Fourthwall (9/9); production needs separate release approval"
+      },
+      "KPT-16": {
+        "status": "NOT_RUN",
+        "note": "commercial test starts after release"
+      },
+      "KPT-17": {
+        "status": "NOT_RUN",
+        "note": "monitoring not activated without owner order"
+      }
+    },
+    "ownerDecisions": [
+      "preview token scope",
+      "release approval",
+      "apparel size charts in Fourthwall",
+      "analytics tool + consent",
+      "phone case description says model is chosen at checkout"
+    ]
+  }
+}

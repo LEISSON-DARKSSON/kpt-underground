@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "at": "2026-10-02T05:54:01.922Z",
+    "tool": "lighthouse@12 mobile preset, simulated throttling, headless Chrome on owner's Windows machine",
+    "note": "lab medians of 3; not field CWV; INP not measurable in lab"
+  },
+  "rows": [
+    {
+      "url": "https://keepitunderground.com/",
+      "runs": 3,
+      "score": 83,
+      "lcpMs": 4711,
+      "cls": 0,
+      "tbtMs": 5,
+      "fcpMs": 963,
+      "kb": 775,
+      "lcpElement": "<p style=\"max-width: 560px; font-size: clamp(14px, 1.8vw, 18px); line-height: 1.85;\">"
+    },
+    {
+      "url": "https://keepitunderground.com/shop",
+      "runs": 3,
+      "score": 81,
+      "lcpMs": 5016,
+      "cls": 0,
+      "tbtMs": 39,
+      "fcpMs": 1428,
+      "kb": 817,
+      "lcpElement": "<p class=\"max-w-sm font-mono text-sm leading-relaxed text-slate\">"
+    },
+    {
+      "url": "https://keepitunderground.com/shop/kpt-heavyweight-tee",
+      "runs": 3,
+      "score": 94,
+      "lcpMs": 3018,
+      "cls": 0,
+      "tbtMs": 30,
+      "fcpMs": 995,
+      "kb": 739,
+      "lcpElement": "<img src=\"https://imgproxy.fourthwall.dev/9YSfZGNwwHMjXpmzcOZgBSMGJK99nVaRP-YCkwCdaj…\" alt=\"KPT - Heavyweight Tee — imag"
+    },
+    {
+      "url": "https://keepitunderground.com/shop/keep-it-underground-signal-01-desk-mat",
+      "runs": 3,
+      "score": 85,
+      "lcpMs": 3903,
+      "cls": 0,
+      "tbtMs": 17,
+      "fcpMs": 1099,
+      "kb": 919,
+      "lcpElement": "<img src=\"https://imgproxy.fourthwall.dev/rInCEwJ7ht2ZhdbzbUx_XsfIgK4e9s4jd7GWLc08Hu…\" alt=\"KEEP IT UNDERGROUND Signal 0"
+    }
+  ]
+}

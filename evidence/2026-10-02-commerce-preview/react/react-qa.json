@@ -1,0 +1,864 @@
+{
+  "checkedAt": "2026-10-01T22:51:50.242Z",
+  "target": "https://kpt-underground-5iqbh90k6-leisson-creative.vercel.app/commerce-preview/shop",
+  "scope": "React port on hosted Vercel Preview; Chrome headless; online fonts via next/font",
+  "passed": 162,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "1440:shop 200",
+      "status": 200
+    },
+    {
+      "name": "1440:shop X-Robots-Tag noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:Bebas Neue (next/font) loaded and on h1",
+      "status": "PASS",
+      "loaded": [
+        "Space Mono|400",
+        "Space Mono Fallback|normal",
+        "Bebas Neue|400"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "body": "\"Space Mono\", \"Space Mono Fallback\", monospace",
+      "bg": "rgb(5, 5, 5)",
+      "h1Color": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "1440:Space Mono 400 in use + 700 face loads",
+      "status": "PASS",
+      "fams": "Space Mono|400 Space Mono Fallback|normal Bebas Neue|400",
+      "bold": [
+        "Space Mono|700|loaded"
+      ]
+    },
+    {
+      "name": "1440:ink background #050505",
+      "status": "PASS",
+      "bg": "rgb(5, 5, 5)"
+    },
+    {
+      "name": "1440:green accent #8ACE00",
+      "status": "PASS",
+      "c": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "1440:shop no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:grid columns (2 side-by-side)",
+      "status": "PASS",
+      "rows": 1
+    },
+    {
+      "name": "1440:artwork loaded, proportion 1600x838 kept",
+      "status": "PASS",
+      "ratios": [
+        {
+          "r": 1.906614785992218,
+          "ok": true
+        },
+        {
+          "r": 1.906614785992218,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "1440:legacy cart trigger hidden",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SIGNAL offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SIGNAL main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.907216494845361,
+      "src": "/commerce-preview/assets/signal-art.webp",
+      "ok": true
+    },
+    {
+      "name": "1440:SIGNAL thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3341346153846154,
+      "src": "/commerce-preview/assets/signal-mockup.webp"
+    },
+    {
+      "name": "1440:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SUBSURFACE offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SUBSURFACE main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.907216494845361,
+      "src": "/commerce-preview/assets/subsurface-art.webp",
+      "ok": true
+    },
+    {
+      "name": "1440:SUBSURFACE thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3341346153846154,
+      "src": "/commerce-preview/assets/subsurface-mockup.webp"
+    },
+    {
+      "name": "1440:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:pdp quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:cart dialog opens modal",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:planned subtotal 2x34",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:cart qty recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:Tab stays inside cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "1440:visible focus ring",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "1440:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:focus returns to Add button",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:body scroll unlocked",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:two distinct designs survive client navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:handoff subtotal carried",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:handoff checkout disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:no inputs/forms anywhere",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:Remove signal clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:Remove subsurface clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:no JS errors / failed own requests",
+      "status": "PASS",
+      "errors": [
+        "console: Failed to load resource: the server responded with a status of 404 ()"
+      ],
+      "failed": []
+    },
+    {
+      "name": "1440:no checkout/third-party requests",
+      "status": "PASS",
+      "badReq": []
+    },
+    {
+      "name": "1440:no audio play() in preview (preload only)",
+      "status": "PASS",
+      "mediaRequests": 4,
+      "toolbarRequests": 4
+    },
+    {
+      "name": "768:shop 200",
+      "status": 200
+    },
+    {
+      "name": "768:shop X-Robots-Tag noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "768:Bebas Neue (next/font) loaded and on h1",
+      "status": "PASS",
+      "loaded": [
+        "Space Mono|400",
+        "Space Mono Fallback|normal",
+        "Bebas Neue|400"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "body": "\"Space Mono\", \"Space Mono Fallback\", monospace",
+      "bg": "rgb(5, 5, 5)",
+      "h1Color": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "768:Space Mono 400 in use + 700 face loads",
+      "status": "PASS",
+      "fams": "Space Mono|400 Space Mono Fallback|normal Bebas Neue|400",
+      "bold": [
+        "Space Mono|700|loaded"
+      ]
+    },
+    {
+      "name": "768:ink background #050505",
+      "status": "PASS",
+      "bg": "rgb(5, 5, 5)"
+    },
+    {
+      "name": "768:green accent #8ACE00",
+      "status": "PASS",
+      "c": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "768:shop no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "768:grid columns (stacked)",
+      "status": "PASS",
+      "rows": 2
+    },
+    {
+      "name": "768:artwork loaded, proportion 1600x838 kept",
+      "status": "PASS",
+      "ratios": [
+        {
+          "r": 1.9077809798270893,
+          "ok": true
+        },
+        {
+          "r": 1.9077809798270893,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "768:legacy cart trigger hidden",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SIGNAL offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SIGNAL main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.9067055393586005,
+      "src": "/commerce-preview/assets/signal-art.webp",
+      "ok": true
+    },
+    {
+      "name": "768:SIGNAL thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3319755600814664,
+      "src": "/commerce-preview/assets/signal-mockup.webp"
+    },
+    {
+      "name": "768:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SUBSURFACE offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SUBSURFACE main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.9067055393586005,
+      "src": "/commerce-preview/assets/subsurface-art.webp",
+      "ok": true
+    },
+    {
+      "name": "768:SUBSURFACE thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3319755600814664,
+      "src": "/commerce-preview/assets/subsurface-mockup.webp"
+    },
+    {
+      "name": "768:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:pdp quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "768:cart dialog opens modal",
+      "status": "PASS"
+    },
+    {
+      "name": "768:planned subtotal 2x34",
+      "status": "PASS"
+    },
+    {
+      "name": "768:cart qty recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "768:Tab stays inside cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "768:visible focus ring",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "768:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "768:focus returns to Add button",
+      "status": "PASS"
+    },
+    {
+      "name": "768:body scroll unlocked",
+      "status": "PASS"
+    },
+    {
+      "name": "768:two distinct designs survive client navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "768:handoff subtotal carried",
+      "status": "PASS"
+    },
+    {
+      "name": "768:handoff checkout disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "768:no inputs/forms anywhere",
+      "status": "PASS"
+    },
+    {
+      "name": "768:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:Remove signal clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "768:Remove subsurface clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "768:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "768:no JS errors / failed own requests",
+      "status": "PASS",
+      "errors": [],
+      "failed": []
+    },
+    {
+      "name": "768:no checkout/third-party requests",
+      "status": "PASS",
+      "badReq": []
+    },
+    {
+      "name": "768:no audio play() in preview (preload only)",
+      "status": "PASS",
+      "mediaRequests": 4,
+      "toolbarRequests": 4
+    },
+    {
+      "name": "390:shop 200",
+      "status": 200
+    },
+    {
+      "name": "390:shop X-Robots-Tag noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "390:Bebas Neue (next/font) loaded and on h1",
+      "status": "PASS",
+      "loaded": [
+        "Space Mono|400",
+        "Space Mono Fallback|normal",
+        "Bebas Neue|400"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "body": "\"Space Mono\", \"Space Mono Fallback\", monospace",
+      "bg": "rgb(5, 5, 5)",
+      "h1Color": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "390:Space Mono 400 in use + 700 face loads",
+      "status": "PASS",
+      "fams": "Space Mono|400 Space Mono Fallback|normal Bebas Neue|400",
+      "bold": [
+        "Space Mono|700|loaded"
+      ]
+    },
+    {
+      "name": "390:ink background #050505",
+      "status": "PASS",
+      "bg": "rgb(5, 5, 5)"
+    },
+    {
+      "name": "390:green accent #8ACE00",
+      "status": "PASS",
+      "c": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "390:shop no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "390:grid columns (stacked)",
+      "status": "PASS",
+      "rows": 2
+    },
+    {
+      "name": "390:artwork loaded, proportion 1600x838 kept",
+      "status": "PASS",
+      "ratios": [
+        {
+          "r": 1.910828025477707,
+          "ok": true
+        },
+        {
+          "r": 1.910828025477707,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "390:legacy cart trigger hidden",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SIGNAL offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SIGNAL main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.908496732026144,
+      "src": "/commerce-preview/assets/signal-art.webp",
+      "ok": true
+    },
+    {
+      "name": "390:SIGNAL thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3333333333333333,
+      "src": "/commerce-preview/assets/signal-mockup.webp"
+    },
+    {
+      "name": "390:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SUBSURFACE offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SUBSURFACE main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.908496732026144,
+      "src": "/commerce-preview/assets/subsurface-art.webp",
+      "ok": true
+    },
+    {
+      "name": "390:SUBSURFACE thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3333333333333333,
+      "src": "/commerce-preview/assets/subsurface-mockup.webp"
+    },
+    {
+      "name": "390:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:pdp quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "390:cart dialog opens modal",
+      "status": "PASS"
+    },
+    {
+      "name": "390:planned subtotal 2x34",
+      "status": "PASS"
+    },
+    {
+      "name": "390:cart qty recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "390:Tab stays inside cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "390:visible focus ring",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "390:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "390:focus returns to Add button",
+      "status": "PASS"
+    },
+    {
+      "name": "390:body scroll unlocked",
+      "status": "PASS"
+    },
+    {
+      "name": "390:two distinct designs survive client navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "390:handoff subtotal carried",
+      "status": "PASS"
+    },
+    {
+      "name": "390:handoff checkout disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "390:no inputs/forms anywhere",
+      "status": "PASS"
+    },
+    {
+      "name": "390:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:Remove signal clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "390:Remove subsurface clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "390:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "390:no JS errors / failed own requests",
+      "status": "PASS",
+      "errors": [],
+      "failed": []
+    },
+    {
+      "name": "390:no checkout/third-party requests",
+      "status": "PASS",
+      "badReq": []
+    },
+    {
+      "name": "390:no audio play() in preview (preload only)",
+      "status": "PASS",
+      "mediaRequests": 4,
+      "toolbarRequests": 4
+    },
+    {
+      "name": "320:shop 200",
+      "status": 200
+    },
+    {
+      "name": "320:shop X-Robots-Tag noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "320:Bebas Neue (next/font) loaded and on h1",
+      "status": "PASS",
+      "loaded": [
+        "Space Mono|400",
+        "Space Mono Fallback|normal",
+        "Bebas Neue|400"
+      ],
+      "h1": "\"Bebas Neue\", \"Bebas Neue Fallback\", sans-serif",
+      "body": "\"Space Mono\", \"Space Mono Fallback\", monospace",
+      "bg": "rgb(5, 5, 5)",
+      "h1Color": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "320:Space Mono 400 in use + 700 face loads",
+      "status": "PASS",
+      "fams": "Space Mono|400 Space Mono Fallback|normal Bebas Neue|400",
+      "bold": [
+        "Space Mono|700|loaded"
+      ]
+    },
+    {
+      "name": "320:ink background #050505",
+      "status": "PASS",
+      "bg": "rgb(5, 5, 5)"
+    },
+    {
+      "name": "320:green accent #8ACE00",
+      "status": "PASS",
+      "c": "rgb(138, 206, 0)"
+    },
+    {
+      "name": "320:shop no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "320:grid columns (stacked)",
+      "status": "PASS",
+      "rows": 2
+    },
+    {
+      "name": "320:artwork loaded, proportion 1600x838 kept",
+      "status": "PASS",
+      "ratios": [
+        {
+          "r": 1.9166666666666667,
+          "ok": true
+        },
+        {
+          "r": 1.9166666666666667,
+          "ok": true
+        }
+      ]
+    },
+    {
+      "name": "320:legacy cart trigger hidden",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SIGNAL offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SIGNAL main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.9137931034482758,
+      "src": "/commerce-preview/assets/signal-art.webp",
+      "ok": true
+    },
+    {
+      "name": "320:SIGNAL thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3293413173652695,
+      "src": "/commerce-preview/assets/signal-mockup.webp"
+    },
+    {
+      "name": "320:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SUBSURFACE offer id",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SUBSURFACE main image own artwork, not stretched",
+      "status": "PASS",
+      "r": 1.9137931034482758,
+      "src": "/commerce-preview/assets/subsurface-art.webp",
+      "ok": true
+    },
+    {
+      "name": "320:SUBSURFACE thumbnail switches to mockup 4:3",
+      "status": "PASS",
+      "r": 1.3293413173652695,
+      "src": "/commerce-preview/assets/subsurface-mockup.webp"
+    },
+    {
+      "name": "320:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:pdp quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "320:cart dialog opens modal",
+      "status": "PASS"
+    },
+    {
+      "name": "320:planned subtotal 2x34",
+      "status": "PASS"
+    },
+    {
+      "name": "320:cart qty recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "320:Tab stays inside cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "320:visible focus ring",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px rgb(138, 206, 0)",
+      "tag": "A"
+    },
+    {
+      "name": "320:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "320:focus returns to Add button",
+      "status": "PASS"
+    },
+    {
+      "name": "320:body scroll unlocked",
+      "status": "PASS"
+    },
+    {
+      "name": "320:two distinct designs survive client navigation",
+      "status": "PASS"
+    },
+    {
+      "name": "320:handoff subtotal carried",
+      "status": "PASS"
+    },
+    {
+      "name": "320:handoff checkout disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "320:no inputs/forms anywhere",
+      "status": "PASS"
+    },
+    {
+      "name": "320:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:Remove signal clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "320:Remove subsurface clickable (no overlap)",
+      "status": "PASS"
+    },
+    {
+      "name": "320:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "320:no JS errors / failed own requests",
+      "status": "PASS",
+      "errors": [],
+      "failed": []
+    },
+    {
+      "name": "320:no checkout/third-party requests",
+      "status": "PASS",
+      "badReq": []
+    },
+    {
+      "name": "320:no audio play() in preview (preload only)",
+      "status": "PASS",
+      "mediaRequests": 4,
+      "toolbarRequests": 4
+    },
+    {
+      "name": "reduced-motion: card image transition effectively off",
+      "status": "PASS",
+      "t": "1e-05s"
+    },
+    {
+      "name": "reduced-motion: content visible (no hidden reveal)",
+      "status": "PASS"
+    }
+  ]
+}

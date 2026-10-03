@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-02T12:38:06.709Z",
+  "destination": "350 5th Ave, New York, NY 10118 (public commercial address, test only)",
+  "results": [
+    {
+      "basket": "signal-x1",
+      "status": "READ",
+      "notes": [
+        "checkout page reached"
+      ],
+      "filled": {
+        "email": false,
+        "first": false,
+        "last": false,
+        "address": false,
+        "city": false,
+        "zip": false
+      },
+      "moneyLines": [
+        "Shipping",
+        "Delivery",
+        "Enter your shipping address to show delivery options",
+        "$34.00",
+        "Subtotal (1 item)",
+        "$34.00",
+        "Total",
+        "$34.00",
+        "Updated total price",
+        "$34.00"
+      ]
+    }
+  ]
+}

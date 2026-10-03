@@ -1,0 +1,28 @@
+
+> kpt-underground@0.1.0 test:http
+> node tests/e2e/http-contract.mjs
+
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: spawn C:\Program Files\nodejs\node.exe ENOENT
+    at ChildProcess._handle.onexit (node:internal/child_process:285:19)
+    at onErrorNT (node:internal/child_process:483:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+Emitted 'error' event on ChildProcess instance at:
+    at ChildProcess._handle.onexit (node:internal/child_process:291:12)
+    at onErrorNT (node:internal/child_process:483:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  errno: -4058,
+  code: 'ENOENT',
+  syscall: 'spawn C:\\Program Files\\nodejs\\node.exe',
+  path: 'C:\\Program Files\\nodejs\\node.exe',
+  spawnargs: [
+    '/C:/PROJECTS/kpt-underground-live/node_modules/next/dist/bin/next',
+    'build'
+  ]
+}
+
+Node.js v25.6.1
+test:http exit 1

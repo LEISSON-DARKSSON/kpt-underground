@@ -1,0 +1,12 @@
+{
+  "currency": "USD",
+  "pricing_status": "test_hypothesis_only_not_applied_live",
+  "products": [
+    {"key": "W2-TOTE", "name": "SIGNAL — Studio Tote", "target_retail": 29},
+    {"key": "W2-GRAPHBOOK-SIGNAL", "name": "PROJECT NOTES — SIGNAL / 01", "target_retail": 24},
+    {"key": "W2-GRAPHBOOK-SUBSURFACE", "name": "PROJECT NOTES — SUBSURFACE / 02", "target_retail": 24},
+    {"key": "W2-STICKERS", "name": "OBJECT STUDIES — Six Marks", "target_retail": 12},
+    {"key": "W2-POSTER-SIGNAL", "name": "WALL STUDIES — SIGNAL / 01", "target_retail": 29},
+    {"key": "W2-POSTER-SUBSURFACE", "name": "WALL STUDIES — SUBSURFACE / 02", "target_retail": 29}
+  ]
+}

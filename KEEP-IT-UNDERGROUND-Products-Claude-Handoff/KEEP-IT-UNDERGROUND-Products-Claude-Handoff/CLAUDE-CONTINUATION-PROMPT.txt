@@ -1,0 +1,48 @@
+Jätka KEEP IT UNDERGROUND uute toodete lisamise tööd kaasasolevast paketist.
+
+Töökaust sisaldab:
+- SVG vektorfailid (`assets/source/`)
+- PNG tööfailid (`assets/artwork/`)
+- preview'd ja mockup'id
+- `product-registry.json` hinnainfo, kataloogi-ID-de ja piirangutega
+- `product-copy.en.md` tootekirjelduste mustanditega
+- `status/current-state.md` hetkeolukorra kokkuvõttega
+
+EESMÄRK
+Lisa strateegiliselt järgmised uued tooted Fourthwalli poodi, ilma olemasolevaid desk mat tooteid rikkumata:
+1. SIGNAL — Studio Tote
+2. PROJECT NOTES — SIGNAL / 01
+3. PROJECT NOTES — SUBSURFACE / 02
+4. OBJECT STUDIES — Six Marks
+5. WALL STUDIES — SIGNAL / 01
+6. WALL STUDIES — SUBSURFACE / 02
+
+KRIITILISED PIIRANGUD
+- Ära muuda olemasolevaid desk mat tooteid.
+- Ära tee uusi makseid ega tellimusi.
+- Ära avalda uusi tooteid kohe. Loo need Hidden / Private / draft-olekus vastavalt tegelikule töövahendile.
+- Ära väida kinnitamata tootja omadusi.
+- Ära kasuta exploratory mockup'e tootmise ainsa alusfailina, kui vastav SVG/PNG source on olemas.
+- Ära ühenda seda ülesannet domeeni-, kassavoo- või saididisaini muudatustega.
+
+SOOVITATUD TÖÖVOOG
+1. Loe `product-registry.json` ja `README.et.md` täielikult.
+2. Kinnita Fourthwalli kataloogis iga toote tegelik saadavus.
+3. Alusta tote + notebooks + sticker sheet lisamisest. Posterid lisa alles siis, kui saadavus on kontrollitud.
+4. Kasuta `assets/source/` SVG-faile peamise kunstialusena; vajadusel kasuta `assets/artwork/` PNG versioone.
+5. Kasuta `product-copy.en.md` tekste ja kohanda neid vastavalt päris baastootele.
+6. Määra soovitatud testhinnad:
+   - Tote 29 USD
+   - Notebook 24 USD
+   - Sticker sheet 12 USD
+   - Poster 29 USD
+7. Pärast iga loomist salvesta:
+   - offer ID
+   - variant ID
+   - staatus
+   - rakendatud hind
+   - kasutatud kunstifail
+8. Lõpus anna üks koondraport PASS / BLOCKED / NOT_RUN seisudega.
+
+LOPUSEIS
+Oodatud lõpptulemus on, et uued tooted on kontol loodud, korrektse kunsti ja tekstiga, hinnastatud testhinnaga ning jäetud mitteavalikuks. Anna raporteeris kõik loodud ID-d ja kõik blockerid.

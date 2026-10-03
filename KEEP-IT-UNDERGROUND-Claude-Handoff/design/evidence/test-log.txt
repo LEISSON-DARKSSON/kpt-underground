@@ -1,0 +1,76 @@
+1440:home heading PASS
+1440:home no horizontal overflow PASS
+1440:two product cards PASS
+1440:artwork proportions preserved PASS
+1440:shop no horizontal overflow PASS
+1440:filter signal PASS
+1440:product ID bound PASS
+1440:product no overflow PASS
+1440:quantity increments PASS
+1440:cart opens PASS
+1440:two items subtotal PASS
+1440:quantity recalculates PASS
+1440:escape closes cart PASS
+1440:focus restored PASS
+1440:distinct designs in cart PASS
+1440:modal focus contained PASS
+1440:handoff correct subtotal PASS
+1440:payment disabled PASS
+1440:no payment/address inputs PASS
+1440:handoff no overflow PASS
+1440:empty cart state PASS
+1440:no JS errors PASS
+1440:no commerce network calls PASS
+1440:noindex PASS
+390:home heading PASS
+390:home no horizontal overflow PASS
+390:two product cards PASS
+390:artwork proportions preserved PASS
+390:shop no horizontal overflow PASS
+390:filter signal PASS
+390:product ID bound PASS
+390:product no overflow PASS
+390:quantity increments PASS
+390:cart opens PASS
+390:two items subtotal PASS
+390:quantity recalculates PASS
+390:escape closes cart PASS
+390:focus restored PASS
+390:distinct designs in cart PASS
+390:modal focus contained PASS
+390:handoff correct subtotal PASS
+390:payment disabled PASS
+390:no payment/address inputs PASS
+390:handoff no overflow PASS
+390:empty cart state PASS
+390:mobile menu PASS
+390:no JS errors PASS
+390:no commerce network calls PASS
+390:noindex PASS
+320:home heading PASS
+320:home no horizontal overflow PASS
+320:two product cards PASS
+320:artwork proportions preserved PASS
+320:shop no horizontal overflow PASS
+320:filter signal PASS
+320:product ID bound PASS
+320:product no overflow PASS
+320:quantity increments PASS
+320:cart opens PASS
+320:two items subtotal PASS
+320:quantity recalculates PASS
+320:escape closes cart PASS
+320:focus restored PASS
+320:distinct designs in cart PASS
+320:modal focus contained PASS
+320:handoff correct subtotal PASS
+320:payment disabled PASS
+320:no payment/address inputs PASS
+320:handoff no overflow PASS
+320:empty cart state PASS
+320:mobile menu PASS
+320:no JS errors PASS
+320:no commerce network calls PASS
+320:noindex PASS
+Reduced motion CSS disables transition PASS
+{"passed": 75, "failed": 0, "blocked": 3}

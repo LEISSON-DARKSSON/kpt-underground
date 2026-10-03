@@ -1,0 +1,45 @@
+{
+  "mode": "design-preview-only",
+  "checkedAt": "2026-10-01",
+  "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+  "products": [
+    {
+      "key": "signal",
+      "series": "SIGNAL",
+      "index": "01",
+      "title": "SIGNAL / 01",
+      "short": "Dark contours. A warm orange focal point.",
+      "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+      "customizationId": "cud_6nZ6I9XbTF6ZWVLwPt6tFQ",
+      "platformState": "PRIVATE",
+      "plannedPriceCents": 3400,
+      "observedPrivateVariantPrice": 16,
+      "currency": "USD",
+      "purchasableInPrototype": false,
+      "lead": "Make room for your next idea.",
+      "description": "SIGNAL / 01 combines a charcoal background, flowing contour lines and a warm orange focal point. The artwork sits mainly to the right and along the lower edge, leaving a quieter center for your keyboard and everyday work.",
+      "artAlt": "SIGNAL / 01: charcoal artwork with pale contour lines and an orange circle.",
+      "artNote": "An original graphic composition. The contours are artwork, not a measured acoustic signal."
+    },
+    {
+      "key": "subsurface",
+      "series": "SUBSURFACE",
+      "index": "02",
+      "title": "SUBSURFACE / 02",
+      "short": "Light surface. Architectural linework.",
+      "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+      "customizationId": "cud_j0r1BZMxQbm2L1iyKP0jFg",
+      "platformState": "PRIVATE",
+      "plannedPriceCents": 3400,
+      "observedPrivateVariantPrice": 16,
+      "currency": "USD",
+      "purchasableInPrototype": false,
+      "lead": "A different perspective for your everyday workspace.",
+      "description": "SUBSURFACE / 02 pairs a warm off-white background with an abstract architectural grid and an orange contour. The open center keeps the composition calm, while the geometry gives the right side a distinct visual focus.",
+      "artAlt": "SUBSURFACE / 02: warm off-white artwork with a gray architectural grid and orange accents.",
+      "artNote": "An original imagined surface, not a geographical map. The geometry is decorative artwork."
+    }
+  ]
+}

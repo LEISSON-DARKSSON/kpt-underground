@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "assetCount": 12,
+  "checks": [
+    {
+      "asset": "wave02-signal-poster-v2",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-signal-graph-notebook-cover",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-subsurface-poster-v2",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-subsurface-graph-notebook-cover",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-signal-studio-tote-front",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-sticker-01",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-sticker-02",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-sticker-03",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-sticker-04",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-sticker-05",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-sticker-06",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "asset": "wave02-sticker-backer",
+      "status": "PASS",
+      "errors": []
+    }
+  ],
+  "fontBinaries": [],
+  "limits": "Local structure/bytes only. No vendor-template, physical quality, actual store, conversion or checkout verification.",
+  "storeWrites": false
+}

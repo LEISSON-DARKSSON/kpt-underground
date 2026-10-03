@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "base": "https://kpt-underground-lu9p6zcw4-leisson-creative.vercel.app",
+    "chrome": "153.0.8010.53",
+    "at": "2026-10-02T04:54:20.684Z"
+  },
+  "results": [
+    {
+      "s": "FAIL",
+      "name": "unknown product → HTTP 404 (prod today: 200)",
+      "note": "status 500"
+    },
+    {
+      "s": "FAIL",
+      "name": "sitemap: 22 public product URLs",
+      "note": "got 0"
+    },
+    {
+      "s": "PASS",
+      "name": "all 22 product pages → 200 with JSON-LD price",
+      "note": ""
+    },
+    {
+      "s": "FAIL",
+      "name": "/shop @390: 22 cards, real images load, categories 9/6/5/2, no overflow, no loader",
+      "note": "cards 0"
+    },
+    {
+      "s": "FAIL",
+      "name": "/shop @1440: 22 cards, real images load, categories 9/6/5/2, no overflow, no loader",
+      "note": "cards 0"
+    },
+    {
+      "s": "FAIL",
+      "name": "tee: nothing preselected, 4XL → $41, cart row 4XL $41",
+      "note": "page.click: Timeout 30000ms exceeded."
+    },
+    {
+      "s": "FAIL",
+      "name": "checkout: server builds a hosted Fourthwall checkout link (intercepted, no order)",
+      "note": "page.waitForResponse: Timeout 30000ms exceeded while waiting for event \"response\""
+    },
+    {
+      "s": "FAIL",
+      "name": "phone case: model select → that model's images, cart gets that id",
+      "note": "page.selectOption: Timeout 30000ms exceeded."
+    },
+    {
+      "s": "PASS",
+      "name": "help page + policy links reachable",
+      "note": ""
+    }
+  ]
+}

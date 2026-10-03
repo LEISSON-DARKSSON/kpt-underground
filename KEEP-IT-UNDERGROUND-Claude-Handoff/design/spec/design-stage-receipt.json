@@ -1,0 +1,31 @@
+{
+  "outcome": "LOCAL_DESIGN_PREVIEW_READY_WITH_LIMITS",
+  "samplePayment": {
+    "authorizedMaximumUsd": 80.49,
+    "latestOwnerScreenshotTotalUsd": 80.67,
+    "overLimitUsd": 0.18,
+    "action": "NO_PAYMENT"
+  },
+  "remoteMutations": {
+    "fourthwallTheme": false,
+    "products": false,
+    "prices": false,
+    "orderOrPayment": false,
+    "github": false,
+    "vercelDeploy": false,
+    "dns": false
+  },
+  "artifacts": [
+    "index.html",
+    "storefront.css",
+    "storefront.js",
+    "next-preview/",
+    "CODEX-IMPLEMENTATION.md"
+  ],
+  "remaining": [
+    "Online source-font visual verification",
+    "Feature-branch integration and full application QA",
+    "Actual native Fourthwall checkout-branding preview"
+  ],
+  "userDataPolicy": "No address, phone, customer email, token, password, cookies or font binaries in package."
+}

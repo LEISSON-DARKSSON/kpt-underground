@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "preparedOn": "2026-10-02",
+  "purpose": "Claude continuation handoff; normalized read-only observations, not account changes or a payment receipt.",
+  "primaryGoal": "Preserve existing keepitunderground.com design and deliver a protected ecommerce design Preview in the existing project.",
+  "activeScope": "DESIGN_PREVIEW_ONLY",
+  "shop": {
+    "sourceKind": "FRESH_CONNECTED_ACCOUNT_READ",
+    "id": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+    "name": "KEEP IT UNDERGROUND",
+    "status": "COMING_SOON",
+    "currency": "USD",
+    "primaryDomain": "keepitunderground-shop.fourthwall.com",
+    "internalDomain": "keepitunderground-shop",
+    "logoUrl": null,
+    "dnsVerified": false,
+    "membershipsEnabled": false
+  },
+  "payout": {
+    "sourceKind": "FRESH_CONNECTED_ACCOUNT_READ",
+    "status": "ACTIVE",
+    "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+    "connectedAt": "2026-09-29T08:06:08.022561Z"
+  },
+  "products": {
+    "sourceKind": "FRESH_CONNECTED_ACCOUNT_READ",
+    "manifest": "state/product-manifest.json",
+    "countReturnedByExactIdRead": 2,
+    "statuses": [
+      "PRIVATE",
+      "PRIVATE"
+    ],
+    "descriptionsFull": true,
+    "printArtworkVisuallyCheckedThisHandoff": false
+  },
+  "orderCheck": {
+    "sourceKind": "FRESH_CONNECTED_ACCOUNT_READ",
+    "tool": "Fourthwalle.ecommerce_get-orders",
+    "filters": {
+      "offerIds": [
+        "74c2ace1-4f7c-469b-a607-5555432019b4",
+        "97704a85-a6b6-4090-894f-a7b5bc71a374"
+      ],
+      "page": 0,
+      "size": 5
+    },
+    "returnedItems": 0,
+    "interpretation": "No matching orders returned for this query. Not a global payment-account audit. No paid-order evidence supplied."
+  },
+  "sampleAuthorization": {
+    "sourceKind": "USER_EXPLICIT_APPROVAL",
+    "currency": "USD",
+    "maxTotal": 80.49,
+    "maxTotalCents": 8049,
+    "items": [
+      {
+        "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+        "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+        "quantity": 1
+      },
+      {
+        "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+        "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+        "quantity": 1
+      }
+    ],
+    "shippingMethod": "Standard",
+    "destination": "same previously confirmed Estonian address; address intentionally omitted",
+    "scope": "one sample order only; no automatic payment in present design work"
+  },
+  "sampleLatestQuote": {
+    "sourceKind": "OWNER_SCREENSHOT",
+    "currency": "USD",
+    "items": 26.0,
+    "shipping": 31.45,
+    "vat": 13.79,
+    "customsDuties": 6.8,
+    "processing": 2.63,
+    "total": 80.67,
+    "totalCents": 8067,
+    "exceedsApprovedCapByCents": 18,
+    "withinCap": false,
+    "isPaidReceipt": false,
+    "isCurrentLiveQuote": false,
+    "evidence": "evidence/owner-quote-80.67-financial-crop.png"
+  },
+  "serverReadVerification": {
+    "sourceKind": "USER_REPORTED_PASS",
+    "httpStatus": 200,
+    "contentType": "application/json",
+    "connection": "ok",
+    "identityPinned": true,
+    "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+    "shopName": "KEEP IT UNDERGROUND",
+    "salesReady": false,
+    "independentlyRepeatedThisHandoff": false,
+    "rootFixReported": "Bound local workspace to confirmed existing Vercel project and team.",
+    "oidcFileRemovalRetestReported": "PASS",
+    "automationBypassSecretNeededReported": false
+  },
+  "github": {
+    "sourceKind": "FRESH_CONNECTED_ACCOUNT_READ",
+    "repository": "LEISSON-DARKSSON/kpt-underground",
+    "mainSha": "99d224189757db3fad1882085fe43f7ff6508ccf",
+    "treeSha": "ed7c327712dd8a47dabb1989c60b1e084b1cff49",
+    "pr1": {
+      "number": 1,
+      "state": "closed",
+      "merged": true,
+      "draft": false,
+      "mergeCommitSha": "99d224189757db3fad1882085fe43f7ff6508ccf",
+      "mergedAt": "2026-09-24T04:41:30Z"
+    },
+    "openPullRequestsReturned": 0,
+    "userLocalWorktreeInspected": false,
+    "newDesignBranchCreatedThisHandoff": false
+  },
+  "vercel": {
+    "sourceKind": "FRESH_CONNECTED_DEPLOYMENT_LIST",
+    "team": "leisson-creative",
+    "teamId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+    "project": "kpt-underground",
+    "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+    "listSinceEpochMs": 1790226337000,
+    "returnedDeploymentsCount": 1,
+    "lastReturnedDeployment": {
+      "id": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app",
+      "state": "READY",
+      "target": null,
+      "sourceBranch": "feat/fourthwall-storefront-readonly-20260923",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d"
+    },
+    "designDeploymentObserved": false,
+    "environmentValuesInspectedThisHandoff": false
+  },
+  "design": {
+    "sourceKind": "BUNDLED_EXISTING_ARTIFACT",
+    "entry": "design/index.html",
+    "status": "LOCAL_INTERACTIVE_PROTOTYPE",
+    "deployedByThisHandoff": false,
+    "retailPriceIsPlannedOnly": true,
+    "realCheckout": false,
+    "externalFontsNeedOnlineVerification": true,
+    "historicalQa": {
+      "uiPass": 75,
+      "uiFail": 0,
+      "uiBlocked": 3,
+      "blockedReason": "Actual font rendering not verified; fallback used.",
+      "viewports": [
+        320,
+        390,
+        1440
+      ],
+      "fullAppBuild": false,
+      "realBuyerFlow": false
+    },
+    "thisHandoffQa": {
+      "previewGuardTestsPassed": 10,
+      "previewGuardTestsFailed": 0,
+      "uiSuiteRerun": false,
+      "printFileHashesMatched": true,
+      "report": "reports/preview-guard-rerun.txt"
+    }
+  },
+  "localOwnerReports": {
+    "sourceKind": "USER_NAMED_PATHS_ONLY",
+    "paths": [
+      "C:\\PROJECTS\\kpt-underground\\execution-report.md",
+      "C:\\PROJECTS\\kpt-underground\\execution-record.json"
+    ],
+    "readThisHandoff": false,
+    "modifiedThisHandoff": false
+  },
+  "nextActions": [
+    "Read handoff and existing local worktree without overwriting.",
+    "Implement protected design Preview from current verified main or existing design branch.",
+    "Verify real source fonts, responsive views and interaction gates.",
+    "Optionally port to existing React components within isolated branch.",
+    "Stage native Fourthwall styling only if isolated unpublished draft is demonstrated.",
+    "Produce evidence-backed Estonian report without publishing or paying."
+  ],
+  "noChangesThisHandoff": [
+    "Fourthwall products",
+    "prices",
+    "artwork",
+    "shop visibility",
+    "payout settings",
+    "orders",
+    "payments",
+    "GitHub code or branches",
+    "Vercel environments or deployments",
+    "DNS"
+  ],
+  "secretsIncluded": false,
+  "fontBinariesIncluded": false,
+  "limitations": [
+    "Fresh account reads are normalized; no personal address or account-creator PII copied.",
+    "Private product imagery was not visually reaudited in this handoff.",
+    "User local execution reports were not read.",
+    "Historical successful server JSON is user-provided evidence, not a repeated current test.",
+    "No conclusions about physical sample quality or sales demand."
+  ]
+}

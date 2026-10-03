@@ -1,0 +1,3239 @@
+{
+  "takenAtUtc": "2026-10-02T13:38:36.212Z",
+  "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+  "productKeys": [
+    "access",
+    "additionalInformation",
+    "createdAt",
+    "description",
+    "id",
+    "images",
+    "name",
+    "sizeGuide",
+    "slug",
+    "state",
+    "type",
+    "updatedAt",
+    "variants"
+  ],
+  "variantKeys": [
+    "attributes",
+    "compareAtPrice",
+    "dimensions",
+    "id",
+    "images",
+    "name",
+    "sku",
+    "stock",
+    "unitPrice",
+    "weight"
+  ],
+  "attributeKeys": [
+    "color",
+    "description",
+    "size"
+  ],
+  "products": [
+    {
+      "id": "22aeebe6-04db-4468-9b37-f078eb90267b",
+      "slug": "kpt-minimalist-backpack",
+      "name": "KPT - Minimalist Backpack",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 5,
+      "images": [
+        {
+          "id": "1d523355-9feb-4bb7-b95c-829069823095",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "49162904-c5b4-4ae0-a10c-21c3de493545",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "5ba455ca-cc8e-422a-9ad6-af07ecafdbec",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "4a96955c-4365-4893-9567-87cb9faee770",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "0dc331c5-5ea1-4824-b8c7-b50232cbb22f",
+          "w": 2000,
+          "h": 2000
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Made from 100% polyester</li><li>Fabric weight: 9.56 oz</li><li>Dimensions: 16.1″ (41 cm) in height, 12.2″ (31 cm) in width, and 5.5″ (14 cm) in diameter</li><li>Capacity: 5.3 gallons (20 l)</li><li>Max weight: 44 lbs (20 kg)</li><li>Water-resistant material</li><li>A large inside pocket with a separate pocket that fits a 15″ laptop</li><li>A hidden pocket with zipper on the back of the bag</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T03:15:45.623653Z",
+        "updatedAt": "2026-10-02T03:22:31.363164Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "3bda0730-41e0-4ac4-a975-b7c5459a2be6",
+          "name": "KPT - Minimalist Backpack - All-Over Print, One size",
+          "sku": "QS6U-9NDG0NE",
+          "attributes": {
+            "description": "All-Over Print, One size",
+            "color": {
+              "name": "All-Over Print",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "One size"
+            }
+          },
+          "price": {
+            "value": 69,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "1d523355-9feb-4bb7-b95c-829069823095",
+            "49162904-c5b4-4ae0-a10c-21c3de493545",
+            "5ba455ca-cc8e-422a-9ad6-af07ecafdbec",
+            "4a96955c-4365-4893-9567-87cb9faee770",
+            "0dc331c5-5ea1-4824-b8c7-b50232cbb22f"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "83986574-4480-4619-8e71-2d61f4ef1bbc",
+      "slug": "kpt-magsafe-tough-case",
+      "name": "KPT - MagSafe Tough Case",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 30,
+      "images": [
+        {
+          "id": "0b1d60c2-c9d9-454f-b87d-f15ba241414d",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "7652736c-289a-4c3c-a0b9-ad0776c97678",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "91fd2bfb-dce1-418f-87c8-06b5eee35c09",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "32d250bf-282a-4103-a5a0-691deb0cc880",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "0e5b39d7-98d9-406b-8779-7a91352c2b45",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "5dc42280-670b-475a-a6f9-9d4b5b59ba51",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "cbf21b4d-67be-4422-9617-6660ab2a864d",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "8074a8d3-818c-439d-8c9f-dbc1eae4f49a",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "39dac2bf-b7bf-4255-a63f-2a244849ecba",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "a8311b06-3f6b-4cbe-971a-b16fc362f65c",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "323ca9d4-02d7-49bb-83ab-acc0a873afc0",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "d1ad320d-e46f-4b45-819a-779be27246fa",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "81de51f8-8534-41f5-acd0-c0c75effdfd3",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "c37269e0-3b40-4be1-bdf3-77f920a909ab",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "77c69c34-6eab-4981-afb4-e3f5ad4b6936",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "73217302-4845-4bc2-bef5-02c946353b0f",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "a1f2c960-a7d7-4771-9691-4fa28ec27fee",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "50f7e53c-4fcd-4a88-8efb-cfffa9e0392e",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "aa151069-2b57-4a20-94a7-5fd0f095dc1b",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "6186c51d-a919-4bfc-87e6-40f96f9c8ff2",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "d9e0d02a-f323-41bc-9fd3-07746dcfdd17",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "71f5c539-f0f6-4df0-b9c1-0506108658f9",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "adc412b5-552c-4e39-8ba5-896ef0d39ef5",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "77d605a5-b197-46b2-8b61-2d1f4f7538c8",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "f52f66b6-bda6-4afe-b9ff-e24ee1a4be95",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "c25126bc-e2e3-4126-96e0-6be464428c82",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "d82b6af7-c497-4c10-9522-acb2949ebfc2",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "5d1641a8-a1a1-4237-8317-af0e6f933fe8",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "915386bd-14ec-4e91-8f4c-cd0ccf9d8c82",
+          "w": 2000,
+          "h": 2000
+        },
+        {
+          "id": "0519591b-0d8e-496b-b228-d0005ed2d519",
+          "w": 2000,
+          "h": 2000
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Polycarbonate outer shell</li><li>Thermoplastic Polyurethane inner liner</li><li>Dual-layer protection</li><li>Precisely aligned port openings</li><li>MagSafe® compatible</li><li>Induction charging-compatible</li><li>Customizable edges (3D wrap)</li><li>Matte or gloss finish</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T03:00:44.390305Z",
+        "updatedAt": "2026-10-02T03:22:54.695585Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "7f2b1e4e-bf08-42f8-a743-dd56447ebb5a",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 14 Pro Max",
+          "sku": "Q6N9-42RB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 14 Pro Max",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 14 Pro Max"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "0b1d60c2-c9d9-454f-b87d-f15ba241414d",
+            "7652736c-289a-4c3c-a0b9-ad0776c97678"
+          ]
+        },
+        {
+          "id": "d80ff202-dada-4846-9793-782073131b27",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 14",
+          "sku": "Q6N9-8WWB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 14",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 14"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "91fd2bfb-dce1-418f-87c8-06b5eee35c09",
+            "32d250bf-282a-4103-a5a0-691deb0cc880"
+          ]
+        },
+        {
+          "id": "ec60f66f-af4c-4719-a97e-14931327504a",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 14 Pro",
+          "sku": "Q6N9-ES8B0PH",
+          "attributes": {
+            "description": "Matte, iPhone 14 Pro",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 14 Pro"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "0e5b39d7-98d9-406b-8779-7a91352c2b45",
+            "5dc42280-670b-475a-a6f9-9d4b5b59ba51"
+          ]
+        },
+        {
+          "id": "de8f0767-849b-4bf9-a10e-043b2a959e7d",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 14 Plus",
+          "sku": "Q6N9-TELB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 14 Plus",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 14 Plus"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "cbf21b4d-67be-4422-9617-6660ab2a864d",
+            "8074a8d3-818c-439d-8c9f-dbc1eae4f49a"
+          ]
+        },
+        {
+          "id": "e33d93af-0d5b-4592-9a4a-e3cc8d0d2edf",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 15",
+          "sku": "Q6N9-K6YB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 15",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 15"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "39dac2bf-b7bf-4255-a63f-2a244849ecba",
+            "a8311b06-3f6b-4cbe-971a-b16fc362f65c"
+          ]
+        },
+        {
+          "id": "6d828beb-2d56-4813-8607-061efe01269f",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 15 Pro",
+          "sku": "Q6N9-37FB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 15 Pro",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 15 Pro"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "323ca9d4-02d7-49bb-83ab-acc0a873afc0",
+            "d1ad320d-e46f-4b45-819a-779be27246fa"
+          ]
+        },
+        {
+          "id": "f52bd197-5bbd-4f93-9ba6-5992a7afb499",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 15 Pro Max",
+          "sku": "Q6N9-89SB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 15 Pro Max",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 15 Pro Max"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "81de51f8-8534-41f5-acd0-c0c75effdfd3",
+            "c37269e0-3b40-4be1-bdf3-77f920a909ab"
+          ]
+        },
+        {
+          "id": "a27be900-4c2a-475f-9616-b3cd1ccc534a",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 15 Plus",
+          "sku": "Q6N9-46NB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 15 Plus",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 15 Plus"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "77c69c34-6eab-4981-afb4-e3f5ad4b6936",
+            "73217302-4845-4bc2-bef5-02c946353b0f"
+          ]
+        },
+        {
+          "id": "530101e8-415e-4771-b3d6-e7fc281f6292",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 16 Plus",
+          "sku": "Q6N9-208B0PH",
+          "attributes": {
+            "description": "Matte, iPhone 16 Plus",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 16 Plus"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "a1f2c960-a7d7-4771-9691-4fa28ec27fee",
+            "50f7e53c-4fcd-4a88-8efb-cfffa9e0392e"
+          ]
+        },
+        {
+          "id": "dc1b65e2-526a-48f0-a280-a6ba416c3fa9",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 16",
+          "sku": "Q6N9-8USB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 16",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 16"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "aa151069-2b57-4a20-94a7-5fd0f095dc1b",
+            "6186c51d-a919-4bfc-87e6-40f96f9c8ff2"
+          ]
+        },
+        {
+          "id": "b8b220f1-e0c6-4e00-a21e-df3651ff7aaf",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 16 Pro Max",
+          "sku": "Q6N9-V70B0PH",
+          "attributes": {
+            "description": "Matte, iPhone 16 Pro Max",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 16 Pro Max"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "d9e0d02a-f323-41bc-9fd3-07746dcfdd17",
+            "71f5c539-f0f6-4df0-b9c1-0506108658f9"
+          ]
+        },
+        {
+          "id": "a7a5f51a-a3d7-486b-a61d-b41bdbc7b119",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 16 Pro",
+          "sku": "Q6N9-FPPB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 16 Pro",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 16 Pro"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "adc412b5-552c-4e39-8ba5-896ef0d39ef5",
+            "77d605a5-b197-46b2-8b61-2d1f4f7538c8"
+          ]
+        },
+        {
+          "id": "149a15e2-a712-45aa-9e5d-41ce820e798a",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 17 Pro Max",
+          "sku": "Q6N9-CFFB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 17 Pro Max",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 17 Pro Max"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "f52f66b6-bda6-4afe-b9ff-e24ee1a4be95"
+          ]
+        },
+        {
+          "id": "20e43e25-c639-48e3-b315-6850c55330f0",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 17 Pro",
+          "sku": "Q6N9-RQJB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 17 Pro",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 17 Pro"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "c25126bc-e2e3-4126-96e0-6be464428c82"
+          ]
+        },
+        {
+          "id": "d600003f-9856-460e-92e9-ece297953605",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 17 Air",
+          "sku": "Q6N9-ZF1B0PH",
+          "attributes": {
+            "description": "Matte, iPhone 17 Air",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 17 Air"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "d82b6af7-c497-4c10-9522-acb2949ebfc2"
+          ]
+        },
+        {
+          "id": "22bf8714-fa4c-45f5-974f-7fb9c2cd4660",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 17",
+          "sku": "Q6N9-SF7B0PH",
+          "attributes": {
+            "description": "Matte, iPhone 17",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 17"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "5d1641a8-a1a1-4237-8317-af0e6f933fe8"
+          ]
+        },
+        {
+          "id": "3d5b102e-d3c3-4616-bfa8-657ccfdd9570",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 18 Pro Max",
+          "sku": "Q6N9-3LNB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 18 Pro Max",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 18 Pro Max"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "915386bd-14ec-4e91-8f4c-cd0ccf9d8c82"
+          ]
+        },
+        {
+          "id": "00c4d478-7a7c-446b-bbab-a0f7c9cdc20f",
+          "name": "KPT - MagSafe Tough Case - Matte, iPhone 18 Pro",
+          "sku": "Q6N9-8XQB0PH",
+          "attributes": {
+            "description": "Matte, iPhone 18 Pro",
+            "color": {
+              "name": "Matte",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "iPhone 18 Pro"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "0519591b-0d8e-496b-b228-d0005ed2d519"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "99cdfeba-2da7-46fe-ae2c-1d742fdc4c2a",
+      "slug": "kpt-beanie",
+      "name": "KPT - Beanie",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 10,
+      "images": [
+        {
+          "id": "19c3d4bc-a0c4-4289-ac8a-e0480b1c2cb8",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "3f010f7b-5e40-4a7e-9abf-b9bb60b26e42",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "09ea659f-73f2-4bc2-bb4f-24893089ff8e",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "90504bb1-f4ef-49b9-bed6-e9c4bb599cb5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "af237fd5-3521-4fa7-b40c-1c69c7264e46",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "f2951466-02ec-493d-94ef-7c5bc4c0bbf4",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "f4ea11c9-b07e-4509-be95-c0b2305936d2",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b27ee6c1-1425-459d-8186-85551066f3a9",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "6aedefe4-f97e-4c7b-a346-5f74c9afe6d5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "64a8acb4-43e1-4e2a-adb9-41a5eab3420e",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>100% Turbo acrylic fabric</li><li>One size fits most</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>Circumference:&nbsp;17 ¼\" - 18 ½\"</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T02:31:05.041331Z",
+        "updatedAt": "2026-10-02T02:40:12.382281Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "426fe195-2cf5-4ded-9cae-94ceb5438d12",
+          "name": "KPT - Beanie - Black, One size",
+          "sku": "Q0HD-MM020NE",
+          "attributes": {
+            "description": "Black, One size",
+            "color": {
+              "name": "Black",
+              "swatch": "#000000"
+            },
+            "size": {
+              "name": "One size"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "19c3d4bc-a0c4-4289-ac8a-e0480b1c2cb8",
+            "3f010f7b-5e40-4a7e-9abf-b9bb60b26e42",
+            "09ea659f-73f2-4bc2-bb4f-24893089ff8e",
+            "90504bb1-f4ef-49b9-bed6-e9c4bb599cb5",
+            "af237fd5-3521-4fa7-b40c-1c69c7264e46",
+            "f2951466-02ec-493d-94ef-7c5bc4c0bbf4",
+            "f4ea11c9-b07e-4509-be95-c0b2305936d2",
+            "b27ee6c1-1425-459d-8186-85551066f3a9",
+            "6aedefe4-f97e-4c7b-a346-5f74c9afe6d5",
+            "64a8acb4-43e1-4e2a-adb9-41a5eab3420e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b37366cd-aa48-49d7-b20e-dedb8a0872c1",
+      "slug": "kpt-crew-socks",
+      "name": "KPT - Crew Socks",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 4,
+      "images": [
+        {
+          "id": "87df90ba-f827-41b5-bf64-005d7a51dfc5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "5cdbf12a-4855-4037-b7e0-a5c475d89878",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8e939b55-dcd4-48d8-9321-d97481698f65",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "a8e3d5cd-6351-4042-b22c-9c4cfe8724f5",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li><span style=\"color: rgb(0, 0, 0);\">200 Needle flat knit</span></li><li>No White Lines When Worn</li><li>Full Color Artwork</li><li>Made from Recycled Plastic Bottles</li><li>One size fits most</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>One size fits most</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T02:26:12.877226Z",
+        "updatedAt": "2026-10-02T02:39:53.354043Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "08f49b09-9f06-4534-9046-ce261cd4ec8e",
+          "name": "KPT - Crew Socks - All-Over Print, One size",
+          "sku": "QTV2-7UWG0NE",
+          "attributes": {
+            "description": "All-Over Print, One size",
+            "color": {
+              "name": "All-Over Print",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "One size"
+            }
+          },
+          "price": {
+            "value": 19,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "87df90ba-f827-41b5-bf64-005d7a51dfc5",
+            "5cdbf12a-4855-4037-b7e0-a5c475d89878",
+            "8e939b55-dcd4-48d8-9321-d97481698f65",
+            "a8e3d5cd-6351-4042-b22c-9c4cfe8724f5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f3e519ab-7b12-496b-959e-6aae2ef0f7eb",
+      "slug": "control-mouse-pad",
+      "name": "CONTROL - Mouse Pad",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 7,
+      "images": [
+        {
+          "id": "c9851f4b-deb6-46b9-94ac-d0ad459d72fd",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "32f79b04-4993-4a1e-b1a7-f9ba699496c6",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "3f93d765-dd68-4cc9-9647-7d9daa4f6bdc",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "a4fe741a-279f-4689-8db3-bfa653f3edb7",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "11d6da2c-748e-4075-ba9d-28166177ee76",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "e7e81098-2552-4491-b4f1-a003d9cf99b2",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "f5547725-a7f8-4532-b096-62373592b22c",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Soft 100% polyester surface&nbsp;</li><li>Natural rubber base</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>Size: 8.7″ × 7.1″ × 0.12″ (220 × 180 × 3 mm)</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T02:19:33.486502Z",
+        "updatedAt": "2026-10-02T02:39:26.861485Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "4ec559fe-e1b6-4be3-8160-6be74cc98ce2",
+          "name": "CONTROL - Mouse Pad - White, 8.7\" x 7.1\"",
+          "sku": "QABY-4R7V087",
+          "attributes": {
+            "description": "White, 8.7\" x 7.1\"",
+            "color": {
+              "name": "White",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "8.7\" x 7.1\""
+            }
+          },
+          "price": {
+            "value": 19,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "c9851f4b-deb6-46b9-94ac-d0ad459d72fd",
+            "32f79b04-4993-4a1e-b1a7-f9ba699496c6",
+            "3f93d765-dd68-4cc9-9647-7d9daa4f6bdc",
+            "a4fe741a-279f-4689-8db3-bfa653f3edb7",
+            "11d6da2c-748e-4075-ba9d-28166177ee76",
+            "e7e81098-2552-4491-b4f1-a003d9cf99b2",
+            "f5547725-a7f8-4532-b096-62373592b22c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "37293c60-4496-4825-b359-356b5347902a",
+      "slug": "kpt-studio-tumbler",
+      "name": "KPT - Studio Tumbler",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 5,
+      "images": [
+        {
+          "id": "f0ba433d-2c36-4ded-8869-e4c87bc7ae07",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "ef1c28d9-2609-4632-9977-746c1db6e017",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "c4456105-620e-4ace-b001-295b01890252",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "01f761ca-8d82-454a-9759-c3b82352a886",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b75e9109-ac52-4411-90be-def5a7b0ba04",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>High-grade stainless steel tumbler</li><li>Volume: 20 oz (600 ml)</li><li>Upper diameter: 4\" (10.2 cm)</li><li>Bottom diameter: 2.75\" (7 cm)</li><li>Tumbler height: 7.25″ (18.3 cm)</li><li>Tumbler height with straw: 10\" (25.4 cm)</li><li>Includes straw and lid</li><li>Hand wash only</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>Volume: 20 oz (600 ml)</li><li>Upper diameter: 4\" (10.2 cm)</li><li>Bottom diameter: 2.75\" (7 cm)</li><li>Tumbler height: 7.25″ (18.3 cm)</li><li>Tumbler height with straw: 10\" (25.4 cm)</li><li>Tumbler size: 4″ × 7.2″ (10.1 cm × 18.2 cm)</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T02:17:07.324462Z",
+        "updatedAt": "2026-10-02T02:38:50.164924Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "9d1f4785-5a51-4af8-9e32-13246fcaa70c",
+          "name": "KPT - Studio Tumbler - Black, One Size",
+          "sku": "QLMZ-XGD20NE",
+          "attributes": {
+            "description": "Black, One Size",
+            "color": {
+              "name": "Black",
+              "swatch": "#000000"
+            },
+            "size": {
+              "name": "One Size"
+            }
+          },
+          "price": {
+            "value": 39,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "f0ba433d-2c36-4ded-8869-e4c87bc7ae07",
+            "ef1c28d9-2609-4632-9977-746c1db6e017",
+            "c4456105-620e-4ace-b001-295b01890252",
+            "01f761ca-8d82-454a-9759-c3b82352a886",
+            "b75e9109-ac52-4411-90be-def5a7b0ba04"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9b4af8fc-347b-4e56-8808-2aacea619a32",
+      "slug": "kpt-crewneck",
+      "name": "KPT - Crewneck",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 15,
+      "images": [
+        {
+          "id": "cd3b815d-e1de-46a5-8311-0e167eb23759",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "4294ff8a-3e00-45b2-b870-8ab3703edea4",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "d404ada6-ba9e-4024-885a-6e58d65ee030",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8becf879-4a53-4dff-b0e7-4ea05489aca5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "dbc37633-71cc-4b0e-b235-7d60a6dc3f5b",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "d4c685e9-3f8a-4fb4-8d44-6832d0a5a4a5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "446b18a7-d593-4683-ad97-d6b6acc06720",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "bff6ff40-a2aa-48b0-b633-d0381185d47e",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "1bfd98dc-496f-4153-8bf1-f2ec4e9be26b",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "bb0a3c32-9ab1-424a-8b0d-c07a28a0baf4",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "3d0792e6-e1b5-4939-9e78-16fedd7b7497",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "adebab0b-4096-492a-aa6e-9cd51be9ee68",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8d5e7f83-8822-4c9c-84f5-0ca3281eb99a",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "ad87629a-dedf-4eb1-ac91-75e97c8cfa75",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b0b6e3f9-8e9d-4247-bd3a-a9a8a838da14",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>100% cotton-faced exterior made from a 65/35 cotton/polyester blend</li><li>Charcoal Heather and Carbon Grey are 55% cotton, 45% polyester</li><li>Heavyweight fabric (8.5 oz)</li><li>Regular fit</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T02:13:51.060693Z",
+        "updatedAt": "2026-10-02T02:37:50.841129Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "96132c02-3ad5-4b8c-a276-fd630887bb20",
+          "name": "KPT - Crewneck - Black, S",
+          "sku": "QZE5-1GJ200S",
+          "attributes": {
+            "description": "Black, S",
+            "color": {
+              "name": "Black",
+              "swatch": "#101010"
+            },
+            "size": {
+              "name": "S"
+            }
+          },
+          "price": {
+            "value": 49,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "cd3b815d-e1de-46a5-8311-0e167eb23759",
+            "4294ff8a-3e00-45b2-b870-8ab3703edea4",
+            "d404ada6-ba9e-4024-885a-6e58d65ee030",
+            "8becf879-4a53-4dff-b0e7-4ea05489aca5",
+            "dbc37633-71cc-4b0e-b235-7d60a6dc3f5b",
+            "d4c685e9-3f8a-4fb4-8d44-6832d0a5a4a5",
+            "446b18a7-d593-4683-ad97-d6b6acc06720",
+            "bff6ff40-a2aa-48b0-b633-d0381185d47e",
+            "1bfd98dc-496f-4153-8bf1-f2ec4e9be26b",
+            "bb0a3c32-9ab1-424a-8b0d-c07a28a0baf4",
+            "3d0792e6-e1b5-4939-9e78-16fedd7b7497",
+            "adebab0b-4096-492a-aa6e-9cd51be9ee68",
+            "8d5e7f83-8822-4c9c-84f5-0ca3281eb99a",
+            "ad87629a-dedf-4eb1-ac91-75e97c8cfa75",
+            "b0b6e3f9-8e9d-4247-bd3a-a9a8a838da14"
+          ]
+        },
+        {
+          "id": "50335d78-bed9-4912-b616-f7fb3f91950c",
+          "name": "KPT - Crewneck - Black, M",
+          "sku": "QZE5-J3Q200M",
+          "attributes": {
+            "description": "Black, M",
+            "color": {
+              "name": "Black",
+              "swatch": "#101010"
+            },
+            "size": {
+              "name": "M"
+            }
+          },
+          "price": {
+            "value": 49,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "cd3b815d-e1de-46a5-8311-0e167eb23759",
+            "4294ff8a-3e00-45b2-b870-8ab3703edea4",
+            "d404ada6-ba9e-4024-885a-6e58d65ee030",
+            "8becf879-4a53-4dff-b0e7-4ea05489aca5",
+            "dbc37633-71cc-4b0e-b235-7d60a6dc3f5b",
+            "d4c685e9-3f8a-4fb4-8d44-6832d0a5a4a5",
+            "446b18a7-d593-4683-ad97-d6b6acc06720",
+            "bff6ff40-a2aa-48b0-b633-d0381185d47e",
+            "1bfd98dc-496f-4153-8bf1-f2ec4e9be26b",
+            "bb0a3c32-9ab1-424a-8b0d-c07a28a0baf4",
+            "3d0792e6-e1b5-4939-9e78-16fedd7b7497",
+            "adebab0b-4096-492a-aa6e-9cd51be9ee68",
+            "8d5e7f83-8822-4c9c-84f5-0ca3281eb99a",
+            "ad87629a-dedf-4eb1-ac91-75e97c8cfa75",
+            "b0b6e3f9-8e9d-4247-bd3a-a9a8a838da14"
+          ]
+        },
+        {
+          "id": "88858a7f-83b5-44df-b8da-350589f11aae",
+          "name": "KPT - Crewneck - Black, L",
+          "sku": "QZE5-C5K200L",
+          "attributes": {
+            "description": "Black, L",
+            "color": {
+              "name": "Black",
+              "swatch": "#101010"
+            },
+            "size": {
+              "name": "L"
+            }
+          },
+          "price": {
+            "value": 49,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "cd3b815d-e1de-46a5-8311-0e167eb23759",
+            "4294ff8a-3e00-45b2-b870-8ab3703edea4",
+            "d404ada6-ba9e-4024-885a-6e58d65ee030",
+            "8becf879-4a53-4dff-b0e7-4ea05489aca5",
+            "dbc37633-71cc-4b0e-b235-7d60a6dc3f5b",
+            "d4c685e9-3f8a-4fb4-8d44-6832d0a5a4a5",
+            "446b18a7-d593-4683-ad97-d6b6acc06720",
+            "bff6ff40-a2aa-48b0-b633-d0381185d47e",
+            "1bfd98dc-496f-4153-8bf1-f2ec4e9be26b",
+            "bb0a3c32-9ab1-424a-8b0d-c07a28a0baf4",
+            "3d0792e6-e1b5-4939-9e78-16fedd7b7497",
+            "adebab0b-4096-492a-aa6e-9cd51be9ee68",
+            "8d5e7f83-8822-4c9c-84f5-0ca3281eb99a",
+            "ad87629a-dedf-4eb1-ac91-75e97c8cfa75",
+            "b0b6e3f9-8e9d-4247-bd3a-a9a8a838da14"
+          ]
+        },
+        {
+          "id": "85e26e7f-0c06-434e-8c46-29427a1a06da",
+          "name": "KPT - Crewneck - Black, XL",
+          "sku": "QZE5-HGM20XL",
+          "attributes": {
+            "description": "Black, XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#101010"
+            },
+            "size": {
+              "name": "XL"
+            }
+          },
+          "price": {
+            "value": 49,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "cd3b815d-e1de-46a5-8311-0e167eb23759",
+            "4294ff8a-3e00-45b2-b870-8ab3703edea4",
+            "d404ada6-ba9e-4024-885a-6e58d65ee030",
+            "8becf879-4a53-4dff-b0e7-4ea05489aca5",
+            "dbc37633-71cc-4b0e-b235-7d60a6dc3f5b",
+            "d4c685e9-3f8a-4fb4-8d44-6832d0a5a4a5",
+            "446b18a7-d593-4683-ad97-d6b6acc06720",
+            "bff6ff40-a2aa-48b0-b633-d0381185d47e",
+            "1bfd98dc-496f-4153-8bf1-f2ec4e9be26b",
+            "bb0a3c32-9ab1-424a-8b0d-c07a28a0baf4",
+            "3d0792e6-e1b5-4939-9e78-16fedd7b7497",
+            "adebab0b-4096-492a-aa6e-9cd51be9ee68",
+            "8d5e7f83-8822-4c9c-84f5-0ca3281eb99a",
+            "ad87629a-dedf-4eb1-ac91-75e97c8cfa75",
+            "b0b6e3f9-8e9d-4247-bd3a-a9a8a838da14"
+          ]
+        },
+        {
+          "id": "56597ebe-eb79-4b02-b907-0c8bc0bfcd56",
+          "name": "KPT - Crewneck - Black, 2XL",
+          "sku": "QZE5-T9E202X",
+          "attributes": {
+            "description": "Black, 2XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#101010"
+            },
+            "size": {
+              "name": "2XL"
+            }
+          },
+          "price": {
+            "value": 51,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "cd3b815d-e1de-46a5-8311-0e167eb23759",
+            "4294ff8a-3e00-45b2-b870-8ab3703edea4",
+            "d404ada6-ba9e-4024-885a-6e58d65ee030",
+            "8becf879-4a53-4dff-b0e7-4ea05489aca5",
+            "dbc37633-71cc-4b0e-b235-7d60a6dc3f5b",
+            "d4c685e9-3f8a-4fb4-8d44-6832d0a5a4a5",
+            "446b18a7-d593-4683-ad97-d6b6acc06720",
+            "bff6ff40-a2aa-48b0-b633-d0381185d47e",
+            "1bfd98dc-496f-4153-8bf1-f2ec4e9be26b",
+            "bb0a3c32-9ab1-424a-8b0d-c07a28a0baf4",
+            "3d0792e6-e1b5-4939-9e78-16fedd7b7497",
+            "adebab0b-4096-492a-aa6e-9cd51be9ee68",
+            "8d5e7f83-8822-4c9c-84f5-0ca3281eb99a",
+            "ad87629a-dedf-4eb1-ac91-75e97c8cfa75",
+            "b0b6e3f9-8e9d-4247-bd3a-a9a8a838da14"
+          ]
+        },
+        {
+          "id": "540bd55a-fcb0-4795-b711-b185237208b8",
+          "name": "KPT - Crewneck - Black, 3XL",
+          "sku": "QZE5-W6F203X",
+          "attributes": {
+            "description": "Black, 3XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#101010"
+            },
+            "size": {
+              "name": "3XL"
+            }
+          },
+          "price": {
+            "value": 53,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "cd3b815d-e1de-46a5-8311-0e167eb23759",
+            "4294ff8a-3e00-45b2-b870-8ab3703edea4",
+            "d404ada6-ba9e-4024-885a-6e58d65ee030",
+            "8becf879-4a53-4dff-b0e7-4ea05489aca5",
+            "dbc37633-71cc-4b0e-b235-7d60a6dc3f5b",
+            "d4c685e9-3f8a-4fb4-8d44-6832d0a5a4a5",
+            "446b18a7-d593-4683-ad97-d6b6acc06720",
+            "bff6ff40-a2aa-48b0-b633-d0381185d47e",
+            "1bfd98dc-496f-4153-8bf1-f2ec4e9be26b",
+            "bb0a3c32-9ab1-424a-8b0d-c07a28a0baf4",
+            "3d0792e6-e1b5-4939-9e78-16fedd7b7497",
+            "adebab0b-4096-492a-aa6e-9cd51be9ee68",
+            "8d5e7f83-8822-4c9c-84f5-0ca3281eb99a",
+            "ad87629a-dedf-4eb1-ac91-75e97c8cfa75",
+            "b0b6e3f9-8e9d-4247-bd3a-a9a8a838da14"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "6c250dd6-5ebd-4a75-a9a5-d1bc584f177f",
+      "slug": "kpt-heavyweight-tee",
+      "name": "KPT - Heavyweight Tee",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 18,
+      "images": [
+        {
+          "id": "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8ab314ec-9909-4522-a64c-98d4ec412793",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "df793356-60a3-4901-8d48-eca148cd95b5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b97a195f-a00c-4797-a301-8cb040da5cc1",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "bc7246e7-0b96-4267-891b-59ef95c77454",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "84283323-5d38-46ff-856d-0d1f542ce04c",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "48d5603f-2612-4506-9fec-e791a1cb40d6",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "fdec0829-aa91-4523-b57b-be2dd082eb3c",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>100% ring-spun cotton</li><li>Heavyweight fabric (6.1 oz)</li><li>Relaxed fit</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T02:12:01.328165Z",
+        "updatedAt": "2026-10-02T02:37:28.189786Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "e9431c80-1063-40f2-9f0f-1246ef63b754",
+          "name": "KPT - Heavyweight Tee - Black, S",
+          "sku": "QK2W-T9D200S",
+          "attributes": {
+            "description": "Black, S",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "S"
+            }
+          },
+          "price": {
+            "value": 35,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+            "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+            "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+            "8ab314ec-9909-4522-a64c-98d4ec412793",
+            "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+            "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+            "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+            "df793356-60a3-4901-8d48-eca148cd95b5",
+            "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+            "b97a195f-a00c-4797-a301-8cb040da5cc1",
+            "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+            "bc7246e7-0b96-4267-891b-59ef95c77454",
+            "84283323-5d38-46ff-856d-0d1f542ce04c",
+            "48d5603f-2612-4506-9fec-e791a1cb40d6",
+            "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+            "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+            "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+            "fdec0829-aa91-4523-b57b-be2dd082eb3c"
+          ]
+        },
+        {
+          "id": "76ec9c27-19f5-4e62-9442-ea1c7d125138",
+          "name": "KPT - Heavyweight Tee - Black, M",
+          "sku": "QK2W-2EK200M",
+          "attributes": {
+            "description": "Black, M",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "M"
+            }
+          },
+          "price": {
+            "value": 35,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+            "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+            "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+            "8ab314ec-9909-4522-a64c-98d4ec412793",
+            "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+            "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+            "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+            "df793356-60a3-4901-8d48-eca148cd95b5",
+            "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+            "b97a195f-a00c-4797-a301-8cb040da5cc1",
+            "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+            "bc7246e7-0b96-4267-891b-59ef95c77454",
+            "84283323-5d38-46ff-856d-0d1f542ce04c",
+            "48d5603f-2612-4506-9fec-e791a1cb40d6",
+            "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+            "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+            "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+            "fdec0829-aa91-4523-b57b-be2dd082eb3c"
+          ]
+        },
+        {
+          "id": "8f5017e9-dad4-428e-a77b-cfcad38ca97d",
+          "name": "KPT - Heavyweight Tee - Black, L",
+          "sku": "QK2W-N5W200L",
+          "attributes": {
+            "description": "Black, L",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "L"
+            }
+          },
+          "price": {
+            "value": 35,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+            "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+            "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+            "8ab314ec-9909-4522-a64c-98d4ec412793",
+            "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+            "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+            "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+            "df793356-60a3-4901-8d48-eca148cd95b5",
+            "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+            "b97a195f-a00c-4797-a301-8cb040da5cc1",
+            "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+            "bc7246e7-0b96-4267-891b-59ef95c77454",
+            "84283323-5d38-46ff-856d-0d1f542ce04c",
+            "48d5603f-2612-4506-9fec-e791a1cb40d6",
+            "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+            "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+            "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+            "fdec0829-aa91-4523-b57b-be2dd082eb3c"
+          ]
+        },
+        {
+          "id": "7d2aaa07-a514-4076-b5b6-d8b090295af7",
+          "name": "KPT - Heavyweight Tee - Black, XL",
+          "sku": "QK2W-AKB20XL",
+          "attributes": {
+            "description": "Black, XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "XL"
+            }
+          },
+          "price": {
+            "value": 35,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+            "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+            "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+            "8ab314ec-9909-4522-a64c-98d4ec412793",
+            "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+            "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+            "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+            "df793356-60a3-4901-8d48-eca148cd95b5",
+            "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+            "b97a195f-a00c-4797-a301-8cb040da5cc1",
+            "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+            "bc7246e7-0b96-4267-891b-59ef95c77454",
+            "84283323-5d38-46ff-856d-0d1f542ce04c",
+            "48d5603f-2612-4506-9fec-e791a1cb40d6",
+            "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+            "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+            "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+            "fdec0829-aa91-4523-b57b-be2dd082eb3c"
+          ]
+        },
+        {
+          "id": "c3561389-deb5-4d2d-bbb5-ccd3e79e11e2",
+          "name": "KPT - Heavyweight Tee - Black, 2XL",
+          "sku": "QK2W-BX4202X",
+          "attributes": {
+            "description": "Black, 2XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "2XL"
+            }
+          },
+          "price": {
+            "value": 37,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+            "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+            "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+            "8ab314ec-9909-4522-a64c-98d4ec412793",
+            "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+            "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+            "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+            "df793356-60a3-4901-8d48-eca148cd95b5",
+            "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+            "b97a195f-a00c-4797-a301-8cb040da5cc1",
+            "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+            "bc7246e7-0b96-4267-891b-59ef95c77454",
+            "84283323-5d38-46ff-856d-0d1f542ce04c",
+            "48d5603f-2612-4506-9fec-e791a1cb40d6",
+            "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+            "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+            "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+            "fdec0829-aa91-4523-b57b-be2dd082eb3c"
+          ]
+        },
+        {
+          "id": "cb9bb1db-9f3a-4111-9bc5-08266885b654",
+          "name": "KPT - Heavyweight Tee - Black, 3XL",
+          "sku": "QK2W-XJ5203X",
+          "attributes": {
+            "description": "Black, 3XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "3XL"
+            }
+          },
+          "price": {
+            "value": 39,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+            "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+            "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+            "8ab314ec-9909-4522-a64c-98d4ec412793",
+            "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+            "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+            "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+            "df793356-60a3-4901-8d48-eca148cd95b5",
+            "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+            "b97a195f-a00c-4797-a301-8cb040da5cc1",
+            "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+            "bc7246e7-0b96-4267-891b-59ef95c77454",
+            "84283323-5d38-46ff-856d-0d1f542ce04c",
+            "48d5603f-2612-4506-9fec-e791a1cb40d6",
+            "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+            "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+            "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+            "fdec0829-aa91-4523-b57b-be2dd082eb3c"
+          ]
+        },
+        {
+          "id": "13698b07-9fb3-4500-9fe0-afe48a36e003",
+          "name": "KPT - Heavyweight Tee - Black, 4XL",
+          "sku": "QK2W-ARU204X",
+          "attributes": {
+            "description": "Black, 4XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "4XL"
+            }
+          },
+          "price": {
+            "value": 41,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "949613f2-a8c7-4630-b73b-5f8f0f1fc37a",
+            "06320d7b-8cc7-4b79-8c7c-3ab97d05ef32",
+            "54dc6387-f1be-4045-a33e-76cdf87cee8a",
+            "8ab314ec-9909-4522-a64c-98d4ec412793",
+            "b9d67dfd-07d9-460b-9350-fd3991a9c608",
+            "42c1f727-9467-4418-b03d-fe2ec15b4f22",
+            "8b6ca266-44cb-494c-a8c0-8cbce0a5dab9",
+            "df793356-60a3-4901-8d48-eca148cd95b5",
+            "80923a69-ac5d-46af-a8c4-9e59bbbbceda",
+            "b97a195f-a00c-4797-a301-8cb040da5cc1",
+            "b23d9ce0-91e2-444f-ae53-cd34158ea6bd",
+            "bc7246e7-0b96-4267-891b-59ef95c77454",
+            "84283323-5d38-46ff-856d-0d1f542ce04c",
+            "48d5603f-2612-4506-9fec-e791a1cb40d6",
+            "a7e4c74e-5851-4f4b-b9ee-26d2d1eab0aa",
+            "b5e61d31-4f06-495d-993c-2e34a4e9fa94",
+            "ee1cb733-1220-4ab0-82f5-3ec0a9b1efa9",
+            "fdec0829-aa91-4523-b57b-be2dd082eb3c"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "caf3e2ed-8b80-4b29-bd94-46427a9fef39",
+      "slug": "kpt-premium-hoodie",
+      "name": "KPT - Premium Hoodie",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 8,
+      "images": [
+        {
+          "id": "95c637b3-0ba5-4e7c-844e-212720c4ac06",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8cc062e5-3e9b-4060-8287-424b6cec6475",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "3e83ab1a-55bf-49aa-8cb5-2094f0bb92b5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "52a377c4-0857-4d2c-aff9-2af5ff17d846",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "09261761-8839-4dc7-8c9e-7cc625b8754b",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "0e943c5f-5970-442c-b169-9f8900587f88",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "ef21a0be-7460-4c42-94c1-6591b2db36ed",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "1831efc2-a747-4eeb-b018-16c2ddddf6ae",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>65% ring-spun cotton, 35% polyester&nbsp;</li><li>Charcoal Heather is 60% ring-spun cotton, 40% polyester</li><li>Carbon Grey is 55% ring-spun cotton, 45% polyester</li><li>Heavyweight fabric (8.5 oz)</li><li>Regular fit but can run a bit tight</li><li>Unisex sizing</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T02:09:34.140766Z",
+        "updatedAt": "2026-10-02T02:37:02.166248Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "21be50ee-6683-481a-b743-ae8b1bdc7e01",
+          "name": "KPT - Premium Hoodie - Black, S",
+          "sku": "QNVS-JY5200S",
+          "attributes": {
+            "description": "Black, S",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "S"
+            }
+          },
+          "price": {
+            "value": 59,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "95c637b3-0ba5-4e7c-844e-212720c4ac06",
+            "8cc062e5-3e9b-4060-8287-424b6cec6475",
+            "3e83ab1a-55bf-49aa-8cb5-2094f0bb92b5",
+            "52a377c4-0857-4d2c-aff9-2af5ff17d846",
+            "09261761-8839-4dc7-8c9e-7cc625b8754b",
+            "0e943c5f-5970-442c-b169-9f8900587f88",
+            "ef21a0be-7460-4c42-94c1-6591b2db36ed",
+            "1831efc2-a747-4eeb-b018-16c2ddddf6ae"
+          ]
+        },
+        {
+          "id": "3e2ba381-1016-43ab-bc64-254fa6d90bdb",
+          "name": "KPT - Premium Hoodie - Black, M",
+          "sku": "QNVS-AR8200M",
+          "attributes": {
+            "description": "Black, M",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "M"
+            }
+          },
+          "price": {
+            "value": 59,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "95c637b3-0ba5-4e7c-844e-212720c4ac06",
+            "8cc062e5-3e9b-4060-8287-424b6cec6475",
+            "3e83ab1a-55bf-49aa-8cb5-2094f0bb92b5",
+            "52a377c4-0857-4d2c-aff9-2af5ff17d846",
+            "09261761-8839-4dc7-8c9e-7cc625b8754b",
+            "0e943c5f-5970-442c-b169-9f8900587f88",
+            "ef21a0be-7460-4c42-94c1-6591b2db36ed",
+            "1831efc2-a747-4eeb-b018-16c2ddddf6ae"
+          ]
+        },
+        {
+          "id": "fdc1e200-1772-475e-8a0e-704146c92841",
+          "name": "KPT - Premium Hoodie - Black, L",
+          "sku": "QNVS-0QX200L",
+          "attributes": {
+            "description": "Black, L",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "L"
+            }
+          },
+          "price": {
+            "value": 59,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "95c637b3-0ba5-4e7c-844e-212720c4ac06",
+            "8cc062e5-3e9b-4060-8287-424b6cec6475",
+            "3e83ab1a-55bf-49aa-8cb5-2094f0bb92b5",
+            "52a377c4-0857-4d2c-aff9-2af5ff17d846",
+            "09261761-8839-4dc7-8c9e-7cc625b8754b",
+            "0e943c5f-5970-442c-b169-9f8900587f88",
+            "ef21a0be-7460-4c42-94c1-6591b2db36ed",
+            "1831efc2-a747-4eeb-b018-16c2ddddf6ae"
+          ]
+        },
+        {
+          "id": "c3eaea21-3c1a-4845-a797-9d28ce90c4c9",
+          "name": "KPT - Premium Hoodie - Black, XL",
+          "sku": "QNVS-8YC20XL",
+          "attributes": {
+            "description": "Black, XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "XL"
+            }
+          },
+          "price": {
+            "value": 59,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "95c637b3-0ba5-4e7c-844e-212720c4ac06",
+            "8cc062e5-3e9b-4060-8287-424b6cec6475",
+            "3e83ab1a-55bf-49aa-8cb5-2094f0bb92b5",
+            "52a377c4-0857-4d2c-aff9-2af5ff17d846",
+            "09261761-8839-4dc7-8c9e-7cc625b8754b",
+            "0e943c5f-5970-442c-b169-9f8900587f88",
+            "ef21a0be-7460-4c42-94c1-6591b2db36ed",
+            "1831efc2-a747-4eeb-b018-16c2ddddf6ae"
+          ]
+        },
+        {
+          "id": "c5e78f62-9e47-4813-a8a3-60134fb357f1",
+          "name": "KPT - Premium Hoodie - Black, 2XL",
+          "sku": "QNVS-XFX202X",
+          "attributes": {
+            "description": "Black, 2XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "2XL"
+            }
+          },
+          "price": {
+            "value": 61,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "95c637b3-0ba5-4e7c-844e-212720c4ac06",
+            "8cc062e5-3e9b-4060-8287-424b6cec6475",
+            "3e83ab1a-55bf-49aa-8cb5-2094f0bb92b5",
+            "52a377c4-0857-4d2c-aff9-2af5ff17d846",
+            "09261761-8839-4dc7-8c9e-7cc625b8754b",
+            "0e943c5f-5970-442c-b169-9f8900587f88",
+            "ef21a0be-7460-4c42-94c1-6591b2db36ed",
+            "1831efc2-a747-4eeb-b018-16c2ddddf6ae"
+          ]
+        },
+        {
+          "id": "5c54cf8a-ed09-421f-bb54-b31daaa3a247",
+          "name": "KPT - Premium Hoodie - Black, 3XL",
+          "sku": "QNVS-HFK203X",
+          "attributes": {
+            "description": "Black, 3XL",
+            "color": {
+              "name": "Black",
+              "swatch": "#080808"
+            },
+            "size": {
+              "name": "3XL"
+            }
+          },
+          "price": {
+            "value": 63,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "95c637b3-0ba5-4e7c-844e-212720c4ac06",
+            "8cc062e5-3e9b-4060-8287-424b6cec6475",
+            "3e83ab1a-55bf-49aa-8cb5-2094f0bb92b5",
+            "52a377c4-0857-4d2c-aff9-2af5ff17d846",
+            "09261761-8839-4dc7-8c9e-7cc625b8754b",
+            "0e943c5f-5970-442c-b169-9f8900587f88",
+            "ef21a0be-7460-4c42-94c1-6591b2db36ed",
+            "1831efc2-a747-4eeb-b018-16c2ddddf6ae"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ee17a091-6316-4c50-ae07-a955af9583da",
+      "slug": "offline-embroidered-beanie",
+      "name": "OFFLINE - Embroidered Beanie",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 10,
+      "images": [
+        {
+          "id": "7f90632a-c679-4b22-b2da-f979b1ed9e61",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "49aaa611-4383-4c0b-a188-c3bdd6e39805",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "d9e78943-79f4-46a1-91fc-d45aa5033672",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "3320d5ea-29bd-4e13-9037-237feed32011",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "e61a16c3-bcce-4eb2-b5da-dd9b0ad5410c",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "c8aa2240-5ba3-4741-b9e7-d9ef6a53e98c",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "da3ef378-daa6-49f6-90ad-dfe95f4b7196",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "3713a471-636c-491e-8334-3c61307bb194",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "330e53c9-0fab-4faf-8d12-fe67acff2b0c",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "42163878-29ee-4044-b3ad-79061512d4a7",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>100% Turbo acrylic fabric</li><li>One size fits most</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>Circumference:&nbsp;17 ¼\" - 18 ½\"</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T00:52:26.66904Z",
+        "updatedAt": "2026-10-02T01:43:41.155083Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "d4a2c948-0e33-4b85-a6e0-7a0387beb744",
+          "name": "OFFLINE - Embroidered Beanie - Black, One size",
+          "sku": "QFB6-D9120NE",
+          "attributes": {
+            "description": "Black, One size",
+            "color": {
+              "name": "Black",
+              "swatch": "#000000"
+            },
+            "size": {
+              "name": "One size"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "7f90632a-c679-4b22-b2da-f979b1ed9e61",
+            "49aaa611-4383-4c0b-a188-c3bdd6e39805",
+            "d9e78943-79f4-46a1-91fc-d45aa5033672",
+            "3320d5ea-29bd-4e13-9037-237feed32011",
+            "e61a16c3-bcce-4eb2-b5da-dd9b0ad5410c",
+            "c8aa2240-5ba3-4741-b9e7-d9ef6a53e98c",
+            "da3ef378-daa6-49f6-90ad-dfe95f4b7196",
+            "3713a471-636c-491e-8334-3c61307bb194",
+            "330e53c9-0fab-4faf-8d12-fe67acff2b0c",
+            "42163878-29ee-4044-b3ad-79061512d4a7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c61e4fb7-7796-4aa3-be8d-132ebc51dd86",
+      "slug": "field-03-water-bottle",
+      "name": "FIELD / 03 - Water Bottle",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 8,
+      "images": [
+        {
+          "id": "5e44a7b8-7779-46dd-993e-2836afe0592f",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "82b03989-a156-46c6-9aca-cc34436189be",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "9f46c270-5260-4725-97f9-4e2e9755019b",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "2b2ebabc-ec17-43a9-bbfb-aa92b6102085",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "d8ad8f80-e142-4af6-85e9-bdc44f487589",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "d4d16abc-2d21-4827-b52a-10908d5c1d11",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "0d2ca49d-3ee0-4803-8c13-3626d66ad4b5",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "a6471b3c-a219-4e5e-9c46-6c7db34f2e14",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Made with 18/8 grade stainless steel, 100% BPA-free</li><ul></ul><li>Volume: 24 oz (710 ml)</li><li>Height: 10.9\" (27.7 cm)</li><li>Width: 2.8\" (7.11 cm)</li><li>Threaded, easy-carry lid</li><ul></ul><li>Hand-wash only</li><ul></ul><li>Lightweight and durable</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>Volume: 24 oz (710 ml)</li><li>Height: 10.9\" (27.7 cm)</li><li>Width: 2.8\" (7.11 cm)</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T00:49:42.482026Z",
+        "updatedAt": "2026-10-02T01:28:42.107934Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "11f39be4-d616-4542-92b5-3c79c0101dc5",
+          "name": "FIELD / 03 - Water Bottle - Black, One Size",
+          "sku": "QH4V-LRB20NE",
+          "attributes": {
+            "description": "Black, One Size",
+            "color": {
+              "name": "Black",
+              "swatch": "#000000"
+            },
+            "size": {
+              "name": "One Size"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "5e44a7b8-7779-46dd-993e-2836afe0592f",
+            "82b03989-a156-46c6-9aca-cc34436189be",
+            "9f46c270-5260-4725-97f9-4e2e9755019b",
+            "2b2ebabc-ec17-43a9-bbfb-aa92b6102085",
+            "d8ad8f80-e142-4af6-85e9-bdc44f487589",
+            "d4d16abc-2d21-4827-b52a-10908d5c1d11",
+            "0d2ca49d-3ee0-4803-8c13-3626d66ad4b5",
+            "a6471b3c-a219-4e5e-9c46-6c7db34f2e14"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2b546ac7-c52a-48be-9a8e-7a3f27eb7e0c",
+      "slug": "night-shift-studio-mug",
+      "name": "NIGHT SHIFT - Studio Mug",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 6,
+      "images": [
+        {
+          "id": "bdafa92f-d1ac-4602-b7e8-8e68b84d1dac",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "1e80fa30-89ab-4049-80ad-79d9bf10a7eb",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "fa5367d3-73de-4b97-8fc4-e7b18482c103",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "f04cf603-2aa1-4aeb-bf11-780f86b94b0f",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "e05e35c8-7eed-490b-af9d-745035acdbbd",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "a33a6161-ca97-4735-9703-a1848b200d0d",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Ceramic</li><li>11 oz mug dimensions:&nbsp;3.85″ (9.8 cm) <span style=\"color: rgb(22, 23, 18);\">in height,</span> 3.35″ (8.5 cm) i<span style=\"color: rgb(22, 23, 18);\">n diameter</span></li><li>15 oz mug dimensions:&nbsp;4.7″ (12cm) <span style=\"color: rgb(22, 23, 18);\">in height, </span>3.35″ (8.5 cm) i<span style=\"color: rgb(22, 23, 18);\">n diameter</span></li><li>Dishwasher and microwave safe</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>11 oz mug dimensions:&nbsp;3.85″ (9.8 cm) <span style=\"color: rgb(22, 23, 18);\">in height,</span> 3.35″ (8.5 cm) i<span style=\"color: rgb(22, 23, 18);\">n diameter</span></li><li>15 oz mug dimensions:&nbsp;4.7″ (12cm) <span style=\"color: rgb(22, 23, 18);\">in height, </span>3.35″ (8.5 cm) i<span style=\"color: rgb(22, 23, 18);\">n diameter</span></li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T00:47:13.98689Z",
+        "updatedAt": "2026-10-02T01:27:45.471555Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "8ccf07c3-0eab-41f9-b6c9-5428aa550874",
+          "name": "NIGHT SHIFT - Studio Mug - Black, 11oz",
+          "sku": "QF34-XX72011",
+          "attributes": {
+            "description": "Black, 11oz",
+            "color": {
+              "name": "Black",
+              "swatch": "#171717"
+            },
+            "size": {
+              "name": "11oz"
+            }
+          },
+          "price": {
+            "value": 24,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "bdafa92f-d1ac-4602-b7e8-8e68b84d1dac",
+            "1e80fa30-89ab-4049-80ad-79d9bf10a7eb",
+            "fa5367d3-73de-4b97-8fc4-e7b18482c103",
+            "f04cf603-2aa1-4aeb-bf11-780f86b94b0f",
+            "e05e35c8-7eed-490b-af9d-745035acdbbd",
+            "a33a6161-ca97-4735-9703-a1848b200d0d"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c802ed05-237f-4eda-9e10-416640f92907",
+      "slug": "transit-subsurface-laptop-sleeve",
+      "name": "TRANSIT - SUBSURFACE Laptop Sleeve",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 3,
+      "images": [
+        {
+          "id": "63b60f8c-cc02-4a39-81c2-1265934ab588",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "349a0b8a-2f89-4ae4-94d9-d6bd8aaaa38c",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "165e4c3b-cee2-45da-9ea1-a8a61f98ad0f",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>100% neoprene</li><li>13″ sleeve weight: 6.49 oz (220 g)</li><li>15″ sleeve weight: 8.8 oz (250 g)</li><li>Lightweight and resistant to water, oil, and heat</li><li>Snug fit</li><li>Faux fur interior lining</li><li>Top-loading zippered enclosure with two sliders</li><li>Padded zipper binding</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>13″ sleeve weight: 6.49 oz (220 g)</li><li>15″ sleeve weight: 8.8 oz (250 g)</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T00:43:57.416935Z",
+        "updatedAt": "2026-10-02T01:44:35.577434Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "9d129bc1-03e4-4da2-bbfe-146639ba95ef",
+          "name": "TRANSIT - SUBSURFACE Laptop Sleeve - All-Over Print, 13″",
+          "sku": "QT6N-U57G013",
+          "attributes": {
+            "description": "All-Over Print, 13″",
+            "color": {
+              "name": "All-Over Print",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "13″"
+            }
+          },
+          "price": {
+            "value": 39,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "63b60f8c-cc02-4a39-81c2-1265934ab588",
+            "349a0b8a-2f89-4ae4-94d9-d6bd8aaaa38c",
+            "165e4c3b-cee2-45da-9ea1-a8a61f98ad0f"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5551ad84-b3c5-4af9-bc6a-05de2349de57",
+      "slug": "transit-signal-laptop-sleeve",
+      "name": "TRANSIT - SIGNAL Laptop Sleeve",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 3,
+      "images": [
+        {
+          "id": "47814fc1-ea78-4a33-9b87-b4e31009f647",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "5c13e7df-c98b-4c19-aaa5-3870b16dec99",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "53e2bec9-462f-414b-aabf-a7f53078de48",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>100% neoprene</li><li>13″ sleeve weight: 6.49 oz (220 g)</li><li>15″ sleeve weight: 8.8 oz (250 g)</li><li>Lightweight and resistant to water, oil, and heat</li><li>Snug fit</li><li>Faux fur interior lining</li><li>Top-loading zippered enclosure with two sliders</li><li>Padded zipper binding</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>13″ sleeve weight: 6.49 oz (220 g)</li><li>15″ sleeve weight: 8.8 oz (250 g)</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T00:41:08.113644Z",
+        "updatedAt": "2026-10-02T01:44:15.601039Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "26b0f4cd-8ba8-4886-b705-dc6345916df3",
+          "name": "TRANSIT - SIGNAL Laptop Sleeve - All-Over Print, 13″",
+          "sku": "Q62B-JFHG013",
+          "attributes": {
+            "description": "All-Over Print, 13″",
+            "color": {
+              "name": "All-Over Print",
+              "swatch": "#fefefe"
+            },
+            "size": {
+              "name": "13″"
+            }
+          },
+          "price": {
+            "value": 39,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "47814fc1-ea78-4a33-9b87-b4e31009f647",
+            "5c13e7df-c98b-4c19-aaa5-3870b16dec99",
+            "53e2bec9-462f-414b-aabf-a7f53078de48"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c0d71bed-0a9e-4e80-8518-061cdb58ac8b",
+      "slug": "wall-studies-subsurface-02",
+      "name": "WALL STUDIES - SUBSURFACE / 02",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 4,
+      "images": [
+        {
+          "id": "61901d79-cd79-4026-b9ab-9a40290c4427",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b2c65539-9b64-4f08-8f37-c4f332d8ee2f",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8a654546-1032-42b8-9781-6ad71003735d",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "5f943f33-9d1e-46cf-a555-1c420107e390",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Paper thickness: 0.26mm</li><li>Paper weight: 189 g/m²</li><li>Opacity: 94%</li><li>ISO brightness: 104%</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-02T00:35:39.011401Z",
+        "updatedAt": "2026-10-02T01:26:33.879821Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "4f21b9ce-a43b-4833-8989-f930eeb350d8",
+          "name": "WALL STUDIES - SUBSURFACE / 02 - White, 18\" x 24\"",
+          "sku": "Q066-RVQV018",
+          "attributes": {
+            "description": "White, 18\" x 24\"",
+            "color": {
+              "name": "White",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "18\" x 24\""
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "61901d79-cd79-4026-b9ab-9a40290c4427",
+            "b2c65539-9b64-4f08-8f37-c4f332d8ee2f",
+            "8a654546-1032-42b8-9781-6ad71003735d",
+            "5f943f33-9d1e-46cf-a555-1c420107e390"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04de8f0f-7b3e-430b-82b2-ca9448f82c77",
+      "slug": "wall-studies-signal-01",
+      "name": "WALL STUDIES - SIGNAL / 01",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 4,
+      "images": [
+        {
+          "id": "d3b9c612-d956-4841-9a91-0fd1cb33df9f",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "5473c45e-f159-4f48-ab6e-111e3a4ff18f",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "08da5402-577e-45aa-b0d9-25967602f6f9",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "32d35588-7106-4f35-b049-5de452a57350",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Paper thickness: 0.26mm</li><li>Paper weight: 189 g/m²</li><li>Opacity: 94%</li><li>ISO brightness: 104%</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-01T23:22:56.154305Z",
+        "updatedAt": "2026-10-02T00:05:51.312345Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "4a8e5a76-c382-47a9-b4a8-f159b2875821",
+          "name": "WALL STUDIES - SIGNAL / 01 - White, 18\" x 24\"",
+          "sku": "QA74-5FVV018",
+          "attributes": {
+            "description": "White, 18\" x 24\"",
+            "color": {
+              "name": "White",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "18\" x 24\""
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "d3b9c612-d956-4841-9a91-0fd1cb33df9f",
+            "5473c45e-f159-4f48-ab6e-111e3a4ff18f",
+            "08da5402-577e-45aa-b0d9-25967602f6f9",
+            "32d35588-7106-4f35-b049-5de452a57350"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "185ce494-67e8-43ff-ac2c-f80186196ebd",
+      "slug": "object-studies-six-marks",
+      "name": "OBJECT STUDIES - Six Marks",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 3,
+      "images": [
+        {
+          "id": "dcd52212-799a-4b13-a0cd-d3d795de8c6d",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "5875960c-4436-4246-a164-0889b7ef8225",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "a2d99d44-657f-46a1-886c-72d056b1d97a",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Film type: MPI 3000 Gloss HOP (EU), Promotional Monomeric PVC (US)</li><li>0.12″ (0.3 cm) white sticker border</li><li>Indoor use only</li><li>Glossy finish</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<p> </p>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-01T23:19:19.720492Z",
+        "updatedAt": "2026-10-02T00:04:27.822309Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "14e39452-2be6-4833-bcc9-c541fc1fbb58",
+          "name": "OBJECT STUDIES - Six Marks - White, 5.83″ × 8.27″",
+          "sku": "Q2E1-5R4V058",
+          "attributes": {
+            "description": "White, 5.83″ × 8.27″",
+            "color": {
+              "name": "White",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "5.83″ × 8.27″"
+            }
+          },
+          "price": {
+            "value": 12,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "dcd52212-799a-4b13-a0cd-d3d795de8c6d",
+            "5875960c-4436-4246-a164-0889b7ef8225",
+            "a2d99d44-657f-46a1-886c-72d056b1d97a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05b191f6-6d4a-474f-ac87-1c9e2edb5894",
+      "slug": "project-notes-subsurface-02",
+      "name": "PROJECT NOTES - SUBSURFACE / 02",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 5,
+      "images": [
+        {
+          "id": "dff71fa3-adf3-47a6-a286-d083976699cc",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b8f7641c-58cd-49fa-bed2-94a306293d6a",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "050747c0-68c5-40b4-bdea-399e32a55c26",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "976d50f0-ccdd-4a5b-98d4-ef59e0c8c010",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "d28426d5-d763-496a-9285-ce793cee09d6",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Size: 6\" × 8\" (15.24 cm × 20.32 cm)</li>\n<li>Weight: 6.6 oz (187 g)</li>\n<li>120-page spiral-bound notebook</li>\n<li>350gsm printed cover</li>\n<li>90gsm paper stock</li>\n<li>Available in graph paper</li>\n<li>Back document pocket</li>\n<li>Spiral binding lays flat for easy writing</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>Height: 8\" (20.32 cm)</li><li>Width: 6\" (15.24 cm)</li><li>Weight: 6.6 oz (187 g)</li></ul>\n\n"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-01T23:14:05.765762Z",
+        "updatedAt": "2026-10-02T00:02:52.196416Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "615506ea-dabb-4b28-95f1-a1ce6fa3872f",
+          "name": "PROJECT NOTES - SUBSURFACE / 02 - White, One Size",
+          "sku": "Q8CU-7GLV0NE",
+          "attributes": {
+            "description": "White, One Size",
+            "color": {
+              "name": "White",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "One Size"
+            }
+          },
+          "price": {
+            "value": 24,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "dff71fa3-adf3-47a6-a286-d083976699cc",
+            "b8f7641c-58cd-49fa-bed2-94a306293d6a",
+            "050747c0-68c5-40b4-bdea-399e32a55c26",
+            "976d50f0-ccdd-4a5b-98d4-ef59e0c8c010",
+            "d28426d5-d763-496a-9285-ce793cee09d6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bad5cb61-ad27-4e4b-94a1-5bd769f19ab8",
+      "slug": "project-notes-signal-01",
+      "name": "PROJECT NOTES - SIGNAL / 01",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 5,
+      "images": [
+        {
+          "id": "5a4ccb39-99f7-412d-9f9d-2d568138d3ad",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "fac91162-1a03-47d9-bc14-2ff0278fc2d6",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8456851d-ae42-4391-bf71-503a46f56f4d",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8ab5d1a2-0b28-486e-ae9a-b748595bde67",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "8c43c736-d55d-40ff-a9e9-8b53a14b2b2e",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>Size: 6\" × 8\" (15.24 cm × 20.32 cm)</li>\n<li>Weight: 6.6 oz (187 g)</li>\n<li>120-page spiral-bound notebook</li>\n<li>350gsm printed cover</li>\n<li>90gsm paper stock</li>\n<li>Available in graph paper</li>\n<li>Back document pocket</li>\n<li>Spiral binding lays flat for easy writing</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>Height: 8\" (20.32 cm)</li><li>Width: 6\" (15.24 cm)</li><li>Weight: 6.6 oz (187 g)</li></ul>\n\n"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-01T23:10:46.790329Z",
+        "updatedAt": "2026-10-02T00:01:54.488322Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "8dbe5def-077d-4cd0-8bd1-63822933968f",
+          "name": "PROJECT NOTES - SIGNAL / 01 - White, One Size",
+          "sku": "QC1N-YCVV0NE",
+          "attributes": {
+            "description": "White, One Size",
+            "color": {
+              "name": "White",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "One Size"
+            }
+          },
+          "price": {
+            "value": 24,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "5a4ccb39-99f7-412d-9f9d-2d568138d3ad",
+            "fac91162-1a03-47d9-bc14-2ff0278fc2d6",
+            "8456851d-ae42-4391-bf71-503a46f56f4d",
+            "8ab5d1a2-0b28-486e-ae9a-b748595bde67",
+            "8c43c736-d55d-40ff-a9e9-8b53a14b2b2e"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11c30deb-6d02-4590-82e6-83061fc4b21d",
+      "slug": "signal-studio-tote",
+      "name": "SIGNAL - Studio Tote",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 4,
+      "images": [
+        {
+          "id": "b536eebb-10ed-466d-8468-ab4d7097f660",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "c47809bc-3cd1-43e7-ba1d-63140d70dba7",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "e651e7db-80cc-49e9-a747-da31a5ffda8e",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "b9f7d5b6-9591-4798-9c80-b3cbacc05317",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul style=\"margin-top: 0px; margin-bottom: 20px;\"><li style=\"line-height: 1.6; margin-bottom: 0px;\">100% cotton</li><li style=\"line-height: 1.6; margin-bottom: 0px;\">Fabric weight: 140 g/m²</li><li style=\"line-height: 1.6; margin-bottom: 0px;\">One size: 15″ × 16.5″ (38 cm × 42 cm)</li><li style=\"line-height: 1.6; margin-bottom: 0px;\">Medium-length carrying handles (67 cm)</li><li style=\"line-height: 1.6; margin-bottom: 0px;\">Capacity: 10 litres</li><li style=\"line-height: 1.6; margin-bottom: 0px;\">Available in a wide range of colours</li><li style=\"line-height: 1.6; margin-bottom: 0px;\">One large main compartment</li></ul>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul style=\"margin-top: 0px; margin-bottom: 20px;\"><li style=\"line-height: 1.6; margin-bottom: 0px;\">One size: 15″ × 16.5″ (38 cm × 42 cm)</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-10-01T23:04:42.78414Z",
+        "updatedAt": "2026-10-02T00:01:09.346762Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "3d06e755-9c5a-4be8-96f2-76ec8b1e99c8",
+          "name": "SIGNAL - Studio Tote - Black, One size",
+          "sku": "Q984-ASJ20NE",
+          "attributes": {
+            "description": "Black, One size",
+            "color": {
+              "name": "Black",
+              "swatch": "#090909"
+            },
+            "size": {
+              "name": "One size"
+            }
+          },
+          "price": {
+            "value": 29,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "b536eebb-10ed-466d-8468-ab4d7097f660",
+            "c47809bc-3cd1-43e7-ba1d-63140d70dba7",
+            "e651e7db-80cc-49e9-a747-da31a5ffda8e",
+            "b9f7d5b6-9591-4798-9c80-b3cbacc05317"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+      "slug": "keep-it-underground-subsurface-desk-mat",
+      "name": "KEEP IT UNDERGROUND SUBSURFACE / 02",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 3,
+      "images": [
+        {
+          "id": "4ff66fea-a872-40d4-bc2c-251902be6b32",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "5da3f9c7-8dd3-41d1-826e-27cb6b7997cb",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "29ac9ba5-a8a5-4600-844c-35f46e94befb",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>3 mm thick neoprene</li><li>Anti-slip backing</li></ul><div><div><b>Care Instructions:</b></div><div><ul><li>Not machine washable</li><li>Spot clean with warm water and mild dish soap</li><li>Air dry only</li></ul></div></div>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>15.5\" x 31.5\"</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-09-24T01:06:32.194902Z",
+        "updatedAt": "2026-10-02T00:00:39.296586Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "d479a574-d42e-4767-9725-f940ce0e165c",
+          "name": "KEEP IT UNDERGROUND SUBSURFACE / 02 - All-Over Print, 15.5\" x 31.5\"",
+          "sku": "QRRN-M0UG015",
+          "attributes": {
+            "description": "All-Over Print, 15.5\" x 31.5\"",
+            "color": {
+              "name": "All-Over Print",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "15.5\" x 31.5\""
+            }
+          },
+          "price": {
+            "value": 34,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "4ff66fea-a872-40d4-bc2c-251902be6b32",
+            "5da3f9c7-8dd3-41d1-826e-27cb6b7997cb",
+            "29ac9ba5-a8a5-4600-844c-35f46e94befb"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "74c2ace1-4f7c-469b-a607-5555432019b4",
+      "slug": "keep-it-underground-signal-01-desk-mat",
+      "name": "KEEP IT UNDERGROUND Signal 01 Desk Mat",
+      "access": "PUBLIC",
+      "state": "AVAILABLE",
+      "imageCount": 3,
+      "images": [
+        {
+          "id": "d90c7958-b6cd-42ea-b888-015ee654515c",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "29baecd6-fef4-4f1b-8733-f6b1bb6a632f",
+          "w": 1536,
+          "h": 2048
+        },
+        {
+          "id": "a81a85b4-5cb0-40f0-98ed-6fb2542e82d8",
+          "w": 1536,
+          "h": 2048
+        }
+      ],
+      "additional": {
+        "additionalInformation": [
+          {
+            "type": "MORE_DETAILS",
+            "title": "More details",
+            "bodyHtml": "<ul><li>3 mm thick neoprene</li><li>Anti-slip backing</li></ul><div><div><b>Care Instructions:</b></div><div><ul><li>Not machine washable</li><li>Spot clean with warm water and mild dish soap</li><li>Air dry only</li></ul></div></div>"
+          },
+          {
+            "type": "SIZE_AND_FIT",
+            "title": "Size & Fit",
+            "bodyHtml": "<ul><li>15.5\" x 31.5\"</li></ul>"
+          },
+          {
+            "type": "GUARANTEE_AND_RETURNS",
+            "title": "Quality Guarantee & Returns",
+            "bodyHtml": "<ul><li>Quality is guaranteed. If there is a print error or visible quality issue, we'll replace or refund it.</li><li>Because the products are made to order, we do not accept general returns or sizing-related returns.</li></ul>"
+          }
+        ],
+        "sizeGuide": null,
+        "createdAt": "2026-09-24T01:03:50.976508Z",
+        "updatedAt": "2026-10-01T23:59:19.042104Z",
+        "type": "PRODUCT"
+      },
+      "variants": [
+        {
+          "id": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+          "name": "KEEP IT UNDERGROUND Signal 01 Desk Mat - All-Over Print, 15.5\" x 31.5\"",
+          "sku": "Q4K3-NC7G015",
+          "attributes": {
+            "description": "All-Over Print, 15.5\" x 31.5\"",
+            "color": {
+              "name": "All-Over Print",
+              "swatch": "#ffffff"
+            },
+            "size": {
+              "name": "15.5\" x 31.5\""
+            }
+          },
+          "price": {
+            "value": 34,
+            "currency": "USD"
+          },
+          "compareAt": null,
+          "stock": "UNLIMITED",
+          "imageIds": [
+            "d90c7958-b6cd-42ea-b888-015ee654515c",
+            "29baecd6-fef4-4f1b-8733-f6b1bb6a632f",
+            "a81a85b4-5cb0-40f0-98ed-6fb2542e82d8"
+          ]
+        }
+      ]
+    }
+  ]
+}

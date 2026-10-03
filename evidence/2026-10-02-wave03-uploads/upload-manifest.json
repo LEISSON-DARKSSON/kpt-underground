@@ -1,0 +1,54 @@
+[
+  {
+    "key": "W3-NIGHT-SHIFT-MUG-v2",
+    "svg": "C:\\PROJECTS\\kpt-wave03\\v2\\W3-NIGHT-SHIFT-MUG-v2.svg",
+    "png": "C:\\PROJECTS\\kpt-wave03\\v2\\W3-NIGHT-SHIFT-MUG-v2.png",
+    "px": [
+      3600,
+      3600
+    ],
+    "svgSha256": "f92bdf043ae74d9e01d5c4140c591331d6b9cda11f23cb7c8841a0c7bb5ffe2b",
+    "pngSha256": "d047605c7bfadc3a635eb8fa8a8e617b2ab7fe885dab983ebee47f8f7e08ccc0",
+    "derivedFrom": "assets/vector/wave03-reconstructed/W3-NIGHT-SHIFT-MUG-reconstructed.svg"
+  },
+  {
+    "key": "W3-FIELD-BOTTLE-v2",
+    "svg": "C:\\PROJECTS\\kpt-wave03\\v2\\W3-FIELD-BOTTLE-v2.svg",
+    "png": "C:\\PROJECTS\\kpt-wave03\\v2\\W3-FIELD-BOTTLE-v2.png",
+    "px": [
+      1600,
+      4000
+    ],
+    "svgSha256": "e6de2f438ec8e250e3920e0a9b458bed5b759bffa7819c7030594f87e25eac65",
+    "pngSha256": "eae22fe85c0bead4cb81ea78df139eef7f39941e6c49479b6099a7cf940a5bba",
+    "derivedFrom": "assets/vector/wave03-reconstructed/W3-FIELD-BOTTLE-reconstructed.svg"
+  },
+  {
+    "key": "W3-TRANSIT-SIGNAL-SLEEVE",
+    "png": "C:\\PROJECTS\\kpt-wave03\\v2\\W3-TRANSIT-SIGNAL-SLEEVE.png",
+    "pngSha256": "cb2ef28cfc17311df62545e4b5e72ae4de2b12fdb440b4ede75fd1005552a6ce",
+    "derivedFrom": "assets/png/wave03-reconstructed/W3-TRANSIT-SIGNAL-SLEEVE-reconstructed.png",
+    "unchanged": true
+  },
+  {
+    "key": "W3-TRANSIT-SUBSURFACE-SLEEVE",
+    "png": "C:\\PROJECTS\\kpt-wave03\\v2\\W3-TRANSIT-SUBSURFACE-SLEEVE.png",
+    "pngSha256": "afc134573305953967cc8e0ac090fe3edc6081bf347c9d7f3926e2931acdb8f7",
+    "derivedFrom": "assets/png/wave03-reconstructed/W3-TRANSIT-SUBSURFACE-SLEEVE-reconstructed.png",
+    "unchanged": true
+  },
+  {
+    "key": "W3-OFFLINE-BEANIE",
+    "png": "C:\\PROJECTS\\kpt-wave03\\v2\\W3-OFFLINE-BEANIE.png",
+    "pngSha256": "ce5f27d21f1b05217ed54d8eb74d3ca01629e18049adbdc22c82c141992b7a74",
+    "derivedFrom": "assets/png/wave03-reconstructed/W3-OFFLINE-BEANIE-reconstructed.png",
+    "unchanged": true
+  },
+  {
+    "key": "W2-SUBSURFACE-POSTER",
+    "png": "C:\\PROJECTS\\kpt-wave03\\v2\\W2-SUBSURFACE-POSTER.png",
+    "pngSha256": "3dc210e1a2cae61fd833125f86ff15e72ca01092f47801d4bf97bb4816d9e57b",
+    "derivedFrom": "assets/png/wave02-original/wave02-subsurface-poster-v2.png",
+    "unchanged": true
+  }
+]

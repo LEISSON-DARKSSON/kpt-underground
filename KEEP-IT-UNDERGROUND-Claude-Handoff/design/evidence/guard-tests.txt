@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: allows Vercel Preview
+ok 1 - allows Vercel Preview
+  ---
+  duration_ms: 0.812545
+  type: 'test'
+  ...
+# Subtest: blocks Production
+ok 2 - blocks Production
+  ---
+  duration_ms: 0.173664
+  type: 'test'
+  ...
+# Subtest: cannot override Production with development Node mode
+ok 3 - cannot override Production with development Node mode
+  ---
+  duration_ms: 0.089637
+  type: 'test'
+  ...
+# Subtest: blocks unknown hosted environment
+ok 4 - blocks unknown hosted environment
+  ---
+  duration_ms: 0.082786
+  type: 'test'
+  ...
+# Subtest: allows local development
+ok 5 - allows local development
+  ---
+  duration_ms: 0.086055
+  type: 'test'
+  ...
+# Subtest: blocks unclassified production server
+ok 6 - blocks unclassified production server
+  ---
+  duration_ms: 0.510318
+  type: 'test'
+  ...
+# Subtest: no actual checkout network calls
+ok 7 - no actual checkout network calls
+  ---
+  duration_ms: 0.173624
+  type: 'test'
+  ...
+# Subtest: preview contains no payment or shipping inputs
+ok 8 - preview contains no payment or shipping inputs
+  ---
+  duration_ms: 1.223583
+  type: 'test'
+  ...
+# Subtest: no credentials or font binaries are embedded
+ok 9 - no credentials or font binaries are embedded
+  ---
+  duration_ms: 1.698491
+  type: 'test'
+  ...
+# Subtest: inline script matches CSP hash
+ok 10 - inline script matches CSP hash
+  ---
+  duration_ms: 9.500855
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 127.38381

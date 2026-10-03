@@ -1,0 +1,340 @@
+{
+  "checkedAt": "2026-10-01T08:42:07.707607+00:00",
+  "scope": "Local HTML prototype only. Not Fourthwall, deployed Next.js, payment, or full accessibility certification.",
+  "browser": "Chromium via Playwright set_content of authored HTML; file navigation blocked by runtime policy; agent-browser CLI not installed",
+  "checks": [
+    {
+      "name": "1440:home heading",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:home no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:artwork proportions preserved",
+      "status": "PASS",
+      "ratios": [
+        1.906614785992218,
+        1.906614785992218
+      ]
+    },
+    {
+      "name": "1440:shop no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:filter signal",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:product ID bound",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:product no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:cart opens",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:two items subtotal",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:quantity recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:focus restored",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:distinct designs in cart",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:modal focus contained",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:handoff correct subtotal",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:payment disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:no payment/address inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:no JS errors",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "name": "1440:no commerce network calls",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:exact external font rendering",
+      "status": "BLOCKED",
+      "reason": "External fonts are disabled in this offline test suite. Exact source-font rendering requires a separate online browser check; it is NOT covered by these passing tests."
+    },
+    {
+      "name": "390:home heading",
+      "status": "PASS"
+    },
+    {
+      "name": "390:home no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "390:artwork proportions preserved",
+      "status": "PASS",
+      "ratios": [
+        1.910828025477707,
+        1.910828025477707
+      ]
+    },
+    {
+      "name": "390:shop no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:filter signal",
+      "status": "PASS"
+    },
+    {
+      "name": "390:product ID bound",
+      "status": "PASS"
+    },
+    {
+      "name": "390:product no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "390:cart opens",
+      "status": "PASS"
+    },
+    {
+      "name": "390:two items subtotal",
+      "status": "PASS"
+    },
+    {
+      "name": "390:quantity recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "390:escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "390:focus restored",
+      "status": "PASS"
+    },
+    {
+      "name": "390:distinct designs in cart",
+      "status": "PASS"
+    },
+    {
+      "name": "390:modal focus contained",
+      "status": "PASS"
+    },
+    {
+      "name": "390:handoff correct subtotal",
+      "status": "PASS"
+    },
+    {
+      "name": "390:payment disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "390:no payment/address inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "390:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "390:mobile menu",
+      "status": "PASS"
+    },
+    {
+      "name": "390:no JS errors",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "name": "390:no commerce network calls",
+      "status": "PASS"
+    },
+    {
+      "name": "390:noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "390:exact external font rendering",
+      "status": "BLOCKED",
+      "reason": "External fonts are disabled in this offline test suite. Exact source-font rendering requires a separate online browser check; it is NOT covered by these passing tests."
+    },
+    {
+      "name": "320:home heading",
+      "status": "PASS"
+    },
+    {
+      "name": "320:home no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "320:artwork proportions preserved",
+      "status": "PASS",
+      "ratios": [
+        1.9166666666666667,
+        1.9166666666666667
+      ]
+    },
+    {
+      "name": "320:shop no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:filter signal",
+      "status": "PASS"
+    },
+    {
+      "name": "320:product ID bound",
+      "status": "PASS"
+    },
+    {
+      "name": "320:product no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "320:cart opens",
+      "status": "PASS"
+    },
+    {
+      "name": "320:two items subtotal",
+      "status": "PASS"
+    },
+    {
+      "name": "320:quantity recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "320:escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "320:focus restored",
+      "status": "PASS"
+    },
+    {
+      "name": "320:distinct designs in cart",
+      "status": "PASS"
+    },
+    {
+      "name": "320:modal focus contained",
+      "status": "PASS"
+    },
+    {
+      "name": "320:handoff correct subtotal",
+      "status": "PASS"
+    },
+    {
+      "name": "320:payment disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "320:no payment/address inputs",
+      "status": "PASS"
+    },
+    {
+      "name": "320:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "320:mobile menu",
+      "status": "PASS"
+    },
+    {
+      "name": "320:no JS errors",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "name": "320:no commerce network calls",
+      "status": "PASS"
+    },
+    {
+      "name": "320:noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "320:exact external font rendering",
+      "status": "BLOCKED",
+      "reason": "External fonts are disabled in this offline test suite. Exact source-font rendering requires a separate online browser check; it is NOT covered by these passing tests."
+    },
+    {
+      "name": "Reduced motion CSS disables transition",
+      "status": "PASS"
+    }
+  ],
+  "passed": 75,
+  "failed": 0,
+  "blocked": 3
+}

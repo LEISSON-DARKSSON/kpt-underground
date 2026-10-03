@@ -1,0 +1,43 @@
+
+> kpt-underground@0.1.0 build
+> next build
+
+▲ Next.js 16.2.1 (Turbopack)
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 1423ms
+  Running TypeScript ...
+  Finished TypeScript in 1831ms ...
+  Collecting page data using 18 workers ...
+  Generating static pages using 18 workers (0/9) ...
+  Generating static pages using 18 workers (2/9) 
+  Generating static pages using 18 workers (4/9) 
+  Generating static pages using 18 workers (6/9) 
+✓ Generating static pages using 18 workers (9/9) in 382ms
+  Finalizing page optimization ...
+
+Route (app)                          Revalidate  Expire
+┌ ○ /                                        1m      1y
+├ ○ /_not-found
+├ ƒ /api/cart/checkout
+├ ƒ /api/fourthwall/status
+├ ƒ /commerce-preview
+├ ƒ /commerce-preview/assets/[file]
+├ ƒ /commerce-preview/shop
+├ ƒ /commerce-preview/shop/[slug]
+├ ƒ /commerce-preview/shop/handoff
+├ ○ /help
+├ ○ /robots.txt
+├ ○ /shop                                    1m      1y
+├ ƒ /shop/[slug]
+├ ○ /signal
+├ ○ /sitemap.xml                             1h      1y
+└ ○ /story
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+build exit 0

@@ -1,0 +1,92 @@
+[
+  {
+    "key": "W4-KPT-CHEST",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-KPT-CHEST.png",
+    "px": [
+      3600,
+      3600
+    ],
+    "sha256": "49a31c9b59c027da4dfaf4ec220f8463be9d148771828a8666923c4bc9436b1a",
+    "fonts": "Bebas Neue"
+  },
+  {
+    "key": "W4-HOODIE-BACK-GLOBE",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-HOODIE-BACK-GLOBE.png",
+    "px": [
+      3600,
+      4500
+    ],
+    "sha256": "4489ad396033ad5268feb4f9a505db6c2f881a13b131fd8cfff34461e0881b19",
+    "fonts": "Bebas Neue,Space Mono"
+  },
+  {
+    "key": "W4-TEE-BACK-WAVE",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-TEE-BACK-WAVE.png",
+    "px": [
+      3600,
+      4500
+    ],
+    "sha256": "74278e6f0392d20c9a1704013ced3504577fc9a6d1c8d1f1dac767e4b5b77b0f",
+    "fonts": "Bebas Neue,Space Mono"
+  },
+  {
+    "key": "W4-MOUSEPAD",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-MOUSEPAD.png",
+    "px": [
+      4200,
+      3540
+    ],
+    "sha256": "a28614097990de3798503c90359bda1f244f6b8dd4cf3f0e444b5e9dab366953",
+    "fonts": "Bebas Neue,Space Mono"
+  },
+  {
+    "key": "W4-PHONE-CASE",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-PHONE-CASE.png",
+    "px": [
+      2400,
+      4800
+    ],
+    "sha256": "dcb4bbcca0721effbf5440c7227d384b66cdc5c5b6b68cf1b50e942df21635e6",
+    "fonts": "Bebas Neue,Space Mono"
+  },
+  {
+    "key": "W4-BACKPACK",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-BACKPACK.png",
+    "px": [
+      3600,
+      4500
+    ],
+    "sha256": "fb55990f55e756e30b20db6c07944f20b5717e3cd4523c3be8c2b405e1ca6250",
+    "fonts": "Bebas Neue"
+  },
+  {
+    "key": "W4-TUMBLER-ETCH",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-TUMBLER-ETCH.png",
+    "px": [
+      2100,
+      4200
+    ],
+    "sha256": "38d296d6dbe678d4ce94daee73bab1c78e4347335133fc78e44b43cfcd2fd8ca",
+    "fonts": "Bebas Neue"
+  },
+  {
+    "key": "W4-SOCK-LEG",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-SOCK-LEG.png",
+    "px": [
+      1800,
+      4200
+    ],
+    "sha256": "ea28a872f50a760aa3f74a84f8a7ec194eef7bc1d712e201b5feeac75811c470",
+    "fonts": "Bebas Neue,Space Mono"
+  },
+  {
+    "key": "W4-BEANIE-KPT-EMB",
+    "png": "C:\\PROJECTS\\kpt-underground\\evidence\\2026-10-02-wave04-art\\W4-BEANIE-KPT-EMB.png",
+    "px": [
+      3600,
+      1260
+    ],
+    "sha256": "35c651cc59bd422e56917b734b88f6c4f84c5419670625d63551eb9e6c20a2fa",
+    "fonts": "Bebas Neue"
+  }
+]

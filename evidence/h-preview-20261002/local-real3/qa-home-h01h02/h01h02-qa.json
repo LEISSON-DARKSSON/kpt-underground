@@ -1,0 +1,312 @@
+{
+  "base": "http://127.0.0.1:3417",
+  "at": "2026-10-02T10:09:52.907Z",
+  "fails": 0,
+  "results": [
+    {
+      "s": "PASS",
+      "name": "cold load @320: CTA present and not covered ~60 ms after DOMContentLoaded",
+      "detail": "{\"inView\":false,\"hit\":null,\"ms\":113}"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: intro is a thin pointer-transparent aria-hidden line; no old #loader",
+      "detail": "{\"pe\":\"none\",\"h\":2,\"bg\":\"rgba(0, 0, 0, 0)\",\"aria\":\"true\",\"oldLoader\":false}"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: CTA click works immediately and reaches /shop",
+      "detail": "64 ms"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: back navigation shows the home page, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@320: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: no horizontal overflow, CTA text not clipped",
+      "detail": "overflow=0 clipped=false"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: hero object is a real Fourthwall image that loaded, 3:2 window, mat fully inside the crop",
+      "detail": "{\"natural\":[1536,2048],\"frameRatio\":1.503,\"cy0\":513,\"cy1\":1535,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: hero caption states name, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: Bebas/Space Mono webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback | h1=\"Bebas Neue\", \"Bebas Neue Fallback\", san | body=\"Space Mono\", \"Space Mono Fallback\", mon"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: Studio picks titled STUDIO PICKS with 6 undistorted cards (object-contain)",
+      "detail": "STUDIO PICKS n=6 fit=contain"
+    },
+    {
+      "s": "PASS",
+      "name": "@320: manifesto strip sits after the product picks",
+      "detail": "picks@1203 manifesto@4553"
+    },
+    {
+      "s": "INFO",
+      "name": "@320: first decision view (viewport 320x700)",
+      "detail": "cta 807-863, proof 903-1108, image 500-682; CTA NOT fully above fold, image fully above fold"
+    },
+    {
+      "s": "PASS",
+      "name": "cold load @390: CTA present and not covered ~60 ms after DOMContentLoaded",
+      "detail": "{\"inView\":true,\"hit\":true,\"ms\":124}"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: intro is a thin pointer-transparent aria-hidden line; no old #loader",
+      "detail": "{\"pe\":\"none\",\"h\":2,\"bg\":\"rgba(0, 0, 0, 0)\",\"aria\":\"true\",\"oldLoader\":false}"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: CTA click works immediately and reaches /shop",
+      "detail": "58 ms"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: back navigation shows the home page, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@390: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: no horizontal overflow, CTA text not clipped",
+      "detail": "overflow=0 clipped=false"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: hero object is a real Fourthwall image that loaded, 3:2 window, mat fully inside the crop",
+      "detail": "{\"natural\":[1536,2048],\"frameRatio\":1.5,\"cy0\":512,\"cy1\":1536,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: hero caption states name, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: Bebas/Space Mono webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback | h1=\"Bebas Neue\", \"Bebas Neue Fallback\", san | body=\"Space Mono\", \"Space Mono Fallback\", mon"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: Studio picks titled STUDIO PICKS with 6 undistorted cards (object-contain)",
+      "detail": "STUDIO PICKS n=6 fit=contain"
+    },
+    {
+      "s": "PASS",
+      "name": "@390: manifesto strip sits after the product picks",
+      "detail": "picks@1179 manifesto@5054"
+    },
+    {
+      "s": "INFO",
+      "name": "@390: first decision view (viewport 390x844)",
+      "detail": "cta 783-839, proof 879-1084, image 447-675; CTA fully above fold, image fully above fold"
+    },
+    {
+      "s": "PASS",
+      "name": "cold load @768: CTA present and not covered ~60 ms after DOMContentLoaded",
+      "detail": "{\"inView\":true,\"hit\":true,\"ms\":126}"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: intro is a thin pointer-transparent aria-hidden line; no old #loader",
+      "detail": "{\"pe\":\"none\",\"h\":2,\"bg\":\"rgba(0, 0, 0, 0)\",\"aria\":\"true\",\"oldLoader\":false}"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: CTA click works immediately and reaches /shop",
+      "detail": "63 ms"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: back navigation shows the home page, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@768: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: no horizontal overflow, CTA text not clipped",
+      "detail": "overflow=0 clipped=false"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: hero object is a real Fourthwall image that loaded, 3:2 window, mat fully inside the crop",
+      "detail": "{\"natural\":[1536,2048],\"frameRatio\":1.497,\"cy0\":511,\"cy1\":1537,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: hero caption states name, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: Bebas/Space Mono webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback | h1=\"Bebas Neue\", \"Bebas Neue Fallback\", san | body=\"Space Mono\", \"Space Mono Fallback\", mon"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: Studio picks titled STUDIO PICKS with 6 undistorted cards (object-contain)",
+      "detail": "STUDIO PICKS n=6 fit=contain"
+    },
+    {
+      "s": "PASS",
+      "name": "@768: manifesto strip sits after the product picks",
+      "detail": "picks@849 manifesto@3012"
+    },
+    {
+      "s": "INFO",
+      "name": "@768: first decision view (viewport 768x1024)",
+      "detail": "cta 493-549, proof 589-714, image 274-467; CTA fully above fold, image fully above fold"
+    },
+    {
+      "s": "PASS",
+      "name": "cold load @1440: CTA present and not covered ~60 ms after DOMContentLoaded",
+      "detail": "{\"inView\":true,\"hit\":true,\"ms\":101}"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: intro is a thin pointer-transparent aria-hidden line; no old #loader",
+      "detail": "{\"pe\":\"none\",\"h\":2,\"bg\":\"rgba(0, 0, 0, 0)\",\"aria\":\"true\",\"oldLoader\":false}"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: CTA click works immediately and reaches /shop",
+      "detail": "49 ms"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: back navigation shows the home page, no blocking overlay",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: one H1, one non-hidden hero link (the CTA)",
+      "detail": "h1=1 links=1"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: no horizontal overflow, CTA text not clipped",
+      "detail": "overflow=0 clipped=false"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: hero object is a real Fourthwall image that loaded, 3:2 window, mat fully inside the crop",
+      "detail": "{\"natural\":[1536,2048],\"frameRatio\":1.502,\"cy0\":513,\"cy1\":1535,\"matInside\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: hero caption states name, price and 'Digital visualisation'",
+      "detail": "DESK MAT · 15.5\" × 31.5\" Signal 01 Desk Mat $34 DIGITAL VISUALISATION · MADE TO ORDER"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: Bebas/Space Mono webfonts loaded and applied",
+      "detail": "Space Mono,Space Mono,Space Mono Fallback,Bebas Neue,Bebas Neue Fallback | h1=\"Bebas Neue\", \"Bebas Neue Fallback\", san | body=\"Space Mono\", \"Space Mono Fallback\", mon"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: Studio picks titled STUDIO PICKS with 6 undistorted cards (object-contain)",
+      "detail": "STUDIO PICKS n=6 fit=contain"
+    },
+    {
+      "s": "PASS",
+      "name": "@1440: manifesto strip sits after the product picks",
+      "detail": "picks@970 manifesto@2606"
+    },
+    {
+      "s": "INFO",
+      "name": "@1440: first decision view (viewport 1440x900)",
+      "detail": "cta 645-701, proof 741-827, image 280-599; CTA fully above fold, image fully above fold"
+    },
+    {
+      "s": "PASS",
+      "name": "reduced motion: intro line is display:none",
+      "detail": "none"
+    },
+    {
+      "s": "PASS",
+      "name": "reduced motion: CTA clickable straight away",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "no JavaScript: H1, CTA link (/shop) and hero object are in the server HTML and visible",
+      "detail": "cta visible=true href=/shop"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard: hero CTA reachable by Tab with a visible focus outline",
+      "detail": "tabs=7 ring={\"style\":\"solid\",\"width\":\"2px\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard: hero has exactly one tab stop",
+      "detail": "1"
+    },
+    {
+      "s": "PASS",
+      "name": "keyboard: Enter on the CTA opens /shop",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "tee: no 'size chart not published' notice any more; sourced chart shown",
+      "detail": "{\"missing\":false,\"sourced\":true}"
+    },
+    {
+      "s": "PASS",
+      "name": "tee: table has the supplier's 7 sizes and values, headings Size/Length/Width/Sleeve",
+      "detail": "[\"Size\",\"Length\",\"Width\",\"Sleeve\"]"
+    },
+    {
+      "s": "PASS",
+      "name": "tee: no size preselected, price shown as range, add button still asks for a size",
+      "detail": "No size selected yet. | $35–$41"
+    },
+    {
+      "s": "PASS",
+      "name": "tee: choosing L highlights chart row L and shows that variant's own price",
+      "detail": "{\"cur\":[\"L\"],\"hint\":\"Selected: L\",\"price\":\"3500\",\"variant\":\"USD · L\"}"
+    },
+    {
+      "s": "PASS",
+      "name": "kpt-premium-hoodie: still says size chart not published (no invented table)",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "kpt-crewneck: still says size chart not published (no invented table)",
+      "detail": ""
+    },
+    {
+      "s": "PASS",
+      "name": "phone case: description no longer tells the shopper to choose the model at checkout",
+      "detail": "An orbit study in white line work with an orange sun, the KPT mark and cross, and KEEP IT UNDERGROUND set along the base. An original KEEP IT UNDERGROUND design"
+    }
+  ]
+}

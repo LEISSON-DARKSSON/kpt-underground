@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-02T12:35:54.313Z",
+  "method": "lighthouse@12 mobile preset, devtools (applied) throttling, median of 5, warm server, local next start + real catalog",
+  "res": [
+    {
+      "sha": "c353c6d",
+      "lcpRuns": [
+        1941,
+        2003,
+        1979,
+        1945,
+        1975
+      ],
+      "lcpMedian": 1975,
+      "fcpMedian": 1975,
+      "el": "<h1 class=\"mt-8 max-w-[760px] font-display text-[clamp(30px,4.2vw,52px)] leading"
+    },
+    {
+      "sha": "22f28c3",
+      "lcpRuns": [
+        2204,
+        2176,
+        2159,
+        2141,
+        2162
+      ],
+      "lcpMedian": 2162,
+      "fcpMedian": 2153,
+      "el": "<img alt=\"\" fetchpriority=\"high\" decoding=\"async\" data-nimg=\"fill\" class=\"hero-f"
+    }
+  ]
+}

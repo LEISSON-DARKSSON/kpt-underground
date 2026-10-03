@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-02T12:40:23.029Z",
+  "destination": "350 5th Ave, New York, NY 10118 (public commercial address, test only)",
+  "results": [
+    {
+      "basket": "signal-x1",
+      "status": "READ",
+      "notes": [
+        "checkout page reached"
+      ],
+      "inputs": [
+        {
+          "frame": "keepitunderground-shop.fourthwall.com",
+          "items": [
+            "input[checkbox|ac=|name=marketingOptIn]"
+          ]
+        },
+        {
+          "frame": "www.google.com",
+          "items": [
+            "input[hidden|ac=|name=]"
+          ]
+        },
+        {
+          "frame": "js.stripe.com",
+          "items": [
+            "input[text|ac=email|name=email]"
+          ]
+        },
+        {
+          "frame": "js.stripe.com",
+          "items": [
+            "input[text|ac=shipping name|name=name]",
+            "select[|ac=shipping country|name=country]",
+            "input[text|ac=disabled|name=addressLine1]",
+            "input[text|ac=shipping address-line2|name=addressLine2]",
+            "input[text|ac=shipping address-level2|name=locality]",
+            "input[text|ac=shipping address-level1|name=]",
+            "select[|ac=shipping address-level1|name=administrativeArea]",
+            "input[text|ac=shipping postal-code|name=postalCode]"
+          ]
+        },
+        {
+          "frame": "js.stripe.com",
+          "items": [
+            "input[text|ac=cc-number|name=number]",
+            "input[text|ac=cc-exp|name=expiry]",
+            "input[text|ac=cc-csc|name=cvc]",
+            "input[checkbox|ac=|name=linkOptIn]",
+            "input[text|ac=off|name=link_pay_token]",
+            "input[checkbox|ac=|name=]",
+            "input[|ac=|name=]",
+            "input[|ac=|name=]",
+            "input[|ac=|name=]"
+          ]
+        },
+        {
+          "frame": "js.stripe.com",
+          "items": [
+            "input[checkbox|ac=|name=syncAddress]"
+          ]
+        }
+      ],
+      "filled": {
+        "email": true,
+        "country": true,
+        "name": true,
+        "address": true,
+        "city": true,
+        "state": true,
+        "zip": true
+      },
+      "moneyLines": [
+        "Shipping",
+        "Delivery",
+        "$7.19",
+        "$34.00",
+        "Subtotal (1 item)",
+        "$34.00",
+        "Shipping",
+        "$7.19",
+        "Tax",
+        "$3.66",
+        "Total",
+        "$44.85",
+        "Updated total price",
+        "$44.85"
+      ]
+    }
+  ]
+}

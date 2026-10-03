@@ -1,0 +1,112 @@
+{
+  "checkedAt": "2026-10-01T23:32:24.016Z",
+  "scope": "Wave 02 products created in Fourthwall admin as Hidden (not published). No orders, payments or publishing.",
+  "method": "Fourthwall admin product designer via Claude in Chrome (file uploads); read-back via built-in browser",
+  "result": "PARTIAL",
+  "created": [
+    {
+      "key": "W2-TOTE",
+      "name": "SIGNAL - Studio Tote",
+      "offerId": "11c30deb-6d02-4590-82e6-83061fc4b21d",
+      "status": "HIDDEN",
+      "priceUsd": 29,
+      "baseCostUsdShown": 9.98,
+      "profitShownUsd": 19.02,
+      "base": "BagBase W101 cotton tote, Black, Printed (DTFx, Printful), front only",
+      "artwork": "assets/artwork/wave02-signal-studio-tote-front.png",
+      "placement": "auto-fit to 9.5x9.5 in front area; back blank",
+      "descriptionSaved": true
+    },
+    {
+      "key": "W2-GRAPHBOOK-SIGNAL",
+      "name": "PROJECT NOTES - SIGNAL / 01",
+      "offerId": "bad5cb61-ad27-4e4b-94a1-5bd769f19ab8",
+      "status": "HIDDEN",
+      "priceUsd": 24,
+      "baseCostUsdShown": 10.95,
+      "profitShownUsd": 13.05,
+      "base": "Spoke SP40004 spiral notebook, graph, 6x8 in",
+      "artwork": "assets/artwork/wave02-signal-graph-notebook-cover.png",
+      "placement": "art 6.03x8.04 in on 6.03x8.45 in template; canvas set to #181B1B (art edge colour) to avoid white bands",
+      "descriptionSaved": true
+    },
+    {
+      "key": "W2-GRAPHBOOK-SUBSURFACE",
+      "name": "PROJECT NOTES - SUBSURFACE / 02",
+      "offerId": "05b191f6-6d4a-474f-ac87-1c9e2edb5894",
+      "status": "HIDDEN",
+      "priceUsd": 24,
+      "baseCostUsdShown": 10.95,
+      "profitShownUsd": 13.05,
+      "base": "Spoke SP40004 spiral notebook, graph, 6x8 in",
+      "artwork": "assets/artwork/wave02-subsurface-graph-notebook-cover.png",
+      "placement": "same as SIGNAL; canvas #EBE7DF",
+      "descriptionSaved": true
+    },
+    {
+      "key": "W2-STICKERS",
+      "name": "OBJECT STUDIES - Six Marks",
+      "offerId": "185ce494-67e8-43ff-ac2c-f80186196ebd",
+      "status": "HIDDEN",
+      "priceUsd": 12,
+      "baseCostUsdShown": 5.05,
+      "profitShownUsd": 6.95,
+      "base": "Allcolor 5495 kiss-cut sticker sheet 5.83x8.27 in",
+      "artwork": "stickers layer: evidence/2026-10-02-wave02-products/wave02-sticker-sheet-stickers-layer.png (6 sticker PNGs composited at the placement-proof positions, transparent background); background layer: assets/artwork/wave02-sticker-backer.png",
+      "placement": "layout follows wave02-sticker-placement-proof.jpg; not a supplier-approved cut template",
+      "descriptionSaved": true
+    },
+    {
+      "key": "W2-POSTER-SIGNAL",
+      "name": "WALL STUDIES - SIGNAL / 01",
+      "offerId": "04de8f0f-7b3e-430b-82b2-ca9448f82c77",
+      "status": "HIDDEN",
+      "priceUsd": 29,
+      "sizes": [
+        "18x24 only"
+      ],
+      "baseCostUsdShown": 13,
+      "profitShownUsd": 16,
+      "base": "Allcolor P001 enhanced matte poster (admin catalog showed no maintenance notice on 2026-10-02)",
+      "artwork": "assets/artwork/wave02-signal-poster-v2.png",
+      "placement": "exact 18x24 fit (5400x7200 px)",
+      "descriptionSaved": true
+    },
+    {
+      "key": "W2-POSTER-SUBSURFACE",
+      "name": "WALL STUDIES - SUBSURFACE / 02",
+      "offerId": null,
+      "status": "NOT_CREATED",
+      "result": "BLOCKED",
+      "reason": "Artwork upload step was refused by this session's permission check; per the denial the step was not retried another way. An unsaved designer draft (18x24 only, no artwork) was left; nothing was created.",
+      "artwork": "assets/artwork/wave02-subsurface-poster-v2.png"
+    }
+  ],
+  "variantIds": "NOT_RUN — the admin UI does not expose variant IDs; read later with get-offers-by-ids on the offer IDs above",
+  "existingDeskMats": {
+    "74c2ace1-4f7c-469b-a607-5555432019b4": "Private (unchanged)",
+    "97704a85-a6b6-4090-894f-a7b5bc71a374": "Private (unchanged)"
+  },
+  "untouched": [
+    "desk mats",
+    "shop COMING_SOON",
+    "theme",
+    "orders/payments/credit",
+    "DNS",
+    "Production",
+    "main"
+  ],
+  "copyNotes": "Customer copy adapted from product-copy.en.md; internal notes (test price, pending quotes) removed; only catalog-verified specs stated.",
+  "resetFixPr": {
+    "url": "https://github.com/LEISSON-DARKSSON/kpt-underground/pull/2",
+    "branch": "fix/globals-reset-cascade-layer",
+    "sha": "489b6ad306470f61dbbe8fa4db7c25fcb61b242a",
+    "deployment": "dpl_Eiy9pcQnvuWBnz3nUmPhpQvMachK",
+    "state": "draft, not merged",
+    "visualDiff": "evidence/2026-10-02-reset-fix-visual-diff/visual-diff.json"
+  },
+  "commercePreviewPr": {
+    "url": "https://github.com/LEISSON-DARKSSON/kpt-underground/pull/3",
+    "state": "draft, not merged"
+  }
+}

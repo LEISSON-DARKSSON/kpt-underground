@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-02T05:58:25.445Z",
+  "method": "local next start + real catalog, lighthouse@12 mobile simulated throttling, median of 3",
+  "res": [
+    {
+      "sha": "b598a17",
+      "path": "/shop",
+      "lcpMs": 5116,
+      "cls": 0,
+      "tbtMs": 85,
+      "lcpEl": "<p class=\"max-w-sm font-mono text-sm leading-relaxed text-slate\">"
+    },
+    {
+      "sha": "cb078ec",
+      "path": "/shop",
+      "lcpMs": 2957,
+      "cls": 0,
+      "tbtMs": 46,
+      "lcpEl": "<p class=\"max-w-sm font-mono text-sm leading-relaxed text-slate\">"
+    }
+  ]
+}

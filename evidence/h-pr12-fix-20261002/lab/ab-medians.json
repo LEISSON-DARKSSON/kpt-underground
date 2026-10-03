@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-02T12:16:24.595Z",
+  "method": "local next start + real catalog, lighthouse@12 mobile simulated throttling, median of 3",
+  "res": [
+    {
+      "sha": "c353c6d",
+      "path": "/",
+      "lcpMs": 2644,
+      "cls": 0,
+      "tbtMs": 17,
+      "lcpEl": "<h1 class=\"mt-8 max-w-[760px] font-display text-[clamp(30px,4.2vw,52px)] leading-[1.0…\" da"
+    },
+    {
+      "sha": "a0091ab",
+      "path": "/",
+      "lcpMs": 4643,
+      "cls": 0,
+      "tbtMs": 33,
+      "lcpEl": "<img src=\"https://imgproxy.fourthwall.dev/rInCEwJ7ht2ZhdbzbUx_XsfIgK4e9s4jd7GWLc08Hu…\" alt"
+    },
+    {
+      "sha": "22f28c3",
+      "path": "/",
+      "lcpMs": 4302,
+      "cls": 0,
+      "tbtMs": 34,
+      "lcpEl": "<img alt=\"\" fetchpriority=\"high\" decoding=\"async\" data-nimg=\"fill\" class=\"hero-figure-img\""
+    }
+  ]
+}

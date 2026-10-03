@@ -1,0 +1,346 @@
+{
+  "checkedAt": "2026-09-24T05:50:20Z",
+  "team": "leisson-creative",
+  "project": "kpt-underground",
+  "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+  "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+  "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+  "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+  "method": "vercel-cli",
+  "result": "BLOCKED",
+  "httpStatus": 302,
+  "contentType": "text/plain",
+  "responseBody": "Redirecting...",
+  "obstacle": "Vercel SSO/protection redirect; controlled Chrome and the SSO URL were blocked by the client with ERR_BLOCKED_BY_CLIENT. No JSON response was observed.",
+  "browserAttempt": {
+    "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+    "result": "BLOCKED",
+    "obstacle": "ERR_BLOCKED_BY_CLIENT"
+  },
+  "passCriteriaObserved": false,
+  "priorReportFilesPresent": false,
+  "credentialsSaved": false,
+  "followUpChecks": [
+    {
+      "checkedAt": "2026-09-24T13:55:06Z",
+      "team": "leisson-creative",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "method": "vercel-cli",
+      "result": "BLOCKED",
+      "httpStatus": 302,
+      "contentType": "text/plain",
+      "responseBody": "Redirecting...",
+      "obstacle": "Vercel protection redirect; no Fourthwall endpoint JSON response was observed.",
+      "browserAttempt": {
+        "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+        "result": "BLOCKED",
+        "obstacle": "ERR_BLOCKED_BY_CLIENT before any Vercel sign-in page appeared"
+      },
+      "deploymentIdentityVerifiedByCli": true,
+      "shaSource": "fixed target supplied for this check",
+      "passCriteriaObserved": false,
+      "credentialsSaved": false
+    },
+    {
+      "checkedAt": "2026-09-28T17:23:21Z",
+      "team": "leisson-creative",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "method": "vercel-cli",
+      "additionalMethod": "connected Vercel read-only fetch",
+      "result": "BLOCKED",
+      "httpStatus": 302,
+      "contentType": "text/plain",
+      "responseBody": "Redirecting...",
+      "obstacle": "Vercel SSO redirect; no Fourthwall endpoint JSON response was observed.",
+      "browserAttempt": {
+        "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+        "result": "BLOCKED",
+        "obstacle": "Browser tool could not load request-header policy on two attempts; no login page was displayed."
+      },
+      "deploymentIdentityVerifiedByConnector": true,
+      "passCriteriaObserved": false,
+      "credentialsSaved": false
+    },
+    {
+      "checkedAt": "2026-09-29T06:54:01Z",
+      "checkType": "existing access-path review",
+      "team": "leisson-creative",
+      "teamId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "workspace": "C:\\PROJECTS\\kpt-underground",
+      "cliVersion": "60.1.3",
+      "cliAccount": "gertleisson-2037",
+      "localProjectJsonPresent": false,
+      "processBypassSecretPresent": false,
+      "newGetSent": false,
+      "reasonNoNewGet": "The exact correctly scoped, deployment-bound vercel curl command previously returned 302 with the available CLI authentication; no changed access condition was found.",
+      "priorExactGetCommand": "vercel curl /api/fourthwall/status --deployment https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app --scope leisson-creative -- --silent --include",
+      "priorExactGetReportTime": "2026-09-24T05:50:20Z",
+      "priorExactGetCliVersion": "59.19.0",
+      "priorExactGetHttpStatus": 302,
+      "priorExactGetContentType": "text/plain",
+      "priorExactGetResponseBody": "Redirecting...",
+      "currentResponseObserved": false,
+      "result": "BLOCKED",
+      "obstacle": "Vercel Deployment Protection redirects the authenticated CLI GET to SSO before endpoint JSON can be read.",
+      "passCriteriaObserved": false,
+      "credentialsSaved": false
+    },
+    {
+      "checkedAt": "2026-09-29T07:02:28Z",
+      "responseCheckedAt": "2026-09-29T07:02:07.468Z",
+      "team": "leisson-creative",
+      "teamId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+      "project": "kpt-underground",
+      "projectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "url": "https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app/api/fourthwall/status",
+      "workspace": "C:\\PROJECTS\\kpt-underground",
+      "cliVersion": "60.1.3",
+      "method": "vercel curl",
+      "getCommand": "vercel curl /api/fourthwall/status --deployment https://kpt-underground-ctoozrsr1-leisson-creative.vercel.app --scope leisson-creative -- --silent --include",
+      "localProjectLinkVerified": true,
+      "localProjectJsonProjectId": "prj_YJhnEFeOnrCoodkZ9k201ReLeGfq",
+      "localProjectJsonOrgId": "team_AM95AHo0HzxOqVMyK8uCsfKw",
+      "chromeResult": "ERR_BLOCKED_BY_CLIENT",
+      "connectorFetchHttpStatus": 302,
+      "httpStatus": 200,
+      "contentType": "application/json",
+      "responseJson": {
+        "checkedAt": "2026-09-29T07:02:07.468Z",
+        "connection": "ok",
+        "identityPinned": true,
+        "shop": {
+          "id": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+          "name": "KEEP IT UNDERGROUND",
+          "domain": "keepitunderground-shop",
+          "publicDomain": "keepitunderground.com"
+        },
+        "collections": [
+          {
+            "id": "col_vXBDW7HUQGOiRKmrIxU_Iw",
+            "name": "All Products",
+            "slug": "all",
+            "description": "Collection including all items on sale!"
+          }
+        ],
+        "products": [],
+        "publicProductCount": 0,
+        "salesReady": false
+      },
+      "result": "PASS",
+      "passCriteriaObserved": true,
+      "postCleanupVerification": {
+        "checkedAt": "2026-09-29T07:03:51Z",
+        "envLocalPresent": false,
+        "httpStatus": 200,
+        "contentType": "application/json",
+        "connection": "ok",
+        "identityPinned": true,
+        "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+        "shopName": "KEEP IT UNDERGROUND",
+        "salesReady": false
+      },
+      "credentialsSaved": false
+    }
+  ],
+  "supplementalEvidence": [
+    {
+      "reviewedAt": "2026-09-24T14:10:22Z",
+      "sourceType": "user-supplied observation file",
+      "sourcePath": "C:\\Users\\gert\\Downloads\\Fourthwall-Preview-observations-20260924.json",
+      "sourceSha256": "403F4FB8496B34EAAEF3F122C20AB11AC46BAD73120C97C27897614CDD4FE487",
+      "deploymentId": "dpl_EkL3BikRbd6kH2bPQ2GSQ1PXg4Ws",
+      "sha": "a524b3718565a5727d3f122682f2831922799e4d",
+      "reportedRuntimeEntries": [
+        {
+          "atUTC": "2026-09-24T13:54:14Z",
+          "method": "GET",
+          "path": "/api/fourthwall/status",
+          "httpStatus": 200
+        },
+        {
+          "atUTC": "2026-09-24T14:00:17Z",
+          "method": "GET",
+          "path": "/api/fourthwall/status",
+          "httpStatus": 200
+        }
+      ],
+      "runtimeResponseBodyCaptured": false,
+      "runtimeContentTypeCaptured": false,
+      "runtimeRequestActorIdentified": false,
+      "attachmentReportedFetch": {
+        "atUTC": "2026-09-24T14:02:14Z",
+        "method": "GET",
+        "httpStatus": 302,
+        "contentType": "text/plain",
+        "responseBody": "Redirecting...\n"
+      },
+      "assessment": "Reported runtime 200 entries are indirect evidence only; the required endpoint JSON assertions remain unobserved.",
+      "result": "BLOCKED",
+      "credentialsSaved": false
+    }
+  ],
+  "fourthwallReadinessFollowUp": {
+    "checkedAt": "2026-09-29T07:58:30Z",
+    "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+    "payoutStatus": "INACTIVE",
+    "sampleCreditBalance": null,
+    "sampleCreditBalanceWithIncentive": null,
+    "products": [
+      {
+        "key": "SIGNAL",
+        "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+        "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+        "status": "PRIVATE",
+        "descriptionChanged": false
+      },
+      {
+        "key": "SUBSURFACE",
+        "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+        "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+        "status": "PRIVATE",
+        "descriptionChanged": true,
+        "descriptionRereadAfterSave": true,
+        "approvedDescriptionOpening": "A different perspective for your everyday workspace."
+      }
+    ],
+    "sampleQuotesBeforeShipping": [
+      {
+        "items": "SIGNAL:1",
+        "subtotalUsd": 13.00,
+        "processingFeeUsd": 0.69,
+        "provisionalTotalUsd": 13.69,
+        "shippingVerified": false,
+        "taxVerified": false,
+        "orderPlaced": false
+      },
+      {
+        "items": "SIGNAL:1,SUBSURFACE:1",
+        "subtotalUsd": 26.00,
+        "processingFeeUsd": 1.08,
+        "provisionalTotalUsd": 27.08,
+        "shippingVerified": false,
+        "taxVerified": false,
+        "orderPlaced": false
+      }
+    ],
+    "payoutOnboardingCompleted": false,
+    "paymentMade": false,
+    "publicPriceChanged": false,
+    "visibilityChanged": false,
+    "postOwnerInputVerification": {
+      "checkedAt": "2026-09-29T08:14:09Z",
+      "payoutStatus": "ACTIVE",
+      "payoutOwner": "CUSTOM",
+      "payoutConnectedAt": "2026-09-29T08:06:08.022561Z",
+      "payoutDashboardShowsConnected": true,
+      "shippingCountry": "EE",
+      "deliveryMethod": "Standard",
+      "shippingAddressSavedInReport": false,
+      "quotes": [
+        {
+          "items": "SIGNAL:1",
+          "subtotalUsd": 13.00,
+          "shippingUsd": 22.89,
+          "vatUsd": 8.61,
+          "customsDutiesUsd": 3.41,
+          "processingFeeUsd": 1.73,
+          "checkoutTotalUsd": 49.64
+        },
+        {
+          "items": "SIGNAL:1,SUBSURFACE:1",
+          "subtotalUsd": 26.00,
+          "shippingUsd": 31.29,
+          "vatUsd": 13.75,
+          "customsDutiesUsd": 6.82,
+          "processingFeeUsd": 2.63,
+          "checkoutTotalUsd": 80.49
+        }
+      ],
+      "orderSubmittedDuringRun": false,
+      "paymentMadeDuringRun": false,
+      "sampleCreditSpentDuringRun": false
+    }
+  },
+  "sampleOrderPrePaymentChecks": [
+    {
+      "checkedAt": "2026-10-01T08:14:50Z",
+      "result": "BLOCKED",
+      "reasonCode": "AUTHORIZED_TOTAL_EXCEEDED",
+      "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+      "checkoutId": "ch_UvuaYXwNSIakvDOieIFRJQ",
+      "method": "existing Fourthwall checkout reopened in Chrome; Fourthwall read-only order and offer checks",
+      "authorizedMaxUsd": 80.49,
+      "duplicateCheck": {
+        "method": "get_orders filtered by both authorized offer IDs",
+        "matchingOrdersReturned": 0,
+        "paidDuplicateObserved": false
+      },
+      "items": [
+        {
+          "key": "SIGNAL",
+          "offerId": "74c2ace1-4f7c-469b-a607-5555432019b4",
+          "variantId": "b28b8e38-0bd5-4303-8641-7aed66648b45",
+          "quantity": 1,
+          "sampleUnitPriceUsd": 13.00,
+          "status": "PRIVATE",
+          "packshotVisuallyMatched": true
+        },
+        {
+          "key": "SUBSURFACE",
+          "offerId": "97704a85-a6b6-4090-894f-a7b5bc71a374",
+          "variantId": "d479a574-d42e-4767-9725-f940ce0e165c",
+          "quantity": 1,
+          "sampleUnitPriceUsd": 13.00,
+          "status": "PRIVATE",
+          "packshotVisuallyMatched": true
+        }
+      ],
+      "sampleCostCheckout": true,
+      "shippingCountry": "EE",
+      "retainedAddressComparedWithPriorCheckout": true,
+      "addressComparisonNote": "Same existing session retained the corresponding owner-entered address; street spelling was ASCII transliteration. No field was edited.",
+      "shippingAddressSavedInReport": false,
+      "deliveryMethod": "Standard",
+      "estimatedDelivery": "2026-10-12/2026-10-19",
+      "quote": {
+        "currency": "USD",
+        "subtotalUsd": 26.00,
+        "shippingUsd": 31.45,
+        "vatUsd": 13.79,
+        "customsDutiesUsd": 6.80,
+        "processingFeeUsd": 2.63,
+        "checkoutTotalUsd": 80.67,
+        "previousCheckoutTotalUsd": 80.49,
+        "limitExceededByUsd": 0.18,
+        "shopCreditLeftAfterOrderUsd": 0.00
+      },
+      "extraItemsOrPaidAddons": false,
+      "completeOrderClickCount": 0,
+      "orderSubmittedDuringRun": false,
+      "paymentMadeDuringRun": false,
+      "sampleCreditSpentDuringRun": false,
+      "orderId": null,
+      "paymentStatus": "NOT_SUBMITTED",
+      "paymentFieldsObservation": "Card-entry fields were empty; no payment information was entered.",
+      "checkoutLeftOpenForOwner": true,
+      "productChangesMade": false,
+      "countedAsCustomerSale": false,
+      "paymentDataOrAuthenticationSecretsSaved": false
+    }
+  ]
+}

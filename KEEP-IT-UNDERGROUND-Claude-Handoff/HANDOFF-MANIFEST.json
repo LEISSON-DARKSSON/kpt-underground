@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "preparedOn": "2026-10-02",
+  "rootDirectory": "KEEP-IT-UNDERGROUND-Claude-Handoff",
+  "excludedFromOwnHash": [
+    "HANDOFF-MANIFEST.json"
+  ],
+  "notes": [
+    "SHA-256 proves local bytes against this manifest, not remote account or print quality.",
+    "Original historical design package remains nested under design/.",
+    "No authentication tokens, raw account screenshots, or font binaries intentionally included."
+  ],
+  "files": [
+    {
+      "path": "CLAUDE-CONTINUATION-PROMPT.txt",
+      "bytes": 3990,
+      "sha256": "7a512b2fb6259ae82ab3a6284cafc48797a81c6dbb17be5804d26ad3bec97b8a"
+    },
+    {
+      "path": "CLAUDE-HANDOFF.md",
+      "bytes": 41238,
+      "sha256": "74136513ebcf3a0d3752134757a2217a28e5a7e7beca0c89a29c173266f85363"
+    },
+    {
+      "path": "START-HERE.md",
+      "bytes": 1825,
+      "sha256": "db79af462941f89d067ec896d28557a378acdbc19475c2b98742793409ad4b4e"
+    },
+    {
+      "path": "automation/verify_handoff.py",
+      "bytes": 5179,
+      "sha256": "246630ed499fbb2f816a6917165ebcf7cff91d321aadc1c4d9b393f5224d921a"
+    },
+    {
+      "path": "copy/product-descriptions.en.md",
+      "bytes": 1568,
+      "sha256": "79b1ee26bbe942bed84b6ae113d4fe07bf368b3af5c1e5179260c806839e5753"
+    },
+    {
+      "path": "design/CODEX-IMPLEMENTATION.md",
+      "bytes": 15975,
+      "sha256": "74e332f1e8bd5c8bad49dc68bba378f0e82dde4b9757cd0c8c51ead278348404"
+    },
+    {
+      "path": "design/README.md",
+      "bytes": 4521,
+      "sha256": "94fcc94540085fd5abcd7f4128bd424ed942f3c0b443e531d052fc1f65e389f7"
+    },
+    {
+      "path": "design/assets/signal-art.webp",
+      "bytes": 138548,
+      "sha256": "7cc856af373dfcddf166a7f0b1b579cb288ba4f76ee7e73b5f58954085a88308"
+    },
+    {
+      "path": "design/assets/signal-mockup.webp",
+      "bytes": 129366,
+      "sha256": "b8fd055782aa01c01730872c458e915fccabbcfb714ff36eac827f26b82cabbf"
+    },
+    {
+      "path": "design/assets/signal-mockups.jpg",
+      "bytes": 347737,
+      "sha256": "4f9dafb3696c536109440759cc9bac7f755714509a2b1eb7cab702fbaa0125e9"
+    },
+    {
+      "path": "design/assets/signal-previews.jpg",
+      "bytes": 228316,
+      "sha256": "1bffd5f37346dffbf0ab3ce448d464ad9e53dcb96a41716253cc4b71c956aa79"
+    },
+    {
+      "path": "design/assets/subsurface-art.webp",
+      "bytes": 63536,
+      "sha256": "74d31b259f28a6834d7d1dc15c23274f37397795f49729e9e79e9b6d55c6d438"
+    },
+    {
+      "path": "design/assets/subsurface-mockup.webp",
+      "bytes": 70816,
+      "sha256": "5da8e0cef8964a8b67159ff7dc2c88d9abf45fcd8a53f570dc7fd32ce1841507"
+    },
+    {
+      "path": "design/assets/subsurface-mockups.jpg",
+      "bytes": 247524,
+      "sha256": "ef022b33f93ac715209cbd6a57329084ad6f61a4384e2ee4da439d68bf2fa230"
+    },
+    {
+      "path": "design/assets/subsurface-previews.jpg",
+      "bytes": 130599,
+      "sha256": "6791b67433642c17476d4095e72dbfe172416cbe18d7eb3d33153fc11e289e02"
+    },
+    {
+      "path": "design/automation/build_next_preview.py",
+      "bytes": 2597,
+      "sha256": "ad7dfa3c11c6c881fc1ba21ebc7986c76f5ee46743345ba9ab456c737898a0de"
+    },
+    {
+      "path": "design/automation/check_preview.py",
+      "bytes": 6785,
+      "sha256": "2e52012147004ce0bed76e59b506cdca137e51813169ffb113995348a2b418ef"
+    },
+    {
+      "path": "design/automation/finalize.py",
+      "bytes": 7432,
+      "sha256": "e9a1b23544acd9940739b398ceaeb8b020ff4e665f9debeb431b0809f8041e5f"
+    },
+    {
+      "path": "design/automation/preview-guard.test.mjs",
+      "bytes": 1848,
+      "sha256": "cd8c75a56ab13342114260e968f1cc9a8c1b7e6abec5108eb8a22e0993c6b17c"
+    },
+    {
+      "path": "design/build_preview.py",
+      "bytes": 5133,
+      "sha256": "9e49c9e9ee9db95e6711e20f9451673069fc05201b91a22e230721c35d605b01"
+    },
+    {
+      "path": "design/evidence/cart-1440.png",
+      "bytes": 148654,
+      "sha256": "af531415254726ac13c780687f8514a06b1c241f3e303d0b1ca0d1aed92f571a"
+    },
+    {
+      "path": "design/evidence/cart-320.png",
+      "bytes": 38393,
+      "sha256": "df24d2cde864fa8d31628c10d04094acb2d2e6d97acd95fc459943ba16f6699d"
+    },
+    {
+      "path": "design/evidence/cart-390.png",
+      "bytes": 42131,
+      "sha256": "dfcc4f31d131a52fe43e3ad072d5004f05a237d2bf29d588ea76578a4e526bee"
+    },
+    {
+      "path": "design/evidence/guard-tests.txt",
+      "bytes": 1506,
+      "sha256": "61b4f7ffefda2852a466706fec4cf2e2f934844c263af5343955de3c85f7771e"
+    },
+    {
+      "path": "design/evidence/handoff-1440.png",
+      "bytes": 180488,
+      "sha256": "e1d91c350d2159b8c8b5663698cffb6d10ef7f57759687e57f20705becd17c9c"
+    },
+    {
+      "path": "design/evidence/handoff-320.png",
+      "bytes": 135852,
+      "sha256": "2082f2f1e23de30bc432f8a2048da12ff98b443ae6a61e4e2b5beb3a602f6f7d"
+    },
+    {
+      "path": "design/evidence/handoff-390.png",
+      "bytes": 137869,
+      "sha256": "6f461fab2652544a98ee293a9b0db5b137567225f7a77202e00fa26c20d88b71"
+    },
+    {
+      "path": "design/evidence/home-1440.png",
+      "bytes": 92838,
+      "sha256": "9a1b1b8a2929d382dcd031c73ddfc633ecfe42b87a45acfcec6a390f73e605e1"
+    },
+    {
+      "path": "design/evidence/home-320.png",
+      "bytes": 41123,
+      "sha256": "f515f5e63a6456915ea8d2594a4ddbefe75c6e3f8c669d23af51cc75a8e4a3ce"
+    },
+    {
+      "path": "design/evidence/home-390.png",
+      "bytes": 44933,
+      "sha256": "398332b51bc43ef5bca23459e49d378f0199c5a974c76ea647fb708fd74236b6"
+    },
+    {
+      "path": "design/evidence/preview-qa.json",
+      "bytes": 7295,
+      "sha256": "94c41b11e34dd6a2048804c6db674a3acea91cce89c24162ff33b3ced80e4744"
+    },
+    {
+      "path": "design/evidence/shop-1440.png",
+      "bytes": 269783,
+      "sha256": "4a44c84abee9dee59ca6da44c2e6b8ed5c5b7e67bf1a89fe431d1545f31f21bc"
+    },
+    {
+      "path": "design/evidence/shop-320.png",
+      "bytes": 102881,
+      "sha256": "2e4d88cb213679a7f8e22a52b6acd9abaf69a9289ae4dbd4b5e02318d4a98753"
+    },
+    {
+      "path": "design/evidence/shop-390.png",
+      "bytes": 120985,
+      "sha256": "0338aa9c9673335f15ec5e504eae850a468981779c378841ddd31760fa58f434"
+    },
+    {
+      "path": "design/evidence/signal-1440.png",
+      "bytes": 356133,
+      "sha256": "5d9f89430be065679e604a07c0538659e46bf160d36636aaea7763c70b98d0e0"
+    },
+    {
+      "path": "design/evidence/signal-320.png",
+      "bytes": 156129,
+      "sha256": "584a839985b41b0be547968461981a179956a346bd3f8f136fdb2cfaedacb294"
+    },
+    {
+      "path": "design/evidence/signal-390.png",
+      "bytes": 182109,
+      "sha256": "53a1a9bd3cb11f63014ab186e9c00e74c4e76b293cb40ec8f45a3ebc799274bd"
+    },
+    {
+      "path": "design/evidence/test-log.txt",
+      "bytes": 2219,
+      "sha256": "96107dbdc4fc75f3b8f00efbba3f01e09db6ca5d1d08a71d7cb896bfeb17323c"
+    },
+    {
+      "path": "design/evidence/typescript-check.txt",
+      "bytes": 270,
+      "sha256": "ce69797cc38eb11482bd71ca272fe5271d20c2ebd60ce5e2e7ebdb352646bfcb"
+    },
+    {
+      "path": "design/file-manifest.json",
+      "bytes": 7350,
+      "sha256": "b61dfc45bce192c6f93f5017ff0a338869f1d9073a167a684949655139d1fffc"
+    },
+    {
+      "path": "design/index.html",
+      "bytes": 580170,
+      "sha256": "902a0b614f074e4878284c11e85a4f13f65d7e24766ba509dad4a8aad8810b87"
+    },
+    {
+      "path": "design/next-preview/src/app/commerce-preview/route.ts",
+      "bytes": 860,
+      "sha256": "c91e7fafbc83504335fc7d229f4b6760651269372dc9e2e50d82f209b4d4051d"
+    },
+    {
+      "path": "design/next-preview/src/lib/kiu-commerce-preview.d.mts",
+      "bytes": 210,
+      "sha256": "54c7a12b1becc92ddce1b9a4400e9aa7519faf135c0831cb94e210a5e93ff10a"
+    },
+    {
+      "path": "design/next-preview/src/lib/kiu-commerce-preview.mjs",
+      "bytes": 581707,
+      "sha256": "69e4955d2c5d8c71510bd4e5832576b2a85a4a25c29b2b78255d68b9926ef935"
+    },
+    {
+      "path": "design/spec/design-stage-receipt.json",
+      "bytes": 841,
+      "sha256": "d9f20808f4584dee50d8d1d1bbbad65acce9e85e006c0aff0076ec28b3779e44"
+    },
+    {
+      "path": "design/spec/design.tokens.json",
+      "bytes": 2020,
+      "sha256": "e972b1a766d26bd91b50d3952714799744e152ac06d9cbca7c4d7507c1830ae9"
+    },
+    {
+      "path": "design/spec/fourthwall-theme-map.json",
+      "bytes": 1370,
+      "sha256": "b66582ad6b23f064c86882594c54901f9e08172f30b8dec9bb9c136240d65ea1"
+    },
+    {
+      "path": "design/spec/products.preview.json",
+      "bytes": 2209,
+      "sha256": "53eb38f3159645d6d5063b87ea8026a5c639be3cf03155f4deb2eb4e598a59a6"
+    },
+    {
+      "path": "design/spec/source-register.json",
+      "bytes": 3559,
+      "sha256": "27177007580cecdd88deae2dece51e5fa4cf90bcd497121ddc104e79ecc11cf4"
+    },
+    {
+      "path": "design/storefront.css",
+      "bytes": 19687,
+      "sha256": "17515ea776ffd4458ad53ac679b31e53d287eec2f47bf1642f4e44698f74bb1f"
+    },
+    {
+      "path": "design/storefront.js",
+      "bytes": 19872,
+      "sha256": "bc69fabebd52a8a68cea61e13ae0dc31fe057b07691b67e5e83ad5869e8efc56"
+    },
+    {
+      "path": "evidence/owner-quote-80.67-financial-crop.png",
+      "bytes": 79784,
+      "sha256": "4588f537f559e879f7cf10dec5b3b1eabcf4a422f0966013dc837ef177ce7071"
+    },
+    {
+      "path": "product-assets/print/SIGNAL-Desk-Mat-Upload.png",
+      "bytes": 3823266,
+      "sha256": "621a9f5e3a6de11fb71e9c7f9ebf44d378928ce1098db982b3bb41eee3e8e426"
+    },
+    {
+      "path": "product-assets/print/SUBSURFACE-Desk-Mat-Upload.png",
+      "bytes": 1859328,
+      "sha256": "9a8237c6da81f374941626dccba73b60e9abafe1d4ee1510e8313d3a4c415c75"
+    },
+    {
+      "path": "product-assets/source/signal-deskmat-SP70018.svg",
+      "bytes": 208995,
+      "sha256": "f09276587da67ac7a8a9d288a568953375794ead457feb23348b25ad812bb92a"
+    },
+    {
+      "path": "product-assets/source/subsurface-deskmat-SP70018.svg",
+      "bytes": 137463,
+      "sha256": "cbe34aa718a03aa00be73ac624f2a6fa6c5df035a484be82b73b381a19ace628"
+    },
+    {
+      "path": "reference/2026-09-23-business-memo-HISTORICAL.md",
+      "bytes": 11521,
+      "sha256": "dcd6e340f65b7d668250df9e7309a3a1f2764e09647916bff82b600381e200eb"
+    },
+    {
+      "path": "reference/SOURCE-REGISTER.md",
+      "bytes": 5491,
+      "sha256": "0ab9982f3eaf811e4970684ed0410bdde003df587cdfaf01da916ad7f09fbc3b"
+    },
+    {
+      "path": "reports/README.md",
+      "bytes": 615,
+      "sha256": "5467a23c4b085472dd2e34e7f6585fbdc9becc4bd0186da1a62da273e86abb27"
+    },
+    {
+      "path": "reports/execution-record-TEMPLATE.json",
+      "bytes": 2964,
+      "sha256": "fe2ead61964d9ff9ed18d451d3ca1a43887b9d1067387f488abeda735d1a9979"
+    },
+    {
+      "path": "reports/execution-report-TEMPLATE.md",
+      "bytes": 1184,
+      "sha256": "01de84223523f2cda60b952336e4686ba2651635f2120998df0ec8f1c5bf76b2"
+    },
+    {
+      "path": "reports/handoff-validation.json",
+      "bytes": 1522,
+      "sha256": "27d873b0b5308e24217889e80c5619650cd49db0c6f497c70a98b7f8d4822643"
+    },
+    {
+      "path": "reports/preview-guard-rerun.txt",
+      "bytes": 1505,
+      "sha256": "1c91459c8e0857c73af8f1128f96645057c2cd3e8120b5158025f6176ee0f721"
+    },
+    {
+      "path": "state/current-state.json",
+      "bytes": 7019,
+      "sha256": "dd55445579a179ad207ced94f74775fb9251d74f0f1a167748c4b45b157a0724"
+    },
+    {
+      "path": "state/product-manifest.json",
+      "bytes": 6270,
+      "sha256": "333ac8892db5e695f72f9120ba8ad44189648de702d64bea2055f19ed4167d0f"
+    }
+  ]
+}

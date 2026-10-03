@@ -1,0 +1,48 @@
+{
+  "status": "SPECIFICATION_ONLY_NOT_APPLIED",
+  "shopId": "sh_1f2e8f65-2b29-4be9-9167-7f42314361fb",
+  "style": {
+    "colors": {
+      "Primary": "#8ACE00",
+      "Background": "#050505",
+      "Text": "#E8E4DC",
+      "Text Over Primary": "#050505"
+    },
+    "fonts": {
+      "Heading font": "Bebas Neue",
+      "Base font": "Space Mono"
+    },
+    "buttons": {
+      "primary": {
+        "shape": "square",
+        "background": "#8ACE00",
+        "text": "#050505"
+      },
+      "secondary": {
+        "shape": "square",
+        "background": "#050505",
+        "text": "#8ACE00",
+        "border": "#8ACE00"
+      }
+    }
+  },
+  "checkout": {
+    "Skin": "Dark mode",
+    "fullPixelParity": "NOT_CLAIMED",
+    "paymentFieldsCustomCss": "DO_NOT_INJECT",
+    "brandInheritance": "VERIFY_IN_ACTUAL_EDITOR"
+  },
+  "writeGuard": {
+    "readCurrentSettingsFirst": true,
+    "backupCurrentThemeFirst": true,
+    "requireIndependentUnpublishedDraft": true,
+    "ifOnlyActiveThemeEditable": "STOP_NATIVE_WRITE_AND_REPORT_LIMITATION",
+    "keepShopStatus": "COMING_SOON",
+    "keepProducts": "PRIVATE",
+    "noOrdersPaymentsOrDnsChanges": true
+  },
+  "sources": [
+    "https://help.fourthwall.com/getting-started/design-my-storefront/customizing-your-site-theme-and-styles",
+    "https://help.fourthwall.com/getting-started/design-my-storefront/edit-checkout-page"
+  ]
+}

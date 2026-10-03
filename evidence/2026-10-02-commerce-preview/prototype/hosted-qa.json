@@ -1,0 +1,618 @@
+{
+  "checkedAt": "2026-10-01T22:47:00.417Z",
+  "target": "https://kpt-underground-5iqbh90k6-leisson-creative.vercel.app/commerce-preview",
+  "scope": "Hosted Vercel Preview /commerce-preview prototype, online fonts, Chrome headless",
+  "passed": 124,
+  "failed": 0,
+  "checks": [
+    {
+      "name": "hosted:route returns 200 via share",
+      "status": 200
+    },
+    {
+      "name": "hosted:CSP connect-src none",
+      "status": "PASS"
+    },
+    {
+      "name": "hosted:X-Robots-Tag noindex",
+      "status": "PASS"
+    },
+    {
+      "name": "hosted:cache private no-store",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:Bebas Neue actually loaded",
+      "status": "PASS",
+      "fonts": {
+        "bebas": true,
+        "mono400": true,
+        "mono700": true,
+        "loaded": [
+          "Bebas Neue 400",
+          "Space Mono 400",
+          "Space Mono 700"
+        ],
+        "statusAttr": "loaded",
+        "h1Font": "\"Bebas Neue\", \"Nimbus Sans Narrow\", \"Arial Narrow\", sans-serif",
+        "bodyFont": "\"Space Mono\", \"Courier New\", monospace"
+      }
+    },
+    {
+      "name": "1440:Space Mono 400+700 actually loaded",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:page font-status says loaded",
+      "status": "PASS",
+      "statusAttr": "loaded"
+    },
+    {
+      "name": "1440:home heading",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:home no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:artwork proportions preserved",
+      "status": "PASS",
+      "ratios": [
+        1.906614785992218,
+        1.906614785992218
+      ]
+    },
+    {
+      "name": "1440:shop no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:cart opens",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:subtotal 2x planned",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:quantity recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:focus restored to trigger",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:two distinct designs in cart",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:Tab focus contained in cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "1440:visible focus indicator",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "1440:handoff payment button disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:no input/form elements",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "1440:no JS errors",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "name": "1440:no CSP violations",
+      "status": "PASS",
+      "cspViolations": []
+    },
+    {
+      "name": "1440:no non-font third-party requests",
+      "status": "PASS",
+      "foreign": []
+    },
+    {
+      "name": "1440:no cursor:none on body",
+      "status": "PASS"
+    },
+    {
+      "name": "768:Bebas Neue actually loaded",
+      "status": "PASS",
+      "fonts": {
+        "bebas": true,
+        "mono400": true,
+        "mono700": true,
+        "loaded": [
+          "Bebas Neue 400",
+          "Space Mono 400",
+          "Space Mono 700"
+        ],
+        "statusAttr": "loaded",
+        "h1Font": "\"Bebas Neue\", \"Nimbus Sans Narrow\", \"Arial Narrow\", sans-serif",
+        "bodyFont": "\"Space Mono\", \"Courier New\", monospace"
+      }
+    },
+    {
+      "name": "768:Space Mono 400+700 actually loaded",
+      "status": "PASS"
+    },
+    {
+      "name": "768:page font-status says loaded",
+      "status": "PASS",
+      "statusAttr": "loaded"
+    },
+    {
+      "name": "768:home heading",
+      "status": "PASS"
+    },
+    {
+      "name": "768:home no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "768:artwork proportions preserved",
+      "status": "PASS",
+      "ratios": [
+        1.9027777777777777,
+        1.9027777777777777
+      ]
+    },
+    {
+      "name": "768:shop no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "768:cart opens",
+      "status": "PASS"
+    },
+    {
+      "name": "768:subtotal 2x planned",
+      "status": "PASS"
+    },
+    {
+      "name": "768:quantity recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "768:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "768:focus restored to trigger",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "768:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:two distinct designs in cart",
+      "status": "PASS"
+    },
+    {
+      "name": "768:Tab focus contained in cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "768:visible focus indicator",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "768:handoff payment button disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "768:no input/form elements",
+      "status": "PASS"
+    },
+    {
+      "name": "768:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "768:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "768:no JS errors",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "name": "768:no CSP violations",
+      "status": "PASS",
+      "cspViolations": []
+    },
+    {
+      "name": "768:no non-font third-party requests",
+      "status": "PASS",
+      "foreign": []
+    },
+    {
+      "name": "768:no cursor:none on body",
+      "status": "PASS"
+    },
+    {
+      "name": "390:Bebas Neue actually loaded",
+      "status": "PASS",
+      "fonts": {
+        "bebas": true,
+        "mono400": true,
+        "mono700": true,
+        "loaded": [
+          "Bebas Neue 400",
+          "Space Mono 400",
+          "Space Mono 700"
+        ],
+        "statusAttr": "loaded",
+        "h1Font": "\"Bebas Neue\", \"Nimbus Sans Narrow\", \"Arial Narrow\", sans-serif",
+        "bodyFont": "\"Space Mono\", \"Courier New\", monospace"
+      }
+    },
+    {
+      "name": "390:Space Mono 400+700 actually loaded",
+      "status": "PASS"
+    },
+    {
+      "name": "390:page font-status says loaded",
+      "status": "PASS",
+      "statusAttr": "loaded"
+    },
+    {
+      "name": "390:home heading",
+      "status": "PASS"
+    },
+    {
+      "name": "390:home no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "390:artwork proportions preserved",
+      "status": "PASS",
+      "ratios": [
+        1.910828025477707,
+        1.910828025477707
+      ]
+    },
+    {
+      "name": "390:shop no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "390:cart opens",
+      "status": "PASS"
+    },
+    {
+      "name": "390:subtotal 2x planned",
+      "status": "PASS"
+    },
+    {
+      "name": "390:quantity recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "390:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "390:focus restored to trigger",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "390:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:two distinct designs in cart",
+      "status": "PASS"
+    },
+    {
+      "name": "390:Tab focus contained in cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "390:visible focus indicator",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "390:handoff payment button disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "390:no input/form elements",
+      "status": "PASS"
+    },
+    {
+      "name": "390:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "390:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "390:mobile menu opens",
+      "status": "PASS"
+    },
+    {
+      "name": "390:no JS errors",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "name": "390:no CSP violations",
+      "status": "PASS",
+      "cspViolations": []
+    },
+    {
+      "name": "390:no non-font third-party requests",
+      "status": "PASS",
+      "foreign": []
+    },
+    {
+      "name": "390:no cursor:none on body",
+      "status": "PASS"
+    },
+    {
+      "name": "320:Bebas Neue actually loaded",
+      "status": "PASS",
+      "fonts": {
+        "bebas": true,
+        "mono400": true,
+        "mono700": true,
+        "loaded": [
+          "Bebas Neue 400",
+          "Space Mono 400",
+          "Space Mono 700"
+        ],
+        "statusAttr": "loaded",
+        "h1Font": "\"Bebas Neue\", \"Nimbus Sans Narrow\", \"Arial Narrow\", sans-serif",
+        "bodyFont": "\"Space Mono\", \"Courier New\", monospace"
+      }
+    },
+    {
+      "name": "320:Space Mono 400+700 actually loaded",
+      "status": "PASS"
+    },
+    {
+      "name": "320:page font-status says loaded",
+      "status": "PASS",
+      "statusAttr": "loaded"
+    },
+    {
+      "name": "320:home heading",
+      "status": "PASS"
+    },
+    {
+      "name": "320:home no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:two product cards",
+      "status": "PASS"
+    },
+    {
+      "name": "320:artwork proportions preserved",
+      "status": "PASS",
+      "ratios": [
+        1.9166666666666667,
+        1.9166666666666667
+      ]
+    },
+    {
+      "name": "320:shop no horizontal overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SIGNAL detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SIGNAL detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:quantity increments",
+      "status": "PASS"
+    },
+    {
+      "name": "320:cart opens",
+      "status": "PASS"
+    },
+    {
+      "name": "320:subtotal 2x planned",
+      "status": "PASS"
+    },
+    {
+      "name": "320:quantity recalculates",
+      "status": "PASS"
+    },
+    {
+      "name": "320:Escape closes cart",
+      "status": "PASS"
+    },
+    {
+      "name": "320:focus restored to trigger",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SUBSURFACE detail bound",
+      "status": "PASS"
+    },
+    {
+      "name": "320:SUBSURFACE detail no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:two distinct designs in cart",
+      "status": "PASS"
+    },
+    {
+      "name": "320:Tab focus contained in cart",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "320:visible focus indicator",
+      "status": "PASS",
+      "inDialog": true,
+      "outline": "solid 2px",
+      "shadow": "none"
+    },
+    {
+      "name": "320:handoff payment button disabled",
+      "status": "PASS"
+    },
+    {
+      "name": "320:no input/form elements",
+      "status": "PASS"
+    },
+    {
+      "name": "320:handoff no overflow",
+      "status": "PASS"
+    },
+    {
+      "name": "320:empty cart state",
+      "status": "PASS"
+    },
+    {
+      "name": "320:mobile menu opens",
+      "status": "PASS"
+    },
+    {
+      "name": "320:no JS errors",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "name": "320:no CSP violations",
+      "status": "PASS",
+      "cspViolations": []
+    },
+    {
+      "name": "320:no non-font third-party requests",
+      "status": "PASS",
+      "foreign": []
+    },
+    {
+      "name": "320:no cursor:none on body",
+      "status": "PASS"
+    },
+    {
+      "name": "reduced-motion: primary button transition 0s",
+      "status": "PASS"
+    },
+    {
+      "name": "reduced-motion: no running animations",
+      "status": "PASS",
+      "running": 0
+    },
+    {
+      "name": "no audio/video elements",
+      "status": "PASS"
+    }
+  ]
+}

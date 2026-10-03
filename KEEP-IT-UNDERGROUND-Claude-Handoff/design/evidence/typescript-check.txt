@@ -1,0 +1,3 @@
+PASS: isolated strict TypeScript check for the optional preview route and declarations.
+NOT RUN: complete application build, lint, production integration and hosted deployment.
+Existing Node typings supplied by the test environment; no dependency or font files bundled.

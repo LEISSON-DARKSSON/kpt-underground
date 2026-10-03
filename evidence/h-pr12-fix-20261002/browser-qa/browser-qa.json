@@ -1,0 +1,96 @@
+{
+  "at": "2026-10-02T12:08:28.838Z",
+  "chromium": "playwright bundled",
+  "results": [
+    {
+      "status": "PASS",
+      "name": "shop @320: 22 products, no horizontal overflow, brand fonts loaded",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "shop @390: 22 products, no horizontal overflow, brand fonts loaded",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "shop @768: 22 products, no horizontal overflow, brand fonts loaded",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "shop @1440: 22 products, no horizontal overflow, brand fonts loaded",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "headings @320: no word is split across lines on /, /story, /signal",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "headings @390: no word is split across lines on /, /story, /signal",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "headings @768: no word is split across lines on /, /story, /signal",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "headings @1440: no word is split across lines on /, /story, /signal",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "home @390: one H1 with the offer, one hero CTA, proof right under it",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "home @1440: one H1 with the offer, one hero CTA, proof right under it",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "B01/B02: category filter in URL survives detail → Back; bogus filter falls back to All",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "C01: view_item_list fires once per list view, not per render",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "B04/A09/KPT-01: tee — nothing preselected; add without size prompts; 4XL → $41 in buy box and cart",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "B05/KPT-08: phone case — model select (18), gallery switches to that model, cart gets that id",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "B06/B09/B11/C02/C03: mat adds in one step; qty/remove/empty; checkout leaves to Fourthwall without purchase event",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "B09: Escape closes the cart and focus returns to the trigger",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "B10/KPT-14: corrupt storage does not break the app; 21st item refused with a notice, nothing dropped",
+      "note": ""
+    },
+    {
+      "status": "PASS",
+      "name": "no-JS: server HTML shows the full catalog (nothing hidden behind reveal classes)",
+      "note": ""
+    }
+  ]
+}

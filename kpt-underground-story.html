@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KEEP IT UNDERGROUND — About</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Anton&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════
+   ROOT & RESET
+═══════════════════════════ */
+:root {
+  --black:    #050505;
+  --black2:   #0a0a0a;
+  --green:    #8ACE00;
+  --orange:   #FF8C00;
+  --rust:     #A0522D;
+  --grey:     #708090;
+  --white:    #E8E4DC;
+  --dim:      #888880;
+  --redact:   #1a1a1a;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* GLOBAL SCANLINE */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9998; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(138,206,0,0.018) 3px, rgba(138,206,0,0.018) 4px
+  );
+  animation: scanmove 12s linear infinite;
+}
+@keyframes scanmove {
+  0%   { background-position: 0 0; }
+  100% { background-position: 0 200px; }
+}
+
+/* GRID BG */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(138,206,0,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138,206,0,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* ═══════════════════════════
+   LOADING SCREEN
+═══════════════════════════ */
+#loader {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+#loader.gone { opacity: 0; visibility: hidden; }
+
+.loader-patch {
+  width: min(340px, 80vw);
+  height: min(340px, 80vw);
+  position: relative;
+  margin-bottom: 40px;
+  animation: patchpulse 0.4s ease infinite alternate;
+}
+@keyframes patchpulse {
+  from { opacity: 0.85; }
+  to   { opacity: 1; }
+}
+
+.loader-line {
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--green);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadein 0.4s ease forwards;
+}
+.loader-line:nth-child(2) { animation-delay: 0.4s; }
+.loader-line:nth-child(3) { animation-delay: 0.8s; }
+.loader-line:nth-child(4) { animation-delay: 1.2s; }
+.loader-line:nth-child(5) { animation-delay: 1.6s; }
+
+.loader-bar-wrap {
+  width: min(260px, 70vw);
+  height: 2px;
+  background: rgba(138,206,0,0.12);
+  margin-top: 24px;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadein 0.3s ease 2s forwards;
+}
+.loader-bar {
+  height: 100%;
+  background: var(--green);
+  width: 0%;
+  animation: loadfill 1.2s ease 2.1s forwards;
+}
+@keyframes loadfill {
+  to { width: 100%; }
+}
+
+@keyframes fadein {
+  to { opacity: 1; }
+}
+
+/* ═══════════════════════════
+   NAV
+═══════════════════════════ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: rgba(5,5,5,0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(138,206,0,0.1);
+  padding: 14px 40px;
+  display: flex; align-items: center;
+  opacity: 0;
+  transition: opacity 0.6s ease 3.8s;
+}
+nav.visible { opacity: 1; }
+
+.nav-wordmark {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px;
+  letter-spacing: 0.18em;
+  color: var(--green);
+  text-decoration: none;
+}
+
+.nav-signal {
+  margin-left: auto;
+  font-size: 8px;
+  letter-spacing: 0.35em;
+  color: var(--green);
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.nav-signal::before {
+  content: '● ';
+  animation: blink 1.4s step-end infinite;
+}
+@keyframes blink {
+  0%,100% { opacity: 0.6; }
+  50% { opacity: 0; }
+}
+
+/* ═══════════════════════════
+   SCROLL REVEAL SYSTEM
+═══════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.35s; }
+.reveal-delay-4 { transition-delay: 0.5s; }
+.reveal-delay-5 { transition-delay: 0.65s; }
+
+/* ═══════════════════════════
+   SECTION BASE
+═══════════════════════════ */
+section {
+  position: relative; z-index: 1;
+  padding: 120px 40px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+.inner-wide {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════
+   HERO
+═══════════════════════════ */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 120px 40px 80px;
+  border-bottom: 1px solid rgba(138,206,0,0.08);
+}
+
+.hero-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 36px;
+  display: block;
+}
+
+.hero-display {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(56px, 12vw, 160px);
+  line-height: 0.86;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  margin-bottom: 0;
+}
+
+.hero-display .line-green { color: var(--green); display: block; }
+.hero-display .line-dim   { color: rgba(232,228,220,0.18); display: block; }
+
+.hero-intro {
+  max-width: 600px;
+  margin-top: 56px;
+  font-size: 16px;
+  line-height: 1.9;
+  color: var(--dim);
+}
+
+.hero-intro em {
+  font-style: normal;
+  color: var(--white);
+}
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: rgba(112,128,144,0.4);
+  text-transform: uppercase;
+  animation: nudge 2.5s ease-in-out infinite;
+}
+@keyframes nudge {
+  0%,100% { transform: translateY(0); opacity: 0.4; }
+  50%      { transform: translateY(6px); opacity: 0.7; }
+}
+
+.hero-meta {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  text-align: right;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(112,128,144,0.3);
+  line-height: 2;
+}
+
+/* GLITCH on hero wordmark */
+.glitch-wrap {
+  position: relative;
+  display: inline-block;
+}
+.glitch-wrap::before,
+.glitch-wrap::after {
+  content: attr(data-text);
+  position: absolute; top: 0; left: 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  width: 100%;
+}
+.glitch-wrap::before {
+  color: var(--orange);
+  clip-path: polygon(0 25%, 100% 25%, 100% 45%, 0 45%);
+  animation: gb 6s infinite;
+  opacity: 0;
+}
+.glitch-wrap::after {
+  color: var(--green);
+  clip-path: polygon(0 65%, 100% 65%, 100% 80%, 0 80%);
+  animation: ga 6s infinite;
+  opacity: 0;
+}
+@keyframes gb {
+  0%,88%,100% { opacity:0; transform:none; }
+  89% { opacity:0.7; transform:translateX(-5px) skewX(-8deg); }
+  91% { opacity:0; }
+}
+@keyframes ga {
+  0%,88%,100% { opacity:0; transform:none; }
+  90% { opacity:0.5; transform:translateX(4px); }
+  92% { opacity:0; }
+}
+
+/* ═══════════════════════════
+   SECTION: NOT FASHION
+═══════════════════════════ */
+#not-fashion {
+  background: var(--black2);
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+}
+
+.stamp-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 8vw, 110px);
+  line-height: 0.88;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+.stamp-headline .accent { color: var(--green); }
+.stamp-headline .strike {
+  text-decoration: line-through;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 4px;
+  opacity: 0.5;
+}
+
+.fragment-block {
+  border-left: 2px solid rgba(138,206,0,0.25);
+  padding-left: 28px;
+  margin-bottom: 40px;
+}
+
+.fragment-label {
+  font-size: 8px;
+  letter-spacing: 0.45em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.fragment-body {
+  font-size: clamp(14px, 2vw, 18px);
+  line-height: 1.85;
+  color: var(--dim);
+  max-width: 680px;
+}
+.fragment-body strong {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.spec-line {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 48px;
+}
+.spec-pill {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  padding: 5px 14px;
+  border: 1px solid rgba(138,206,0,0.2);
+  color: var(--green);
+  text-transform: uppercase;
+  background: rgba(138,206,0,0.04);
+}
+
+/* ═══════════════════════════
+   SECTION: FEELING
+═══════════════════════════ */
+#feeling {
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+  position: relative;
+}
+
+.feeling-bg {
+  position: absolute;
+  inset: 0; z-index: 0;
+  overflow: hidden;
+}
+.feeling-bg svg {
+  position: absolute;
+  right: -80px; top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.04;
+  width: min(700px, 80vw);
+}
+
+.pull-quote {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 6vw, 80px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin-bottom: 56px;
+  max-width: 800px;
+  position: relative; z-index: 1;
+}
+.pull-quote span { color: var(--green); }
+
+/* ═══════════════════════════
+   SECTION: LINES
+═══════════════════════════ */
+#lines {
+  background: var(--black2);
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+}
+
+.lines-header {
+  font-size: 9px;
+  letter-spacing: 0.5em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 64px;
+  display: block;
+}
+
+.line-card {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  margin-bottom: 2px;
+  background: rgba(10,10,10,0.9);
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.line-card:hover { background: rgba(15,15,15,1); }
+.line-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0;
+  width: 3px;
+  transition: width 0.3s;
+}
+.line-card:hover::before { width: 5px; }
+
+.line-card.ravewear::before   { background: var(--green); }
+.line-card.festival::before   { background: var(--rust); }
+.line-card.everyday::before   { background: var(--grey); }
+.line-card.accessories::before { background: var(--orange); }
+
+.line-num {
+  padding: 40px 0 40px 32px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  opacity: 0.2;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 44px;
+}
+.line-card.ravewear   .line-num { color: var(--green); }
+.line-card.festival   .line-num { color: var(--rust); }
+.line-card.everyday   .line-num { color: var(--grey); }
+.line-card.accessories .line-num { color: var(--orange); }
+
+.line-content {
+  padding: 40px 40px 40px 0;
+}
+
+.line-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(26px, 3.5vw, 44px);
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+  line-height: 1;
+}
+.line-card.ravewear    .line-title { color: var(--green); }
+.line-card.festival    .line-title { color: #C0724D; }
+.line-card.everyday    .line-title { color: var(--white); }
+.line-card.accessories .line-title { color: var(--orange); }
+
+.line-tagline {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--grey);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.line-desc {
+  font-size: clamp(13px, 1.5vw, 15px);
+  line-height: 1.9;
+  color: var(--dim);
+  max-width: 620px;
+}
+.line-desc strong { color: var(--white); font-weight: 700; }
+
+/* ═══════════════════════════
+   SECTION: ARTISTS
+═══════════════════════════ */
+#artists {
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+  position: relative;
+}
+
+.artists-aside {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(90px, 18vw, 240px);
+  line-height: 0.8;
+  color: rgba(138,206,0,0.04);
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(90deg);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.artists-intro {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  margin-bottom: 48px;
+  max-width: 740px;
+}
+.artists-intro span { color: var(--green); }
+
+.artists-body {
+  max-width: 680px;
+}
+
+.artists-para {
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.95;
+  color: var(--dim);
+  margin-bottom: 28px;
+}
+.artists-para strong { color: var(--white); }
+.artists-para em {
+  font-style: normal;
+  color: var(--green);
+}
+
+.ten-percent {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  margin: 36px 0;
+}
+.ten-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 12vw, 140px);
+  line-height: 0.8;
+  color: var(--green);
+  letter-spacing: -0.02em;
+}
+.ten-label {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--grey);
+  text-transform: uppercase;
+  margin-left: 16px;
+  line-height: 1.4;
+  padding-bottom: 8px;
+  align-self: flex-end;
+}
+
+.rule-line {
+  border: none;
+  border-top: 1px solid rgba(138,206,0,0.12);
+  margin: 48px 0;
+}
+
+/* ═══════════════════════════
+   SECTION: SIGNAL NETWORK
+═══════════════════════════ */
+#signal {
+  background: var(--black2);
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.signal-static {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px;
+  opacity: 0.025;
+  pointer-events: none;
+}
+
+.classified-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.classified-stamp {
+  font-size: 8px;
+  letter-spacing: 0.5em;
+  color: var(--orange);
+  text-transform: uppercase;
+  border: 1px solid rgba(255,140,0,0.3);
+  padding: 5px 12px;
+  background: rgba(255,140,0,0.05);
+}
+
+.classified-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255,140,0,0.15);
+}
+
+.signal-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(40px, 7vw, 96px);
+  line-height: 0.88;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  margin-bottom: 48px;
+}
+.signal-headline .redact {
+  background: var(--redact);
+  color: var(--redact);
+  position: relative;
+  user-select: none;
+  cursor: not-allowed;
+  transition: background 0.3s, color 0.3s;
+  padding: 0 4px;
+}
+.signal-headline .redact:hover {
+  background: rgba(138,206,0,0.08);
+  color: var(--green);
+}
+
+.signal-fragments {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 48px;
+}
+
+.signal-frag {
+  background: rgba(5,5,5,0.8);
+  padding: 28px;
+  position: relative;
+}
+.signal-frag::before {
+  content: attr(data-num);
+  position: absolute;
+  top: 16px; right: 16px;
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  color: rgba(112,128,144,0.3);
+}
+
+.signal-frag-label {
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: var(--green);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 12px;
+}
+.signal-frag-text {
+  font-size: clamp(12px, 1.5vw, 14px);
+  line-height: 1.85;
+  color: var(--dim);
+}
+.signal-frag-text strong { color: var(--white); }
+
+.signal-cta {
+  border: 1px solid rgba(138,206,0,0.15);
+  padding: 32px;
+  position: relative;
+}
+.signal-cta::before {
+  content: '// ACCESS RESTRICTED';
+  position: absolute;
+  top: -8px; left: 24px;
+  background: var(--black2);
+  padding: 0 12px;
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: var(--green);
+}
+.signal-cta-text {
+  font-size: clamp(13px, 1.6vw, 16px);
+  line-height: 1.9;
+  color: var(--dim);
+  max-width: 640px;
+}
+.signal-cta-text strong { color: var(--white); }
+
+/* ═══════════════════════════
+   SECTION: PRINCIPLES
+═══════════════════════════ */
+#principles {
+  border-bottom: 1px solid rgba(112,128,144,0.1);
+}
+
+.principles-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 56px;
+}
+
+.principle {
+  background: var(--black2);
+  padding: 36px 28px;
+  border-top: 2px solid rgba(138,206,0,0.2);
+  transition: border-color 0.3s;
+}
+.principle:hover { border-color: var(--green); }
+
+.principle-num {
+  font-size: 8px;
+  letter-spacing: 0.4em;
+  color: rgba(138,206,0,0.4);
+  display: block;
+  margin-bottom: 16px;
+}
+
+.principle-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.principle-text {
+  font-size: 12px;
+  line-height: 1.85;
+  color: var(--dim);
+}
+
+/* ═══════════════════════════
+   SECTION: MANIFESTO / CLOSE
+═══════════════════════════ */
+#manifesto {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: var(--black);
+  position: relative;
+  overflow: hidden;
+}
+
+.manifesto-bg-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+.manifesto-bg-text span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 25vw, 340px);
+  letter-spacing: -0.03em;
+  line-height: 0.8;
+  color: rgba(138,206,0,0.025);
+  white-space: nowrap;
+  user-select: none;
+  animation: slowspin 60s linear infinite;
+}
+@keyframes slowspin {
+  from { transform: rotate(-3deg) scale(1.05); }
+  to   { transform: rotate(3deg) scale(1.05); }
+}
+
+.manifesto-inner {
+  position: relative; z-index: 1;
+  max-width: 900px; margin: 0 auto;
+  padding: 0 40px;
+}
+
+.manifesto-lines {
+  list-style: none;
+  margin-bottom: 56px;
+}
+.manifesto-lines li {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 5vw, 60px);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: var(--white);
+  border-bottom: 1px solid rgba(138,206,0,0.07);
+  padding: 16px 0;
+  transition: color 0.2s;
+}
+.manifesto-lines li:hover { color: var(--green); }
+.manifesto-lines li.dim-line { color: rgba(232,228,220,0.2); }
+.manifesto-lines li.green-line { color: var(--green); }
+.manifesto-lines li.orange-line { color: var(--orange); }
+
+.manifesto-close {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.manifesto-cert {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--grey);
+  text-transform: uppercase;
+  line-height: 2;
+  opacity: 0.6;
+}
+
+.manifesto-stamp {
+  width: 72px; height: 72px;
+  border: 1.5px solid rgba(138,206,0,0.3);
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 0;
+  transform: rotate(-14deg);
+  opacity: 0.5;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.manifesto-stamp span:first-child {
+  font-size: 6px; letter-spacing: 0.25em; color: var(--green); text-transform: uppercase;
+}
+.manifesto-stamp span:last-child {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; color: var(--green); line-height: 1;
+}
+
+/* ═══════════════════════════
+   FOOTER STRIP
+═══════════════════════════ */
+footer {
+  position: relative; z-index: 1;
+  border-top: 1px solid rgba(138,206,0,0.1);
+  padding: 32px 40px;
+  display: flex; align-items: center;
+  gap: 24px; flex-wrap: wrap;
+}
+
+.footer-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 14px; letter-spacing: 0.2em; color: var(--green);
+}
+
+.footer-meta {
+  font-size: 8px; letter-spacing: 0.25em; color: var(--grey);
+  text-transform: uppercase; opacity: 0.5;
+}
+
+.footer-right {
+  margin-left: auto;
+  font-size: 8px; letter-spacing: 0.25em;
+  color: rgba(112,128,144,0.35);
+  text-align: right;
+  line-height: 1.8;
+}
+
+/* ═══════════════════════════
+   SCROLLBAR
+═══════════════════════════ */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--green); }
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+@media (max-width: 768px) {
+  section { padding: 80px 24px; }
+  nav { padding: 14px 24px; }
+  .signal-fragments { grid-template-columns: 1fr; }
+  .principles-row { grid-template-columns: 1fr; }
+  .line-card { grid-template-columns: 48px 1fr; }
+  .line-num { font-size: 28px; padding-left: 16px; padding-top: 44px; }
+  .line-content { padding: 36px 24px 36px 0; }
+  footer { flex-direction: column; align-items: flex-start; }
+  .footer-right { margin-left: 0; text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════
+     LOADER
+═══════════════════════ -->
+<div id="loader">
+  <div class="loader-patch">
+    <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+      <!-- Adversarial patch as loading screen -->
+      <rect width="340" height="340" fill="#080808"/>
+      <rect x="0"   y="0"   width="55"  height="80"  fill="#8ACE00" opacity="0.9"/>
+      <rect x="55"  y="0"   width="35"  height="38"  fill="#050505"/>
+      <rect x="90"  y="0"   width="65"  height="55"  fill="#E8E4DC" opacity="0.88"/>
+      <rect x="155" y="0"   width="45"  height="90"  fill="#050505"/>
+      <rect x="200" y="0"   width="90"  height="42"  fill="#8ACE00" opacity="0.65"/>
+      <rect x="290" y="0"   width="50"  height="65"  fill="#050505"/>
+      <rect x="0"   y="80"  width="30"  height="55"  fill="#050505"/>
+      <rect x="30"  y="80"  width="90"  height="38"  fill="#E8E4DC" opacity="0.75"/>
+      <rect x="120" y="38"  width="35"  height="65"  fill="#8ACE00" opacity="0.45"/>
+      <rect x="200" y="42"  width="90"  height="72"  fill="#050505"/>
+      <rect x="290" y="65"  width="50"  height="55"  fill="#8ACE00" opacity="0.4"/>
+      <rect x="0"   y="135" width="140" height="55"  fill="#050505"/>
+      <rect x="140" y="103" width="50"  height="75"  fill="#E8E4DC" opacity="0.82"/>
+      <rect x="190" y="114" width="80"  height="48"  fill="#8ACE00" opacity="0.3"/>
+      <rect x="270" y="120" width="70"  height="60"  fill="#050505"/>
+      <rect x="0"   y="190" width="65"  height="75"  fill="#8ACE00" opacity="0.75"/>
+      <rect x="65"  y="190" width="75"  height="38"  fill="#050505"/>
+      <rect x="140" y="178" width="50"  height="82"  fill="#050505"/>
+      <rect x="190" y="162" width="80"  height="62"  fill="#E8E4DC" opacity="0.6"/>
+      <rect x="270" y="180" width="70"  height="68"  fill="#050505"/>
+      <rect x="0"   y="265" width="95"  height="75"  fill="#050505"/>
+      <rect x="95"  y="228" width="70"  height="112" fill="#8ACE00" opacity="0.55"/>
+      <rect x="165" y="260" width="50"  height="80"  fill="#050505"/>
+      <rect x="215" y="224" width="60"  height="116" fill="#E8E4DC" opacity="0.5"/>
+      <rect x="275" y="248" width="65"  height="92"  fill="#050505"/>
+      <!-- False face ellipses -->
+      <ellipse cx="95"  cy="160" rx="35" ry="42" fill="none" stroke="#FF8C00" stroke-width="1.2" opacity="0.55"/>
+      <ellipse cx="240" cy="140" rx="28" ry="36" fill="none" stroke="#FF8C00" stroke-width="0.9" opacity="0.4"/>
+      <!-- Watermark -->
+      <text x="8" y="334" font-family="monospace" font-size="7" fill="#8ACE00" opacity="0.4" letter-spacing="2">ADV_PATCH_v2.1 // CONF_SCORE: &lt;0.3 // YOLO_DISRUPT // KPT-UG</text>
+    </svg>
+  </div>
+  <div class="loader-line">Initialising signal</div>
+  <div class="loader-line">Verifying frequency</div>
+  <div class="loader-line">Confirming underground access</div>
+  <div class="loader-line">KPT-UG // CERT-001 // STATUS: ACTIVE</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- ═══════════════════════
+     NAV
+═══════════════════════ -->
+<nav id="nav">
+  <a class="nav-wordmark" href="#">KPT-UNDERGROUND</a>
+  <span class="nav-signal">SIGNAL ACTIVE</span>
+</nav>
+
+<!-- ═══════════════════════
+     HERO
+═══════════════════════ -->
+<section id="hero">
+  <div class="inner-wide">
+    <span class="hero-eyebrow reveal">DOC TYPE: BRAND STORY // REF: KPT-UG-BS-001 // CLASS: CLANDESTINE</span>
+
+    <h1 class="hero-display reveal reveal-delay-1">
+      <span class="glitch-wrap" data-text="YOU FELT IT">YOU FELT IT</span>
+      <span class="line-green reveal reveal-delay-2">BEFORE YOU</span>
+      <span class="line-dim reveal reveal-delay-3">UNDERSTOOD IT.</span>
+    </h1>
+
+    <p class="hero-intro reveal reveal-delay-4">
+      The pressure in your chest <em>before the first kick hits.</em>
+      The moment a room stops being a room and becomes something closer to a decision.
+      The specific quality of darkness at 3 AM when the only light is above the decks
+      and everyone present <em>chose</em> to be there — really chose, not scrolled into —
+      chose, physically, to stand in that space and receive what was coming.
+    </p>
+  </div>
+
+  <div class="hero-scroll-hint reveal reveal-delay-5">↓ Scroll to enter</div>
+  <div class="hero-meta">
+    KEEP IT UNDERGROUND<br>
+    SWL: UNLIMITED<br>
+    FREQ: SUB-BASS<br>
+    KPT-UG-001
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     NOT FASHION
+═══════════════════════ -->
+<section id="not-fashion">
+  <div class="inner">
+    <h2 class="stamp-headline reveal">
+      THIS IS<br>
+      NOT <span class="strike">FASHION</span>.<br>
+      <span class="accent">THIS IS EQUIPMENT.</span>
+    </h2>
+
+    <div class="fragment-block reveal reveal-delay-1">
+      <span class="fragment-label">01 // The Standard</span>
+      <p class="fragment-body">
+        Fashion is a season. A mood board. A colour approved by a committee in a city that has never
+        heard a sub bin at operating pressure. What we make answers to a different brief entirely.
+        <strong>The fabric weights are industrial. The construction tolerances are tight.
+        The hardware is load-rated.</strong> Every specification exists because
+        someone needed it to exist — on a floor, in a field, behind a stage at 5 AM
+        when the work is not finished.
+      </p>
+    </div>
+
+    <div class="fragment-block reveal reveal-delay-2">
+      <span class="fragment-label">02 // The Origin</span>
+      <p class="fragment-body">
+        We did not start a brand. We started by showing up. By loading in at midnight when
+        the venue had no name. By carrying flight cases up service stairs. By finding the frequency
+        before anyone else was awake enough to hear it. <strong>The gear came first. Always the gear.</strong>
+        Stacks of cabinet panels. Cable looms coiled like nervous systems waiting to be activated.
+        Crossover circuits soldered by hand in cold workshop light.
+      </p>
+    </div>
+
+    <div class="fragment-block reveal reveal-delay-3">
+      <span class="fragment-label">03 // The Gap</span>
+      <p class="fragment-body">
+        For a long time, the work was its own reward. But there was no language for what we were doing.
+        No clothing that reflected the discipline of it — the rigging knowledge, the frequency literacy,
+        the <strong>deliberate invisibility.</strong> What existed was fashion borrowing the aesthetic
+        of the underground without any of its weight. Made for people who had
+        heard about the scene, not for the people who ran cable through it.
+        So we made our own.
+      </p>
+    </div>
+
+    <div class="spec-line reveal reveal-delay-4">
+      <span class="spec-pill">440GSM FRENCH TERRY</span>
+      <span class="spec-pill">AQL 2.5 STANDARD</span>
+      <span class="spec-pill">±1CM TOLERANCE</span>
+      <span class="spec-pill">LOAD-RATED HARDWARE</span>
+      <span class="spec-pill">FARADAY LINING OPTION</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     THE FEELING
+═══════════════════════ -->
+<section id="feeling">
+  <div class="feeling-bg">
+    <svg viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- giant subwoofer schematic -->
+      <circle cx="350" cy="300" r="260" stroke="#8ACE00" stroke-width="0.8" fill="none" stroke-dasharray="6 5"/>
+      <circle cx="350" cy="300" r="220" stroke="#8ACE00" stroke-width="0.5" fill="none"/>
+      <circle cx="350" cy="300" r="170" stroke="#8ACE00" stroke-width="1" fill="none"/>
+      <circle cx="350" cy="300" r="95" stroke="#8ACE00" stroke-width="0.8" fill="none" stroke-dasharray="3 4"/>
+      <circle cx="350" cy="300" r="48" stroke="#8ACE00" stroke-width="1.2" fill="none"/>
+      <circle cx="350" cy="300" r="20" fill="#8ACE00" opacity="0.06"/>
+      <circle cx="350" cy="300" r="8" fill="#8ACE00" opacity="0.2"/>
+    </svg>
+  </div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <p class="pull-quote reveal">
+      "We are the people who build the systems<br>
+      that other people <span>dance inside.</span>"
+    </p>
+
+    <div class="fragment-block reveal reveal-delay-1" style="border-left-color:rgba(160,82,45,0.35);">
+      <span class="fragment-label" style="color:var(--rust);">The Work</span>
+      <p class="fragment-body">
+        Sound at physical scale is not entertainment. It is infrastructure. It is engineering.
+        It is a <strong>choice to build something that does not ask permission.</strong>
+        The 4 AM load-out is its own ceremony.
+        The moment the system comes alive in an empty room — tuned, phased, the sub
+        reaching below the range of conscious hearing — that is what we make the clothing for.
+        That moment. That person. That discipline.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     THE FOUR LINES
+═══════════════════════ -->
+<section id="lines">
+  <div class="inner-wide">
+    <span class="lines-header reveal">THE FOUR LINES // PRODUCT SYSTEM</span>
+
+    <!-- RAVEWEAR -->
+    <div class="line-card ravewear reveal">
+      <div class="line-num">01</div>
+      <div class="line-content">
+        <div class="line-title">RAVEWEAR</div>
+        <span class="line-tagline">Built for the floor. Engineered for six hours.</span>
+        <p class="line-desc">
+          The technical core. Designed for sustained physical use in dark, high-temperature, high-intensity
+          environments. <strong>Moisture-responsive fabrics</strong>, reinforced at every stress point.
+          Reflective elements that sleep under ambient light and wake under UV and flash.
+          Silhouettes with full range of motion and the visual weight the floor demands.
+          Nothing decorative. Nothing that fails. Nothing that belongs to a trend cycle
+          that will be embarrassing in eighteen months.
+        </p>
+      </div>
+    </div>
+
+    <!-- FESTIVALWEAR -->
+    <div class="line-card festival reveal">
+      <div class="line-num">02</div>
+      <div class="line-content">
+        <div class="line-title">FESTIVALWEAR</div>
+        <span class="line-tagline">Three days. Open sky. Full commitment.</span>
+        <p class="line-desc">
+          Built for duration, not intensity. Teknival fields, forest stages, multi-day free parties —
+          the long-haul environments where <strong>water-resistance, layering, and packability</strong>
+          become the engineering priorities. Carries the heaviest graphic documentation:
+          halftone subwoofer schematics, adversarial textures, frequency maps printed at 32 LPI
+          on fabric tested across a field season. Worn by the people who stay until
+          the generator runs out and the birds start.
+        </p>
+      </div>
+    </div>
+
+    <!-- EVERYDAY -->
+    <div class="line-card everyday reveal">
+      <div class="line-num">03</div>
+      <div class="line-content">
+        <div class="line-title">EVERYDAY</div>
+        <span class="line-tagline">What you wear between events is not neutral.</span>
+        <p class="line-desc">
+          The entry point. Designed for the city, the record shop, the after-party breakfast —
+          the hours between events when you still need to mean something.
+          The graphic approach is restrained: <strong>a tonal chest hit, an interior label
+          that rewards the person who looks,</strong> a wrist-cuff print that only signifies
+          something to someone who already knows what it refers to.
+          Construction standards and fabric weights remain non-negotiable. No entry-level quality.
+          Just a lower volume. The door to everything else.
+        </p>
+      </div>
+    </div>
+
+    <!-- ACCESSORIES -->
+    <div class="line-card accessories reveal">
+      <div class="line-num">04</div>
+      <div class="line-content">
+        <div class="line-title">ACCESSORIES</div>
+        <span class="line-tagline">Details are not optional. They are the document.</span>
+        <p class="line-desc">
+          Eyewear, hardware, modular carry systems. Sunglasses built for the specific conditions
+          of outdoor festival culture: <strong>high UV, variable light, the functional need to look
+          like you belong in the technical crew as much as the crowd.</strong>
+          Polarised lenses, TR90 flex hinges, matte acetate frames in palette colorways.
+          The carry case doubles as a Faraday pouch. Cobra-buckled belt systems.
+          Every object is a sentence in the same document. None of it is decoration.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     THE ARTISTS
+═══════════════════════ -->
+<section id="artists">
+  <div class="artists-aside">ARTISTS</div>
+  <div class="inner" style="position:relative;z-index:1;">
+
+    <h2 class="artists-intro reveal">
+      The people making the music<br>
+      you will <span>never find on a chart.</span>
+    </h2>
+
+    <div class="artists-body">
+      <p class="artists-para reveal reveal-delay-1">
+        There are artists making electronic music right now who will never appear on a booking agency roster.
+        Not because they lack ability. Because they made a <strong>deliberate choice</strong> — to stay in the
+        frequency range that does not negotiate with commercial radio. To refuse the compression
+        that makes music safe for mass consumption. To keep making work that requires the listener
+        to come to it rather than it arriving pre-digested in a feed.
+      </p>
+
+      <p class="artists-para reveal reveal-delay-2">
+        These artists — hardcore, gabber, hardtek, speedcore, dark techno, drum and bass, deep ambient —
+        have almost no infrastructure. No label advances. No sync licensing. No algorithm surfacing them
+        to people with disposable income. They exist because the scene sustains them directly,
+        person to person, show to show, without intermediaries.
+        <em>We are building some of that infrastructure.</em>
+      </p>
+
+      <div class="ten-percent reveal reveal-delay-3">
+        <span class="ten-num">10%</span>
+        <span class="ten-label">of every transaction<br>goes directly to<br>underground artists</span>
+      </div>
+
+      <hr class="rule-line">
+
+      <p class="artists-para reveal reveal-delay-1">
+        Recipients are not selected by application form, grant committee, or social media metrics.
+        They are identified the way everything in this scene is identified —
+        <strong>by people who were there, who know where the work belongs.</strong>
+        No criteria document. No approval process. Money moving from people who buy the clothing
+        to people who make the music that made the clothing necessary. That is the entire mechanism.
+      </p>
+
+      <p class="artists-para reveal reveal-delay-2">
+        This is not charity. It is <strong>infrastructure payment.</strong>
+        The underground exists because people sustain it. We are one mechanism for that sustenance.
+        The clothing is the product. The culture is the purpose.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     THE SIGNAL NETWORK
+═══════════════════════ -->
+<section id="signal">
+  <div class="signal-static"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+
+    <div class="classified-header reveal">
+      <span class="classified-stamp">CLASSIFIED</span>
+      <div class="classified-line"></div>
+      <span class="classified-stamp" style="color:var(--green);border-color:rgba(138,206,0,0.3);background:rgba(138,206,0,0.05);">MEMBERS ONLY</span>
+    </div>
+
+    <h2 class="signal-headline reveal reveal-delay-1">
+      THE<br>
+      SIGNAL<br>
+      <span class="redact" title="Hover to reveal">NETWORK</span>
+    </h2>
+
+    <div class="signal-fragments reveal reveal-delay-2">
+      <div class="signal-frag" data-num="FRAG-01">
+        <span class="signal-frag-label">What it is not</span>
+        <p class="signal-frag-text">
+          Not a newsletter. Not a loyalty programme. Not a points balance or a referral link or
+          a digital community managed by a social media coordinator.
+          <strong>It is a channel.</strong> Closed. Non-algorithmic.
+          Operating outside the infrastructure designed to convert every human relationship
+          into an engagement metric.
+        </p>
+      </div>
+      <div class="signal-frag" data-num="FRAG-02">
+        <span class="signal-frag-label">What moves through it</span>
+        <p class="signal-frag-text">
+          Location codes. Frequency callouts. Access instructions for events that
+          <strong>have no public existence.</strong> Parties that are not announced.
+          Stages that are not on any map. The kind of gathering where the only way in
+          is already knowing — and the only way to already know is to have been
+          connected long enough to be trusted.
+        </p>
+      </div>
+      <div class="signal-frag" data-num="FRAG-03">
+        <span class="signal-frag-label">Why it works</span>
+        <p class="signal-frag-text">
+          Because we are genuinely embedded in these scenes.
+          The information is real because <strong>the relationships are real.</strong>
+          We did not build a database and call it a community.
+          We have been on the floors, on the rigs, in the fields.
+          This is not a brand partnership. It is a continuation.
+        </p>
+      </div>
+      <div class="signal-frag" data-num="FRAG-04">
+        <span class="signal-frag-label">How you enter</span>
+        <p class="signal-frag-text">
+          You buy the clothing. You receive access.
+          <strong>What follows cannot be described further here.</strong>
+          Not because it is complicated. Because the description of it
+          would reduce it to something it is not.
+          Some things work only when they remain exactly as clandestine as they need to be.
+        </p>
+      </div>
+    </div>
+
+    <div class="signal-cta reveal reveal-delay-3">
+      <p class="signal-cta-text">
+        The underground has always survived by being <strong>invisible to the systems designed to commodify it.</strong>
+        The Signal Network is not a feature we built. It is a direct expression of how the scene
+        has always operated — information passed between people who have demonstrated
+        they understand what it is for. The clothing is how you qualify.
+        The rest is not ours to advertise.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     PRINCIPLES
+═══════════════════════ -->
+<section id="principles">
+  <div class="inner-wide">
+    <span class="fragment-label reveal" style="font-size:9px;letter-spacing:0.5em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:0;">
+      Operating Principles // How We Work
+    </span>
+
+    <div class="principles-row">
+      <div class="principle reveal">
+        <span class="principle-num">PRINCIPLE 01</span>
+        <div class="principle-title">NO INFLUENCERS. EVER.</div>
+        <p class="principle-text">
+          The first production run is not for sale. It goes to the crew — the riggers
+          and DJs actually doing the work. When the scene sees the gear on a 4 AM load-in,
+          the authenticity is established by use, not by endorsement.
+        </p>
+      </div>
+      <div class="principle reveal reveal-delay-1">
+        <span class="principle-num">PRINCIPLE 02</span>
+        <div class="principle-title">NO TREND CYCLES.</div>
+        <p class="principle-text">
+          The colorway is the warehouse at operating temperature. The fabric weights
+          are determined by the environment, not by seasonal palettes.
+          We do not follow. We do not pitch to fashion press. We do not adjust
+          to what the mainstream thinks the underground looks like this year.
+        </p>
+      </div>
+      <div class="principle reveal reveal-delay-2">
+        <span class="principle-num">PRINCIPLE 03</span>
+        <div class="principle-title">QUALITY IS NON-NEGOTIABLE.</div>
+        <p class="principle-text">
+          AQL 2.5 manufacturing standard. ±1cm production tolerances.
+          Print cracking tests. Shrinkage checks. Bar-tack reinforcement
+          at every stress point. If it cannot withstand the environment
+          we made it for, it does not leave the factory.
+        </p>
+      </div>
+      <div class="principle reveal reveal-delay-3">
+        <span class="principle-num">PRINCIPLE 04</span>
+        <div class="principle-title">MUSIC FIRST. ALWAYS.</div>
+        <p class="principle-text">
+          Ten percent of every transaction funds underground artists directly.
+          No applications, no committees, no grant language. The scene
+          identifies who the money belongs to. We move it there.
+          The clothing exists to sustain the culture, not to extract from it.
+        </p>
+      </div>
+      <div class="principle reveal reveal-delay-1">
+        <span class="principle-num">PRINCIPLE 05</span>
+        <div class="principle-title">FUNCTION BEFORE FORM.</div>
+        <p class="principle-text">
+          Graphics are technical documentation or defensive camouflage —
+          not decoration. Faraday pocket linings exist for privacy, not branding.
+          Reflective tape activates in function, not as aesthetic gesture.
+          Every element answers a question about the environment it operates in.
+        </p>
+      </div>
+      <div class="principle reveal reveal-delay-2">
+        <span class="principle-num">PRINCIPLE 06</span>
+        <div class="principle-title">CLANDESTINE BY DEFAULT.</div>
+        <p class="principle-text">
+          The drop link is not on the homepage. The Signal Network
+          is not advertised. The interior label rewards the person
+          who looks closely. The brand does not announce itself to people
+          who are not paying the right kind of attention. That is intentional.
+          That has always been the point.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     MANIFESTO CLOSE
+═══════════════════════ -->
+<section id="manifesto">
+  <div class="manifesto-bg-text"><span>UNDERGROUND</span></div>
+  <div class="manifesto-inner">
+    <ul class="manifesto-lines">
+      <li class="reveal">WE DO NOT ADVERTISE.</li>
+      <li class="dim-line reveal reveal-delay-1">WE DO NOT TREND.</li>
+      <li class="dim-line reveal reveal-delay-2">WE DO NOT FOLLOW.</li>
+      <li class="reveal reveal-delay-3">WE BUILD THE SYSTEMS.</li>
+      <li class="green-line reveal reveal-delay-4">WE SUSTAIN THE ARTISTS.</li>
+      <li class="reveal reveal-delay-5">WE KEEP THE FREQUENCY.</li>
+      <li class="orange-line reveal reveal-delay-3">WE KEEP THE STANDARD.</li>
+      <li class="reveal reveal-delay-4" style="border-bottom:none;padding-bottom:0;">WE KEEP IT UNDERGROUND.</li>
+    </ul>
+
+    <div class="manifesto-close reveal reveal-delay-2">
+      <div class="manifesto-cert">
+        SWL: UNLIMITED // SIGNAL: ACTIVE<br>
+        CERT: KPT-UG-001 // CLASS: UNDERGROUND UTILITY<br>
+        FREQ RESPONSE: 20–200HZ // EST. UNDERGROUND
+      </div>
+      <div class="manifesto-stamp">
+        <span>CERT</span>
+        <span>KPT</span>
+        <span>U/G</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════
+     FOOTER
+═══════════════════════ -->
+<footer>
+  <span class="footer-brand">KPT-UNDERGROUND</span>
+  <span class="footer-meta">EST. UNDERGROUND // SOUNDSYSTEM WORKWEAR // SIGNAL NETWORK</span>
+  <div class="footer-right">
+    DOC REF: KPT-UG-BS-001<br>
+    CLASSIFICATION: CLANDESTINE<br>
+    VERSION: 1.0
+  </div>
+</footer>
+
+<script>
+// ─── LOADER ───────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('gone');
+    document.getElementById('nav').classList.add('visible');
+    // trigger hero reveals
+    document.querySelectorAll('#hero .reveal').forEach((el, i) => {
+      setTimeout(() => el.classList.add('in'), 200 + i * 120);
+    });
+  }, 3600);
+});
+
+// ─── SCROLL REVEAL ────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal:not(#hero .reveal)').forEach(el => observer.observe(el));
+
+// ─── SUBTLE PARALLAX ON HERO ──────────
+const heroDisplay = document.querySelector('.hero-display');
+if (heroDisplay) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    heroDisplay.style.transform = `translateY(${y * 0.18}px)`;
+    heroDisplay.style.opacity = Math.max(0, 1 - y / 600);
+  }, { passive: true });
+}
+
+// ─── GLITCH ON HOVER / RANDOM ─────────
+document.querySelectorAll('.manifesto-lines li').forEach(li => {
+  li.addEventListener('mouseenter', () => {
+    li.style.letterSpacing = Math.random() > 0.5 ? '0.04em' : '0';
+    setTimeout(() => { li.style.letterSpacing = '0.02em'; }, 120);
+  });
+});
+</script>
+</body>
+</html>

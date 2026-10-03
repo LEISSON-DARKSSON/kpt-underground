@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#050505">
+<meta name="description" content="Soundsystem workwear for the people who build the systems. Keep It Underground.">
+<title>KEEP IT UNDERGROUND — Soundsystem Workwear</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+
+/* ══════════════════════════════════
+   TOKENS
+══════════════════════════════════ */
+:root {
+  --ink:    #050505;
+  --ink2:   #090909;
+  --ink3:   #0e0e0e;
+  --green:  #8ACE00;
+  --orange: #FF8C00;
+  --rust:   #A0522D;
+  --slate:  #708090;
+  --paper:  #E8E4DC;
+  --muted:  #606258;
+  --dim:    #333330;
+  --ease:   cubic-bezier(0.16,1,0.3,1);
+  --snap:   cubic-bezier(0.34,1.56,0.64,1);
+  --mid:    200ms;
+  --sat:    env(safe-area-inset-top,0px);
+  --sab:    env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{
+  background:var(--ink);color:var(--paper);
+  font-family:'Space Mono',monospace;font-size:13px;line-height:1.7;
+  overflow-x:hidden;cursor:none;
+}
+body::before{content:'';position:fixed;inset:0;z-index:8000;pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(138,206,0,0.012) 3px,rgba(138,206,0,0.012) 4px);}
+body::after{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(138,206,0,0.026) 1px,transparent 1px),linear-gradient(90deg,rgba(138,206,0,0.026) 1px,transparent 1px);
+  background-size:52px 52px;}
+
+/* ══════════════════════════════════
+   CURSOR
+══════════════════════════════════ */
+#cur{position:fixed;top:0;left:0;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);will-change:transform;}
+.cc{position:relative;width:18px;height:18px;transition:width var(--mid) var(--ease),height var(--mid) var(--ease);}
+.cc::before,.cc::after{content:'';position:absolute;background:var(--green);}
+.cc::before{width:1px;height:100%;left:50%;transform:translateX(-50%);}
+.cc::after{width:100%;height:1px;top:50%;transform:translateY(-50%);}
+.cg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;background:var(--ink);z-index:1;transition:width var(--mid) var(--ease),height var(--mid) var(--ease);}
+.cr{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:0;height:0;border:1px solid rgba(138,206,0,0);border-radius:50%;transition:width 280ms var(--ease),height 280ms var(--ease),border-color 280ms;}
+.cl{position:absolute;left:22px;top:50%;transform:translateY(-50%);font-size:7px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;white-space:nowrap;opacity:0;transition:opacity var(--mid);}
+
+@keyframes rp{from{width:18px;height:18px;opacity:0.7;border-color:var(--green)}to{width:60px;height:60px;opacity:0;border-color:var(--green)}}
+@keyframes blink{0%,100%{opacity:0.5}50%{opacity:0}}
+@keyframes fi{to{opacity:1}}
+@keyframes su{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@keyframes caretblink{0%,100%{opacity:1}50%{opacity:0}}
+
+body.ch .cc{width:30px;height:30px}body.ch .cg{width:7px;height:7px}
+body.ch .cr{width:42px;height:42px;border-color:rgba(138,206,0,0.3)}body.ch .cl{opacity:1}
+body.cshop .cc{width:26px;height:26px}body.cshop .cl{opacity:1;font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.06em;}
+body.cshop .cr{width:50px;height:50px;border-color:rgba(138,206,0,0.4)}
+body.clock .cc::before,body.clock .cc::after{background:var(--orange)}
+body.clock .cl{color:var(--orange);opacity:1}
+body.clock .cr{width:42px;height:42px;border-color:rgba(255,140,0,0.3)}
+
+/* ══════════════════════════════════
+   LOADER
+══════════════════════════════════ */
+#loader{position:fixed;inset:0;z-index:9999;background:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;transition:opacity 0.8s ease,visibility 0.8s ease;}
+#loader.gone{opacity:0;visibility:hidden;pointer-events:none;}
+.lp{width:min(210px,54vw);height:min(210px,54vw);margin-bottom:24px;animation:ldp 0.45s ease infinite alternate;}
+@keyframes ldp{from{opacity:0.82}to{opacity:1}}
+.ll{font-size:8px;letter-spacing:0.45em;color:var(--green);text-transform:uppercase;opacity:0;animation:fi 0.3s ease forwards;}
+.ll:nth-child(2){animation-delay:0.3s}.ll:nth-child(3){animation-delay:0.65s}.ll:nth-child(4){animation-delay:1s}
+.lb{width:min(170px,50vw);height:1px;background:rgba(138,206,0,0.1);margin-top:16px;overflow:hidden;opacity:0;animation:fi 0.3s ease 1.35s forwards;}
+.lf{height:100%;background:var(--green);width:0;animation:lff 0.9s ease 1.45s forwards;}
+@keyframes lff{to{width:100%}}
+
+/* ══════════════════════════════════
+   NAV
+══════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  height:56px;padding:0 40px;
+  display:flex;align-items:center;gap:0;
+  background:rgba(5,5,5,0);
+  border-bottom:1px solid rgba(138,206,0,0);
+  backdrop-filter:blur(0px);
+  transition:background 0.5s ease,border-color 0.5s ease,backdrop-filter 0.5s ease;
+  opacity:0;
+}
+#nav.show{opacity:1;}
+#nav.scrolled{
+  background:rgba(5,5,5,0.96);
+  border-color:rgba(138,206,0,0.07);
+  backdrop-filter:blur(16px);
+}
+
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:0.2em;color:var(--green);text-decoration:none;margin-right:32px;}
+.nav-links{display:flex;gap:0;margin-right:auto;}
+.nav-lnk{font-size:8px;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);text-decoration:none;padding:0 16px;height:56px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:color var(--mid),border-color var(--mid);}
+.nav-lnk:hover{color:var(--paper);}
+.nav-lnk.active{color:var(--green);border-color:var(--green);}
+.nav-dot{font-size:7px;letter-spacing:0.3em;color:var(--green);opacity:0.4;margin-right:20px;}
+.nav-dot::before{content:'● ';animation:blink 1.6s step-end infinite;}
+.nav-shop-btn{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:var(--green);text-decoration:none;border:1px solid rgba(138,206,0,0.22);padding:7px 18px;transition:background var(--mid),color var(--mid),border-color var(--mid);}
+.nav-shop-btn:hover{background:var(--green);color:var(--ink);border-color:var(--green);}
+
+/* ══════════════════════════════════
+   AUDIO TOGGLE
+══════════════════════════════════ */
+#aBtn{position:fixed;bottom:28px;right:28px;z-index:600;display:flex;align-items:center;gap:8px;padding:7px 14px;background:rgba(5,5,5,0.9);border:1px solid rgba(138,206,0,0.12);backdrop-filter:blur(10px);cursor:none;opacity:0;transition:opacity 0.4s ease,border-color var(--mid);}
+#aBtn.show{opacity:1;}#aBtn:hover{border-color:rgba(138,206,0,0.35);}
+.abrs{display:flex;align-items:flex-end;gap:2px;height:12px;}
+.abr{width:2px;background:var(--green);border-radius:1px;transition:height 0.15s;}
+.abr:nth-child(1){height:3px}.abr:nth-child(2){height:8px}.abr:nth-child(3){height:5px}.abr:nth-child(4){height:11px}.abr:nth-child(5){height:6px}
+#aBtn.on .abr:nth-child(1){animation:b1 0.8s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(2){animation:b2 0.6s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(3){animation:b3 0.9s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(4){animation:b4 0.7s ease-in-out infinite alternate}
+#aBtn.on .abr:nth-child(5){animation:b5 0.5s ease-in-out infinite alternate}
+@keyframes b1{from{height:3px}to{height:10px}}@keyframes b2{from{height:8px}to{height:3px}}
+@keyframes b3{from{height:5px}to{height:12px}}@keyframes b4{from{height:11px}to{height:4px}}
+@keyframes b5{from{height:6px}to{height:9px}}
+#aBtn.off .abr{height:2px;opacity:0.3;}
+.albl{font-size:7px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;}
+
+/* ══════════════════════════════════
+   TICKER
+══════════════════════════════════ */
+.tw{position:relative;z-index:1;overflow:hidden;border-top:1px solid rgba(138,206,0,0.07);border-bottom:1px solid rgba(138,206,0,0.07);background:rgba(138,206,0,0.018);padding:11px 0;white-space:nowrap;}
+.tw::before,.tw::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none;}
+.tw::before{left:0;background:linear-gradient(90deg,var(--ink),transparent);}
+.tw::after{right:0;background:linear-gradient(-90deg,var(--ink),transparent);}
+.ttr{display:inline-flex;animation:tsc 30s linear infinite;}
+.ttr:hover{animation-play-state:paused;}
+@keyframes tsc{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ti{font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:var(--muted);padding:0 24px;transition:color var(--mid);}
+.ti:hover{color:var(--green)}.ti.ac{color:rgba(138,206,0,0.32);}
+
+/* ══════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════ */
+.r{opacity:0;transform:translateY(22px);transition:opacity 0.85s var(--ease),transform 0.85s var(--ease);}
+.r.in{opacity:1;transform:none;}
+.d1{transition-delay:0.08s}.d2{transition-delay:0.18s}.d3{transition-delay:0.3s}.d4{transition-delay:0.44s}
+
+/* ══════════════════════════════════
+   LAYOUT UTILS
+══════════════════════════════════ */
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px;}
+section{position:relative;z-index:1;}
+.eyebrow{font-size:8px;letter-spacing:0.5em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:24px;}
+.stmt{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,9vw,128px);line-height:0.86;letter-spacing:0.01em;color:var(--paper);}
+.stmt .g{color:var(--green);}.stmt .o{color:var(--orange);}
+.cta-lnk{display:inline-flex;align-items:center;gap:12px;font-size:9px;letter-spacing:0.45em;text-transform:uppercase;color:var(--green);text-decoration:none;border-bottom:1px solid rgba(138,206,0,0.22);padding-bottom:4px;transition:color var(--mid),border-color var(--mid);}
+.cta-lnk:hover{color:var(--paper);border-color:rgba(232,228,220,0.25);}
+.cta-lnk .arr{transition:transform var(--mid) var(--ease);}
+.cta-lnk:hover .arr{transform:translateX(5px);}
+
+/* ══════════════════════════════════
+   01 — HERO
+══════════════════════════════════ */
+#hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 0 80px;
+  position:relative;overflow:hidden;
+  border-bottom:1px solid rgba(138,206,0,0.06);
+}
+
+/* Subwoofer schematic background */
+.hero-schematic{
+  position:absolute;right:-80px;top:50%;transform:translateY(-50%);
+  width:min(700px,70vw);height:min(700px,70vw);
+  opacity:0;transition:opacity 1.2s ease;
+  pointer-events:none;
+}
+.hero-schematic.drawn{opacity:1;}
+
+/* Noise overlay */
+.hero-noise{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:256px;opacity:0.03;}
+
+/* Character assembly */
+.hero-char{display:inline-block;opacity:0;transform:translateY(16px) scale(0.94);transition:opacity 0.48s var(--snap),transform 0.48s var(--snap);}
+.hero-char.space{display:inline;}
+.hero-char.in{opacity:1;transform:none;}
+.hero-degrade .hero-char{opacity:0.14;}
+.hero-degrade .hero-char.in{opacity:0.14;}
+.hero-degrade .hero-char.fl{opacity:0.05!important;}
+.hero-degrade .hero-char.fl2{opacity:0.24!important;}
+.hero-line{display:block;font-family:'Bebas Neue',sans-serif;font-size:clamp(58px,11vw,140px);line-height:0.86;letter-spacing:0.01em;}
+.hero-line.g{color:var(--green);}
+
+.hero-sub{
+  display:block;max-width:560px;
+  font-size:clamp(14px,1.8vw,18px);line-height:1.85;color:var(--muted);
+  margin-top:36px;
+  opacity:0;transition:opacity 0.7s ease;
+}
+.hero-sub.in{opacity:1;}
+.hero-sub strong{color:var(--paper);}
+
+.hero-ctas{display:flex;align-items:center;gap:28px;flex-wrap:wrap;margin-top:44px;opacity:0;transition:opacity 0.7s ease 0.2s;}
+.hero-ctas.in{opacity:1;}
+.hero-cta-primary{
+  display:inline-flex;align-items:center;gap:14px;
+  padding:16px 32px;
+  background:var(--green);color:var(--ink);
+  font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.12em;
+  border:none;text-decoration:none;
+  transition:background var(--mid),color var(--mid),transform 0.1s;
+  cursor:none;
+}
+.hero-cta-primary:hover{background:var(--paper);}
+.hero-cta-primary:active{transform:scale(0.98);}
+
+.hero-scroll{position:absolute;bottom:36px;left:40px;font-size:8px;letter-spacing:0.4em;color:rgba(112,128,144,0.3);text-transform:uppercase;animation:nudge 2.6s ease-in-out infinite;}
+.hero-meta{position:absolute;bottom:36px;right:40px;text-align:right;font-size:8px;letter-spacing:0.2em;color:rgba(112,128,144,0.25);line-height:2;}
+
+/* Live stats bar */
+.hero-stats{
+  display:flex;gap:0;
+  margin-top:52px;
+  border:1px solid rgba(138,206,0,0.1);
+  opacity:0;transition:opacity 0.7s ease 0.4s;
+  max-width:560px;
+}
+.hero-stats.in{opacity:1;}
+.hs-item{flex:1;padding:14px 16px;border-right:1px solid rgba(138,206,0,0.07);}
+.hs-item:last-child{border-right:none;}
+.hs-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--green);line-height:1;display:block;letter-spacing:-0.01em;}
+.hs-lbl{font-size:7px;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;display:block;margin-top:3px;}
+
+/* ══════════════════════════════════
+   02 — MANIFESTO STRIP
+══════════════════════════════════ */
+#manifestoStrip{
+  background:var(--ink2);
+  border-bottom:1px solid rgba(138,206,0,0.06);
+  padding:0;overflow:hidden;position:relative;z-index:1;
+}
+.ms-track{
+  display:flex;width:max-content;
+  animation:msscroll 20s linear infinite;
+  border-top:1px solid rgba(138,206,0,0.06);
+  border-bottom:1px solid rgba(138,206,0,0.06);
+}
+.ms-track:hover{animation-play-state:paused;}
+@keyframes msscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.ms-item{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(28px,4vw,52px);
+  letter-spacing:0.04em;color:rgba(232,228,220,0.12);
+  padding:20px 32px;
+  white-space:nowrap;
+  border-right:1px solid rgba(138,206,0,0.05);
+  transition:color 0.3s ease;
+}
+.ms-item:hover{color:rgba(232,228,220,0.3);}
+.ms-item.accent{color:rgba(138,206,0,0.2);}
+.ms-item.accent:hover{color:rgba(138,206,0,0.5);}
+
+/* ══════════════════════════════════
+   03 — COLLECTION PREVIEW
+══════════════════════════════════ */
+#collection{
+  padding:100px 0;
+  border-bottom:1px solid rgba(138,206,0,0.06);
+}
+
+.col-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:48px;flex-wrap:wrap;gap:20px;
+}
+.col-title-block{}
+
+/* Preview grid — 2 large + 2 small */
+.preview-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:auto auto;
+  gap:2px;
+}
+
+.prev-card{
+  position:relative;background:var(--ink2);
+  overflow:hidden;cursor:none;
+  display:flex;flex-direction:column;
+}
+.prev-card.large{grid-row:span 2;}
+.prev-card.wide{grid-column:span 2;}
+
+/* Blueprint visual */
+.pv-vis{
+  flex:1;min-height:200px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--ink);
+  position:relative;overflow:hidden;
+}
+.prev-card.large .pv-vis{min-height:400px;}
+
+.pv-bp{
+  opacity:0.28;
+  transition:opacity 0.5s ease,transform 0.6s var(--ease);
+}
+.prev-card:hover .pv-bp{opacity:0.5;transform:scale(1.04);}
+
+.pv-accent{
+  position:absolute;top:0;left:0;right:0;height:2px;
+  transform:scaleX(0);transform-origin:left;
+  transition:transform 0.4s var(--ease);
+}
+.prev-card:hover .pv-accent{transform:scaleX(1);}
+
+.pv-badge{
+  position:absolute;top:14px;right:14px;
+  font-size:7px;letter-spacing:0.35em;text-transform:uppercase;
+  padding:4px 10px;border:1px solid rgba(138,206,0,0.25);
+  color:var(--green);background:rgba(138,206,0,0.06);
+}
+
+/* Hover overlay */
+.pv-hover{
+  position:absolute;inset:0;
+  background:rgba(5,5,5,0.75);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity 0.3s ease;
+}
+.prev-card:hover .pv-hover{opacity:1;}
+.pv-hover-lnk{
+  font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.1em;
+  color:var(--green);border:1px solid rgba(138,206,0,0.35);
+  padding:10px 24px;background:rgba(5,5,5,0.8);
+  text-decoration:none;
+  transition:background var(--mid),color var(--mid);
+}
+.pv-hover-lnk:hover{background:var(--green);color:var(--ink);}
+
+/* Card info */
+.pv-info{padding:16px 18px 20px;border-top:1px solid rgba(138,206,0,0.06);}
+.pv-line{font-size:7px;letter-spacing:0.35em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;}
+.pv-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(18px,2.2vw,26px);letter-spacing:0.05em;color:var(--paper);display:block;margin-bottom:2px;}
+.pv-price{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);}
+
+/* CTA row */
+.col-footer{display:flex;justify-content:center;margin-top:40px;}
+
+/* ══════════════════════════════════
+   04 — BRAND PROOF SPLIT
+══════════════════════════════════ */
+#proof{
+  display:grid;grid-template-columns:1fr 1fr;
+  border-bottom:1px solid rgba(138,206,0,0.06);
+}
+.proof-left{
+  padding:100px 48px 100px 40px;
+  border-right:1px solid rgba(138,206,0,0.06);
+  background:var(--ink2);
+}
+.proof-right{
+  padding:100px 40px 100px 48px;
+}
+
+.proof-stat{
+  margin-bottom:48px;
+}
+.ps-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,12vw,140px);
+  line-height:0.8;letter-spacing:-0.03em;color:var(--green);
+}
+.ps-label{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--slate);margin-top:10px;line-height:1.9;border-top:1px solid rgba(138,206,0,0.1);padding-top:10px;display:block;}
+
+.proof-copy{font-size:clamp(14px,1.8vw,18px);line-height:1.85;color:var(--muted);margin-bottom:28px;}
+.proof-copy strong{color:var(--paper);}
+
+/* Spec grid */
+.spec-mini{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:32px;}
+.sm-item{background:var(--ink3);padding:16px 18px;}
+.sm-lbl{font-size:8px;letter-spacing:0.3em;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;}
+.sm-val{font-size:12px;color:var(--paper);font-weight:700;letter-spacing:0.05em;}
+
+/* ══════════════════════════════════
+   05 — ARTIST FUND COUNTER (LIVE)
+══════════════════════════════════ */
+#artistFund{
+  padding:100px 0;
+  border-bottom:1px solid rgba(138,206,0,0.06);
+  position:relative;overflow:hidden;
+  background:var(--ink);
+}
+
+.af-bg{
+  position:absolute;inset:0;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.af-bg span{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(140px,30vw,400px);
+  color:rgba(138,206,0,0.02);letter-spacing:-0.04em;
+  user-select:none;white-space:nowrap;
+  animation:bgd 60s linear infinite alternate;
+}
+@keyframes bgd{from{transform:scale(1.04) rotate(-1.5deg)}to{transform:scale(1.04) rotate(1.5deg)}}
+
+.af-layout{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+  position:relative;z-index:1;
+}
+
+/* Animated odometer-style counter */
+.af-counter-wrap{display:flex;flex-direction:column;}
+.af-live-tag{font-size:8px;letter-spacing:0.4em;color:rgba(138,206,0,0.5);text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.af-live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:blink 1.4s step-end infinite;}
+
+.af-amount{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(64px,11vw,140px);
+  line-height:0.88;color:var(--green);
+  letter-spacing:-0.03em;
+  position:relative;
+}
+.af-currency{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(28px,4vw,52px);
+  color:rgba(138,206,0,0.5);vertical-align:top;margin-top:4px;display:inline-block;
+}
+
+.af-sub{
+  font-size:9px;letter-spacing:0.25em;color:var(--slate);text-transform:uppercase;
+  margin-top:12px;line-height:1.9;border-top:1px solid rgba(138,206,0,0.1);padding-top:12px;
+}
+.af-quarter{margin-top:8px;font-size:8px;letter-spacing:0.2em;color:var(--dim);}
+.af-quarter strong{color:rgba(138,206,0,0.4);}
+
+/* Artist portraits — represented as blueprint circles */
+.af-artists{display:flex;flex-direction:column;gap:0;}
+.af-artist{
+  display:grid;grid-template-columns:48px 1fr;gap:16px;align-items:center;
+  padding:16px 0;border-bottom:1px solid rgba(112,128,144,0.07);
+  opacity:0;transform:translateX(-12px);
+  transition:opacity 0.5s var(--ease),transform 0.5s var(--ease);
+}
+.af-artist.in{opacity:1;transform:none;}
+.af-artist:last-child{border-bottom:none;}
+.af-avatar{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--ink3);border:1px solid rgba(138,206,0,0.12);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:16px;color:rgba(138,206,0,0.4);
+  flex-shrink:0;
+}
+.af-name{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.05em;color:var(--paper);display:block;}
+.af-scene{font-size:8px;letter-spacing:0.2em;color:var(--muted);text-transform:uppercase;}
+.af-received{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--green);margin-left:auto;white-space:nowrap;padding-left:16px;}
+
+/* ══════════════════════════════════
+   06 — SIGNAL NETWORK TEASER
+══════════════════════════════════ */
+#signalTeaser{
+  padding:100px 0;
+  background:var(--ink2);
+  border-bottom:1px solid rgba(138,206,0,0.06);
+  position:relative;overflow:hidden;
+}
+
+.signal-noise{position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px;opacity:0.02;}
+
+.st-layout{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:start;position:relative;z-index:1;}
+
+.st-left{}
+.st-header{margin-bottom:32px;}
+.st-classified{display:inline-flex;align-items:center;gap:12px;margin-bottom:20px;}
+.stc-badge{font-size:8px;letter-spacing:0.45em;text-transform:uppercase;padding:5px 12px;border:1px solid;color:var(--orange);border-color:rgba(255,140,0,0.25);background:rgba(255,140,0,0.04);}
+.stc-rule{width:60px;height:1px;background:rgba(255,140,0,0.15);}
+
+.st-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,7vw,96px);line-height:0.88;color:var(--paper);margin-bottom:24px;}
+.st-title span{color:var(--green);}
+
+/* Redacted block */
+.st-redact{display:inline;background:#181818;color:#181818;cursor:none;transition:background 0.3s,color 0.3s;padding:0 4px;position:relative;}
+.st-redact::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(90deg,#181818,#181818 6px,rgba(138,206,0,0.06) 6px,rgba(138,206,0,0.06) 8px);pointer-events:none;transition:opacity 0.3s;}
+.st-redact:hover{background:rgba(138,206,0,0.07);color:var(--green);}
+.st-redact:hover::after{opacity:0;}
+
+.st-body{font-size:clamp(13px,1.6vw,16px);line-height:1.9;color:var(--muted);margin-bottom:32px;}
+.st-body strong{color:var(--paper);}
+
+/* 4-item access list */
+.st-access-list{display:flex;flex-direction:column;gap:2px;}
+.st-access-item{
+  display:flex;align-items:flex-start;gap:16px;
+  background:rgba(5,5,5,0.8);padding:16px 18px;
+  border-left:2px solid rgba(138,206,0,0.15);
+  transition:border-color var(--mid);
+}
+.st-access-item:hover{border-color:var(--green);}
+.st-ai-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:rgba(138,206,0,0.18);line-height:1;flex-shrink:0;width:28px;}
+.st-ai-title{font-size:9px;letter-spacing:0.2em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:3px;}
+.st-ai-desc{font-size:11px;color:var(--muted);line-height:1.7;}
+.st-ai-desc strong{color:var(--paper);}
+
+/* Right — terminal-style access confirm */
+.st-right{}
+
+.st-terminal{
+  background:#030a03;border:1px solid rgba(138,206,0,0.18);
+  padding:24px;position:relative;overflow:hidden;border-radius:3px;
+}
+.st-terminal::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(138,206,0,0.04) 0%,transparent 70%);pointer-events:none;z-index:0;}
+.st-terminal::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);animation:crtf 0.08s step-end infinite;}
+@keyframes crtf{0%{opacity:0.7}50%{opacity:1}100%{opacity:0.8}}
+
+.stt-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(138,206,0,0.1);position:relative;z-index:1;}
+.stt-title{font-size:8px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;}
+.stt-status{font-size:8px;letter-spacing:0.3em;color:rgba(138,206,0,0.5);}
+.stt-status::before{content:'● ';animation:blink 1.4s step-end infinite;color:var(--green);}
+
+.stt-body{font-family:'Space Mono',monospace;font-size:11px;line-height:1.95;color:rgba(138,206,0,0.8);position:relative;z-index:1;min-height:180px;}
+.stt-line{display:block;}
+.t-block{display:inline-block;background:rgba(138,206,0,0.18);color:transparent;user-select:none;letter-spacing:0.05em;animation:tblk 3s step-end infinite;}
+.t-block:nth-child(odd){animation-delay:0.8s;}.t-block:nth-child(even){animation-delay:1.5s;}
+@keyframes tblk{0%,85%,100%{background:rgba(138,206,0,0.18);color:transparent}86%{background:rgba(138,206,0,0.07);color:rgba(138,206,0,0.3)}88%{background:rgba(138,206,0,0.18);color:transparent}92%{background:rgba(138,206,0,0.13);color:rgba(138,206,0,0.15)}94%{background:rgba(138,206,0,0.18);color:transparent}}
+.t-cursor{display:inline-block;width:7px;height:12px;background:var(--green);vertical-align:middle;animation:caretblink 1.2s step-end infinite;margin-left:2px;}
+.stt-hint{font-size:7px;letter-spacing:0.25em;color:rgba(138,206,0,0.28);margin-top:12px;text-transform:uppercase;position:relative;z-index:1;}
+
+.st-cta-block{margin-top:20px;padding:20px;background:rgba(138,206,0,0.03);border:1px solid rgba(138,206,0,0.1);}
+.st-cta-txt{font-size:11px;color:var(--muted);line-height:1.8;margin-bottom:14px;}
+.st-cta-txt strong{color:var(--paper);}
+.btn-signal-access{
+  display:block;width:100%;padding:14px;text-align:center;
+  background:none;border:1px solid rgba(138,206,0,0.25);
+  color:var(--green);font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:0.1em;
+  text-decoration:none;cursor:none;
+  transition:background var(--mid),color var(--mid),border-color var(--mid);
+}
+.btn-signal-access:hover{background:var(--green);color:var(--ink);border-color:var(--green);}
+
+/* ══════════════════════════════════
+   07 — PROOF STRIP (NUMBERS)
+══════════════════════════════════ */
+#proofStrip{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid rgba(138,206,0,0.06);
+  position:relative;z-index:1;
+}
+.ps-cell{
+  padding:40px 28px;
+  border-right:1px solid rgba(138,206,0,0.06);
+  position:relative;overflow:hidden;
+  transition:background var(--mid);
+}
+.ps-cell:last-child{border-right:none;}
+.ps-cell:hover{background:rgba(138,206,0,0.02);}
+.ps-val{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4.5vw,56px);line-height:1;color:var(--green);display:block;letter-spacing:-0.01em;}
+.ps-unit{font-family:'Bebas Neue',sans-serif;font-size:clamp(16px,2.5vw,28px);color:rgba(138,206,0,0.45);margin-left:2px;}
+.ps-desc{font-size:9px;letter-spacing:0.25em;color:var(--muted);text-transform:uppercase;display:block;margin-top:8px;line-height:1.6;}
+
+/* ══════════════════════════════════
+   08 — PHILOSOPHY STRIP
+══════════════════════════════════ */
+#philosophy{
+  padding:100px 0;
+  border-bottom:1px solid rgba(138,206,0,0.06);
+  background:var(--ink2);
+}
+.ph-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;}
+.ph-cell{background:var(--ink);padding:32px 28px;border-top:2px solid rgba(138,206,0,0.1);transition:border-color var(--mid);}
+.ph-cell:hover{border-color:var(--green);}
+.ph-num{font-size:8px;letter-spacing:0.4em;color:rgba(138,206,0,0.35);text-transform:uppercase;display:block;margin-bottom:14px;}
+.ph-title{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.06em;color:var(--paper);margin-bottom:12px;}
+.ph-text{font-size:11px;line-height:1.8;color:var(--muted);}
+.ph-text strong{color:var(--paper);}
+
+/* ══════════════════════════════════
+   09 — FOOTER
+══════════════════════════════════ */
+#footer{
+  background:var(--ink2);
+  border-top:1px solid rgba(138,206,0,0.08);
+  position:relative;z-index:1;
+  padding:64px 0 calc(40px + var(--sab));
+}
+
+.footer-grid{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:48px;
+  padding-bottom:48px;
+  border-bottom:1px solid rgba(112,128,144,0.08);
+}
+
+.fg-brand{}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:0.2em;color:var(--green);display:block;margin-bottom:16px;}
+.footer-tagline{font-size:11px;color:var(--muted);line-height:1.8;max-width:260px;margin-bottom:20px;}
+.footer-tagline strong{color:var(--paper);}
+
+.footer-signal-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:8px;letter-spacing:0.3em;color:var(--green);text-transform:uppercase;
+  border:1px solid rgba(138,206,0,0.15);padding:6px 12px;
+}
+.fst-dot{width:5px;height:5px;border-radius:50%;background:var(--green);animation:blink 1.4s step-end infinite;}
+
+.fg-col{}
+.fg-col-title{font-size:8px;letter-spacing:0.4em;color:var(--green);text-transform:uppercase;display:block;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid rgba(138,206,0,0.08);}
+.fg-link{display:block;font-size:10px;letter-spacing:0.1em;color:var(--muted);text-decoration:none;margin-bottom:10px;transition:color var(--mid);}
+.fg-link:hover{color:var(--paper);}
+
+.footer-bottom{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;padding-top:28px;
+}
+.fb-copy{font-size:8px;letter-spacing:0.2em;color:var(--dim);text-transform:uppercase;}
+.fb-cert{font-size:8px;letter-spacing:0.2em;color:var(--dim);text-transform:uppercase;text-align:right;}
+
+/* ══════════════════════════════════
+   MOBILE
+══════════════════════════════════ */
+@media(max-width:900px){
+  #proof{grid-template-columns:1fr;}
+  .proof-left{border-right:none;border-bottom:1px solid rgba(138,206,0,0.06);}
+  .af-layout{grid-template-columns:1fr;gap:40px;}
+  .st-layout{grid-template-columns:1fr;gap:40px;}
+  #proofStrip{grid-template-columns:1fr 1fr;}
+  .ph-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+  .preview-grid{grid-template-columns:1fr 1fr;}
+  .prev-card.large{grid-row:span 1;}
+  .prev-card.wide{grid-column:span 2;}
+}
+@media(max-width:768px){
+  body{cursor:auto;}
+  #cur,#aBtn{display:none!important;}
+  #nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .wrap{padding:0 20px;}
+  .hero-ctas{flex-direction:column;align-items:flex-start;}
+  .hero-stats{max-width:100%;}
+  .preview-grid{grid-template-columns:1fr;}
+  .prev-card.wide{grid-column:span 1;}
+  #proofStrip{grid-template-columns:1fr 1fr;}
+  .footer-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cur"><div class="cc"><div class="cg"></div></div><div class="cr"></div><div class="cl" id="cl">ENTER</div></div>
+
+<!-- AUDIO -->
+<div id="aBtn"><div class="abrs"><div class="abr"></div><div class="abr"></div><div class="abr"></div><div class="abr"></div><div class="abr"></div></div><span class="albl" id="albl">SOUND OFF</span></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <svg class="lp" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg">
+    <rect width="210" height="210" fill="#080808"/>
+    <!-- Adversarial patch loader -->
+    <rect x="0" y="0" width="36" height="48" fill="#8ACE00" opacity="0.9"/>
+    <rect x="36" y="0" width="21" height="22" fill="#050505"/>
+    <rect x="57" y="0" width="42" height="36" fill="#E8E4DC" opacity="0.85"/>
+    <rect x="99" y="0" width="30" height="55" fill="#050505"/>
+    <rect x="129" y="0" width="81" height="26" fill="#8ACE00" opacity="0.62"/>
+    <rect x="0" y="48" width="19" height="34" fill="#050505"/>
+    <rect x="19" y="48" width="55" height="22" fill="#E8E4DC" opacity="0.72"/>
+    <rect x="74" y="22" width="25" height="42" fill="#8ACE00" opacity="0.44"/>
+    <rect x="129" y="26" width="81" height="48" fill="#050505"/>
+    <rect x="0" y="82" width="92" height="36" fill="#050505"/>
+    <rect x="92" y="68" width="37" height="50" fill="#E8E4DC" opacity="0.78"/>
+    <rect x="129" y="74" width="81" height="32" fill="#8ACE00" opacity="0.28"/>
+    <rect x="0" y="118" width="42" height="48" fill="#8ACE00" opacity="0.72"/>
+    <rect x="42" y="118" width="50" height="24" fill="#050505"/>
+    <rect x="92" y="118" width="37" height="50" fill="#050505"/>
+    <rect x="129" y="106" width="81" height="44" fill="#E8E4DC" opacity="0.55"/>
+    <rect x="0" y="166" width="62" height="44" fill="#050505"/>
+    <rect x="62" y="142" width="44" height="68" fill="#8ACE00" opacity="0.52"/>
+    <rect x="106" y="166" width="36" height="44" fill="#050505"/>
+    <rect x="142" y="150" width="68" height="60" fill="#050505"/>
+    <ellipse cx="60" cy="100" rx="21" ry="26" fill="none" stroke="#FF8C00" stroke-width="0.9" opacity="0.5"/>
+    <ellipse cx="152" cy="88" rx="17" ry="22" fill="none" stroke="#FF8C00" stroke-width="0.7" opacity="0.4"/>
+    <text x="4" y="207" font-family="monospace" font-size="5" fill="#8ACE00" opacity="0.35" letter-spacing="1.5">KPT-UG // KEEP IT UNDERGROUND</text>
+  </svg>
+  <div class="ll">Keep It Underground</div>
+  <div class="ll">Soundsystem Workwear</div>
+  <div class="ll">Signal Network Active</div>
+  <div class="lb"><div class="lf"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#">KPT-UNDERGROUND</a>
+  <div class="nav-links">
+    <a class="nav-lnk active" href="#">HOME</a>
+    <a class="nav-lnk" href="story.html">STORY</a>
+    <a class="nav-lnk" href="shop.html">COLLECTION</a>
+    <a class="nav-lnk" href="#">SIGNAL</a>
+  </div>
+  <span class="nav-dot">SIGNAL ACTIVE</span>
+  <a class="nav-shop-btn" href="shop.html">SHOP →</a>
+</nav>
+
+<!-- ════════════════════════════════
+     01 — HERO
+════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-noise"></div>
+
+  <!-- Background schematic -->
+  <svg class="hero-schematic" id="heroSchematic" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="350" cy="350" r="300" fill="none" stroke="#8ACE00" stroke-width="0.8" stroke-dasharray="8 6" opacity="0.15"/>
+    <circle cx="350" cy="350" r="240" fill="none" stroke="#8ACE00" stroke-width="0.6" opacity="0.1"/>
+    <circle cx="350" cy="350" r="176" fill="none" stroke="#8ACE00" stroke-width="0.9" opacity="0.12"/>
+    <circle cx="350" cy="350" r="112" fill="none" stroke="#8ACE00" stroke-width="0.6" stroke-dasharray="4 5" opacity="0.1"/>
+    <circle cx="350" cy="350" r="56"  fill="none" stroke="#8ACE00" stroke-width="0.8" opacity="0.1"/>
+    <circle cx="350" cy="350" r="20"  fill="#8ACE00" opacity="0.04"/>
+    <circle cx="350" cy="350" r="6"   fill="#8ACE00" opacity="0.12"/>
+    <!-- Mounting holes -->
+    <circle cx="350" cy="50"  r="6" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.1"/>
+    <circle cx="350" cy="650" r="6" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.1"/>
+    <circle cx="50"  cy="350" r="6" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.1"/>
+    <circle cx="650" cy="350" r="6" fill="none" stroke="#8ACE00" stroke-width="0.7" opacity="0.1"/>
+    <!-- Cross hairs -->
+    <line x1="50"  y1="350" x2="110" y2="350" stroke="#8ACE00" stroke-width="0.5" opacity="0.08"/>
+    <line x1="590" y1="350" x2="650" y2="350" stroke="#8ACE00" stroke-width="0.5" opacity="0.08"/>
+    <line x1="350" y1="50"  x2="350" y2="110" stroke="#8ACE00" stroke-width="0.5" opacity="0.08"/>
+    <line x1="350" y1="590" x2="350" y2="650" stroke="#8ACE00" stroke-width="0.5" opacity="0.08"/>
+  </svg>
+
+  <div class="wrap">
+    <span class="eyebrow" id="heroEyebrow" style="opacity:0;animation:fi 0.5s ease 0.3s forwards">
+      EST. UNDERGROUND // SOUNDSYSTEM WORKWEAR // SIGNAL NETWORK ACTIVE
+    </span>
+
+    <div id="heroDisplay"></div>
+
+    <span class="hero-sub" id="heroSub">
+      We make clothing for the people who build the systems that other people dance inside.
+      Not fashion. <strong>Equipment.</strong> Engineered for the floor, the field, and the 4 AM load-out.
+      Every purchase sustains the artists. Every order activates your Signal Network access.
+    </span>
+
+    <div class="hero-ctas" id="heroCtas">
+      <a class="hero-cta-primary" href="shop.html">SHOP THE COLLECTION <span>→</span></a>
+      <a class="cta-lnk" href="story.html">Read the story <span class="arr">→</span></a>
+    </div>
+
+    <!-- Live stats -->
+    <div class="hero-stats" id="heroStats">
+      <div class="hs-item">
+        <span class="hs-val" id="hsSold">247</span>
+        <span class="hs-lbl">Pieces sold</span>
+      </div>
+      <div class="hs-item">
+        <span class="hs-val" id="hsArtists">€3,240</span>
+        <span class="hs-lbl">To artists this quarter</span>
+      </div>
+      <div class="hs-item">
+        <span class="hs-val" id="hsSignal">247</span>
+        <span class="hs-lbl">Signal members</span>
+      </div>
+    </div>
+  </div>
+
+  <span class="hero-scroll">↓ Scroll</span>
+  <div class="hero-meta">
+    KPT-UG-001<br>
+    SS-2025<br>
+    CLANDESTINE
+  </div>
+</section>
+
+<!-- MANIFESTO SCROLL STRIP -->
+<div id="manifestoStrip">
+  <div class="ms-track" id="msTrack">
+    <!-- Injected by JS -->
+  </div>
+</div>
+
+<div class="tw"><div class="ttr" id="tt1"></div></div>
+
+<!-- ════════════════════════════════
+     03 — COLLECTION PREVIEW
+════════════════════════════════ -->
+<section id="collection">
+  <div class="wrap">
+    <div class="col-header r">
+      <div class="col-title-block">
+        <span class="eyebrow" style="margin-bottom:12px">THE COLLECTION</span>
+        <div class="stmt" style="font-size:clamp(40px,6vw,80px)">FOUR LINES.<br><span class="g">ONE STANDARD.</span></div>
+      </div>
+      <a class="cta-lnk" href="shop.html">View all pieces <span class="arr">→</span></a>
+    </div>
+
+    <div class="preview-grid">
+
+      <!-- LARGE: Rigger Boxy Hoodie -->
+      <div class="prev-card large r lv1">
+        <div class="pv-vis">
+          <div class="pv-accent" style="background:var(--green)"></div>
+          <div class="pv-bp">
+            <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" width="200" height="234">
+              <path d="M80 56 L48 92 L34 160 L76 160 L76 210 L164 210 L164 160 L206 160 L192 92 L160 56 C152 75 134 84 120 84 C106 84 88 75 80 56Z" fill="none" stroke="#8ACE00" stroke-width="0.8"/>
+              <circle cx="120" cy="67" r="17" fill="none" stroke="#8ACE00" stroke-width="0.7"/>
+              <rect x="82" y="150" width="36" height="30" rx="1" fill="none" stroke="#8ACE00" stroke-width="0.6" opacity="0.6"/>
+              <rect x="122" y="150" width="36" height="30" rx="1" fill="none" stroke="#8ACE00" stroke-width="0.6" opacity="0.6"/>
+              <line x1="76" y1="200" x2="164" y2="200" stroke="#8ACE00" stroke-width="0.5" stroke-dasharray="4 3" opacity="0.4"/>
+              <circle cx="95" cy="152" r="3" fill="#8ACE00" opacity="0.6"/>
+              <circle cx="159" cy="152" r="3" fill="#8ACE00" opacity="0.6"/>
+              <!-- Subwoofer schematic center -->
+              <g opacity="0.12">
+                <circle cx="120" cy="133" r="36" fill="none" stroke="#8ACE00" stroke-width="0.7" stroke-dasharray="5 4"/>
+                <circle cx="120" cy="133" r="26" fill="none" stroke="#8ACE00" stroke-width="0.5"/>
+                <circle cx="120" cy="133" r="16" fill="none" stroke="#8ACE00" stroke-width="0.6"/>
+                <circle cx="120" cy="133" r="6"  fill="#8ACE00" opacity="0.4"/>
+              </g>
+              <text x="28" y="228" font-family="monospace" font-size="5" fill="#8ACE00" opacity="0.4" letter-spacing="1">KPT-RW-001 // 440GSM // 32LPI</text>
+            </svg>
+          </div>
+          <span class="pv-badge">NEW</span>
+          <div class="pv-hover">
+            <a class="pv-hover-lnk" href="shop.html">VIEW PIECE →</a>
+          </div>
+        </div>
+        <div class="pv-info">
+          <span class="pv-line">RAVEWEAR</span>
+          <span class="pv-name">RIGGER BOXY HOODIE</span>
+          <span class="pv-price">€180</span>
+        </div>
+      </div>
+
+      <!-- SMALL TOP: Field Jacket -->
+      <div class="prev-card r d1 lv2">
+        <div class="pv-vis">
+          <div class="pv-accent" style="background:var(--rust)"></div>
+          <div class="pv-bp">
+            <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg" width="120" height="134">
+              <path d="M54 30 L24 60 L24 150 L84 150 L84 96 L96 96 L96 150 L156 150 L156 60 L126 30 L105 48 L90 42 L75 48Z" fill="none" stroke="#A0522D" stroke-width="0.8"/>
+              <line x1="84" y1="48" x2="84" y2="150" stroke="#A0522D" stroke-width="0.5" stroke-dasharray="4 4"/>
+              <rect x="72" y="66" width="36" height="22" fill="none" stroke="#A0522D" stroke-width="0.5" opacity="0.5"/>
+              <text x="12" y="168" font-family="monospace" font-size="5" fill="#A0522D" opacity="0.4" letter-spacing="0.5">600D CORDURA</text>
+            </svg>
+          </div>
+          <span class="pv-badge" style="color:var(--orange);border-color:rgba(255,140,0,0.3);background:rgba(255,140,0,0.06)">LIMITED</span>
+          <div class="pv-hover"><a class="pv-hover-lnk" href="shop.html">VIEW PIECE →</a></div>
+        </div>
+        <div class="pv-info">
+          <span class="pv-line">FESTIVALWEAR</span>
+          <span class="pv-name">TEKNIVAL FIELD JACKET</span>
+          <span class="pv-price">€320</span>
+        </div>
+      </div>
+
+      <!-- SMALL BOTTOM: KPT Shades -->
+      <div class="prev-card r d2 lv4">
+        <div class="pv-vis">
+          <div class="pv-accent" style="background:var(--orange)"></div>
+          <div class="pv-bp">
+            <svg viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg" width="120" height="80">
+              <circle cx="54" cy="60" r="32" fill="none" stroke="#FF8C00" stroke-width="0.9"/>
+              <circle cx="126" cy="60" r="32" fill="none" stroke="#FF8C00" stroke-width="0.9"/>
+              <circle cx="54" cy="60" r="24" fill="none" stroke="#FF8C00" stroke-width="0.4" opacity="0.4"/>
+              <circle cx="126" cy="60" r="24" fill="none" stroke="#FF8C00" stroke-width="0.4" opacity="0.4"/>
+              <line x1="10" y1="54" x2="22" y2="60" stroke="#FF8C00" stroke-width="0.7"/>
+              <line x1="158" y1="60" x2="170" y2="54" stroke="#FF8C00" stroke-width="0.7"/>
+              <line x1="86" y1="60" x2="94" y2="60" stroke="#FF8C00" stroke-width="1.2"/>
+              <text x="36" y="110" font-family="monospace" font-size="5" fill="#FF8C00" opacity="0.4" letter-spacing="0.5">UV400 // TR90 FRAME</text>
+            </svg>
+          </div>
+          <span class="pv-badge" style="color:var(--green);border-color:rgba(138,206,0,0.25);background:rgba(138,206,0,0.05)">NEW</span>
+          <div class="pv-hover"><a class="pv-hover-lnk" href="shop.html">VIEW PIECE →</a></div>
+        </div>
+        <div class="pv-info">
+          <span class="pv-line">ACCESSORIES</span>
+          <span class="pv-name">KPT SHADES MK1</span>
+          <span class="pv-price">€120</span>
+        </div>
+      </div>
+
+      <!-- WIDE: Underground Tee -->
+      <div class="prev-card wide r d3 lv3">
+        <div style="display:grid;grid-template-columns:1fr 1fr;flex:1">
+          <div class="pv-vis">
+            <div class="pv-accent" style="background:var(--slate)"></div>
+            <div class="pv-bp">
+              <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg" width="100" height="112">
+                <path d="M60 42 L30 66 L48 78 L48 150 L132 150 L132 78 L150 66 L120 42Z" fill="none" stroke="#708090" stroke-width="0.8"/>
+                <line x1="90" y1="42" x2="90" y2="150" stroke="#708090" stroke-width="0.4" stroke-dasharray="3 4" opacity="0.4"/>
+                <text x="28" y="168" font-family="monospace" font-size="5" fill="#708090" opacity="0.4" letter-spacing="0.5">260GSM // ENZYME WASH</text>
+              </svg>
+            </div>
+            <div class="pv-hover"><a class="pv-hover-lnk" href="shop.html">VIEW PIECE →</a></div>
+          </div>
+          <div style="padding:24px 24px;display:flex;flex-direction:column;justify-content:flex-end;border-left:1px solid rgba(112,128,144,0.08)">
+            <span class="pv-line">EVERYDAY</span>
+            <span class="pv-name">UNDERGROUND TEE</span>
+            <span style="font-size:11px;color:var(--muted);line-height:1.75;margin:8px 0 12px;font-size:11px">Tonal chest hit. Interior wrist-cuff frequency print — <strong style="color:var(--paper)">visible only to the wearer.</strong></span>
+            <span class="pv-price">€65</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-footer r d4">
+      <a class="hero-cta-primary" href="shop.html">VIEW FULL COLLECTION <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="tw"><div class="ttr" id="tt2" style="animation-direction:reverse;animation-duration:36s"></div></div>
+
+<!-- ════════════════════════════════
+     04 — PROOF
+════════════════════════════════ -->
+<section id="proof">
+  <div class="proof-left">
+    <div class="wrap" style="padding-right:0;max-width:none">
+      <div class="proof-stat r">
+        <div class="ps-num">440<span style="font-size:clamp(36px,5vw,64px);color:rgba(138,206,0,0.4)">GSM</span></div>
+        <span class="ps-label">MINIMUM FABRIC WEIGHT<br>HERO FRENCH TERRY — NEVER BELOW THIS</span>
+      </div>
+      <p class="proof-copy r d1">Fashion uses 180–220GSM because it is cheap and easy to print. We use 440GSM because it <strong>behaves differently in the environment</strong> — it drapes with weight, it holds its shape under extended wear, it does not pill or thin after twenty washes. This is not a marketing claim. It is a specification.</p>
+      <div class="spec-mini r d2">
+        <div class="sm-item"><span class="sm-lbl">AQL Standard</span><span class="sm-val">2.5</span></div>
+        <div class="sm-item"><span class="sm-lbl">Tolerance</span><span class="sm-val">±1cm</span></div>
+        <div class="sm-item"><span class="sm-lbl">Print Test</span><span class="sm-val">130%</span></div>
+        <div class="sm-item"><span class="sm-lbl">Shrink Max</span><span class="sm-val">5%</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="proof-right">
+    <div class="wrap" style="padding-left:0;max-width:none">
+      <span class="eyebrow r">THE MISSION</span>
+      <div class="stmt r d1" style="font-size:clamp(40px,5.5vw,72px);margin-bottom:28px">NOT FASHION.<br><span class="g">FIELD GEAR.</span></div>
+      <p class="proof-copy r d2">We are riggers, technicians, and crew — the people who arrive before the crowd and leave after the silence. This clothing was made for that work, not to represent it. <strong>Every detail is functional. Every specification is earned.</strong></p>
+      <p class="proof-copy r d3">The hardware is load-rated. The seams are triple-stitched. The pockets are positioned for actual use. And ten percent of every transaction goes directly to the underground artists who make the music that made the clothing necessary.</p>
+      <div class="r d4" style="margin-top:32px">
+        <a class="cta-lnk" href="story.html">Read the full story <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF STRIP -->
+<div id="proofStrip" class="r">
+  <div class="ps-cell">
+    <span class="ps-val">10<span class="ps-unit">%</span></span>
+    <span class="ps-desc">Of every transaction to<br>underground artists directly</span>
+  </div>
+  <div class="ps-cell">
+    <span class="ps-val">440<span class="ps-unit">gsm</span></span>
+    <span class="ps-desc">Minimum fabric weight<br>across all garments</span>
+  </div>
+  <div class="ps-cell">
+    <span class="ps-val">AQL<span class="ps-unit" style="font-size:18px"> 2.5</span></span>
+    <span class="ps-desc">Manufacturing quality<br>control standard</span>
+  </div>
+  <div class="ps-cell">
+    <span class="ps-val">0<span class="ps-unit">%</span></span>
+    <span class="ps-desc">Influencer seeding<br>No paid promotion ever</span>
+  </div>
+</div>
+
+<div class="tw"><div class="ttr" id="tt3" style="animation-duration:38s"></div></div>
+
+<!-- ════════════════════════════════
+     05 — ARTIST FUND
+════════════════════════════════ -->
+<section id="artistFund">
+  <div class="af-bg"><span>ARTISTS</span></div>
+  <div class="wrap">
+    <div class="af-layout">
+
+      <div class="af-counter-wrap r">
+        <div class="af-live-tag">
+          <div class="af-live-dot"></div>
+          LIVE FUND COUNTER // Q1 2025
+        </div>
+        <div class="af-amount">
+          <span class="af-currency">€</span><span id="afAmount">0</span>
+        </div>
+        <span class="af-sub">DISTRIBUTED TO UNDERGROUND ARTISTS<br>THIS QUARTER // UPDATED WITH EACH ORDER</span>
+        <p class="af-quarter"><strong>Total distributed since launch:</strong> €8,640</p>
+        <div style="margin-top:28px">
+          <a class="cta-lnk" href="story.html#artists">How it works <span class="arr">→</span></a>
+        </div>
+      </div>
+
+      <div>
+        <span class="eyebrow r" style="margin-bottom:20px">CURRENT RECIPIENTS</span>
+        <div class="af-artists" id="afArtists">
+          <!-- Injected by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     06 — SIGNAL NETWORK
+════════════════════════════════ -->
+<section id="signalTeaser">
+  <div class="signal-noise"></div>
+  <div class="wrap">
+    <div class="st-layout">
+
+      <div class="st-left">
+        <div class="st-header r">
+          <div class="st-classified">
+            <span class="stc-badge">CLASSIFIED</span>
+            <div class="stc-rule"></div>
+          </div>
+          <h2 class="st-title">THE<br><span>SIGNAL</span><br><span class="st-redact" title="Hover to reveal">NETWORK.</span></h2>
+          <p class="st-body">Not a newsletter. Not a loyalty programme. A <strong>closed channel</strong> through which information about events that do not publicly exist is distributed. Every KPT-UNDERGROUND order — regardless of value — activates your access <strong>automatically.</strong></p>
+        </div>
+
+        <div class="st-access-list r d1">
+          <div class="st-access-item">
+            <span class="st-ai-num">01</span>
+            <div><span class="st-ai-title">Inside Event Intel</span><p class="st-ai-desc">Location codes and frequency callouts for events that are not announced publicly. <strong>Not on social media. Not on Resident Advisor.</strong></p></div>
+          </div>
+          <div class="st-access-item">
+            <span class="st-ai-num">02</span>
+            <div><span class="st-ai-title">Secret Drop Access</span><p class="st-ai-desc">Drop information 48h before any public announcement. <strong>Secret drops are Network-only</strong> — the frequency code arrives through this channel.</p></div>
+          </div>
+          <div class="st-access-item">
+            <span class="st-ai-num">03</span>
+            <div><span class="st-ai-title">Artist Broadcasts</span><p class="st-ai-desc">Unreleased mixes and sessions from artists in the support pool. <strong>Never archived. Never publicly listed.</strong></p></div>
+          </div>
+          <div class="st-access-item">
+            <span class="st-ai-num">04</span>
+            <div><span class="st-ai-title">Fund Transparency Reports</span><p class="st-ai-desc"><strong>Quarterly distribution reports</strong> — which artists received funds, exact amounts, no committee language.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="st-right r d2">
+        <div class="st-terminal">
+          <div class="stt-header">
+            <span class="stt-title">KPT-UG // SIGNAL NETWORK // NODE-01</span>
+            <span class="stt-status">ACTIVE</span>
+          </div>
+          <div class="stt-body" id="sttBody">
+            <!-- Injected by JS -->
+          </div>
+          <div class="stt-hint">// TYPE 140HZ TO AUTHENTICATE</div>
+        </div>
+
+        <div class="st-cta-block" style="margin-top:16px">
+          <p class="st-cta-txt"><strong>Purchase any item to authenticate.</strong> Signal Network access activates automatically with every order. The channel is real because the relationships are real.</p>
+          <a class="btn-signal-access" href="shop.html">SHOP TO AUTHENTICATE →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="tw"><div class="ttr" id="tt4" style="animation-direction:reverse;animation-duration:29s"></div></div>
+
+<!-- ════════════════════════════════
+     07 — PHILOSOPHY
+════════════════════════════════ -->
+<section id="philosophy">
+  <div class="wrap">
+    <span class="eyebrow r">HOW WE OPERATE</span>
+    <div class="stmt r d1" style="font-size:clamp(38px,5vw,72px)">SIX<br><span class="g">PRINCIPLES.</span></div>
+    <div class="ph-grid">
+      <div class="ph-cell r"><span class="ph-num">PRINCIPLE 01</span><div class="ph-title">NO INFLUENCERS. EVER.</div><p class="ph-text">The first run went to riggers and DJs doing the work. <strong>Authenticity is demonstrated at 4 AM during a load-in,</strong> not staged for a camera in a studio.</p></div>
+      <div class="ph-cell r d1"><span class="ph-num">PRINCIPLE 02</span><div class="ph-title">NO TREND CYCLES.</div><p class="ph-text">The colorway is the warehouse at operating temperature. <strong>Specifications are determined by the environment,</strong> not seasonal palette forecasts or fashion week positioning.</p></div>
+      <div class="ph-cell r d2"><span class="ph-num">PRINCIPLE 03</span><div class="ph-title">QUALITY IS NON-NEGOTIABLE.</div><p class="ph-text"><strong>AQL 2.5. ±1cm tolerances. Bar-tack at every stress point.</strong> If it cannot survive the environment it was designed for, it does not leave the factory.</p></div>
+      <div class="ph-cell r d1"><span class="ph-num">PRINCIPLE 04</span><div class="ph-title">MUSIC FIRST. ALWAYS.</div><p class="ph-text">Ten percent of every transaction funds underground artists directly. <strong>No applications. No committees.</strong> The scene identifies who the money belongs to. We move it there.</p></div>
+      <div class="ph-cell r d2"><span class="ph-num">PRINCIPLE 05</span><div class="ph-title">FUNCTION BEFORE FORM.</div><p class="ph-text">Graphics are technical documentation or defensive camouflage. <strong>Faraday pocket linings exist for privacy, not branding.</strong> Every element answers a question about the environment it operates in.</p></div>
+      <div class="ph-cell r d3"><span class="ph-num">PRINCIPLE 06</span><div class="ph-title">CLANDESTINE BY DEFAULT.</div><p class="ph-text">The drop link is not on the homepage. <strong>The brand does not announce itself to people who are not paying the right kind of attention.</strong> That is intentional. That has always been the point.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════
+     08 — FOOTER
+════════════════════════════════ -->
+<footer id="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="fg-brand">
+        <span class="footer-logo">KPT-UNDERGROUND</span>
+        <p class="footer-tagline">Soundsystem workwear for the people who build the systems that other people dance inside. <strong>Not fashion. Equipment.</strong></p>
+        <div class="footer-signal-tag">
+          <div class="fst-dot"></div>
+          SIGNAL NETWORK ACTIVE
+        </div>
+      </div>
+      <div class="fg-col">
+        <span class="fg-col-title">COLLECTION</span>
+        <a class="fg-link" href="shop.html">All Pieces</a>
+        <a class="fg-link" href="shop.html#ravewear">Ravewear</a>
+        <a class="fg-link" href="shop.html#festivalwear">Festivalwear</a>
+        <a class="fg-link" href="shop.html#everyday">Everyday</a>
+        <a class="fg-link" href="shop.html#accessories">Accessories</a>
+      </div>
+      <div class="fg-col">
+        <span class="fg-col-title">BRAND</span>
+        <a class="fg-link" href="story.html">Brand Story</a>
+        <a class="fg-link" href="story.html#artists">Artist Fund</a>
+        <a class="fg-link" href="story.html#signal">Signal Network</a>
+        <a class="fg-link" href="#">About</a>
+        <a class="fg-link" href="#">Contact</a>
+      </div>
+      <div class="fg-col">
+        <span class="fg-col-title">TECHNICAL</span>
+        <a class="fg-link" href="#">Size Guide</a>
+        <a class="fg-link" href="#">Care Instructions</a>
+        <a class="fg-link" href="#">Shipping Info</a>
+        <a class="fg-link" href="#">Returns</a>
+        <a class="fg-link" href="#">FAQ</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="fb-copy">© 2025 KPT-UNDERGROUND // ALL RIGHTS RESERVED // EST. UNDERGROUND</span>
+      <span class="fb-cert">CERT: KPT-UG-001 // CLASS: UNDERGROUND UTILITY // SIGNAL: ACTIVE</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/* ═══════════════════════════════════
+   AUDIO ENGINE
+═══════════════════════════════════ */
+let actx=null,aon=false;
+const gc=()=>{if(!actx)actx=new(window.AudioContext||window.webkitAudioContext)();if(actx.state==='suspended')actx.resume();return actx;};
+const pSub=(f=40,d=0.35,v=0.18)=>{if(!aon)return;try{const c=gc(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.type='sine';o.frequency.value=f;g.gain.setValueAtTime(0,c.currentTime);g.gain.linearRampToValueAtTime(v,c.currentTime+0.02);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);o.start();o.stop(c.currentTime+d+0.05);}catch(e){}};
+const pClk=(v=0.1)=>{if(!aon)return;try{const c=gc(),buf=c.createBuffer(1,c.sampleRate*0.06,c.sampleRate),d=buf.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.exp(-i/(c.sampleRate*0.008));const s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=3000;f.Q.value=0.8;s.buffer=buf;s.connect(f);f.connect(g);g.connect(c.destination);g.gain.value=v;s.start();}catch(e){}};
+const pStat=(d=0.2,v=0.07)=>{if(!aon)return;try{const c=gc(),buf=c.createBuffer(1,c.sampleRate*d,c.sampleRate),da=buf.getChannelData(0);for(let i=0;i<da.length;i++)da[i]=Math.random()*2-1;const s=c.createBufferSource(),g=c.createGain(),f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=2400;f.Q.value=0.5;s.buffer=buf;s.connect(f);f.connect(g);g.connect(c.destination);g.gain.setValueAtTime(0,c.currentTime);g.gain.linearRampToValueAtTime(v,c.currentTime+0.03);g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+d);s.start();}catch(e){}};
+const setA=(on)=>{aon=on;if(on)gc();const b=document.getElementById('aBtn');b.classList.toggle('on',on);b.classList.toggle('off',!on);document.getElementById('albl').textContent=on?'SOUND ON':'SOUND OFF';};
+document.getElementById('aBtn').addEventListener('click',()=>setA(!aon));
+
+/* ═══════════════════════════════════
+   CURSOR
+═══════════════════════════════════ */
+const cur=document.getElementById('cur'),cl=document.getElementById('cl');
+let mx=-300,my=-300;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function t(){cur.style.transform=`translate(calc(${mx}px - 50%),calc(${my}px - 50%))`;requestAnimationFrame(t);})();
+const sc=(s,l='')=>{document.body.className=s?`c${s}`:'';cl.textContent=l;};
+const rp=()=>{const r=cur.querySelector('.cr');r.style.animation='none';r.offsetHeight;r.style.animation='rp 0.5s ease forwards';};
+
+/* ═══════════════════════════════════
+   NAV SCROLL BEHAVIOUR
+═══════════════════════════════════ */
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>60);
+},{passive:true});
+
+/* ═══════════════════════════════════
+   HERO CHARACTER ASSEMBLY
+═══════════════════════════════════ */
+const HLINES=[
+  {text:'KEEP IT',  cls:'hero-line'},
+  {text:'UNDER',    cls:'hero-line'},
+  {text:'GROUND.',  cls:'hero-line g hero-degrade'},
+];
+const buildHero=()=>{
+  const c=document.getElementById('heroDisplay');
+  HLINES.forEach(l=>{
+    const el=document.createElement('div');
+    el.className=l.cls;
+    [...l.text].forEach(ch=>{
+      const s=document.createElement('span');
+      s.className=ch===' '?'hero-char space':'hero-char';
+      s.textContent=ch;el.appendChild(s);
+    });
+    c.appendChild(el);
+  });
+};
+const fireHero=()=>{
+  const chars=document.querySelectorAll('#heroDisplay .hero-char:not(.space)');
+  chars.forEach((ch,i)=>setTimeout(()=>ch.classList.add('in'),60+i*24));
+  const t=60+chars.length*24;
+  setTimeout(()=>{
+    document.getElementById('heroSub').classList.add('in');
+    document.getElementById('heroCtas').classList.add('in');
+    document.getElementById('heroStats').classList.add('in');
+    document.getElementById('heroSchematic').classList.add('drawn');
+    pSub(40,0.4,0.14);
+  },t+100);
+};
+const startDegrade=()=>{
+  const dc=document.querySelectorAll('.hero-degrade .hero-char');
+  if(!dc.length)return;
+  setInterval(()=>{
+    const n=Math.random()>0.5?1:2;
+    for(let i=0;i<n;i++){
+      const idx=Math.floor(Math.random()*dc.length),cls=Math.random()>0.5?'fl':'fl2';
+      dc[idx].classList.add(cls);
+      setTimeout(()=>dc[idx].classList.remove('fl','fl2'),180);
+    }
+  },1900);
+};
+
+/* ═══════════════════════════════════
+   MANIFESTO SCROLL STRIP
+═══════════════════════════════════ */
+const MS_ITEMS=[
+  {t:'WE DO NOT ADVERTISE.',a:false},{t:'///',a:true},
+  {t:'WE DO NOT TREND.',a:false},{t:'///',a:true},
+  {t:'WE DO NOT FOLLOW.',a:false},{t:'///',a:true},
+  {t:'WE BUILD THE SYSTEMS.',a:false},{t:'///',a:true},
+  {t:'WE SUSTAIN THE ARTISTS.',a:true},{t:'///',a:false},
+  {t:'WE KEEP THE FREQUENCY.',a:false},{t:'///',a:true},
+  {t:'WE KEEP THE STANDARD.',a:false},{t:'///',a:true},
+  {t:'WE KEEP IT UNDERGROUND.',a:true},{t:'///',a:false},
+];
+const buildMS=()=>{
+  const t=document.getElementById('msTrack');
+  [...MS_ITEMS,...MS_ITEMS].forEach(i=>{
+    const el=document.createElement('div');
+    el.className='ms-item'+(i.a?' accent':'');
+    el.textContent=i.t;t.appendChild(el);
+  });
+};
+
+/* ═══════════════════════════════════
+   TICKERS
+═══════════════════════════════════ */
+const TA=[{t:'KEEP IT UNDERGROUND',a:false},{t:'//',a:true},{t:'440GSM',a:false},{t:'//',a:true},{t:'AQL 2.5',a:false},{t:'//',a:true},{t:'10% TO ARTISTS',a:false},{t:'//',a:true},{t:'SWL: UNLIMITED',a:false},{t:'//',a:true},{t:'FREQ: 20-200HZ',a:false},{t:'//',a:true},{t:'NO INFLUENCERS',a:false},{t:'//',a:true},{t:'NO TREND CYCLES',a:false},{t:'//',a:true},{t:'SIGNAL NETWORK ACTIVE',a:false},{t:'//',a:true},{t:'EST. UNDERGROUND',a:false},{t:'//',a:true}];
+const TB=[{t:'RAVEWEAR',a:false},{t:'//',a:true},{t:'FESTIVALWEAR',a:false},{t:'//',a:true},{t:'EVERYDAY',a:false},{t:'//',a:true},{t:'ACCESSORIES',a:false},{t:'//',a:true},{t:'COBRA BUCKLE SYSTEM',a:false},{t:'//',a:true},{t:'FARADAY LINING',a:false},{t:'//',a:true},{t:'3M REFLECTIVE',a:false},{t:'//',a:true},{t:'32LPI HALFTONE SCHEMATICS',a:false},{t:'//',a:true},{t:'CLANDESTINE BY DEFAULT',a:false},{t:'//',a:true}];
+const bt=(id,items)=>{const t=document.getElementById(id);if(!t)return;[...items,...items].forEach(i=>{const s=document.createElement('span');s.className='ti'+(i.a?' ac':'');s.textContent=i.t;t.appendChild(s);});};
+bt('tt1',TA);bt('tt2',TB);bt('tt3',TA);bt('tt4',TB);
+
+/* ═══════════════════════════════════
+   ARTIST FUND COUNTER
+═══════════════════════════════════ */
+const ARTISTS=[
+  {name:'BURIAL STATIC',scene:'UK DARK STEP',received:'€324'},
+  {name:'HEX PROTOCOL',scene:'EU HARDTEK',received:'€324'},
+  {name:'SUBTERRAIN',scene:'EE TECHNO',received:'€324'},
+  {name:'WAVEFORM ERROR',scene:'US NOISE TECHNO',received:'€162'},
+  {name:'VOID OPERATOR',scene:'DE HARDFLOOR',received:'€162'},
+  {name:'TERRAFORMER',scene:'FR TEKNIVAL',received:'€324'},
+  {name:'SIGNAL GHOST',scene:'PL UNDERGROUND',received:'€216'},
+  {name:'FRACTURE UNIT',scene:'CZ DARK TEKNO',received:'€162'},
+  {name:'IRON CURTAIN DUB',scene:'HU SYSTEM DUB',received:'€216'},
+  {name:'NULL POINT',scene:'BE INDUSTRIAL',received:'€108'},
+];
+
+let afStarted=false;
+const animateAF=()=>{
+  if(afStarted)return;afStarted=true;
+  const el=document.getElementById('afAmount');
+  const target=3240;
+  let v=0;
+  const steps=40,dur=1600;
+  const iv=setInterval(()=>{
+    v=Math.min(v+Math.ceil(target/steps),target);
+    el.textContent=v.toLocaleString();
+    pClk(0.03);
+    if(v>=target){clearInterval(iv);el.textContent=target.toLocaleString();}
+  },dur/steps);
+
+  // Stagger artist items
+  document.querySelectorAll('.af-artist').forEach((a,i)=>{
+    setTimeout(()=>a.classList.add('in'),i*80);
+  });
+};
+
+const buildArtists=()=>{
+  const c=document.getElementById('afArtists');
+  ARTISTS.slice(0,6).forEach(a=>{
+    const el=document.createElement('div');
+    el.className='af-artist';
+    el.innerHTML=`<div class="af-avatar">${a.name.charAt(0)}</div><div><span class="af-name">${a.name}</span><span class="af-scene">${a.scene}</span></div><span class="af-received">${a.received}</span>`;
+    c.appendChild(el);
+  });
+};
+
+/* ═══════════════════════════════════
+   SIGNAL TERMINAL
+═══════════════════════════════════ */
+const TLINES=[
+  {text:'> INITIALISING SIGNAL NETWORK...',delay:0},
+  {text:'> ENCRYPTION: AES-256 ',block:'████████',suffix:' OK',delay:360},
+  {text:'> CARRIER: 140HZ ',block:'████████████',suffix:' LOCKED',delay:700},
+  {text:'> ACCESS NODES: ',block:'██',suffix:' ',block2:'██',suffix2:' ',block3:'██',suffix3:' [REDACTED]',delay:1040},
+  {text:'> IDENTITY: ',block:'████████████████',suffix:'',delay:1360},
+  {text:'> STATUS: ACTIVE',delay:1680,color:'var(--green)'},
+  {text:'> AWAITING AUTHENTICATION...',delay:1960},
+];
+let tBooted=false;
+const bootTerminal=()=>{
+  if(tBooted)return;tBooted=true;
+  pStat(0.15,0.06);
+  const body=document.getElementById('sttBody');
+  if(!body)return;
+  body.innerHTML='';
+  TLINES.forEach(line=>{
+    setTimeout(()=>{
+      const el=document.createElement('span');
+      el.className='stt-line';
+      if(line.color)el.style.color=line.color;
+      el.appendChild(document.createTextNode(line.text));
+      if(line.block){
+        const b=document.createElement('span');b.className='t-block';b.textContent=line.block;el.appendChild(b);
+        if(line.suffix)el.appendChild(document.createTextNode(line.suffix));
+        if(line.block2){const b2=document.createElement('span');b2.className='t-block';b2.textContent=line.block2;el.appendChild(b2);}
+        if(line.suffix2)el.appendChild(document.createTextNode(line.suffix2));
+        if(line.block3){const b3=document.createElement('span');b3.className='t-block';b3.textContent=line.block3;el.appendChild(b3);}
+        if(line.suffix3)el.appendChild(document.createTextNode(line.suffix3));
+      }
+      body.appendChild(el);
+      pClk(0.04);
+      if(line.delay===1960){const c=document.createElement('span');c.className='t-cursor';body.appendChild(c);}
+    },line.delay);
+  });
+};
+
+/* Easter egg */
+let kbuf='';
+document.addEventListener('keydown',e=>{
+  kbuf+=e.key.toUpperCase();if(kbuf.length>8)kbuf=kbuf.slice(-8);
+  if(kbuf.includes('140HZ')){
+    kbuf='';
+    const body=document.getElementById('sttBody');if(!body)return;
+    pStat(0.3,0.1);body.innerHTML='';
+    [{t:'> 140HZ: CONFIRMED',c:'var(--green)'},{t:'> SIGNAL: AUTHENTICATED',c:'var(--green)'},{t:'> SHOP TO CLAIM ACCESS',c:'var(--paper)'}].forEach((l,i)=>{
+      setTimeout(()=>{const el=document.createElement('span');el.className='stt-line';el.style.color=l.c;el.textContent=l.t;body.appendChild(el);pSub(70+i*20,0.15,0.1);},i*280);
+    });
+    setTimeout(()=>{body.innerHTML='';tBooted=false;bootTerminal();},5000);
+  }
+});
+
+/* ═══════════════════════════════════
+   REVEAL + OBSERVERS
+═══════════════════════════════════ */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.classList.add('in');
+    if(e.target.id==='artistFund'||e.target.closest('#artistFund')){animateAF();}
+    if(e.target.id==='signalTeaser'||e.target.closest('#signalTeaser')){bootTerminal();}
+    obs.unobserve(e.target);
+  });
+},{threshold:0.1,rootMargin:'0px 0px -32px 0px'});
+
+const wireReveal=()=>document.querySelectorAll('.r:not(.in)').forEach(el=>obs.observe(el));
+
+/* Artist fund section specific observer */
+const afObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){animateAF();afObs.disconnect();}});
+},{threshold:0.2});
+
+const sigObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){bootTerminal();sigObs.disconnect();}});
+},{threshold:0.2});
+
+/* ═══════════════════════════════════
+   WIRE INTERACTIVES
+═══════════════════════════════════ */
+const wireEl=(el)=>{
+  const lbl=el.dataset.cursor||'ENTER';
+  const isShop=el.classList.contains('hero-cta-primary')||el.classList.contains('nav-shop-btn')||el.classList.contains('btn-signal-access');
+  el.addEventListener('mouseenter',()=>{
+    if(isShop){sc('shop',el.getAttribute('href')==='shop.html'?'SHOP':'ENTER');}
+    else{sc('h',lbl);}
+    rp();
+  });
+  el.addEventListener('mouseleave',()=>sc(''));
+};
+
+/* ═══════════════════════════════════
+   BOOT
+═══════════════════════════════════ */
+window.addEventListener('load',()=>{
+  buildHero();buildMS();buildArtists();
+
+  setTimeout(()=>{
+    document.getElementById('loader').classList.add('gone');
+    document.getElementById('nav').classList.add('show');
+    document.getElementById('aBtn').classList.add('show','off');
+
+    setTimeout(()=>fireHero(),200);
+    setTimeout(()=>startDegrade(),3200);
+
+    wireReveal();
+    afObs.observe(document.getElementById('artistFund'));
+    sigObs.observe(document.getElementById('signalTeaser'));
+
+    document.querySelectorAll('a,button,.prev-card,.ph-cell,.st-access-item,.ps-cell').forEach(wireEl);
+    document.getElementById('aBtn').addEventListener('mouseenter',()=>{sc('h','SOUND');rp();});
+    document.getElementById('aBtn').addEventListener('mouseleave',()=>sc(''));
+    document.getElementById('signalTeaser').addEventListener('mouseenter',()=>{sc('lock','CLASSIFIED');rp();});
+    document.getElementById('signalTeaser').addEventListener('mouseleave',()=>sc(''));
+    document.querySelectorAll('.st-redact').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{sc('lock','REVEAL');rp();});
+      el.addEventListener('mouseleave',()=>sc(''));
+    });
+
+    pSub(40,0.28,0.1);
+  },2400);
+});
+</script>
+</body>
+</html>

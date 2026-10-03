@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "templateOnly": true,
+  "instructions": "Create a new report or adapt to the owner existing schema after reading it. Do not overwrite old entries. All statuses below are blank-run NOT_RUN, not this handoff snapshot.",
+  "run": {
+    "startedAt": null,
+    "completedAt": null,
+    "agent": "Claude",
+    "scope": "commerce-design-preview",
+    "repo": null,
+    "branch": null,
+    "sourceSha": null,
+    "result": "NOT_RUN"
+  },
+  "checks": [
+    {
+      "name": "identity-and-worktree",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "assets-integrity",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "local-prototype",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "native-components",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "fonts-loaded",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "desktop-1440",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "tablet-768",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "mobile-390",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "narrow-320",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "keyboard-and-focus",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "reduced-motion",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "no-commerce-requests",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "production-preview-denied",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "typecheck",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "lint",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "full-app-build",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "hosted-preview",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "fourthwall-draft-isolation",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    },
+    {
+      "name": "fourthwall-private-products-unchanged",
+      "status": "NOT_RUN",
+      "evidence": [],
+      "notes": ""
+    }
+  ],
+  "deployment": {
+    "projectId": null,
+    "teamId": null,
+    "environment": null,
+    "branch": null,
+    "sha": null,
+    "id": null,
+    "url": null
+  },
+  "changes": {
+    "files": [],
+    "remoteWrites": [],
+    "payments": [],
+    "orders": [],
+    "publication": []
+  },
+  "blockers": [],
+  "nextDecision": null
+}
